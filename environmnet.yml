@@ -1,0 +1,12 @@
+name: pyssm
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - cmake
+  - python 
+  - onnx
+  - numpy
+  - pip
+  # - pip:
+  #   - -e file:. 
