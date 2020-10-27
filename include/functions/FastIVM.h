@@ -35,12 +35,7 @@ public:
         L = new data_t[K*K];
     }
 
-    FastIVM* clone() {
-        return new FastIVM(K, kernel, sigma);
-    }
-
     data_t peek(std::vector<std::vector<data_t>> &cur_solution, std::vector<data_t> const &x) {
-        std::cout << "good peeking" << std::endl;
         if (added < K) {
             for (size_t i = 0; i < added; ++i) {
                 data_t kval = kernel(cur_solution[i], x);
@@ -71,6 +66,10 @@ public:
             fval = peek(cur_solution, x);
             added++;
         }
+    }
+
+    std::shared_ptr<SubmodularFunction> clone() const {
+        return std::shared_ptr<SubmodularFunction>(new FastIVM(K, kernel, sigma));
     }
 
     ~FastIVM() {

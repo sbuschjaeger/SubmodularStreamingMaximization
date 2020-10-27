@@ -5,6 +5,8 @@
 #include "functions/FastIVM.h"
 #include "kernels/RBFKernel.h"
 #include "Greedy.h"
+#include "Random.h"
+#include "SieveStreaming.h"
 
 
 void cholesky(data_t *const pOut, data_t const *const pIn, size_t const N, size_t const ld) {
@@ -81,14 +83,59 @@ int main() {
     };    
 
     unsigned int K = 3;
+    
     // IVM slowIVM(RBFKernel(), 1.0);
-    // Greedy greedy(3, &slowIVM);
-    //auto fastIVM = new FastIVM(K, RBFKernel(), 1.0);
-    // FastIVM * fastIVM = new FastIVM(K, RBFKernel(), 1.0);
+    // FastIVM fastIVM(K, RBFKernel(), 1.0);
+    
+    // Greedy greedy(K, [](std::vector<std::vector<data_t>> const &X){
+    //     unsigned int K = X.size();
+    //     data_t * kmat = new data_t[K*K];
 
-    FastIVM fastIVM(K, RBFKernel(), 1.0);
-    IVM slowIVM(RBFKernel(), 1.0);
-    Greedy greedy(K, [](std::vector<std::vector<data_t>> const &X){
+    //     for (unsigned int i = 0; i < K; ++i) {
+    //         for (unsigned int j = i; j < K; ++j) {
+    //             data_t kval = kernel(X[i], X[j]);
+    //             if (i == j) {
+    //                 kmat[i+i*K] = 1.0 + kval / std::pow(1.0, 2.0);
+    //             } else {
+    //                 kmat[i+j*K] = kval / std::pow(1.0, 2.0);
+    //                 kmat[j+i*K] = kval / std::pow(1.0, 2.0);
+    //             }
+    //         }
+    //     }
+
+    //     data_t fval = logDet(kmat, X.size(), X.size());
+    //     delete [] kmat;
+    //     return fval;
+    // });
+    // greedy.fit(data);
+    // std::vector<std::vector<double>> solution = greedy.get_solution();
+    // double fval = greedy.get_fval();
+
+    // Random random(K, [](std::vector<std::vector<data_t>> const &X){
+    //     unsigned int K = X.size();
+    //     data_t * kmat = new data_t[K*K];
+
+    //     for (unsigned int i = 0; i < K; ++i) {
+    //         for (unsigned int j = i; j < K; ++j) {
+    //             data_t kval = kernel(X[i], X[j]);
+    //             if (i == j) {
+    //                 kmat[i+i*K] = 1.0 + kval / std::pow(1.0, 2.0);
+    //             } else {
+    //                 kmat[i+j*K] = kval / std::pow(1.0, 2.0);
+    //                 kmat[j+i*K] = kval / std::pow(1.0, 2.0);
+    //             }
+    //         }
+    //     }
+
+    //     data_t fval = logDet(kmat, X.size(), X.size());
+    //     delete [] kmat;
+    //     return fval;
+    // });
+    // random.fit(data);
+    // std::vector<std::vector<double>> solution = random.get_solution();
+    // double fval = random.get_fval();
+
+    SieveStreaming sieve(K, [](std::vector<std::vector<data_t>> const &X){
         unsigned int K = X.size();
         data_t * kmat = new data_t[K*K];
 
@@ -107,11 +154,10 @@ int main() {
         data_t fval = logDet(kmat, X.size(), X.size());
         delete [] kmat;
         return fval;
-    });
-
-    greedy.fit(data);
-    std::vector<std::vector<double>> solution = greedy.get_solution();
-    double fval = greedy.get_fval();
+    }, 2.0, 0.1);
+    sieve.fit(data);
+    std::vector<std::vector<double>> solution = sieve.get_solution();
+    double fval = sieve.get_fval();
 
     std::cout << "Found a solution with fval = " << fval << std::endl;
     for (auto x : solution) {

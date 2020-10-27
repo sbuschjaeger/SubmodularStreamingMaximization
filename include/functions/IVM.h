@@ -72,10 +72,6 @@ protected:
 public:
     IVM(std::function<data_t (std::vector<data_t> const &, std::vector<data_t> const &)> kernel, data_t sigma) : kernel(kernel), sigma(sigma) {}
 
-    IVM* clone() {
-        return new IVM(kernel, sigma);
-    }
-
     data_t operator()(std::vector<std::vector<data_t>> const &X) const {
         // This is the most basic implementations which recomputes everything with each call
         // I would not use this for any real-world problems. 
@@ -98,6 +94,10 @@ public:
         data_t fval = IVM::logDet(kmat, X.size(), X.size());
         delete [] kmat;
         return fval;
+    }
+
+    std::shared_ptr<SubmodularFunction> clone() const {
+        return std::shared_ptr<SubmodularFunction>(new IVM(kernel, sigma));
     }
 };
 

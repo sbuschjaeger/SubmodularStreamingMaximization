@@ -4,9 +4,12 @@ import numpy as np
 from numpy.linalg import slogdet
 
 from PySSM import RBFKernel
-from PySSM import Greedy
 from PySSM import IVM
 from PySSM import SubmodularFunction
+
+from PySSM import Greedy
+from PySSM import Random
+from PySSM import SieveStreaming
 
 def logdet(X):
     X = np.array(X)
@@ -31,8 +34,8 @@ class FastLogdet(SubmodularFunction):
         self.kmat = np.zeros((K,K))
         
     def peek(self, X, x):
-        if self.added == 0:
-            return 0
+        # if self.added == 0:
+        #     return 0
         
         if self.added < self.K:
             #X = np.array(X)
@@ -72,8 +75,25 @@ class FastLogdet(SubmodularFunction):
         else:
             return 0
 
-    # def clone(self):
-    #     return FastLogdet()
+    def clone(self):
+        return FastLogdet(self.K)
+
+        # print("CLONE")
+        # cloned = FastLogdet.__new__(FastLogdet)
+        # print(cloned)
+        # # clone C++ state
+        # #SubmodularFunction.__init__(self, cloned)
+        # FastLogdet.__init__(self, self.K)
+        # # clone Python state
+        # cloned.__dict__.update(self.__dict__)
+        # print("CLONE DONE")
+        # print(cloned.__call__)
+        # print(self.__call__)
+        # return cloned
+
+    def __call__(self, X):
+        return logdet(X)
+    
 
 X = [
     [0, 0],
@@ -87,17 +107,22 @@ X = [
 ]
 
 K = 3
+# optimizers = [SieveStreaming] #Greedy, Random
+# for clazz in optimizers:
 # kernel = RBFKernel(sigma=1,scale=1)
 # slowIVM = IVM(kernel = kernel, sigma = 1.0)
-# greedy = Greedy(K, slowIVM)
 
-#greedy = Greedy(K, logdet)
+# opt = clazz(K, slowIVM)
+#opt = clazz(K, logdet)
 fastLogDet = FastLogdet(K)
-greedy = Greedy(K, fastLogDet)
+opt = SieveStreaming(K, fastLogDet, 2.0, 0.1)
 
-greedy.fit(X)
-fval = greedy.get_fval()
-solution = np.array(greedy.get_solution())
+opt.fit(X)
+#for x in X:
+#    opt.next(x)
+
+fval = opt.get_fval()
+solution = np.array(opt.get_solution())
 
 print("Found a solution with fval = {}".format(fval))
 print(solution)

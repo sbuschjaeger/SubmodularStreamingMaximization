@@ -12,14 +12,11 @@ public:
 
     // Greedy(unsigned int K, SubmodularFunction * f) : SubmodularOptimizer(K, f) {}
 
-    // Greedy(unsigned int K, std::unique_ptr<SubmodularFunction> f) : SubmodularOptimizer(K,std::move(f)) {}
-
     // Greedy(unsigned int K, SubmodularFunction &f) : SubmodularOptimizer(K,f) {}
+    
+    //Greedy(unsigned int K, std::unique_ptr<SubmodularFunction> f) : SubmodularOptimizer(K,std::move(f)) {}
 
-    Greedy(unsigned int K, SubmodularFunction & f) : SubmodularOptimizer(K,f) {
-        is_fitted = false;
-        assert(("K should at-least be 1 or greater.", K >= 1));
-    }
+    Greedy(unsigned int K, SubmodularFunction & f) : SubmodularOptimizer(K,f) {}
 
     Greedy(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f) : SubmodularOptimizer(K,f) {}
 
@@ -40,7 +37,7 @@ public:
             // Technically the Greedy algorithms picks that element with largest gain. This is equivalent to picking that
             // element which results in the largest function value. There is no need to explicitly compute the gain
             for (auto i : remaining) {
-                data_t ftmp = f.peek(solution, X[i]);
+                data_t ftmp = f->peek(solution, X[i]);
                 fvals.push_back(ftmp);
             }
 
@@ -49,7 +46,7 @@ public:
             unsigned int max_idx = remaining[max_element];
             
             // Copy new vector into solution vector
-            f.update(solution, X[max_idx]);
+            f->update(solution, X[max_idx]);
             solution.push_back(std::vector<data_t>(X[max_idx]));
             remaining.erase(remaining.begin()+max_element);
         }

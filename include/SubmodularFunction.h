@@ -17,7 +17,6 @@ public:
     virtual data_t operator()(std::vector<std::vector<data_t>> const &solution) const = 0;
 
     virtual data_t peek(std::vector<std::vector<data_t>> &cur_solution, std::vector<data_t> const &x) {
-        std::cout << "bad peeking" << std::endl;
         cur_solution.push_back(x);
         data_t ftmp = this->operator()(cur_solution);
         cur_solution.pop_back();
@@ -25,6 +24,12 @@ public:
     }
 
     virtual void update(std::vector<std::vector<data_t>> &cur_solution, std::vector<data_t> const &x) {}
+
+    virtual std::shared_ptr<SubmodularFunction> clone() const = 0;
+
+    virtual ~SubmodularFunction() {
+        std::cout << "DTOR CALLED" << std::endl;
+    }
 };
 
 #endif // SUBMODULARFUNCTION_H
