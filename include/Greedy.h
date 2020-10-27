@@ -8,14 +8,6 @@
 
 class Greedy : public SubmodularOptimizer {
 public:
-    // Greedy(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f) : SubmodularOptimizer(K,f) {}
-
-    // Greedy(unsigned int K, SubmodularFunction * f) : SubmodularOptimizer(K, f) {}
-
-    // Greedy(unsigned int K, SubmodularFunction &f) : SubmodularOptimizer(K,f) {}
-    
-    //Greedy(unsigned int K, std::unique_ptr<SubmodularFunction> f) : SubmodularOptimizer(K,std::move(f)) {}
-
     Greedy(unsigned int K, SubmodularFunction & f) : SubmodularOptimizer(K,f) {}
 
     Greedy(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f) : SubmodularOptimizer(K,f) {}

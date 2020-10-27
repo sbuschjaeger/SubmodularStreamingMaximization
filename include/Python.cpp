@@ -10,6 +10,8 @@
 #include "Greedy.h"
 #include "Random.h"
 #include "SieveStreaming.h"
+#include "SieveStreamingPP.h"
+#include "ThreeSieves.h"
 
 namespace py = pybind11;
 
@@ -120,6 +122,27 @@ PYBIND11_MODULE(PySSM, m) {
         .def("get_fval", &SieveStreaming::get_fval)
         .def("fit", &SieveStreaming::fit, py::arg("X"))
         .def("next", &SieveStreaming::next, py::arg("x"));
+    
+    py::class_<SieveStreamingPP>(m, "SieveStreamingPP") 
+        .def(py::init<unsigned int, SubmodularFunction&, data_t, data_t>(), py::arg("K"), py::arg("f"), py::arg("m"), py::arg("epsilon"))
+        .def(py::init<unsigned int, std::function<data_t (std::vector<std::vector<data_t>> const &)>, data_t, data_t>(), py::arg("K"), py::arg("f"),  py::arg("m"), py::arg("epsilon"))
+        .def("get_solution", &SieveStreamingPP::get_solution)
+        .def("get_fval", &SieveStreamingPP::get_fval)
+        .def("fit", &SieveStreamingPP::fit, py::arg("X"))
+        .def("next", &SieveStreamingPP::next, py::arg("x"));
+    
+    // py::enum_<ThreeSieves::THRESHOLD_STRATEGY>(m, "ThresholdStrategy")
+    //     .value("SIEVE", ThreeSieves::THRESHOLD_STRATEGY::SIEVE)
+    //     .value("CONSTANT", ThreeSieves::THRESHOLD_STRATEGY::CONSTANT)
+    //     .export_values();
+        
+    py::class_<ThreeSieves>(m, "ThreeSieves") 
+        .def(py::init<unsigned int, SubmodularFunction&, data_t, data_t, std::string const &, unsigned int>(), py::arg("K"), py::arg("f"), py::arg("m"), py::arg("epsilon"), py::arg("strategy"), py::arg("T"))
+        .def(py::init<unsigned int, std::function<data_t (std::vector<std::vector<data_t>> const &)>, data_t, data_t, std::string const &, unsigned int>(), py::arg("K"), py::arg("f"),  py::arg("m"), py::arg("epsilon"), py::arg("strategy"), py::arg("T"))
+        .def("get_solution", &ThreeSieves::get_solution)
+        .def("get_fval", &ThreeSieves::get_fval)
+        .def("fit", &ThreeSieves::fit, py::arg("X"))
+        .def("next", &ThreeSieves::next, py::arg("x"));
 }
 
 

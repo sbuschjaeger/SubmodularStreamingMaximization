@@ -35,10 +35,6 @@ private:
 protected:
     unsigned int K;
     
-    // THIS REQUIRES OUR OWN COPY CTOR IN THIS CLASS
-    // SubmodularFunction * wrapper = NULL;
-    // SubmodularFunction &f;
-    
     /** 
      * Okay lets explain the reasoning behind this a bit more. 
      * 1):  Use SubmodularFunction as an object. This does not work because we are dealing with inheritance / virtual functions
@@ -52,7 +48,6 @@ protected:
     //std::unique_ptr<SubmodularFunction> f;
     std::shared_ptr<SubmodularFunction> f;
 
-    //std::function<data_t (std::vector<std::vector<data_t>> const &)> f;
     bool is_fitted;
 
 public:
@@ -60,18 +55,12 @@ public:
     std::vector<std::vector<data_t>> solution;
     data_t fval;
 
-    // SubmodularOptimizer(unsigned int K, std::unique_ptr<SubmodularFunction> f) : K(K), f(std::move(f)) {
-    // }
-
     SubmodularOptimizer(unsigned int K, SubmodularFunction & f) 
         : K(K), f(f.clone()) {
         is_fitted = false;
         fval = 0;
         assert(("K should at-least be 1 or greater.", K >= 1));
     }
-    
-    // SubmodularOptimizer(unsigned int K, SubmodularFunction * f) 
-    //     : SubmodularOptimizer(K, std::move(std::unique_ptr<SubmodularFunction>(f))) {}
 
     SubmodularOptimizer(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f) 
         : K(K), f(std::unique_ptr<SubmodularFunction>(new SubmodularFunctionWrapper(f))) {
@@ -80,17 +69,11 @@ public:
         assert(("K should at-least be 1 or greater.", K >= 1));
     }
 
-    //  SubmodularOptimizer(unsigned int K, data_t (std::vector<std::vector<data_t>> const &) f) 
-    //     : SubmodularOptimizer(K, [f](std::vector<std::vector<data_t>> const &X){return f(X);}) {}
-
-    // SubmodularOptimizer(unsigned int K, SubmodularFunction & f) 
-    //     : K(K), f(f) {
-    //     is_fitted = false;
-    //     assert(("K should at-least be 1 or greater.", K >= 1));
-    // }
-
-    // SubmodularOptimizer(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f) 
-    //     : K(K), wrapper(new SubmodularFunctionWrapper(f)), f(*wrapper) {}
+    SubmodularOptimizer(unsigned int K, std::shared_ptr<SubmodularFunction> f) : K(K), f(f) {
+        is_fitted = false;
+        fval = 0;
+        assert(("K should at-least be 1 or greater.", K >= 1));
+    }
 
     /**
      *
@@ -126,12 +109,7 @@ public:
     /**
      * Destructor.
      */
-    virtual ~SubmodularOptimizer() {
-        // if (wrapper != NULL) {
-        //     delete wrapper;
-        //     wrapper = NULL;
-        // }
-    }
+    virtual ~SubmodularOptimizer() {}
 };
 
 #endif // THREESIEVES_SUBMODULAROPTIMIZER_H

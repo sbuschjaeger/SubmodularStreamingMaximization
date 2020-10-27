@@ -9,18 +9,15 @@
 #include <unordered_set>
 
 class SieveStreaming : public SubmodularOptimizer {
-private:
+protected:
 
     class Sieve : public SubmodularOptimizer {
-    private:
-        data_t threshold;
-        
     public:
-        
-        // Sieve(unsigned int K, std::unique_ptr<SubmodularFunction> f, data_t threshold) : SubmodularOptimizer(K,std::move(f)), threshold(threshold) {
-        // }
+        data_t threshold;
 
         Sieve(unsigned int K, SubmodularFunction & f, data_t threshold) : SubmodularOptimizer(K,f), threshold(threshold) {}
+
+        Sieve(unsigned int K, std::shared_ptr<SubmodularFunction> f, data_t threshold) : SubmodularOptimizer(K,f), threshold(threshold) {}
 
         Sieve(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f, data_t threshold) : SubmodularOptimizer(K,f), threshold(threshold) {
         }
@@ -44,57 +41,53 @@ private:
 
     };
 
-    static inline std::vector<data_t> thresholds(unsigned int K, data_t m, data_t epsilon) {
+    static inline std::vector<data_t> thresholds(data_t lower, data_t upper, data_t epsilon) {
         if (epsilon > 0.0) {
+            // unsigned int i = 0;
+            // do {
+            //     data_t val = std::pow(1+epsilon, i);
+            //     if (val > lower) {
+            //         thresholds.push_back(val);
+            //     }
+            // } while( val < upper);
 
-            int lower, upper;
-            data_t tlower = std::log(m) / std::log(1.0 + epsilon);
+            int ilower = std::ceil(std::log(lower) / std::log(1.0 + epsilon));
+            int iupper; // = std::floor(std::log(upper) / std::log(1.0 + epsilon));
 
-            if (tlower > 0)
-                lower = (int) tlower + 1;
-            else
-                lower = (int) tlower;
+            data_t tmp = std::log(upper) / std::log(1.0 + epsilon);
+            if (tmp == std::floor(tmp)) {
+                iupper = std::floor(tmp) - 1;
+            } else {
+                iupper = std::floor(tmp);
+            }
 
-            data_t tupper = std::log(K * m) / std::log(1.0 + epsilon);
-            upper = (int) tupper; // "+ 1" for testing
+            if (ilower >= iupper)
+                throw std::runtime_error("SieveStreaming::thresholds: Lower threshold boundary (" + std::to_string(ilower) + ") is higher than or equal to the upper boundary ("
+                                        + std::to_string(iupper) + "), epsilon = " + std::to_string(epsilon) + ".");
 
-            if (lower >= upper)
-                throw std::runtime_error("SieveStreaming::thresholds: Lower threshold boundary (" + std::to_string(lower) + ") is higher than or equal to the upper boundary ("
-                                        + std::to_string(upper) + "), epsilon = " + std::to_string(epsilon) + ".");
+            std::vector<data_t> ts;
+            for (int i = ilower; i < iupper; ++i) {
+                ts.push_back(std::pow(1.0 + epsilon, i));
+            }
 
-            std::vector<data_t> thresholds;
-            for (int i = lower; i < upper; ++i)
-                thresholds.push_back(std::pow(1.0 + epsilon, i));
-
-            return thresholds;
+            return ts;
         } else
             throw std::runtime_error("SieveStreaming::thresholds: epsilon must be a positive real-number (is: " + std::to_string(epsilon) + ").");
     }
 
 protected:
-    // TODO How to properly init these?
     std::vector<Sieve*> sieves;
 
-
 public:
-    // TODO fval / get_solution wie genau implementieren?
-    // TODO Sieve must recieve a copy of SumodularFunction!
     SieveStreaming(unsigned int K, SubmodularFunction & f, data_t m, data_t epsilon) : SubmodularOptimizer(K,f) {
-        std::vector<data_t> ts = thresholds(K, m, epsilon);
+        std::vector<data_t> ts = thresholds(m, K*m, epsilon);
         for (auto t : ts) {
             sieves.push_back(new Sieve(K, f, t));
         }
     }
 
-    // SieveStreaming(unsigned int K, std::unique_ptr<SubmodularFunction> f, data_t m, data_t epsilon) : SubmodularOptimizer(K,std::move(f)) {
-    //     std::vector<data_t> ts = thresholds(K, m, epsilon);
-    //     for (auto t : ts) {
-    //         sieves.push_back(Sieve(K, std::move(f), t));
-    //     }
-    // }
-
     SieveStreaming(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f, data_t m, data_t epsilon) : SubmodularOptimizer(K,f) {
-        std::vector<data_t> ts = thresholds(K, m, epsilon);
+        std::vector<data_t> ts = thresholds(m, K*m, epsilon);
         for (auto t : ts) {
             sieves.push_back(new Sieve(K, f, t));
         }

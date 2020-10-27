@@ -10,6 +10,8 @@ from PySSM import SubmodularFunction
 from PySSM import Greedy
 from PySSM import Random
 from PySSM import SieveStreaming
+from PySSM import SieveStreamingPP
+from PySSM import ThreeSieves 
 
 def logdet(X):
     X = np.array(X)
@@ -114,8 +116,12 @@ K = 3
 
 # opt = clazz(K, slowIVM)
 #opt = clazz(K, logdet)
+# fastLogDet = FastLogdet(K)
+# opt = SieveStreaming(K, fastLogDet, 2.0, 0.1)
+# opt = SieveStreamingPP(K, fastLogDet, 2.0, 0.1)
+
 fastLogDet = FastLogdet(K)
-opt = SieveStreaming(K, fastLogDet, 2.0, 0.1)
+opt = ThreeSieves(K, fastLogDet, 2.0, 0.1, "sieve", T = 100)
 
 opt.fit(X)
 #for x in X:

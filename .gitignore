@@ -2,3 +2,5 @@
 .vscode
 *.so
 PySSM.egg-info/
+data/
+*tar.gz

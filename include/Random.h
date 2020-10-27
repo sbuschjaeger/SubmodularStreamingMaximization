@@ -40,8 +40,6 @@ protected:
 public:
     Random(unsigned int K, SubmodularFunction & f, unsigned long seed = 0) : SubmodularOptimizer(K,f), generator(seed) {}
 
-    // Random(unsigned int K, std::unique_ptr<SubmodularFunction> f, unsigned long seed = 0) : SubmodularOptimizer(K,std::move(f)), generator(seed) {}
-
     Random(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f, unsigned long seed = 0) : SubmodularOptimizer(K,f), generator(seed) {}
 
     void fit(std::vector<std::vector<data_t>> const & X) {

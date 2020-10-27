@@ -5,9 +5,10 @@ channels:
 dependencies:
   - cmake
   - python 
-  - onnx
   - numpy
   - pip
   - pip:
+    - pandas
     - pylint
+    - arff
   #   - -e file:. 

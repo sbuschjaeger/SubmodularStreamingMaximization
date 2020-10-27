@@ -27,9 +27,7 @@ public:
 
     virtual std::shared_ptr<SubmodularFunction> clone() const = 0;
 
-    virtual ~SubmodularFunction() {
-        std::cout << "DTOR CALLED" << std::endl;
-    }
+    virtual ~SubmodularFunction() {}
 };
 
 #endif // SUBMODULARFUNCTION_H
