@@ -20,13 +20,18 @@ public:
     SubmodularFunctionWrapper(std::function<data_t (std::vector<std::vector<data_t>> const &)> f) : f(f) {
     }
 
+    data_t peek(std::vector<std::vector<data_t>> &cur_solution, std::vector<data_t> const &x) {
+        cur_solution.push_back(x);
+        data_t ftmp = f(cur_solution);
+        cur_solution.pop_back();
+        return ftmp;
+    }
+
     std::shared_ptr<SubmodularFunction> clone() const {
         return std::shared_ptr<SubmodularFunction>(new SubmodularFunctionWrapper(f));
     }
 
-    data_t operator()(std::vector<std::vector<data_t>> const &solution) const {
-        return f(solution);
-    }
+    void update(std::vector<std::vector<data_t>> &cur_solution, std::vector<data_t> const &x) {}
 };
 
 class SubmodularOptimizer {
