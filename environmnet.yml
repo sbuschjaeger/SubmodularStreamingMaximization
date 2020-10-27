@@ -8,5 +8,6 @@ dependencies:
   - onnx
   - numpy
   - pip
-  # - pip:
+  - pip:
+    - pylint
   #   - -e file:. 
