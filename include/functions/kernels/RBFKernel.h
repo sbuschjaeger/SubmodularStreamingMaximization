@@ -2,6 +2,9 @@
 #define RBF_KERNEL_H
 
 #include <cassert>
+#include <algorithm>
+#include <numeric>
+#include <vector>
 #include "DataTypeHandling.h"
 #include "functions/kernels/Kernel.h"
 /**
@@ -51,9 +54,16 @@ public:
     inline data_t operator()(const std::vector<data_t>& x1, const std::vector<data_t>& x2) const override {
         data_t distance = 0;
         if (x1 != x2) {
-            for (unsigned int i = 0; i < x1.size(); ++i) {
-                distance += (x1[i]-x2[i])*(x1[i]-x2[i]);
-            }
+            // This is the fastest stl-compatible version I could find / come up with. I am not sure how much 
+            // vectorization this utilizes, but for now this shall be enough
+            // TODO: Template the dimension of vectors so we might vectorize it?
+            distance = std::inner_product(x1.begin(), x1.end(), x2.begin(), data_t(0), 
+                std::plus<data_t>(), [](data_t x,data_t y){return (y-x)*(y-x);});
+
+            // for (unsigned int i = 0; i < x1.size(); ++i) {
+            //     auto const d = x1[i] - x2[i];
+            //     distance += d * d;
+            // }
             distance /= sigma;
         }
         return scale * std::exp(-distance);

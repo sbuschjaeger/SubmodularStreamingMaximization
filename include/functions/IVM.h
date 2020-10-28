@@ -126,6 +126,8 @@ public:
     std::shared_ptr<SubmodularFunction> clone() const override {
         return std::shared_ptr<SubmodularFunction>(new IVM(*kernel, sigma));
     }
+
+    ~IVM() {}
 };
 
 #endif // INFORMATIVE_VECTOR_MACHINE_H

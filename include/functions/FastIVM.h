@@ -129,12 +129,12 @@ public:
 
     ~FastIVM() {
         if (kmat != NULL) {
-            delete kmat;
+            delete[] kmat;
             kmat = NULL;
         }
 
         if (L != NULL) {
-            delete L;
+            delete[] L;
             L = NULL;
         }
     }

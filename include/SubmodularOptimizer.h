@@ -41,20 +41,20 @@ public:
         : K(K), f(f.clone()) {
         is_fitted = false;
         fval = 0;
-        assert(("K should at-least be 1 or greater.", K >= 1));
+        // assert(("K should at-least be 1 or greater.", K >= 1));
     }
 
     SubmodularOptimizer(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f) 
         : K(K), f(std::unique_ptr<SubmodularFunction>(new SubmodularFunctionWrapper(f))) {
         is_fitted = false;
         fval = 0;
-        assert(("K should at-least be 1 or greater.", K >= 1));
+        // assert(("K should at-least be 1 or greater.", K >= 1));
     }
 
     SubmodularOptimizer(unsigned int K, std::shared_ptr<SubmodularFunction> f) : K(K), f(f) {
         is_fitted = false;
         fval = 0;
-        assert(("K should at-least be 1 or greater.", K >= 1));
+        // assert(("K should at-least be 1 or greater.", K >= 1));
     }
 
     /**

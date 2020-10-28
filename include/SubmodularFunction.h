@@ -55,6 +55,7 @@ public:
         return std::shared_ptr<SubmodularFunction>(new SubmodularFunctionWrapper(f));
     }
 
+    ~SubmodularFunctionWrapper() {}
 };
 
 #endif // SUBMODULARFUNCTION_H

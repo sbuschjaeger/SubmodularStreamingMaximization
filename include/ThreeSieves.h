@@ -22,7 +22,7 @@ public:
     unsigned int t;
 
     ThreeSieves(unsigned int K, SubmodularFunction & f, data_t m, data_t epsilon, std::string const & strategy, unsigned int T) : SubmodularOptimizer(K,f), threshold(K*m), epsilon(epsilon),T(T), t(0)  {
-        assert(("T should at-least be 1 or greater.", T >= 1));
+        // assert(("T should at-least be 1 or greater.", T >= 1));
         std::string lower_case(strategy);
         std::transform(lower_case.begin(), lower_case.end(), lower_case.begin(),
             [](unsigned char c){ return std::tolower(c); });
@@ -44,15 +44,15 @@ public:
         } else {
             this->strategy = THRESHOLD_STRATEGY::CONSTANT;
         }
-        assert(("T should at-least be 1 or greater.", T >= 1));
+        // assert(("T should at-least be 1 or greater.", T >= 1));
     }
 
     ThreeSieves(unsigned int K, SubmodularFunction & f, data_t m, data_t epsilon, THRESHOLD_STRATEGY strategy, unsigned int T) : SubmodularOptimizer(K,f), threshold(K*m), epsilon(epsilon), strategy(strategy), T(T), t(0)  {
-        assert(("T should at-least be 1 or greater.", T >= 1));
+        // assert(("T should at-least be 1 or greater.", T >= 1));
     }
 
     ThreeSieves(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f, data_t m, data_t epsilon, THRESHOLD_STRATEGY strategy, unsigned int T) : SubmodularOptimizer(K,f), threshold(K*m), epsilon(epsilon), strategy(strategy), T(T), t(0) {
-        assert(("T should at-least be 1 or greater.", T >= 1));
+        // assert(("T should at-least be 1 or greater.", T >= 1));
     }
 
     void fit(std::vector<std::vector<data_t>> const & X) {

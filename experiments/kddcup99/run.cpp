@@ -8,7 +8,7 @@
 #include <chrono>
 
 #include "functions/FastIVM.h"
-#include "kernels/RBFKernel.h"
+#include "functions/kernels/RBFKernel.h"
 #include "Greedy.h"
 #include "Random.h"
 #include "SieveStreaming.h"
@@ -85,7 +85,7 @@ int main() {
     //     if (cnt > 10) break;
     // }
 
-    auto K = 20;
+    auto K = 50;
     FastIVM fastIVM(K, RBFKernel( std::sqrt(data[0].size()), 1.0) , 1.0);
 
     std::cout << "Selecting " << K << " representatives via Greedy" << std::endl;
@@ -96,16 +96,6 @@ int main() {
     // std::cout << "Selecting " << K << " representatives via Random with seed = 0" << std::endl;
     // Random random0(K, fastIVM, 0);
     // res = evaluate_optimizer(random0, data);
-    // std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
-
-    // std::cout << "Selecting " << K << " representatives via Random with seed = 12345" << std::endl;
-    // Random random12345(K, fastIVM, 12345);
-    // res = evaluate_optimizer(random12345, data);
-    // std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
-    
-    // std::cout << "Selecting " << K << " representatives via Random with seed = 1337" << std::endl;
-    // Random random1337(K, fastIVM, 1337);
-    // res = evaluate_optimizer(random1337, data);
     // std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
 
     // std::cout << "Selecting " << K << " representatives via SieveStreaming" << std::endl;

@@ -2,8 +2,8 @@
 #include <vector>
 #include <math.h>
 
-#include "functions/FastIVM.h"
-#include "kernels/RBFKernel.h"
+#include "FastIVM.h"
+#include "RBFKernel.h"
 #include "Greedy.h"
 #include "Random.h"
 #include "SieveStreaming.h"

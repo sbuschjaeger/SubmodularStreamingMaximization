@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
 project(StreamingSubmodularOptimization LANGUAGES CXX)
-find_package(OpenMP)
+# find_package(OpenMP)
 
 option(CREATE_EXPERIMENTS "Should experiments be created?" OFF)
 
@@ -22,7 +22,7 @@ endif()
 
 set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -g")
 
 ###################################################################
 # TARGETS
@@ -37,7 +37,7 @@ add_executable(run_kddcup ${SOURCES} experiments/kddcup99/run.cpp)
 #     # set_target_properties(threesieves-tests PROPERTIES LINKER_FLAGS "-fprofile-arcs -ftest-coverage")
 # endif ()
 
-add_executable(main tests/main.cpp)
+# add_executable(main tests/main.cpp)
 
 add_subdirectory(pybind11)
 pybind11_add_module(PySSM include/Python.cpp)
