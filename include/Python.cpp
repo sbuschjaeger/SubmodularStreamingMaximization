@@ -1,10 +1,12 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
+// #include <pybind11/stl_bind.h>
 #include <pybind11/operators.h>
 #include <pybind11/functional.h>
 
 #include "SubmodularFunction.h"
-#include "kernels/RBFKernel.h"
+#include "functions/kernels/RBFKernel.h"
+#include "functions/kernels/Kernel.h"
 #include "functions/IVM.h"
 #include "functions/FastIVM.h"
 #include "Greedy.h"
@@ -17,7 +19,7 @@ namespace py = pybind11;
 
 class PySubmodularFunction : public SubmodularFunction {
 public:
-    data_t operator()(std::vector<std::vector<data_t>> const &solution) const {
+    data_t operator()(std::vector<std::vector<data_t>> const &solution) const override {
         PYBIND11_OVERRIDE_PURE_NAME(
             data_t,                     /* Return type */
             SubmodularFunction,         /* Parent class */
@@ -27,28 +29,32 @@ public:
         );
     }
 
-    data_t peek(std::vector<std::vector<data_t>> &cur_solution, std::vector<data_t> const &x) {
-       PYBIND11_OVERRIDE(
+
+
+    data_t peek(std::vector<std::vector<data_t>> const &cur_solution, std::vector<data_t> const &x, unsigned int pos) override {
+       PYBIND11_OVERRIDE_PURE(
            data_t,
            SubmodularFunction,
            peek,
            cur_solution, 
-           x
+           x,
+           pos
        );
     }
+    
 
-    void update(std::vector<std::vector<data_t>> &cur_solution, std::vector<data_t> const &x) {
-        PYBIND11_OVERRIDE(
+    void update(std::vector<std::vector<data_t>> const &cur_solution, std::vector<data_t> const &x, unsigned int pos) override {
+        PYBIND11_OVERRIDE_PURE(
            void,
            SubmodularFunction,
            update,
            cur_solution, 
-           x
+           x,
+           pos
        );
     }
 
     ~PySubmodularFunction() {
-        std::cout << "D'TOR CALLED" << std::endl;
     }
 
     // See https://github.com/pybind/pybind11/issues/1049
@@ -56,46 +62,115 @@ public:
         auto self = py::cast(this);
         auto cloned = self.attr("clone")();
 
-        std::vector<std::vector<data_t>> X({{1.0,2.0}});
-        std::vector<data_t> x({1.0,1.0});
-
         auto keep_python_state_alive = std::make_shared<py::object>(cloned);
         auto ptr = cloned.cast<PySubmodularFunction*>();
-        std::cout << "RETURN COPY" << std::endl;
 
         std::shared_ptr<SubmodularFunction> newobj = std::shared_ptr<SubmodularFunction>(keep_python_state_alive, ptr);
-        std::cout << "adress: " << newobj << std::endl;
 
         // aliasing shared_ptr: points to `A_trampoline* ptr` but refcounts the Python object
         return newobj;
     }
 };
 
+class PyKernel : public Kernel {
+public:
+    data_t operator()(std::vector<data_t> const &x1, std::vector<data_t> const &x2) const override {
+        PYBIND11_OVERRIDE_PURE_NAME(
+            data_t,                     /* Return type */
+            Kernel,                     /* Parent class */
+            "__call__",                 /* Name of method in Python */
+            operator(),                 /* Name of function in C++ */
+            x1,                         /* Argument(s) */
+            x2
+        );
+    }
+
+    ~PyKernel() {}
+
+    // See https://github.com/pybind/pybind11/issues/1049
+    std::shared_ptr<Kernel> clone() const override {
+        auto self = py::cast(this);
+        auto cloned = self.attr("clone")();
+
+        auto keep_python_state_alive = std::make_shared<py::object>(cloned);
+        auto ptr = cloned.cast<PyKernel*>();
+
+        std::shared_ptr<Kernel> newobj = std::shared_ptr<Kernel>(keep_python_state_alive, ptr);
+
+        // aliasing shared_ptr: points to `A_trampoline* ptr` but refcounts the Python object
+        return newobj;
+    }
+};
+
+// data_t fit_greedy_on_ivm(unsigned int K, data_t sigma, data_t scale, data_t epsilon, std::vector<std::vector<data_t>> const &X) {
+//     FastIVM fastIVM(K, RBFKernel(sigma, scale), epsilon);
+//     Greedy greedy(K, fastIVM);
+//     greedy.fit(X);
+//     return greedy.get_fval();
+// }
+
+// data_t fit_greedy_on_ivm_2(unsigned int K, data_t sigma, data_t scale, data_t epsilon) {
+//     return 1.0;
+//     // FastIVM fastIVM(K, RBFKernel(sigma, scale), epsilon);
+//     // Greedy greedy(K, fastIVM);
+//     // greedy.fit(X);
+//     // return greedy.get_fval();
+// }
+
+// PYBIND11_MAKE_OPAQUE(std::vector<data_t>);
+// PYBIND11_MAKE_OPAQUE(std::vector<std::vector<data_t>>);
+
 PYBIND11_MODULE(PySSM, m) {
-    py::class_<RBFKernel>(m, "RBFKernel")
-        .def(py::init<data_t, data_t>(), py::arg("sigma") = 1.0, py::arg("scale") = 1.0)
-        .def(py::init<float>(), py::arg("sigma") = 1.0)
+    // m.def("fit_greedy_on_ivm", &fit_greedy_on_ivm, 
+    //     py::arg("K"), 
+    //     py::arg("sigma"),
+    //     py::arg("scale"),
+    //     py::arg("epsilon"),
+    //     py::arg("X")
+    // );
+
+    // m.def("fit_greedy_on_ivm_2", &fit_greedy_on_ivm_2, 
+    //     py::arg("K"), 
+    //     py::arg("sigma"),
+    //     py::arg("scale"),
+    //     py::arg("epsilon")
+    // );
+
+    // py::bind_vector<std::vector<data_t>>(m, "Vector");
+    // py::bind_vector<std::vector<std::vector<data_t>>>(m, "Matrix");
+
+    py::class_<Kernel, PyKernel, std::shared_ptr<Kernel>>(m, "Kernel")
         .def(py::init<>())
-        .def("__call__", &RBFKernel::operator());
+        .def("__call__", &Kernel::operator())
+        .def("clone", &Kernel::clone, py::return_value_policy::reference);
+
+    py::class_<RBFKernel, Kernel, std::shared_ptr<RBFKernel>>(m, "RBFKernel")
+        .def(py::init<data_t, data_t>(), py::arg("sigma") = 1.0, py::arg("scale") = 1.0)
+        .def(py::init<data_t>(), py::arg("sigma") = 1.0)
+        .def(py::init<>())
+        .def("__call__", &RBFKernel::operator())
+        .def("clone", &RBFKernel::clone, py::return_value_policy::reference);
 
     py::class_<SubmodularFunction, PySubmodularFunction, std::shared_ptr<SubmodularFunction>>(m, "SubmodularFunction")
         .def(py::init<>())
-        .def("peek", &SubmodularFunction::peek, py::arg("cur_solution"), py::arg("x"))
-        .def("update", &SubmodularFunction::update, py::arg("cur_solution"), py::arg("x"))
+        .def("peek", &SubmodularFunction::peek, py::arg("cur_solution"), py::arg("x"), py::arg("pos"))
+        .def("update", &SubmodularFunction::update, py::arg("cur_solution"), py::arg("x"), py::arg("pos"))
         .def("__call__", &SubmodularFunction::operator())
         .def("clone", &SubmodularFunction::clone, py::return_value_policy::reference);
 
     py::class_<IVM, SubmodularFunction, std::shared_ptr<IVM> >(m, "IVM")
-        .def(py::init<std::function<data_t (std::vector<data_t> const &, std::vector<data_t> const &)>, data_t>(), py::arg("kernel"), py::arg("sigma"))
-        .def("peek", &IVM::peek, py::arg("cur_solution"), py::arg("x"))
-        .def("update", &IVM::update, py::arg("cur_solution"), py::arg("x"))
+        //.def(py::init<std::function<data_t (std::vector<data_t> const &, std::vector<data_t> const &)>, data_t>(), py::arg("kernel"), py::arg("sigma"))
+        .def(py::init<Kernel const &, data_t>(), py::arg("kernel"), py::arg("sigma"))
+        .def("peek", &IVM::peek, py::arg("cur_solution"), py::arg("x"), py::arg("pos"))
+        .def("update", &IVM::update, py::arg("cur_solution"), py::arg("x"), py::arg("pos"))
         .def("__call__", &IVM::operator())
         .def("clone", &IVM::clone, py::return_value_policy::reference);
 
     py::class_<FastIVM, IVM, SubmodularFunction, std::shared_ptr<FastIVM> >(m, "FastIVM")
-        .def(py::init<unsigned int, std::function<data_t (std::vector<data_t> const &, std::vector<data_t> const &)>, data_t>(),  py::arg("K"),  py::arg("kernel"), py::arg("sigma"))
-        .def("peek", &FastIVM::peek, py::arg("cur_solution"), py::arg("x"))
-        .def("update", &FastIVM::update, py::arg("cur_solution"), py::arg("x"))
+        //.def(py::init<unsigned int, std::function<data_t (std::vector<data_t> const &, std::vector<data_t> const &)>, data_t>(),  py::arg("K"),  py::arg("kernel"), py::arg("sigma"))
+        .def(py::init<unsigned int, Kernel const &, data_t>(),  py::arg("K"),  py::arg("kernel"), py::arg("sigma"))
+        .def("peek", &FastIVM::peek, py::arg("cur_solution"), py::arg("x"), py::arg("pos"))
+        .def("update", &FastIVM::update, py::arg("cur_solution"), py::arg("x"), py::arg("pos"))
         .def("__call__", &FastIVM::operator())
         .def("clone", &FastIVM::clone, py::return_value_policy::reference);
 
@@ -131,11 +206,6 @@ PYBIND11_MODULE(PySSM, m) {
         .def("fit", &SieveStreamingPP::fit, py::arg("X"))
         .def("next", &SieveStreamingPP::next, py::arg("x"));
     
-    // py::enum_<ThreeSieves::THRESHOLD_STRATEGY>(m, "ThresholdStrategy")
-    //     .value("SIEVE", ThreeSieves::THRESHOLD_STRATEGY::SIEVE)
-    //     .value("CONSTANT", ThreeSieves::THRESHOLD_STRATEGY::CONSTANT)
-    //     .export_values();
-        
     py::class_<ThreeSieves>(m, "ThreeSieves") 
         .def(py::init<unsigned int, SubmodularFunction&, data_t, data_t, std::string const &, unsigned int>(), py::arg("K"), py::arg("f"), py::arg("m"), py::arg("epsilon"), py::arg("strategy"), py::arg("T"))
         .def(py::init<unsigned int, std::function<data_t (std::vector<std::vector<data_t>> const &)>, data_t, data_t, std::string const &, unsigned int>(), py::arg("K"), py::arg("f"),  py::arg("m"), py::arg("epsilon"), py::arg("strategy"), py::arg("T"))

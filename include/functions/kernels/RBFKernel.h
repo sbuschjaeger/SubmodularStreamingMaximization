@@ -3,10 +3,11 @@
 
 #include <cassert>
 #include "DataTypeHandling.h"
+#include "functions/kernels/Kernel.h"
 /**
  *
  */
-class RBFKernel {
+class RBFKernel : public Kernel {
 private:
     data_t sigma = 1.0;
     data_t scale = 1.0;
@@ -47,7 +48,7 @@ public:
      * @param x2 A vector.
      * @return RBF kernel value for x1 and x2.
      */
-    inline data_t operator()(const std::vector<data_t>& x1, const std::vector<data_t>& x2) const {
+    inline data_t operator()(const std::vector<data_t>& x1, const std::vector<data_t>& x2) const override {
         data_t distance = 0;
         if (x1 != x2) {
             for (unsigned int i = 0; i < x1.size(); ++i) {
@@ -58,6 +59,9 @@ public:
         return scale * std::exp(-distance);
     }
 
+    std::shared_ptr<Kernel> clone() const override {
+        return std::shared_ptr<Kernel>(new RBFKernel(sigma, scale));
+    }
 };
 
 #endif // RBF_KERNEL_H

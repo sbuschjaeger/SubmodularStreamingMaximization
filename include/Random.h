@@ -10,7 +10,6 @@
 
 class Random : public SubmodularOptimizer {
 protected:
-    unsigned long seed = 0;
     unsigned int cnt = 0;
     std::default_random_engine generator;
 
@@ -46,11 +45,12 @@ public:
         if (X.size() < K) {
             K = X.size();
         }
-        std::default_random_engine generator(seed);
         std::vector<unsigned int> indices = sample_without_replacement(K, X.size(), generator);
 
         for (auto i : indices) {
-            solution.push_back(std::vector<data_t>(X[i]));
+            f->update(solution, X[i], solution.size());
+            solution.push_back(X[i]);
+            //solution.push_back(std::vector<data_t>(X[i]));
         }
 
         cnt = X.size();
@@ -61,14 +61,16 @@ public:
     void next(std::vector<data_t> const &x) {
         // Super basic reservoir sampling. This can probably be improved.
         if (solution.size() < K) {
-            solution.push_back(std::vector<data_t>(x));
+            f->update(solution, x, solution.size());
+            solution.push_back(x);
         } else {
             unsigned int j = std::uniform_int_distribution<>(1, cnt)(generator);
             if (j <= K) {
-                solution[j - 1] = std::vector<data_t>(x);
+                f->update(solution, x, j - 1);
+                solution[j - 1] = x; //std::vector<data_t>(x);
             }
         }
-        
+
         fval = f->operator()(solution);
         is_fitted = true;
         ++cnt;

@@ -29,10 +29,10 @@ protected:
         void next(std::vector<data_t> const &x) {
             unsigned int Kcur = solution.size();
             if (Kcur < K) {
-                data_t fdelta = f->peek(solution, x) - fval;
+                data_t fdelta = f->peek(solution, x, solution.size()) - fval;
                 data_t tau = (threshold / 2.0 - fval) / static_cast<data_t>(K - Kcur);
                 if (fdelta >= tau) {
-                    f->update(solution, x);
+                    f->update(solution, x, solution.size());
                     solution.push_back(std::vector<data_t>(x));
                     fval += fdelta;
                 }

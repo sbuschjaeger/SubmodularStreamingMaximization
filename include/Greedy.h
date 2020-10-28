@@ -29,7 +29,7 @@ public:
             // Technically the Greedy algorithms picks that element with largest gain. This is equivalent to picking that
             // element which results in the largest function value. There is no need to explicitly compute the gain
             for (auto i : remaining) {
-                data_t ftmp = f->peek(solution, X[i]);
+                data_t ftmp = f->peek(solution, X[i], solution.size());
                 fvals.push_back(ftmp);
             }
 
@@ -38,8 +38,9 @@ public:
             unsigned int max_idx = remaining[max_element];
             
             // Copy new vector into solution vector
-            f->update(solution, X[max_idx]);
-            solution.push_back(std::vector<data_t>(X[max_idx]));
+            f->update(solution, X[max_idx], solution.size());
+            //solution.push_back(std::vector<data_t>(X[max_idx]));
+            solution.push_back(X[max_idx]);
             remaining.erase(remaining.begin()+max_element);
         }
 

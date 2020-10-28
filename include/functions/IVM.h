@@ -8,6 +8,7 @@
 #include <cassert>
 #include "DataTypeHandling.h"
 #include "SubmodularFunction.h"
+#include "kernels/Kernel.h"
 
 //#include <src/SubmodularFunction.h>
 //#include "kernels/Kernel.h"
@@ -16,6 +17,22 @@
  */
 class IVM : public SubmodularFunction {
 protected:
+
+    inline void compute_kernel(data_t *const kmat, std::vector<std::vector<data_t>> const &X) const {
+        unsigned int K = X.size();
+
+        for (unsigned int i = 0; i < K; ++i) {
+            for (unsigned int j = i; j < K; ++j) {
+                data_t kval = kernel->operator()(X[i], X[j]);
+                if (i == j) {
+                    kmat[i+i*K] = 1.0 + kval / std::pow(sigma, 2.0);
+                } else {
+                    kmat[i+j*K] = kval / std::pow(sigma, 2.0);
+                    kmat[j+i*K] = kval / std::pow(sigma, 2.0);
+                }
+            }
+        }
+    }
 
     static inline void cholesky(data_t *const pOut, data_t const *const pIn, size_t const N, size_t const ld) {
         for (unsigned int j = 0; j < N; ++j) {
@@ -39,7 +56,7 @@ protected:
         }
     }
 
-    static inline data_t logDet(data_t const *const pM, size_t const N, size_t ld) {
+    static inline data_t log_det(data_t const *const pM, size_t const N, size_t ld) {
         data_t *L = new data_t[N * N];
 
         data_t * tmp = new data_t[N*N];
@@ -66,38 +83,48 @@ protected:
         return 2*det;
     }
 
-    std::function<data_t (std::vector<data_t> const &, std::vector<data_t> const &)> kernel;
+    //std::function<data_t (std::vector<data_t> const &, std::vector<data_t> const &)> kernel;
+    std::shared_ptr<Kernel> kernel;
     data_t sigma;
 
 public:
-    IVM(std::function<data_t (std::vector<data_t> const &, std::vector<data_t> const &)> kernel, data_t sigma) : kernel(kernel), sigma(sigma) {}
+    //IVM(std::function<data_t (std::vector<data_t> const &, std::vector<data_t> const &)> const &kernel, data_t sigma) : kernel(kernel), sigma(sigma) {}
+    IVM(Kernel const &kernel, data_t sigma) : kernel(kernel.clone()), sigma(sigma) {}
 
-    data_t operator()(std::vector<std::vector<data_t>> const &X) const {
+    IVM(std::function<data_t (std::vector<data_t> const &, std::vector<data_t> const &)> kernel, data_t sigma) 
+        : kernel(std::unique_ptr<Kernel>(new KernelWrapper(kernel))), sigma(sigma) {
+    }
+
+    data_t peek(std::vector<std::vector<data_t>> const& cur_solution, std::vector<data_t> const &x, unsigned int pos) override {
+        std::vector<std::vector<data_t>> tmp(cur_solution);
+
+        if (pos >= cur_solution.size()) {
+            tmp.push_back(x);
+        } else {
+            tmp[pos] = x;
+        }
+
+        data_t ftmp = this->operator()(tmp);
+        return ftmp;
+    } 
+
+    void update(std::vector<std::vector<data_t>> const &cur_solution, std::vector<data_t> const &x, unsigned int pos) override {}
+
+    data_t operator()(std::vector<std::vector<data_t>> const &X) const override {
         // This is the most basic implementations which recomputes everything with each call
         // I would not use this for any real-world problems. 
 
         unsigned int K = X.size();
         data_t * kmat = new data_t[K*K];
+        compute_kernel(kmat, X);
 
-        for (unsigned int i = 0; i < K; ++i) {
-            for (unsigned int j = i; j < K; ++j) {
-                data_t kval = kernel(X[i], X[j]);
-                if (i == j) {
-                    kmat[i+i*K] = 1.0 + kval / std::pow(sigma, 2.0);
-                } else {
-                    kmat[i+j*K] = kval / std::pow(sigma, 2.0);
-                    kmat[j+i*K] = kval / std::pow(sigma, 2.0);
-                }
-            }
-        }
-
-        data_t fval = IVM::logDet(kmat, X.size(), X.size());
+        data_t fval = IVM::log_det(kmat, X.size(), X.size());
         delete [] kmat;
         return fval;
     }
 
-    std::shared_ptr<SubmodularFunction> clone() const {
-        return std::shared_ptr<SubmodularFunction>(new IVM(kernel, sigma));
+    std::shared_ptr<SubmodularFunction> clone() const override {
+        return std::shared_ptr<SubmodularFunction>(new IVM(*kernel, sigma));
     }
 };
 

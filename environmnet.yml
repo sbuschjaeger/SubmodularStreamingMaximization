@@ -4,11 +4,11 @@ channels:
   - defaults
 dependencies:
   - cmake
-  - python 
+  - python=3.8
   - numpy
   - pip
+  - pandas
+  - scipy
   - pip:
-    - pandas
     - pylint
-    - arff
-  #   - -e file:. 
+  #  - -e file:. 
