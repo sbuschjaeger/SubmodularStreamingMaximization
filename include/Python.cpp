@@ -14,6 +14,7 @@
 #include "SieveStreaming.h"
 #include "SieveStreamingPP.h"
 #include "ThreeSieves.h"
+#include "Salsa.h"
 
 namespace py = pybind11;
 
@@ -29,8 +30,6 @@ public:
         );
     }
 
-
-
     data_t peek(std::vector<std::vector<data_t>> const &cur_solution, std::vector<data_t> const &x, unsigned int pos) override {
        PYBIND11_OVERRIDE_PURE(
            data_t,
@@ -41,7 +40,6 @@ public:
            pos
        );
     }
-    
 
     void update(std::vector<std::vector<data_t>> const &cur_solution, std::vector<data_t> const &x, unsigned int pos) override {
         PYBIND11_OVERRIDE_PURE(
@@ -183,8 +181,8 @@ PYBIND11_MODULE(PySSM, m) {
         .def("fit", &Greedy::fit, py::arg("X"));
     
     py::class_<Random>(m, "Random") 
-        .def(py::init<unsigned int, SubmodularFunction&>(), py::arg("K"), py::arg("f"))
-        .def(py::init<unsigned int, std::function<data_t (std::vector<std::vector<data_t>> const &)> >(), py::arg("K"), py::arg("f"))
+        .def(py::init<unsigned int, SubmodularFunction&, unsigned long>(), py::arg("K"), py::arg("f"), py::arg("seed")= 0)
+        .def(py::init<unsigned int, std::function<data_t (std::vector<std::vector<data_t>> const &)>, unsigned long>(), py::arg("K"), py::arg("f"), py::arg("seed") = 0)
         .def("get_solution", &Random::get_solution)
         .def("get_fval", &Random::get_fval)
         .def("fit", &Random::fit, py::arg("X"))
@@ -213,11 +211,12 @@ PYBIND11_MODULE(PySSM, m) {
         .def("get_fval", &ThreeSieves::get_fval)
         .def("fit", &ThreeSieves::fit, py::arg("X"))
         .def("next", &ThreeSieves::next, py::arg("x"));
+
+    py::class_<Salsa>(m, "Salsa") 
+        .def(py::init<unsigned int, SubmodularFunction&, data_t, data_t, data_t, data_t, data_t, data_t, data_t, data_t,data_t>(), py::arg("K"), py::arg("f"), py::arg("m"), py::arg("epsilon"), py::arg("hilow_epsilon") = 0.05, py::arg("hilow_beta") = 0.1, py::arg("hilow_delta") = 0.025, py::arg("dense_beta") = 0.8, py::arg("dense_C1") = 10, py::arg("dense_C2") = 0.2, py::arg("fixed_epsilon") = 1.0/6.0)
+        .def(py::init<unsigned int, std::function<data_t (std::vector<std::vector<data_t>> const &)>, data_t, data_t, data_t, data_t, data_t, data_t, data_t, data_t,data_t>(), py::arg("K"), py::arg("f"), py::arg("m"), py::arg("epsilon"), py::arg("hilow_epsilon") = 0.05, py::arg("hilow_beta") = 0.1, py::arg("hilow_delta") = 0.025, py::arg("dense_beta") = 0.8, py::arg("dense_C1") = 10, py::arg("dense_C2") = 0.2, py::arg("fixed_epsilon") = 1.0/6.0)
+        .def("get_solution", &Salsa::get_solution)
+        .def("get_fval", &Salsa::get_fval)
+        .def("fit", &Salsa::fit, py::arg("X"))
+        .def("next", &Salsa::next, py::arg("x"));
 }
-
-
-// PySSMM
-// PYBIND11_MODULE(PySSMM, m) {
-//     py::class_<RBFKernel>(m, "RBFKernel")
-//         .def("update", &IVM::update);
-// }

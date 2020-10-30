@@ -3,7 +3,7 @@
 import os
 from scipy.io import arff
 import numpy as np
-import pandas
+import pandas as pd
 
 import numpy as np
 from numpy.linalg import slogdet
@@ -18,6 +18,7 @@ from PySSM import Random
 from PySSM import SieveStreaming
 from PySSM import SieveStreamingPP
 from PySSM import ThreeSieves 
+from PySSM import Salsa 
 
 #from PySSM import fit_greedy_on_ivm , fit_greedy_on_ivm_2
 
@@ -43,7 +44,7 @@ def evaluate_batch(opt, X):
     end = time.process_time()
     solution = np.array(opt.get_solution())
     return {
-        "solution":solution,
+        #"solution":solution,
         "fval":fval,
         "runtime":end - start
     }
@@ -56,7 +57,7 @@ def evaluate_stream(opt, X):
     end = time.process_time()
     solution = np.array(opt.get_solution())
     return {
-        "solution":solution,
+        #"solution":solution,
         "fval":fval,
         "runtime":end - start
     }
@@ -64,7 +65,7 @@ def evaluate_stream(opt, X):
 print("Loading data")
 data, meta = arff.loadarff(os.path.join(os.path.dirname(__file__), "data", "KDDCup99", "KDDCup99_withoutdupl_norm_1ofn.arff"))
 
-data_pd = pandas.DataFrame(data)
+data_pd = pd.DataFrame(data)
 data_pd.columns = meta
 
 # Extract label vector
@@ -77,73 +78,123 @@ data_pd = data_pd.drop("id", axis=1)
 # Only values from now on
 X = data_pd.values
 
-K = 20
+Ks = range(5,100,5)
+# Ks = [5]
+eps = [1e-3,1e-2,1e-1]
+Ts = [500, 1000, 2500, 5000]
+Sigmas = np.array([0.1, 0.5, 1.0, 2.0, 5.0])*np.sqrt(X.shape[1])
 
-kernel = RBFKernel(sigma=np.sqrt(X.shape[1]),scale=1)
-fastLogDet = FastIVM(K, kernel, 1.0)
+results = []
 
-# TODO 
-# xmat = Matrix()
-# for x in X:
-#     xvec = Vector(x)
-#     xmat.append(xvec)
+for K in Ks:
+    print("Testing K = {}".format(K))
 
-# print("Selecting {} represantatives via all c++ greedy".format(K))
-# start = time.process_time()
-# fval = fit_greedy_on_ivm(K=K, sigma=np.sqrt(X.shape[1]), scale=1.0, epsilon = 1.0, X = xmat)
-# end = time.process_time()
-# runtime = end - start
-# print("\t fval:\t{} \n\t runtime:\t{} \n\n".format(fval, runtime))
+    for s in Sigmas:
+        print("\t Testing s = {}".format(s))
 
-# start = time.process_time()
-# fval = fit_greedy_on_ivm_2(K=K, sigma=1.0, scale=2.0, epsilon = 3.0)
-# end = time.process_time() 
-# runtime = end - start
-# print("\t fval:\t{} \n\t runtime:\t{} \n\n".format(fval, runtime))
-print()
-print("=== BATCH PROCESSING ===")
-print()
+        kernel = RBFKernel(sigma=s,scale=1)
+        fastLogDet = FastIVM(K, kernel, 1.0)
+        
+        res = evaluate_batch(Greedy(K, fastLogDet), X)
+        results.append(
+            {   
+                **res,
+                "method": "Greedy",
+                "K":K,
+                "sigma":s
+            }
+        )
 
-print("Selecting {} represantatives via Greedy with C++ logdet".format(K))
-res = evaluate_batch(Greedy(K, fastLogDet), X)
-print("\t fval:\t{} \n\t runtime:\t{} \n\n".format(res["fval"], res["runtime"]))
+        runtimes = []
+        fvals = []
+        for i in range(10):
+            res = evaluate_batch(Random(K, fastLogDet, i), X)
+            fvals.append(res["fval"])
+            runtimes.append(res["runtime"])
 
-# print("Selecting {} represantatives via Greedy with python logdet".format(K))
-# res = evaluate_optimizer(Greedy(K, logdet), X)
-# print("\t fval:\t{} \n\t runtime:\t{} \n\n".format(res["fval"], res["runtime"]))
+        results.append(
+            {   
+                "fval":np.mean(fvals),
+                "runtime":np.mean(runtimes),
+                "method": "Random",
+                "K":K,
+                "sigma":s
+            }
+        )
 
-print("Selecting {} represantatives via Random".format(K))
-res = evaluate_batch(Random(K, fastLogDet), X)
-print("\t fval:\t{} \n \t runtime:\t{} \n \n".format(res["fval"], res["runtime"]))
+        for e in eps:
+            print("\t\t Testing e = {}".format(e))
 
-print("Selecting {} represantatives via Sieve".format(K))
-res = evaluate_batch(SieveStreaming(K, fastLogDet, 1.0, 0.01), X)
-print("\t fval:\t{} \n \t runtime:\t{} \n \n".format(res["fval"], res["runtime"]))
+            res = evaluate_batch(SieveStreaming(K, fastLogDet, 1.0, e), X)
+            results.append(
+                {   
+                    **res,
+                    "method": "SieveStreaming",
+                    "K":K,
+                    "sigma":s,
+                    "epsilon":e
+                }
+            )
 
-# print("Selecting {} represantatives via Sieve++".format(K))
-# res = evaluate_batch(SieveStreamingPP(K, fastLogDet, 1.0, 0.01), X)
-# print("\t fval:\t{} \n \t runtime:\t{} \n \n".format(res["fval"], res["runtime"]))
+            res = evaluate_batch(SieveStreamingPP(K, fastLogDet, 1.0, e), X)
+            results.append(
+                {   
+                    **res,
+                    "method": "SieveStreaming++",
+                    "K":K,
+                    "sigma":s,
+                    "epsilon":e
+                }
+            )
 
-print("Selecting {} represantatives via ThreeSieves".format(K))
-res = evaluate_batch(ThreeSieves(K, fastLogDet, 1.0, 0.01, "sieve", 1000), X)
-print("\t fval:\t{} \n \t runtime:\t{} \n \n".format(res["fval"], res["runtime"]))
+            res = evaluate_batch(Salsa(K, fastLogDet, 1.0, e), X)
+            results.append(
+                {   
+                    **res,
+                    "method": "Salsa",
+                    "K":K,
+                    "sigma":s,
+                    "epsilon":e
+                }
+            )
 
-print()
-print("=== STREAM PROCESSING ===")
-print()
+            for T in Ts:    
+                print("\t\t\t Testing T = {}".format(T))
+                res = evaluate_batch(ThreeSieves(K, fastLogDet, 1.0, e, "sieve", T), X)
+                results.append(
+                    {   
+                        **res,
+                        "method": "ThreeSieves",
+                        "K":K,
+                        "sigma":s,
+                        "epsilon":e,
+                        "T":T
+                    }
+                )
+        
+    df = pd.DataFrame(results)
+    df.to_csv("results.csv",index=False)
 
-print("Selecting {} represantatives via Random".format(K))
-res = evaluate_stream(Random(K, fastLogDet), X)
-print("\t fval:\t{} \n \t runtime:\t{} \n \n".format(res["fval"], res["runtime"]))
+    # print("Selecting {} represantatives via Greedy with python logdet".format(K))
+    # res = evaluate_optimizer(Greedy(K, logdet), X)
+    # print("\t fval:\t{} \n\t runtime:\t{} \n\n".format(res["fval"], res["runtime"]))
 
-print("Selecting {} represantatives via Sieve".format(K))
-res = evaluate_stream(SieveStreaming(K, fastLogDet, 1.0, 0.01), X)
-print("\t fval:\t{} \n \t runtime:\t{} \n \n".format(res["fval"], res["runtime"]))
+    # print()
+    # print("=== STREAM PROCESSING ===")
+    # print()
 
-# print("Selecting {} represantatives via Sieve++".format(K))
-# res = evaluate_stream(SieveStreamingPP(K, fastLogDet, 1.0, 0.01), X)
-# print("\t fval:\t{} \n \t runtime:\t{} \n \n".format(res["fval"], res["runtime"]))
+    # print("Selecting {} represantatives via Random".format(K))
+    # res = evaluate_stream(Random(K, fastLogDet), X)
+    # print("\t fval:\t{} \n \t runtime:\t{} \n \n".format(res["fval"], res["runtime"]))
 
-print("Selecting {} represantatives via ThreeSieves".format(K))
-res = evaluate_stream(ThreeSieves(K, fastLogDet, 1.0, 0.01, "sieve", 1000), X)
-print("\t fval:\t{} \n \t runtime:\t{} \n \n".format(res["fval"], res["runtime"]))
+    # print("Selecting {} represantatives via Sieve".format(K))
+    # res = evaluate_stream(SieveStreaming(K, fastLogDet, 1.0, 0.01), X)
+    # print("\t fval:\t{} \n \t runtime:\t{} \n \n".format(res["fval"], res["runtime"]))
+
+    # print("Selecting {} represantatives via Sieve++".format(K))
+    # res = evaluate_stream(SieveStreamingPP(K, fastLogDet, 1.0, 0.01), X)
+    # print("\t fval:\t{} \n \t runtime:\t{} \n \n".format(res["fval"], res["runtime"]))
+
+    # print("Selecting {} represantatives via ThreeSieves".format(K))
+    # res = evaluate_stream(ThreeSieves(K, fastLogDet, 1.0, 0.01, "sieve", 1000), X)
+    # print("\t fval:\t{} \n \t runtime:\t{} \n \n".format(res["fval"], res["runtime"]))

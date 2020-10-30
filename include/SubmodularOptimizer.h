@@ -51,11 +51,11 @@ public:
         // assert(("K should at-least be 1 or greater.", K >= 1));
     }
 
-    SubmodularOptimizer(unsigned int K, std::shared_ptr<SubmodularFunction> f) : K(K), f(f) {
-        is_fitted = false;
-        fval = 0;
-        // assert(("K should at-least be 1 or greater.", K >= 1));
-    }
+    // SubmodularOptimizer(unsigned int K, std::shared_ptr<SubmodularFunction> f) : K(K), f(f) {
+    //     is_fitted = false;
+    //     fval = 0;
+    //     // assert(("K should at-least be 1 or greater.", K >= 1));
+    // }
 
     /**
      *

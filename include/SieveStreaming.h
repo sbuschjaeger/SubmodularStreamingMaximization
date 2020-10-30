@@ -8,6 +8,42 @@
 #include <random>
 #include <unordered_set>
 
+inline std::vector<data_t> thresholds(data_t lower, data_t upper, data_t epsilon) {
+    std::vector<data_t> ts;
+
+    if (epsilon > 0.0) {
+        // int i = std::ceil(std::log(lower) / std::log(1.0 + epsilon));
+        // data_t val = std::pow(1+epsilon, i);
+
+        // while( val < upper) {
+        //     val = std::pow(1+epsilon, i);
+        //     ts.push_back(val);
+        //     ++i;
+        // }
+
+        int ilower = std::ceil(std::log(lower) / std::log(1.0 + epsilon));
+        //int iupper; // = std::floor(std::log(upper) / std::log(1.0 + epsilon));
+        // data_t tmp = std::log(upper) / std::log(1.0 + epsilon);
+        // if (tmp == std::floor(tmp)) {
+        //     iupper = std::floor(tmp) - 1;
+        // } else {
+        //     iupper = std::floor(tmp);
+        // }
+
+        if (ilower >= upper)
+            throw std::runtime_error("thresholds: Lower threshold boundary (" + std::to_string(ilower) + ") is higher than or equal to the upper boundary ("
+                                    + std::to_string(upper) + "), epsilon = " + std::to_string(epsilon) + ".");
+
+        for (data_t val = std::pow(1.0 + epsilon, ilower); val <= upper; ++ilower, val = std::pow(1.0 + epsilon, ilower)) {
+            ts.push_back(val);
+        }
+    } else {
+        throw std::runtime_error("thresholds: epsilon must be a positive real-number (is: " + std::to_string(epsilon) + ").");
+    }
+    
+    return ts;
+}
+
 class SieveStreaming : public SubmodularOptimizer {
 protected:
 
@@ -17,7 +53,7 @@ protected:
 
         Sieve(unsigned int K, SubmodularFunction & f, data_t threshold) : SubmodularOptimizer(K,f), threshold(threshold) {}
 
-        Sieve(unsigned int K, std::shared_ptr<SubmodularFunction> f, data_t threshold) : SubmodularOptimizer(K,f), threshold(threshold) {}
+        // Sieve(unsigned int K, std::shared_ptr<SubmodularFunction> f, data_t threshold) : SubmodularOptimizer(K,f), threshold(threshold) {}
 
         Sieve(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f, data_t threshold) : SubmodularOptimizer(K,f), threshold(threshold) {
         }
@@ -41,46 +77,13 @@ protected:
 
     };
 
-    static inline std::vector<data_t> thresholds(data_t lower, data_t upper, data_t epsilon) {
-        if (epsilon > 0.0) {
-            // unsigned int i = 0;
-            // do {
-            //     data_t val = std::pow(1+epsilon, i);
-            //     if (val > lower) {
-            //         thresholds.push_back(val);
-            //     }
-            // } while( val < upper);
-
-            int ilower = std::ceil(std::log(lower) / std::log(1.0 + epsilon));
-            int iupper; // = std::floor(std::log(upper) / std::log(1.0 + epsilon));
-
-            data_t tmp = std::log(upper) / std::log(1.0 + epsilon);
-            if (tmp == std::floor(tmp)) {
-                iupper = std::floor(tmp) - 1;
-            } else {
-                iupper = std::floor(tmp);
-            }
-
-            if (ilower >= iupper)
-                throw std::runtime_error("SieveStreaming::thresholds: Lower threshold boundary (" + std::to_string(ilower) + ") is higher than or equal to the upper boundary ("
-                                        + std::to_string(iupper) + "), epsilon = " + std::to_string(epsilon) + ".");
-
-            std::vector<data_t> ts;
-            for (int i = ilower; i < iupper; ++i) {
-                ts.push_back(std::pow(1.0 + epsilon, i));
-            }
-
-            return ts;
-        } else
-            throw std::runtime_error("SieveStreaming::thresholds: epsilon must be a positive real-number (is: " + std::to_string(epsilon) + ").");
-    }
-
 protected:
     std::vector<Sieve*> sieves;
 
 public:
     SieveStreaming(unsigned int K, SubmodularFunction & f, data_t m, data_t epsilon) : SubmodularOptimizer(K,f) {
         std::vector<data_t> ts = thresholds(m, K*m, epsilon);
+
         for (auto t : ts) {
             sieves.push_back(new Sieve(K, f, t));
         }

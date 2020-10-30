@@ -25,19 +25,31 @@ public:
     void next(std::vector<data_t> const &x) {
         SieveStreaming::next(x);
         
-        data_t tau_min = std::max(lower_bound, m) / static_cast<data_t>(2.0*K);
-        auto res = std::remove_if(sieves.begin(), sieves.end(), 
-            [tau_min](auto const s) { return s->fval < tau_min; }
-        );
-        sieves.erase(res, sieves.end());
+        if (lower_bound < fval) {
+            // the lower_bound has changed and thus tau_min changes given that we know m 
+            lower_bound = fval;
 
-        std::vector<data_t> ts = thresholds(tau_min, K * m, epsilon);
-        for (auto t : ts) {
-            bool any = std::any_of(sieves.begin(), sieves.end(), 
-                [t](auto const s){ return s->threshold == t; }
+            data_t tau_min = std::max(lower_bound, m) / static_cast<data_t>(2.0*K);
+            
+            auto no_sieves_before = sieves.size();
+            auto res = std::remove_if(sieves.begin(), sieves.end(), 
+                [tau_min](auto const &s) { return s->fval < tau_min; }
             );
-            if (!any) {
-                sieves.push_back(new Sieve(K, f->clone(), t));
+            sieves.erase(res, sieves.end());
+
+            if (no_sieves_before > sieves.size()) {
+                // TODO CHECK IF THIS IS ACTUALLY HAPPENING
+                // We actually deleted some sieves, so we insert new ones
+                std::vector<data_t> ts = thresholds(tau_min, K * m, epsilon);
+
+                for (auto t : ts) {
+                    bool any = std::any_of(sieves.begin(), sieves.end(), 
+                        [t](auto const &s){ return s->threshold == t; }
+                    );
+                    if (!any) {
+                        sieves.push_back(new Sieve(K, *f, t));
+                    }
+                }
             }
         }
     };

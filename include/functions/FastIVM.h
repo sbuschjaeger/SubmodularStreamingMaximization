@@ -124,7 +124,7 @@ public:
     }
 
     std::shared_ptr<SubmodularFunction> clone() const override {
-        return std::shared_ptr<SubmodularFunction>(new FastIVM(K, *kernel, sigma));
+        return std::make_shared<FastIVM>(K, *kernel, sigma);
     }
 
     ~FastIVM() {
