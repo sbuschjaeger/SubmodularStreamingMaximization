@@ -10,6 +10,8 @@ dependencies:
   - pandas
   - scipy
   - plotly # Technically not a dependency, but still nice to have for browsing results
+  - plotly-orca # Technically not a dependency, but still nice to have for browsing results
+  - psutil # Technically not a dependency, but required for exporting PDFs from plotting
   - jupyter # Technically not a dependency, but still nice to have for browsing results
   - pip:
     - pylint

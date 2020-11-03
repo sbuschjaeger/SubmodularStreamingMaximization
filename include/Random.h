@@ -8,6 +8,21 @@
 #include <random>
 #include <unordered_set>
 
+
+/**
+ * @brief The Random Optimizers for submodular functions. It randomly picks K elements as a solution. For streaming, Reservoir Sampling is used.
+ *  - Stream:  Yes
+ *  - Solution: 1/4
+ *  - Runtime: O(N)
+ *  - Memory: O(K)
+ *  - Function Queries per Element: O(1) (In case of Reservoir Sampling to maintain a consistent function value)
+ *  - Function Types: nonnegative submodular functions
+ * 
+ * See also :
+ *   - Feige, U., Mirrokni, V. S., & Vondrák, J. (2011). Maximizing non-monotone submodular functions. SIAM Journal on Computing. https://doi.org/10.1137/090779346
+ *   - Vitter, J. S. (1985). Random Sampling with a Reservoir. ACM Transactions on Mathematical Software (TOMS). https://doi.org/10.1145/3147.3165
+ * @note   
+ */
 class Random : public SubmodularOptimizer {
 protected:
     unsigned int cnt = 0;
@@ -37,10 +52,30 @@ protected:
     };
 
 public:
+
+    /**
+     * @brief Construct a new Random object.
+     * 
+     * @param K The cardinality constraint you of the optimization problem, that is the number of items selected.
+     * @param f The function which should be maximized. Note, that the `clone' function is used to construct a new SubmodularFunction which is owned by this object. If you implement a custom SubmodularFunction make sure that everything you need is actually cloned / copied.  
+     * @param seed The random seed used for randomization.
+     */
     Random(unsigned int K, SubmodularFunction & f, unsigned long seed = 0) : SubmodularOptimizer(K,f), generator(seed) {}
 
+    /**
+     * @brief Construct a new Random object
+     * 
+     * @param K The cardinality constraint you of the optimization problem, that is the number of items selected.
+     * @param f The function which should be maximized. Note, that this parameter is likely moved and not copied. Thus, if you construct multiple optimizers with the __same__ function they all reference the __same__ function. This can be very efficient for state-less functions, but may lead to weird side effects if f keeps track of a state. 
+     * @param seed The random seed used for randomization.
+     */
     Random(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f, unsigned long seed = 0) : SubmodularOptimizer(K,f), generator(seed) {}
 
+     /**
+     * @brief  Randomly pick K elements as a solution. You can access the solution via `get_solution`
+     * @note   
+     * @param  X A constant reference to the entire data set
+     */
     void fit(std::vector<std::vector<data_t>> const & X) {
         if (X.size() < K) {
             K = X.size();
@@ -58,19 +93,27 @@ public:
         is_fitted = true;
     }
 
+    /**
+     * @brief Consume the next object in the data stream. This call uses Reservoir Sampling to sample the current solution which can access via `get_solution`.
+     * 
+     * @param x A constant reference to the next object on the stream.
+     */
     void next(std::vector<data_t> const &x) {
-        // Super basic reservoir sampling. This can probably be improved.
+        
         if (solution.size() < K) {
+            // Just add the first K elements
             f->update(solution, x, solution.size());
             solution.push_back(x);
         } else {
+            // Sample the replacement-index with decreasing probability
             unsigned int j = std::uniform_int_distribution<>(1, cnt)(generator);
             if (j <= K) {
                 f->update(solution, x, j - 1);
-                solution[j - 1] = x; //std::vector<data_t>(x);
+                solution[j - 1] = x; 
             }
         }
 
+        // Update the current function value
         fval = f->operator()(solution);
         is_fitted = true;
         ++cnt;

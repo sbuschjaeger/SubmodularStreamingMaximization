@@ -54,7 +54,7 @@ public:
     ThreeSieves(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f, data_t m, data_t epsilon, THRESHOLD_STRATEGY strategy, unsigned int T) : SubmodularOptimizer(K,f), threshold(K*m), epsilon(epsilon), strategy(strategy), T(T), t(0) {
         // assert(("T should at-least be 1 or greater.", T >= 1));
     }
-
+    
     void fit(std::vector<std::vector<data_t>> const & X) {
         while(solution.size() < K) {
             for (auto &x : X) {

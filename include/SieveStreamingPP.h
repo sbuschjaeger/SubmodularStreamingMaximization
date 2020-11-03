@@ -8,6 +8,18 @@
 #include <numeric>
 #include <unordered_set>
 
+/**
+ * @brief The SieveStreaming optimizer for nonnegative, monotone submodular functions. This is an improved version of SieveStreaming which re-samples thresholds once a new (better) lower bound is detected. 
+ *  - Stream:  Yes
+ *  - Solution: 1/2 - \varepsilon 
+ *  - Runtime: O(1)
+ *  - Memory: O(K / \varepsilon)
+ *  - Function Queries per Element: O(log(K) / \varepsilon)
+ *  - Function Types: nonnegative, monotone submodular functions
+ * 
+ * See also:
+ *   - Kazemi, E., Mitrovic, M., Zadimoghaddam, M., Lattanzi, S., & Karbasi, A. (2019). Submodular streaming in all its glory: Tight approximation, minimum memory and low adaptive complexity. 36th International Conference on Machine Learning, ICML 2019, 2019-June, 5767–5784. Retrieved from http://proceedings.mlr.press/v97/kazemi19a/kazemi19a.pdf
+*/
 class SieveStreamingPP : public SieveStreaming {
 private:
     data_t lower_bound;
