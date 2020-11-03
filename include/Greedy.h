@@ -6,6 +6,11 @@
 #include <algorithm>
 #include <numeric>
 
+/**
+ * @brief  The Greedy optimizers for submodular functions. This implementation is due to Nemhauser etal.
+ * @note   
+ * @retval None
+ */
 class Greedy : public SubmodularOptimizer {
 public:
     Greedy(unsigned int K, SubmodularFunction & f) : SubmodularOptimizer(K,f) {}
