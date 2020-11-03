@@ -5,3 +5,4 @@ PySSM.egg-info/
 data/
 *tar.gz
 *.csv
+*.mat

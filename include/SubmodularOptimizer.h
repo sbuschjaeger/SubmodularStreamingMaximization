@@ -62,7 +62,11 @@ public:
      * @param dataset
      * @return
      */
-    virtual void fit(std::vector<std::vector<data_t>> const & X) = 0;
+    virtual void fit(std::vector<std::vector<data_t>> const & X) {
+        for (auto &x : X) {
+            next(x);
+        }
+    }
 
     /**
      *

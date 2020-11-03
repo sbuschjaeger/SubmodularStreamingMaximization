@@ -8,7 +8,6 @@ import pandas as pd
 import numpy as np
 from numpy.linalg import slogdet
 import time
-
 from joblib import Parallel, delayed
 
 # from PySSM import Matrix, Vector
@@ -22,50 +21,13 @@ from PySSM import SieveStreamingPP
 from PySSM import ThreeSieves 
 from PySSM import Salsa 
 
-#from PySSM import fit_greedy_on_ivm , fit_greedy_on_ivm_2
+import os
+import numpy as np
+import scipy.io
+import scipy.io
+from sklearn import preprocessing
 
-# def logdet(X):
-#     X = np.array(X)
-#     K = X.shape[0]
-#     kmat = np.zeros((K,K))
 
-#     for i, xi in enumerate(X):
-#         for j, xj in enumerate(X):
-#             kval = 1.0*np.exp(-np.sum((xi-xj)**2) / 1.0)
-#             if i == j:
-#                 kmat[i][i] = 1.0 + kval / 1.0**2
-#             else:
-#                 kmat[i][j] = kval / 1.0**2
-#                 kmat[j][i] = kval / 1.0**2
-#     return slogdet(kmat)[1]
-
-# def evaluate_batch(opt, X):
-#     start = time.process_time()
-#     opt.fit(X)
-#     fval = opt.get_fval()
-#     end = time.process_time()
-#     solution = np.array(opt.get_solution())
-#     return {
-#         #"solution":solution,
-#         "fval":fval,
-#         "runtime":end - start
-#     }
-
-# def evaluate_stream(opt, X):
-#     start = time.process_time()
-#     for x in X:
-#         opt.next(x)
-#     fval = opt.get_fval()
-#     end = time.process_time()
-#     solution = np.array(opt.get_solution())
-#     return {
-#         #"solution":solution,
-#         "fval":fval,
-#         "runtime":end - start
-#     }
-
-# @delayed
-# @wrap_non_picklable_objects
 def eval(options, X):
     name = options["method"]
     sigma = options["sigma"]
@@ -111,20 +73,16 @@ def eval(options, X):
     }
 
 print("Loading data")
-data, meta = arff.loadarff(os.path.join(os.path.dirname(__file__), "data", "KDDCup99", "KDDCup99_withoutdupl_norm_1ofn.arff"))
 
-data_pd = pd.DataFrame(data)
-data_pd.columns = meta
-
-# Extract label vector
-y = np.array([-1 if x == "yes" else 1 for x in data_pd["outlier"]])  # 1 = inlier, -1 = outlier
-
-# Delete irrelevant features.
-data_pd = data_pd.drop("outlier", axis=1)
-data_pd = data_pd.drop("id", axis=1)
+data = pd.read_csv("data.csv", header=0, index_col=None)
+data = data.drop(columns = ["label"])
 
 # Only values from now on
-X = data_pd.values
+X = data.values
+
+# MinMax normalize the data
+min_max_scaler = preprocessing.MinMaxScaler()
+X = min_max_scaler.fit_transform(X)
 
 Ks = range(5,100,5)
 # Ks = [5]
@@ -134,7 +92,6 @@ Ts = [500, 1000, 2500, 5000]
 Sigmas = [np.sqrt(X.shape[1])]
 
 results = []
-
 runs = []
 for K in Ks:
     for s in Sigmas:

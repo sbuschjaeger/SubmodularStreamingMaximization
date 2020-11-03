@@ -9,6 +9,13 @@ dependencies:
   - pip
   - pandas
   - scipy
+  - plotly # Technically not a dependency, but still nice to have for browsing results
+  - jupyter # Technically not a dependency, but still nice to have for browsing results
   - pip:
     - pylint
+    - plotly-express
+    - nbformat
+    - kaggle # for downloading creditfraud dataset
+    - pyfact # for downloading / processing fact data
+    - progressbar
   #  - -e file:. 

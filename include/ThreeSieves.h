@@ -56,8 +56,13 @@ public:
     }
 
     void fit(std::vector<std::vector<data_t>> const & X) {
-        for (auto &x : X) {
-            next(x);
+        while(solution.size() < K) {
+            for (auto &x : X) {
+                next(x);
+                if (solution.size() == K) {
+                    break;
+                }
+            }
         }
     }
 
@@ -70,7 +75,7 @@ public:
                     {
                         data_t tmp = std::log(threshold) / std::log(1.0 + epsilon);
                         int i;
-                        if (tmp == std::floor(tmp)) {
+                        if (tmp == std::floor(tmp) || std::abs(tmp - std::floor(tmp)) < 1e-7) {
                             i = std::floor(tmp) - 1;
                         } else {
                             i = std::floor(tmp);
@@ -92,7 +97,7 @@ public:
             
             if (fdelta >= tau) {
                 f->update(solution, x, solution.size());
-                solution.push_back(std::vector<data_t>(x));
+                solution.push_back(x);
                 fval += fdelta;
                 t = 0;
             } else {

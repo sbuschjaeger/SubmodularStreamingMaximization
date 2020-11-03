@@ -69,7 +69,7 @@ protected:
                 data_t tau = (threshold / 2.0 - fval) / static_cast<data_t>(K - Kcur);
                 if (fdelta >= tau) {
                     f->update(solution, x, solution.size());
-                    solution.push_back(std::vector<data_t>(x));
+                    solution.push_back(x);
                     fval += fdelta;
                 }
             }
@@ -96,15 +96,26 @@ public:
         }
     }
 
-    ~SieveStreaming() {
-        for (auto s : sieves) {
-            delete s;
+    void fit(std::vector<std::vector<data_t>> const & X) {
+        bool one_pass = false;
+        while(solution.size() < K) {
+            for (auto &x : X) {
+                next(x);
+                // It is verly likely that the lower threshold sieves will fill up early and thus we will probably find a full sieve early on
+                // This likely results in a very bad function value. However, only iterating once over the entire data-set may lead to a very
+                // weird situation where no sieve is full yet (e.g. for very small datasets). Thus, we re-iterate as often as needed and early
+                // exit if we have seen every item at-least once
+                if (solution.size() == K && one_pass) {
+                    break;
+                }
+            }
+            one_pass = true;
         }
     }
 
-    void fit(std::vector<std::vector<data_t>> const & X) {
-        for (auto &x : X) {
-            next(x);
+    ~SieveStreaming() {
+        for (auto s : sieves) {
+            delete s;
         }
     }
 
