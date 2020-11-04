@@ -44,37 +44,37 @@ Once installed, you can simply import the desired submodular function and optimi
 The following example uses the Greedy optimizer to select a data summary by maximizing the Informative Vector Machine (the full examples can be found in `tests/main.py`)
 
 ```python
-    from PySSM import RBFKernel
-    from PySSM import IVM
-    from PySSM import Greedy
+from PySSM import RBFKernel
+from PySSM import IVM
+from PySSM import Greedy
 
-    X = [
-        [0, 0],
-        [1, 1],
-        [0.5, 1.0],
-        [1.0, 0.5],
-        [0, 0.5],
-        [0.5, 1],
-        [0.0, 1.0],
-        [1.0, 0.]
-    ]    
+X = [
+    [0, 0],
+    [1, 1],
+    [0.5, 1.0],
+    [1.0, 0.5],
+    [0, 0.5],
+    [0.5, 1],
+    [0.0, 1.0],
+    [1.0, 0.]
+]    
 
-    K = 3
-    kernel = RBFKernel(sigma=1,scale=1)
-    ivm = IVM(kernel = kernel, sigma = 1.0)
-    greedy = Greedy(K, ivm)
-    
-    greedy.fit(X)
+K = 3
+kernel = RBFKernel(sigma=1,scale=1)
+ivm = IVM(kernel = kernel, sigma = 1.0)
+greedy = Greedy(K, ivm)
 
-    # Alternativley, you can use the streaming interface. 
-    #for x in X:
-    #    opt.next(x)
+greedy.fit(X)
 
-    fval = opt.get_fval()
-    solution = np.array(opt.get_solution())
+# Alternativley, you can use the streaming interface. 
+#for x in X:
+#    opt.next(x)
 
-    print("Found a solution with fval = {}".format(fval))
-    print(solution)
+fval = opt.get_fval()
+solution = np.array(opt.get_solution())
+
+print("Found a solution with fval = {}".format(fval))
+print(solution)
 ```
 
 ### Using the C++ interface
@@ -82,39 +82,39 @@ The following example uses the Greedy optimizer to select a data summary by maxi
 The C++ code is header-only so simply include the desired functions in your project and your are good to go. If you have trouble compiling you can look at the `CMakeLists.txt` file which compiles the Python bindings as well as the following test file. The following example uses the Greedy optimizer to select a data summary by maximizing the Informative Vector Machine (the full examples can be found in `tests/main.cpp`)
 
 ```cpp
-    #include <iostream>
-    #include <vector>
-    #include <math.h>
-    #include "FastIVM.h"
-    #include "RBFKernel.h"
-    #include "Greedy.h"
+#include <iostream>
+#include <vector>
+#include <math.h>
+#include "FastIVM.h"
+#include "RBFKernel.h"
+#include "Greedy.h"
 
-    std::vector<std::vector<double>> data = {
-        {0, 0},
-        {1, 1},
-        {0.5, 1.0},
-        {1.0, 0.5},
-        {0, 0.5},
-        {0.5, 1},
-        {0.0, 1.0},
-        {1.0, 0.0}
-    };    
+std::vector<std::vector<double>> data = {
+    {0, 0},
+    {1, 1},
+    {0.5, 1.0},
+    {1.0, 0.5},
+    {0, 0.5},
+    {0.5, 1},
+    {0.0, 1.0},
+    {1.0, 0.0}
+};    
 
-    unsigned int K = 3;
-    FastIVM fastIVM(K, RBFKernel(), 1.0);
-    
-    Greedy greedy(K, fastIVM)
-    greedy.fit(data);
-    auto solution = greedy.get_solution();
-    double fval = greedy.get_fval();
+unsigned int K = 3;
+FastIVM fastIVM(K, RBFKernel(), 1.0);
 
-    std::cout << "Found a solution with fval = " << fval << std::endl;
-    for (auto x : solution) {
-        for (auto xi : x) {
-            std::cout << xi << " ";
-        }
-        std::cout << std::endl;
+Greedy greedy(K, fastIVM)
+greedy.fit(data);
+auto solution = greedy.get_solution();
+double fval = greedy.get_fval();
+
+std::cout << "Found a solution with fval = " << fval << std::endl;
+for (auto x : solution) {
+    for (auto xi : x) {
+        std::cout << xi << " ";
     }
+    std::cout << std::endl;
+}
 ```
 
 ## How to reproduce the experiments in our paper
