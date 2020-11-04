@@ -86,7 +86,7 @@ X = min_max_scaler.fit_transform(X)
 Ks = range(5,100,5)
 # Ks = [5]
 eps = [1e-3,5e-3,1e-2,5e-2,1e-1]
-Ts = [500, 1000, 2500, 5000]
+Ts = [50, 250, 500, 1000, 2500, 5000]
 #Sigmas = np.array([0.1, 0.5, 1.0, 2.0, 5.0])*np.sqrt(X.shape[1])
 Sigmas = [np.sqrt(X.shape[1])]
 
@@ -99,58 +99,58 @@ for K in Ks:
         # kernel = RBFKernel(sigma=s,scale=1)
         # fastLogDet = FastIVM(K, kernel, 1.0)
         
-        runs.append(
-            ( {   
-                "method": "Greedy",
-                "K":K,
-                "sigma":s,
-                "scale":1
-            }, X)
-        )
+        # runs.append(
+        #     ( {   
+        #         "method": "Greedy",
+        #         "K":K,
+        #         "sigma":s,
+        #         "scale":1
+        #     }, X)
+        # )
 
-        runs.append(
-            ( {   
-                "method": "Random",
-                "K":K,
-                "sigma":s,
-                "scale":1,
-                "reps":5
-            }, X)
-        )
+        # runs.append(
+        #     ( {   
+        #         "method": "Random",
+        #         "K":K,
+        #         "sigma":s,
+        #         "scale":1,
+        #         "reps":5
+        #     }, X)
+        # )
 
         for e in eps:
-            runs.append(
-                ( {   
-                    "method": "SieveStreaming",
-                    "K":K,
-                    "sigma":s,
-                    "scale":1,
-                    "reps":1,
-                    "epsilon":e
-                }, X)
-            )
+            # runs.append(
+            #     ( {   
+            #         "method": "SieveStreaming",
+            #         "K":K,
+            #         "sigma":s,
+            #         "scale":1,
+            #         "reps":1,
+            #         "epsilon":e
+            #     }, X)
+            # )
 
-            runs.append(
-                ( {   
-                    "method": "SieveStreaming++",
-                    "K":K,
-                    "sigma":s,
-                    "scale":1,
-                    "reps":1,
-                    "epsilon":e
-                }, X)
-            )
+            # runs.append(
+            #     ( {   
+            #         "method": "SieveStreaming++",
+            #         "K":K,
+            #         "sigma":s,
+            #         "scale":1,
+            #         "reps":1,
+            #         "epsilon":e
+            #     }, X)
+            # )
 
-            runs.append(
-                ( {   
-                    "method": "Salsa",
-                    "K":K,
-                    "sigma":s,
-                    "scale":1,
-                    "reps":1,
-                    "epsilon":e
-                }, X)
-            )
+            # runs.append(
+            #     ( {   
+            #         "method": "Salsa",
+            #         "K":K,
+            #         "sigma":s,
+            #         "scale":1,
+            #         "reps":1,
+            #         "epsilon":e
+            #     }, X)
+            # )
 
             for T in Ts:    
                 runs.append(
@@ -169,7 +169,7 @@ n_cores = 15
 print("Running {} on {} cores".format(len(runs), n_cores))
 results = Parallel(n_jobs=n_cores)(delayed(eval)(options = options, X = X) for options, X in runs)
 df = pd.DataFrame(results)
-df.to_csv("results.csv",index=False)
+df.to_csv("results.csv",index=False, columns=["method","K","sigma","scale","fval","runtime","reps","epsilon","T"])
 
     # print("Selecting {} represantatives via Greedy with python logdet".format(K))
     # res = evaluate_optimizer(Greedy(K, logdet), X)
