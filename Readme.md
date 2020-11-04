@@ -1,6 +1,6 @@
 # Submodular Streaming Maximization
 
-This repository includes the code for our paper "Very Fast Streaming Submodular Function Maximization" (https://arxiv.org/abs/2010.10059) which introduces a  nonnegative submodular function maximization algorithm for streaming data. For our experiments we also implemented already existing state-of-the-art streaming algorithms for which we could not find an implementation. The code focuses on easy extensibility and accessibility. It is mainly written in header-only C++ with a Python interface via pybind11. 
+This repository includes the code for our paper "Very Fast Streaming Submodular Function Maximization" (https://arxiv.org/abs/2010.10059) which introduces a new  nonnegative submodular function maximization algorithm for streaming data. For our experiments, we also implemented already existing state-of-the-art streaming algorithms for which we could not find an implementation. The code focuses on easy extensibility and accessibility. It is mainly written in header-only C++ with a Python interface via pybind11. 
 
 Supported algorithms are:
 
@@ -16,7 +16,7 @@ For more information on these algorithms please check out our paper or have a lo
 Supported submodular functions are:
 
 - Informative Vector Machine (sometimes called LogDet) with RBF kernel. Look at this function if you want to implement your own submodular function.
-- Fast Informative Vector Machine (sometimes called LogDet) with RBF kernel. This keeps track of the cholesky decomposition of the kernel matrix and updates it without re-computing the entire Kernelmatrix or its inverse. Use this function if speed is important. 
+- Fast Informative Vector Machine with RBF kernel. This keeps track of the Cholesky Decomposition of the kernel matrix and updates it without re-computing the entire Kernelmatrix or its inverse. Use this function if speed is important. 
 
 ## How to use this code
 For building the code you need:
@@ -43,6 +43,7 @@ Note the `--force` option which overrides all existing environments called `pyss
 Once installed, you can simply import the desired submodular function and optimizer via `PySSM`. For a detailed explanation on specific parameters / functions provided please have a look at the documentation of the source code.
 The following example uses the Greedy optimizer to select a data summary by maximizing the Informative Vector Machine (the full examples can be found in `tests/main.py`)
 
+```python
     from PySSM import RBFKernel
     from PySSM import IVM
     from PySSM import Greedy
@@ -74,11 +75,13 @@ The following example uses the Greedy optimizer to select a data summary by maxi
 
     print("Found a solution with fval = {}".format(fval))
     print(solution)
+```
 
 ### Using the C++ interface
 
 The C++ code is header-only so simply include the desired functions in your project and your are good to go. If you have trouble compiling you can look at the `CMakeLists.txt` file which compiles the Python bindings as well as the following test file. The following example uses the Greedy optimizer to select a data summary by maximizing the Informative Vector Machine (the full examples can be found in `tests/main.cpp`)
 
+```cpp
     #include <iostream>
     #include <vector>
     #include <math.h>
@@ -112,6 +115,7 @@ The C++ code is header-only so simply include the desired functions in your proj
         }
         std::cout << std::endl;
     }
+```
 
 ## How to reproduce the experiments in our paper
 
