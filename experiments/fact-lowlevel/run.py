@@ -94,63 +94,58 @@ results = []
 runs = []
 for K in Ks:
     for s in Sigmas:
-        # print("\t Testing s = {}".format(s))
+        runs.append(
+            ( {   
+                "method": "Greedy",
+                "K":K,
+                "sigma":s,
+                "scale":1
+            }, X)
+        )
 
-        # kernel = RBFKernel(sigma=s,scale=1)
-        # fastLogDet = FastIVM(K, kernel, 1.0)
-        
-        # runs.append(
-        #     ( {   
-        #         "method": "Greedy",
-        #         "K":K,
-        #         "sigma":s,
-        #         "scale":1
-        #     }, X)
-        # )
-
-        # runs.append(
-        #     ( {   
-        #         "method": "Random",
-        #         "K":K,
-        #         "sigma":s,
-        #         "scale":1,
-        #         "reps":5
-        #     }, X)
-        # )
+        runs.append(
+            ( {   
+                "method": "Random",
+                "K":K,
+                "sigma":s,
+                "scale":1,
+                "reps":5
+            }, X)
+        )
 
         for e in eps:
-            # runs.append(
-            #     ( {   
-            #         "method": "SieveStreaming",
-            #         "K":K,
-            #         "sigma":s,
-            #         "scale":1,
-            #         "reps":1,
-            #         "epsilon":e
-            #     }, X)
-            # )
+            runs.append(
+                ( {   
+                    "method": "SieveStreaming",
+                    "K":K,
+                    "sigma":s,
+                    "scale":1,
+                    "reps":1,
+                    "epsilon":e
+                }, X)
+            )
 
-            # runs.append(
-            #     ( {   
-            #         "method": "SieveStreaming++",
-            #         "K":K,
-            #         "sigma":s,
-            #         "scale":1,
-            #         "reps":1,
-            #         "epsilon":e
-            #     }, X)
-            # )
+            runs.append(
+                ( {   
+                    "method": "SieveStreaming++",
+                    "K":K,
+                    "sigma":s,
+                    "scale":1,
+                    "reps":1,
+                    "epsilon":e
+                }, X)
+            )
 
-            # runs.append(
-            #     ( {   
-            #         "method": "Salsa",
-            #         "K":K,
-            #         "sigma":s,
-            #         "scale":1,
-            #         "reps":1,
-            #         "epsilon":e
-            #     }, X)
-            # )
+            runs.append(
+                ( {   
+                    "method": "Salsa",
+                    "K":K,
+                    "sigma":s,
+                    "scale":1,
+                    "reps":1,
+                    "epsilon":e
+                }, X)
+            )
 
             for T in Ts:    
                 runs.append(
@@ -170,27 +165,3 @@ print("Running {} on {} cores".format(len(runs), n_cores))
 results = Parallel(n_jobs=n_cores)(delayed(eval)(options = options, X = X) for options, X in runs)
 df = pd.DataFrame(results)
 df.to_csv("results.csv",index=False, columns=["method","K","sigma","scale","fval","runtime","reps","epsilon","T"])
-
-    # print("Selecting {} represantatives via Greedy with python logdet".format(K))
-    # res = evaluate_optimizer(Greedy(K, logdet), X)
-    # print("\t fval:\t{} \n\t runtime:\t{} \n\n".format(res["fval"], res["runtime"]))
-
-    # print()
-    # print("=== STREAM PROCESSING ===")
-    # print()
-
-    # print("Selecting {} represantatives via Random".format(K))
-    # res = evaluate_stream(Random(K, fastLogDet), X)
-    # print("\t fval:\t{} \n \t runtime:\t{} \n \n".format(res["fval"], res["runtime"]))
-
-    # print("Selecting {} represantatives via Sieve".format(K))
-    # res = evaluate_stream(SieveStreaming(K, fastLogDet, 1.0, 0.01), X)
-    # print("\t fval:\t{} \n \t runtime:\t{} \n \n".format(res["fval"], res["runtime"]))
-
-    # print("Selecting {} represantatives via Sieve++".format(K))
-    # res = evaluate_stream(SieveStreamingPP(K, fastLogDet, 1.0, 0.01), X)
-    # print("\t fval:\t{} \n \t runtime:\t{} \n \n".format(res["fval"], res["runtime"]))
-
-    # print("Selecting {} represantatives via ThreeSieves".format(K))
-    # res = evaluate_stream(ThreeSieves(K, fastLogDet, 1.0, 0.01, "sieve", 1000), X)
-    # print("\t fval:\t{} \n \t runtime:\t{} \n \n".format(res["fval"], res["runtime"]))

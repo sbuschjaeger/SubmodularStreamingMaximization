@@ -22,50 +22,6 @@ from PySSM import SieveStreamingPP
 from PySSM import ThreeSieves 
 from PySSM import Salsa 
 
-#from PySSM import fit_greedy_on_ivm , fit_greedy_on_ivm_2
-
-# def logdet(X):
-#     X = np.array(X)
-#     K = X.shape[0]
-#     kmat = np.zeros((K,K))
-
-#     for i, xi in enumerate(X):
-#         for j, xj in enumerate(X):
-#             kval = 1.0*np.exp(-np.sum((xi-xj)**2) / 1.0)
-#             if i == j:
-#                 kmat[i][i] = 1.0 + kval / 1.0**2
-#             else:
-#                 kmat[i][j] = kval / 1.0**2
-#                 kmat[j][i] = kval / 1.0**2
-#     return slogdet(kmat)[1]
-
-# def evaluate_batch(opt, X):
-#     start = time.process_time()
-#     opt.fit(X)
-#     fval = opt.get_fval()
-#     end = time.process_time()
-#     solution = np.array(opt.get_solution())
-#     return {
-#         #"solution":solution,
-#         "fval":fval,
-#         "runtime":end - start
-#     }
-
-# def evaluate_stream(opt, X):
-#     start = time.process_time()
-#     for x in X:
-#         opt.next(x)
-#     fval = opt.get_fval()
-#     end = time.process_time()
-#     solution = np.array(opt.get_solution())
-#     return {
-#         #"solution":solution,
-#         "fval":fval,
-#         "runtime":end - start
-#     }
-
-# @delayed
-# @wrap_non_picklable_objects
 def eval(options, X):
     name = options["method"]
     sigma = options["sigma"]
@@ -138,11 +94,6 @@ results = []
 runs = []
 for K in Ks:
     for s in Sigmas:
-        # print("\t Testing s = {}".format(s))
-
-        # kernel = RBFKernel(sigma=s,scale=1)
-        # fastLogDet = FastIVM(K, kernel, 1.0)
-        
         runs.append(
             ( {   
                 "method": "Greedy",
@@ -214,27 +165,3 @@ print("Running {} on {} cores".format(len(runs), n_cores))
 results = Parallel(n_jobs=n_cores)(delayed(eval)(options = options, X = X) for options, X in runs)
 df = pd.DataFrame(results)
 df.to_csv("results.csv",index=False)
-
-    # print("Selecting {} represantatives via Greedy with python logdet".format(K))
-    # res = evaluate_optimizer(Greedy(K, logdet), X)
-    # print("\t fval:\t{} \n\t runtime:\t{} \n\n".format(res["fval"], res["runtime"]))
-
-    # print()
-    # print("=== STREAM PROCESSING ===")
-    # print()
-
-    # print("Selecting {} represantatives via Random".format(K))
-    # res = evaluate_stream(Random(K, fastLogDet), X)
-    # print("\t fval:\t{} \n \t runtime:\t{} \n \n".format(res["fval"], res["runtime"]))
-
-    # print("Selecting {} represantatives via Sieve".format(K))
-    # res = evaluate_stream(SieveStreaming(K, fastLogDet, 1.0, 0.01), X)
-    # print("\t fval:\t{} \n \t runtime:\t{} \n \n".format(res["fval"], res["runtime"]))
-
-    # print("Selecting {} represantatives via Sieve++".format(K))
-    # res = evaluate_stream(SieveStreamingPP(K, fastLogDet, 1.0, 0.01), X)
-    # print("\t fval:\t{} \n \t runtime:\t{} \n \n".format(res["fval"], res["runtime"]))
-
-    # print("Selecting {} represantatives via ThreeSieves".format(K))
-    # res = evaluate_stream(ThreeSieves(K, fastLogDet, 1.0, 0.01, "sieve", 1000), X)
-    # print("\t fval:\t{} \n \t runtime:\t{} \n \n".format(res["fval"], res["runtime"]))

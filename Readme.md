@@ -1,48 +1,48 @@
 # Submodular Streaming Maximization
 
-This repository offers code for submodular function maximization with a cardinality constraint in a streaming setting. For reference there are also some batch algorithms implemented. The code focuses on easy extensiability and accasibilty. The bulk if the code is header-only C++ with a Python interface via pybind11. 
+This repository includes the code for our paper "Very Fast Streaming Submodular Function Maximization" (https://arxiv.org/abs/2010.10059) which introduces a  nonnegative submodular function maximization algorithm for streaming data. For our experiments we also implemented already existing state-of-the-art streaming algorithms for which we could not find an implementation. The code focuses on easy extensibility and accessibility. It is mainly written in header-only C++ with a Python interface via pybind11. 
 
-Currently supported algorithms are:
+Supported algorithms are:
 
 - Greedy
 - SieveStreaming
 - SieveStreaming++
 - ThreeSieves 
 - Random
+- Salsa
 
+For more information on these algorithms please check out our paper or have a look at the (more or less extensive) comments in the source code.
 
-We currently offer a standard implementation 
+Supported submodular functions are:
 
-## Requirments
+- Informative Vector Machine (sometimes called LogDet) with RBF kernel. Look at this function if you want to implement your own submodular function.
+- Fast Informative Vector Machine (sometimes called LogDet) with RBF kernel. This keeps track of the cholesky decomposition of the kernel matrix and updates it without re-computing the entire Kernelmatrix or its inverse. Use this function if speed is important. 
+
+## How to use this code
 For building the code you need:
 
 - CMake >= 3.13
 - C++ 17 compiler (e.g. gcc-7, clang-5)
 
-## How to use the Python interface
-Probability the easiest is to use the Python interface. We use PyBind11 to generate the C++ interface which is a submodule of this repository. First clone this repo recurisvley
+First clone this repo recursively
 
     git clone --recurse-submodules git@github.com:sbuschjaeger/SubmodularStreamingMaximization.git 
 
-If you use anaconda to manage your python packages you can use the following commands to install all dependencies including the python interface PySSM 
+### Using the Python Interface
+
+If you use anaconda to manage your python packages you can use the following commands to install all dependencies including the python interface `PySSM` 
     
     source /opt/anaconda3/bin/activate 
     conda env create -f environment.yml  --force
     conda activate pyssm
 
-alternativly you can just install this package via
+Note the `--force` option which overrides all existing environments called `pyssm`. Alternatively, you can just install this package via
 
     pip install -e .
 
-Once you installed, you can simply import the desired submodular function and optimizer. For a detailed explanation on specific parameters / functions provided please have a look at the documentation of the source code. In general each submodulare optimizer expectes the number of items to select ("K") as well as the function to optimize (e.g. the ivm objective) and each optimizers offers: 
+Once installed, you can simply import the desired submodular function and optimizer via `PySSM`. For a detailed explanation on specific parameters / functions provided please have a look at the documentation of the source code.
+The following example uses the Greedy optimizer to select a data summary by maximizing the Informative Vector Machine (the full examples can be found in `tests/main.py`)
 
-- `fit(X)`: To fit the entire dataset X  (batch processing)
-- `next(x)`: To process one element x  (stream processing)
-- `get_solution`: To retrieve the current solution
-- `get_fval`: To retrieve the solution's corresponding function value
-
-A complete example which uses the Greedy algorithms to maximizse the IVM objective with RBF kernel is: 
-    
     from PySSM import RBFKernel
     from PySSM import IVM
     from PySSM import Greedy
@@ -75,186 +75,65 @@ A complete example which uses the Greedy algorithms to maximizse the IVM objecti
     print("Found a solution with fval = {}".format(fval))
     print(solution)
 
-### How to provide your own submodular function
-The code lies special emphasize on extending the existing code and providing your own submodular functions. 
-Most commonly, people might want to use the IVM function with their own kernel. For example, consider you want to use the linear kernel then you just have to provide a function accepts two examples and pass this function to the IVM:
+### Using the C++ interface
 
-    import numpy as np
-    from PySSM import IVM
+The C++ code is header-only so simply include the desired functions in your project and your are good to go. If you have trouble compiling you can look at the `CMakeLists.txt` file which compiles the Python bindings as well as the following test file. The following example uses the Greedy optimizer to select a data summary by maximizing the Informative Vector Machine (the full examples can be found in `tests/main.cpp`)
 
-    def linear(x1, x2):
-        return np.dot(x1,x2)
+    #include <iostream>
+    #include <vector>
+    #include <math.h>
+    #include "FastIVM.h"
+    #include "RBFKernel.h"
+    #include "Greedy.h"
+
+    std::vector<std::vector<double>> data = {
+        {0, 0},
+        {1, 1},
+        {0.5, 1.0},
+        {1.0, 0.5},
+        {0, 0.5},
+        {0.5, 1},
+        {0.0, 1.0},
+        {1.0, 0.0}
+    };    
+
+    unsigned int K = 3;
+    FastIVM fastIVM(K, RBFKernel(), 1.0);
     
-    ivm = IVM(kernel = linear, sigma = 1.0)
-    
-There are two ways to provide your own submodular function. The simplest approach is to offer a python function which accepts the current set and returns the corresponding function value. For example, the IVMs logdet would be: 
+    Greedy greedy(K, fastIVM)
+    greedy.fit(data);
+    auto solution = greedy.get_solution();
+    double fval = greedy.get_fval();
 
-    from PySSM import Greedy
+    std::cout << "Found a solution with fval = " << fval << std::endl;
+    for (auto x : solution) {
+        for (auto xi : x) {
+            std::cout << xi << " ";
+        }
+        std::cout << std::endl;
+    }
 
-    def logdet(X):
-        # Note, that X is a list of list and not yet a numpy array
-        X = np.array(X)
-        K = X.shape[0]
-        kmat = np.zeros((K,K))
+## How to reproduce the experiments in our paper
 
-        for i, xi in enumerate(X):
-            for j, xj in enumerate(X):
-                kval = 1.0*np.exp(-np.sum((xi-xj)**2) / 1.0)
-                if i == j:
-                    kmat[i][i] = 1.0 + kval / 1.0**2
-                else:
-                    kmat[i][j] = kval / 1.0**2
-                    kmat[j][i] = kval / 1.0**2
-        return slogdet(kmat)[1]
-    
-    X = [
-        [0, 0],
-        [1, 1],
-        [0.5, 1.0],
-        [1.0, 0.5],
-        [0, 0.5],
-        [0.5, 1],
-        [0.0, 1.0],
-        [1.0, 0.]
-    ]    
+In the `experiments` folder you can find code which runs experiments on various dataset via the Python interface. You will probably need to download the data first which can be done using the `init.{sh,py}` scripts provided in each folder. Some notes on this:
 
-    K = 3
-    greedy = Greedy(K, logdet)
-    greedy.fit(X)
+- The `creditfraud` is hosted on kaggle, which requires the kaggle-api to be installed and configured with an API key. It might be easier to manually download this data-set from kaggle
+- The `fact-highlevel` data is hosted by the FACT project page. To process these files some additional packages are required which should be installed via the conda environment. If not, please have a look at the `environment.yml` and install the necessary packages manually. Also note, that the files are rather large (> 2GB) so beware to have enough space 
+- The `fact-lowlevel` requires even more additional tools and packages. Please contact me sebastian.buschjaeger@tu-dortmund.de if you are interested in these files.
 
-    # Alternativley, you can use the streaming interface. 
-    #for x in X:
-    #    opt.next(x)
+Once the data is downloaded, you should be able to execute the `run.py` file which starts all experiments. This file starts _all_ experiments for a single data-set including all hyperparameter configurations. This may take some time (as in several hours) to finish. These files are currently configured to launch `15` threads via `joblib`, so make sure your hardware is strong enough or reduce the number of cores by setting `n_cores` at the end of the file. After the experiments finished, you can browse the results by using the `explore_results` Jupyter Notebook. Note that, depending on actual experiments you ran you might want to change `datasets` in the second cell of this notebook accordingly.
 
-    fval = opt.get_fval()
-    solution = np.array(opt.get_solution())
+### Citing our Paper
 
-    print("Found a solution with fval = {}".format(fval))
-    print(solution)
+    @misc{buschjäger2020fast,
+          title={Very Fast Streaming Submodular Function Maximization}, 
+          author={Sebastian Buschjäger and Philipp-Jan Honysz and Katharina Morik},
+          year={2020},
+          eprint={2010.10059},
+          archivePrefix={arXiv},
+          primaryClass={cs.LG}
+    }
 
-This calls `logdet` for each function evaluation, which means that we evaluate `logdet` for every item in the dataset / stream.
+### Acknowledgments 
+Special Thanks goes to Philipp Jan-Honysz (philipp.honysz@tu-dortmund.de) who provided the original implementation for our experiments which formed the basis of this code. 
 
-### How to provide your own submodular function class
-
-In the previous exampke we re-compute the entire kernel matrix each time we call `logdet` which becomes very costly. You can implement your own `SubmodularFunction` to cache the kernel matrix inbetween computations. To do so you need to implement the abstract SubmodularFunction class which requires three methods: 
-
-- `peek(self, X, x)`: We peek what the current function value would be, if we _would_ add x to the current solution X. This function gets called for every item in the batch / stream so it sould be as fast as possible
-- `update(self, X, x)`: We update what the current function value _is_ when x is added to the current solution X. This function gets called for every item in the batch / stream we add to our target solution.
-- `clone(self)`: Some algorithms like SieveStreaming or SieveStreaming++ maintain multiple solutions with each their own SubmodularFunctions. The C++ backend will call this method method whenever it requires a new SubmodularFunction for these algorithms. 
-
-A complete example which caches the kernel matrix inbetween computations is then:    
-    
-    from PySSM import SubmodularFunction
-
-    # We implement a SubmodularFunction
-    class FastLogdet(SubmodularFunction):
-        def __init__(self, K):
-            super().__init__()
-            self.added = 0
-            self.K = K
-            self.kmat = np.zeros((K,K))
-        
-        # We peek what the current function value would be, if we would add x to the current solution X. 
-        # This function gets called for every item in the batch / stream so it sould be as fast as possible
-        def peek(self, X, x):
-            if self.added < self.K:
-                #X = np.array(X)
-                x = np.array(x)
-                
-                row = []
-                for xi in X:
-                    kval = 1.0*np.exp(-np.sum((xi-x)**2) / 1.0)
-                    row.append(kval)
-                kval = 1.0*np.exp(-np.sum((x-x)**2) / 1.0)
-                row.append(1.0 + kval / 1.0**2)
-
-                self.kmat[:self.added, self.added] = row[:-1]
-                self.kmat[self.added, :self.added + 1] = row
-                return slogdet(self.kmat[:self.added + 1,:self.added + 1])[1]
-            else:
-                return 0
-
-        # We update what the current function value is when x is added to the current solution X. 
-        # This function gets called for every item in the batch / stream we add to our target solution.
-        def update(self, X, x):
-            #X = np.array(X)
-            if self.added < self.K:
-                x = np.array(x)
-
-                row = []
-                for xi in X:
-                    kval = 1.0*np.exp(-np.sum((xi-x)**2) / 1.0)
-                    row.append(kval)
-
-                kval = 1.0*np.exp(-np.sum((x-x)**2) / 1.0)
-                row.append(1.0 + kval / 1.0**2)
-
-                self.kmat[:self.added, self.added] = row[:-1]
-                self.kmat[self.added, :self.added + 1] = row
-                self.added += 1
-
-                return slogdet(self.kmat[:self.added + 1,:self.added + 1])[1]
-            else:
-                return 0
-
-        # Some algorithms like SieveStreaming or SieveStreaming++ maintain multiple solutions with each their own SubmodularFunctions. The C++ backend will call the clone() method whenever it requires a new SubmodularFunction for these algorithms. 
-        def clone(self):
-            return FastLogdet(self.K)
-
-    from PySSM import Greedy
-
-    X = [
-        [0, 0],
-        [1, 1],
-        [0.5, 1.0],
-        [1.0, 0.5],
-        [0, 0.5],
-        [0.5, 1],
-        [0.0, 1.0],
-        [1.0, 0.]
-    ]    
-
-    K = 3
-    fastIVM = FastLogdet(K)
-    greedy = Greedy(K, fastIVM)
-    
-    greedy.fit(X)
-
-    # Alternativley, you can use the streaming interface. 
-    #for x in X:
-    #    opt.next(x)
-
-    fval = opt.get_fval()
-    solution = np.array(opt.get_solution())
-
-    print("Found a solution with fval = {}".format(fval))
-    print(solution)
-
-    X = [
-        [0, 0],
-        [1, 1],
-        [0.5, 1.0],
-        [1.0, 0.5],
-        [0, 0.5],
-        [0.5, 1],
-        [0.0, 1.0],
-        [1.0, 0.]
-    ]
-
-### How to provide your own optimizer
-Currently we do not support writing your own optimizer in Python and we do not have any plans to do so. If you are interested in this just leave an issue or write us an E-Mail (sebastian.buschjaeger@tu-dortmund.de). Alternativley, you can implement your own maximization algorithm in C++ as explained in the next section.
-
-## How to use the C++ interface
-
-The c++ interface generally follows the Python interface, but offers a little bit more freedom. The code uses a generic `data_t` datatype which is defined in "DataTypeHandling.h". This is per default a `double`. As above, the optimizers will generally offer:
-
-- `fit(std::vector<std::vector<data_t>> const &X)`: To fit the entire dataset X. 
-- `next(std::vector<data_t> const &x)`: To process one element x (stream processing).The data type `data_t` is defined in "DataTypeHandling.h" and probabilty set to double (default)
-- `std::vector<std::vector<data_t>>const &  get_solution()`: To retrieve a reference to the current solution. 
-- `data_t get_fval()`: To retrieve the solution's corresponding function value. The data type `data_t` is defined in "DataTypeHandling.h" and probabilty set to double (default)
-
-### How to provide your own submodular function
-
-### How to provide your own submodular function class
-
-### How to provide your own optimizer
