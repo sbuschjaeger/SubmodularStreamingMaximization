@@ -121,13 +121,13 @@ The C++ code is header-only so simply include the desired functions in your proj
 
 In the `experiments` folder you can find code which runs experiments on various dataset via the Python interface. You will probably need to download the data first which can be done using the `init.{sh,py}` scripts provided in each folder. Some notes on this:
 
-- The `creditfraud` is hosted on kaggle, which requires the kaggle-api to be installed and configured with an API key. It might be easier to manually download this data-set from kaggle
-- The `fact-highlevel` data is hosted by the FACT project page. To process these files some additional packages are required which should be installed via the conda environment. If not, please have a look at the `environment.yml` and install the necessary packages manually. Also note, that the files are rather large (> 2GB) so beware to have enough space 
-- The `fact-lowlevel` requires even more additional tools and packages. Please contact me sebastian.buschjaeger@tu-dortmund.de if you are interested in these files.
+- `creditfraud` is hosted on kaggle, which requires the kaggle-api to be installed and configured with an API key. It might be easier to manually download this data-set from kaggle
+- `fact-highlevel` is hosted by the FACT project page. To process these files some additional packages are required which should be installed via the conda environment. If not, please make sure to have `pyfact` installed and working. Also note, that these files are rather large (> 2GB) so the download may take some time.
+- `fact-lowlevel` requires even more additional tools and packages. Please contact sebastian.buschjaeger@tu-dortmund.de if you are interested in these files.
 
-Once the data is downloaded, you should be able to execute the `run.py` file which starts all experiments. This file starts _all_ experiments for a single data-set including all hyperparameter configurations. This may take some time (as in several hours) to finish. These files are currently configured to launch `15` threads via `joblib`, so make sure your hardware is strong enough or reduce the number of cores by setting `n_cores` at the end of the file. After the experiments finished, you can browse the results by using the `explore_results` Jupyter Notebook. Note that, depending on actual experiments you ran you might want to change `datasets` in the second cell of this notebook accordingly.
+Once the data is downloaded, you can start the experiments by executing `run.py` in the respective folder. This file starts _all_ experiments for a single data-set including all hyperparameter configurations. This may take some time (usually a few hours per data-set) to finish. The experiments are currently configured to launch `15` threads via `joblib`, so make sure your hardware is strong enough or reduce the number of cores by setting `n_cores` at the end of each file. After the experiments finished, you can browse the results by using the `explore_results` Jupyter Notebook. Note that, depending on actual experiments you ran you might want to change the list of `datasets` used for plotting in the second cell of this notebook accordingly.
 
-### Citing our Paper
+## Citing our Paper
 
     @misc{buschjäger2020fast,
           title={Very Fast Streaming Submodular Function Maximization}, 
@@ -138,6 +138,6 @@ Once the data is downloaded, you should be able to execute the `run.py` file whi
           primaryClass={cs.LG}
     }
 
-### Acknowledgments 
+## Acknowledgments 
 Special Thanks goes to Philipp Jan-Honysz (philipp.honysz@tu-dortmund.de) who provided the original implementation for our experiments which formed the basis of this code. 
 
