@@ -39,9 +39,9 @@ inline std::vector<data_t> thresholds(data_t lower, data_t upper, data_t epsilon
         //     iupper = std::floor(tmp);
         // }
 
-        if (ilower >= upper)
-            throw std::runtime_error("thresholds: Lower threshold boundary (" + std::to_string(ilower) + ") is higher than or equal to the upper boundary ("
-                                    + std::to_string(upper) + "), epsilon = " + std::to_string(epsilon) + ".");
+        // if (ilower >= upper)
+        //     throw std::runtime_error("thresholds: Lower threshold boundary (" + std::to_string(ilower) + ") is higher than or equal to the upper boundary ("
+        //                             + std::to_string(upper) + "), epsilon = " + std::to_string(epsilon) + ".");
 
         for (data_t val = std::pow(1.0 + epsilon, ilower); val <= upper; ++ilower, val = std::pow(1.0 + epsilon, ilower)) {
             ts.push_back(val);
@@ -75,6 +75,7 @@ protected:
      * @brief A single Sieve with its own threshold
      * 
      */
+    template <bool DYNAMIC>
     class Sieve : public SubmodularOptimizer {
     public:
         // The threshold
@@ -117,7 +118,14 @@ protected:
             unsigned int Kcur = solution.size();
             if (Kcur < K) {
                 data_t fdelta = f->peek(solution, x, solution.size()) - fval;
-                data_t tau = (threshold / 2.0 - fval) / static_cast<data_t>(K - Kcur);
+                
+                data_t tau;
+                if constexpr(DYNAMIC) {
+                    tau = (threshold / 2.0 - fval) / static_cast<data_t>(K - Kcur);
+                } else {
+                    tau = threshold;
+                }
+
                 if (fdelta >= tau) {
                     f->update(solution, x, solution.size());
                     solution.push_back(x);
@@ -125,13 +133,30 @@ protected:
                 }
             }
         }
-
     };
 
 protected:
     // A list of all sieves
     // TODO: Move from raw pointer to std::unique_ptr
-    std::vector<Sieve*> sieves;
+    std::vector<std::unique_ptr<Sieve<true>>> sieves;
+
+    /**
+     * @brief Construct a new Sieve Streaming object. This constructor does not prepare any sieves and might be useable for optimizers which inherit from this class
+     * 
+     * @param K The cardinality constraint you of the optimization problem, that is the number of items selected.
+     * @param f The function which should be maximized. Note, that the `clone' function is used to construct a new SubmodularFunction which is owned by this object. If you implement a custom SubmodularFunction make sure that everything you need is actually cloned / copied.  
+     */
+    SieveStreaming(unsigned int K, SubmodularFunction & f) : SubmodularOptimizer(K,f) {
+    }
+
+    /**
+     * @brief Construct a new Sieve Streaming object. This constructor does not prepare any sieves and might be useable for optimizers which inherit from this class
+     * 
+     * @param K The cardinality constraint you of the optimization problem, that is the number of items selected.
+     * @param f The function which should be maximized. Note, that this parameter is likely moved and not copied. Thus, if you construct multiple optimizers with the __same__ function they all reference the __same__ function. This can be very efficient for state-less functions, but may lead to weird side effects if f keeps track of a state. 
+     */
+    SieveStreaming(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f) : SubmodularOptimizer(K,f) {
+    }
 
 public:
     /**
@@ -146,7 +171,7 @@ public:
         std::vector<data_t> ts = thresholds(m, K*m, epsilon);
 
         for (auto t : ts) {
-            sieves.push_back(new Sieve(K, f, t));
+            sieves.push_back(std::make_unique<Sieve<true>>(K, f, t));
         }
     }
 
@@ -161,30 +186,7 @@ public:
     SieveStreaming(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f, data_t m, data_t epsilon) : SubmodularOptimizer(K,f) {
         std::vector<data_t> ts = thresholds(m, K*m, epsilon);
         for (auto t : ts) {
-            sieves.push_back(new Sieve(K, f, t));
-        }
-    }
-
-    /**
-     * @brief Loop at-least once of the entire dataset and select items according to the different thresholding sieves constructed. You can access the solution via `get_solution`
-     * 
-     * @param X A constant reference to the entire data set
-     * @note This algorithm may loop multiple times over the entire data-set until it selects K elements 
-     */
-    void fit(std::vector<std::vector<data_t>> const & X) {
-        bool one_pass = false;
-        while(solution.size() < K) {
-            for (auto &x : X) {
-                next(x);
-                // It is verly likely that the lower threshold sieves will fill up early and thus we will probably find a full sieve early on
-                // This likely results in a very bad function value. However, only iterating once over the entire data-set may lead to a very
-                // weird situation where no sieve is full yet (e.g. for very small datasets). Thus, we re-iterate as often as needed and early
-                // exit if we have seen every item at-least once
-                if (solution.size() == K && one_pass) {
-                    break;
-                }
-            }
-            one_pass = true;
+            sieves.push_back(std::make_unique<Sieve<true>>(K, f, t));
         }
     }
 
@@ -193,9 +195,9 @@ public:
      * 
      */
     ~SieveStreaming() {
-        for (auto s : sieves) {
-            delete s;
-        }
+        // for (auto s : sieves) {
+        //     delete s;
+        // }
     }
 
     /**
@@ -204,7 +206,7 @@ public:
      * @param x A constant reference to the next object on the stream.
      */
     void next(std::vector<data_t> const &x) {
-        for (auto s : sieves) {
+        for (auto &s : sieves) {
             s->next(x);
             if (s->get_fval() > fval) {
                 fval = s->get_fval();

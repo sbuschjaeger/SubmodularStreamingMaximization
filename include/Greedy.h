@@ -43,8 +43,9 @@ public:
      * @brief Pick that element with the largest marginal gain in the entire dataset. Repeat this until K element have been selected. You can access the solution via `get_solution`
      * 
      * @param X A constant reference to the entire data set
+     * @param iterations: Has no effect. Greedy iterates K times over the entire dataset in any case.
      */
-    void fit(std::vector<std::vector<data_t>> const & X) {
+    void fit(std::vector<std::vector<data_t>> const & X, unsigned int iterations = 1) {
         std::vector<unsigned int> remaining(X.size());
         std::iota(remaining.begin(), remaining.end(), 0);
         data_t fcur = 0;

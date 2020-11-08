@@ -75,8 +75,9 @@ public:
      * @brief  Randomly pick K elements as a solution. You can access the solution via `get_solution`
      * @note   
      * @param  X A constant reference to the entire data set
+     * @param iterations: Has no effect. Random samples K elements, no iterations required.
      */
-    void fit(std::vector<std::vector<data_t>> const & X) {
+    void fit(std::vector<std::vector<data_t>> const & X, unsigned int iterations = 1) {
         if (X.size() < K) {
             K = X.size();
         }

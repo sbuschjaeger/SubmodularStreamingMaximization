@@ -134,7 +134,7 @@ protected:
     
 
 protected:
-    std::vector<SubmodularOptimizer*> algos;
+    std::vector<std::unique_ptr<SubmodularOptimizer>> algos;
     data_t m;
     data_t epsilon;
 
@@ -190,36 +190,32 @@ public:
         fixed_epsilon(fixed_epsilon)
     {}
 
-    ~Salsa() {
-        for (auto s : algos) {
-            delete s;
-        }
-    }
-
-    void fit(std::vector<std::vector<data_t>> const & X) {
+    void fit(std::vector<std::vector<data_t>> const & X, unsigned int iterations = 1) {
         unsigned int N = X.size();
         std::vector<data_t> ts = thresholds(m, K*m, epsilon);
         for (auto t : ts) {
-            algos.push_back(new FixedThreshold(K, *f, fixed_epsilon, t));
-            algos.push_back(new HighLowThreshold(K, *f, hilow_epsilon, t, hilow_beta, hilow_delta, N));
-            algos.push_back(new Dense(K, *f, t, dense_beta, dense_C1, dense_C2, N));
-        }
- 
-        for (auto &x : X) {
-            for (auto s : algos) {
-                s->next(x);
-            }
+            algos.push_back(std::make_unique<FixedThreshold>(K, *f, fixed_epsilon, t));
+            algos.push_back(std::make_unique<HighLowThreshold>(K, *f, hilow_epsilon, t, hilow_beta, hilow_delta, N));
+            algos.push_back(std::make_unique<Dense>(K, *f, t, dense_beta, dense_C1, dense_C2, N));
         }
 
-        for (auto s : algos) {
-            if (s->get_fval() > fval) {
-                fval = s->get_fval();
-                // TODO THIS IS A COPY AT THE MOMENT
-                solution = s->solution;
+        for (unsigned int i = 0; i < iterations; ++i) {
+            for (auto &x : X) {
+                for (auto &s : algos) {
+                    s->next(x);
+                    if (s->get_fval() > fval) {
+                        fval = s->get_fval();
+                        // TODO THIS IS A COPY AT THE MOMENT
+                        solution = s->solution;
+                        is_fitted = true;
+                    }
+                    
+                    if (solution.size() == K && i > 0) {
+                        return;
+                    }
+                }
             }
         }
-
-        is_fitted = true;
     }
 
     void next(std::vector<data_t> const &x) {

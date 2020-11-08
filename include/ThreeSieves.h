@@ -55,17 +55,6 @@ public:
         // assert(("T should at-least be 1 or greater.", T >= 1));
     }
     
-    void fit(std::vector<std::vector<data_t>> const & X) {
-        while(solution.size() < K) {
-            for (auto &x : X) {
-                next(x);
-                if (solution.size() == K) {
-                    break;
-                }
-            }
-        }
-    }
-
     void next(std::vector<data_t> const &x) {
         unsigned int Kcur = solution.size();
         if (Kcur < K) {
