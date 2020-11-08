@@ -55,7 +55,7 @@ auto evaluate_optimizer(SubmodularOptimizer &opt, std::vector<std::vector<data_t
     auto end = std::chrono::steady_clock::now();   
     std::chrono::duration<double> runtime_seconds = end-start;
     auto fval = opt.get_fval();
-
+    std::cout << "Selected " << opt.get_solution().size() << std::endl;
     return std::make_tuple(fval, runtime_seconds.count());
 }
 
@@ -86,7 +86,7 @@ int main() {
     //     if (cnt > 10) break;
     // }
 
-    auto K = 70;
+    auto K = 50;
     FastIVM fastIVM(K, RBFKernel( std::sqrt(data[0].size()), 1.0) , 1.0);
 
     // std::cout << "Selecting " << K << " representatives via Greedy" << std::endl;
@@ -99,29 +99,29 @@ int main() {
     // res = evaluate_optimizer(random0, data);
     // std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
 
-    auto eps = {0.1, 0.01, 0.001, 0.0001};
-    // for (auto e: eps) {
-    //     std::cout << "Selecting " << K << " representatives via SieveStreaming with eps = " << e << std::endl;
-    //     SieveStreaming sieve(K, fastIVM, 1.0, e);
-    //     auto res = evaluate_optimizer(sieve, data);
-    //     std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
-    // }
-
-    // std::cout << "Selecting " << K << " representatives via SieveStreaming++" << std::endl;
-    // SieveStreamingPP sievepp(K, fastIVM, 1.0, 0.01);
-    // res = evaluate_optimizer(sievepp, data);
-    // std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
+    auto eps = {0.01};
+    for (auto e: eps) {
+        std::cout << "Selecting " << K << " representatives via SieveStreaming with eps = " << e << std::endl;
+        SieveStreaming sieve(K, fastIVM, 1.0, e);
+        auto res = evaluate_optimizer(sieve, data);
+        std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
+        
+        std::cout << "Selecting " << K << " representatives via SieveStreaming++ with eps = " << e << std::endl;
+        SieveStreamingPP sievepp(K, fastIVM, 1.0, e);
+        res = evaluate_optimizer(sievepp, data);
+        std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
+    }
 
     // std::cout << "Selecting " << K << " representatives via Salsa" << std::endl;
     // Salsa salsa(K, fastIVM, 1.0, 0.01);
     // auto res = evaluate_optimizer(salsa, data);
     // std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
-    for (auto T: {500, 1000, 2500, 5000} ){
-        for (auto e: eps) {
-            std::cout << "Selecting " << K << " representatives via ThreeSieves with T = " << T << " and eps = " << e << std::endl;
-            ThreeSieves three(K, fastIVM, 1.0, e, ThreeSieves::THRESHOLD_STRATEGY::SIEVE, T);
-            auto res = evaluate_optimizer(three, data);
-            std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
-        }
-    }
+    // for (auto T: {500, 1000, 2500, 5000} ){
+    //     for (auto e: eps) {
+    //         std::cout << "Selecting " << K << " representatives via ThreeSieves with T = " << T << " and eps = " << e << std::endl;
+    //         ThreeSieves three(K, fastIVM, 1.0, e, ThreeSieves::THRESHOLD_STRATEGY::SIEVE, T);
+    //         auto res = evaluate_optimizer(three, data);
+    //         std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
+    //     }
+    // }
 }

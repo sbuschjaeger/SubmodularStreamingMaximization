@@ -49,8 +49,8 @@ public:
     /**
      * @brief  Creates a submodular optimizer object. 
      * @note   
-     * @param  K: The cardinality constraint you of the optimization problem, that is the number of items selected.
-     * @param  f: The function which should be maximized. Note, that the `clone' function is used to construct a new SubmodularFunction which is owned by this object. If you implement a custim SubmodularFunction make sure that everything you need is actually cloned / copied.  
+     * @param  K: The cardinality constraint K of the optimization problem or differently put the number of items to be selected.
+     * @param  f: The function which should be maximized. Note, that the `clone' function is used to construct a new SubmodularFunction which is owned by this object. If you implement a custom SubmodularFunction make sure that everything you need is actually cloned / copied.  
      * @retval A new SubmodularOptimizer object.  
      */
     SubmodularOptimizer(unsigned int K, SubmodularFunction & f) 
@@ -63,7 +63,7 @@ public:
     /**
      * @brief  Creates a submodular optimizer object. 
      * @note   
-     * @param  K: The cardinality constraint you of the optimization problem, that is the number of items selected.
+     * @param  K: The cardinality constraint K of the optimization problem or differently put the number of items to be selected.
      * @param  f: The function which should be maximized. Note, that this parameter is likely moved and not copied. Thus, if you construct multiple optimizers with the __same__ function they all reference the __same__ function. This can be very efficient for state-less functions, but may lead to weird side effects if f keeps track of a state. 
      * @retval A new SubmodularOptimizer object.  
      */
@@ -78,11 +78,22 @@ public:
      * @brief  Find a solution given the entire data set. 
      * @note   
      * @param  X: A constant reference to the entire data set
+     * @param iterations: Maximum number of iterations over the entire data-set (default = 1). Tries to select exactly K elements by iterating multiple 
+     *                    times over the entire dataset, but at most iterations times and at-least once. Early exits once K elements are found and at-least one iteration is completed. 
      * @retval None
      */
-    virtual void fit(std::vector<std::vector<data_t>> const & X) {
-        for (auto &x : X) {
-            next(x);
+    virtual void fit(std::vector<std::vector<data_t>> const & X, unsigned int iterations = 1) {
+        for (unsigned int i = 0; i < iterations; ++i) {
+            for (auto &x : X) {
+                next(x);
+                // It is verly likely that the lower threshold sieves will fill up early and thus we will probably find a full sieve early on
+                // This likely results in a very bad function value. However, only iterating once over the entire data-set may lead to a very
+                // weird situation where no sieve is full yet (e.g. for very small datasets). Thus, we re-iterate as often as needed and early
+                // exit if we have seen every item at-least once
+                if (solution.size() == K && i > 0) {
+                    return;
+                }
+            }
         }
     }
 
