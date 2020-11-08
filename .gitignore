@@ -8,3 +8,5 @@ data/
 *.mat
 *.pdf
 *.npy
+*.json
+*.jsonl
