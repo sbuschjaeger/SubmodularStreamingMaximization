@@ -55,7 +55,7 @@ def pre(cfg):
 def fit(cfg, opt):
     X = cfg["X"]
     
-    opt.fit(cfg["X"])
+    opt.fit(cfg["X"], cfg["K"])
     return opt
 
 def post(cfg, opt):
@@ -67,14 +67,11 @@ data, meta = arff.loadarff(os.path.join(os.path.dirname(__file__), "data", "KDDC
 data_pd = pd.DataFrame(data)
 data_pd.columns = meta
 
-# Extract label vector
 y = np.array([-1 if x == "yes" else 1 for x in data_pd["outlier"]])  # 1 = inlier, -1 = outlier
 
-# Delete irrelevant features.
 data_pd = data_pd.drop("outlier", axis=1)
 data_pd = data_pd.drop("id", axis=1)
 
-# Only values from now on
 X = data_pd.values
 
 Ks = range(5,10,5)

@@ -158,7 +158,7 @@ PYBIND11_MODULE(PySSM, m) {
 
     py::class_<IVM, SubmodularFunction, std::shared_ptr<IVM> >(m, "IVM")
         //.def(py::init<std::function<data_t (std::vector<data_t> const &, std::vector<data_t> const &)>, data_t>(), py::arg("kernel"), py::arg("sigma"))
-        .def(py::init<Kernel const &, data_t>(), py::arg("kernel"), py::arg("sigma"))
+        .def(py::init<Kernel const &, data_t>(), py::arg("kernel"), py::arg("sigma") = 1.0)
         .def("peek", &IVM::peek, py::arg("cur_solution"), py::arg("x"), py::arg("pos"))
         .def("update", &IVM::update, py::arg("cur_solution"), py::arg("x"), py::arg("pos"))
         .def("__call__", &IVM::operator())
@@ -166,7 +166,7 @@ PYBIND11_MODULE(PySSM, m) {
 
     py::class_<FastIVM, IVM, SubmodularFunction, std::shared_ptr<FastIVM> >(m, "FastIVM")
         //.def(py::init<unsigned int, std::function<data_t (std::vector<data_t> const &, std::vector<data_t> const &)>, data_t>(),  py::arg("K"),  py::arg("kernel"), py::arg("sigma"))
-        .def(py::init<unsigned int, Kernel const &, data_t>(),  py::arg("K"),  py::arg("kernel"), py::arg("sigma"))
+        .def(py::init<unsigned int, Kernel const &, data_t>(),  py::arg("K"),  py::arg("kernel"), py::arg("sigma") = 1.0)
         .def("peek", &FastIVM::peek, py::arg("cur_solution"), py::arg("x"), py::arg("pos"))
         .def("update", &FastIVM::update, py::arg("cur_solution"), py::arg("x"), py::arg("pos"))
         .def("__call__", &FastIVM::operator())
@@ -178,14 +178,14 @@ PYBIND11_MODULE(PySSM, m) {
         .def(py::init<unsigned int, std::function<data_t (std::vector<std::vector<data_t>> const &)> >(), py::arg("K"), py::arg("f"))
         .def("get_solution", &Greedy::get_solution)
         .def("get_fval", &Greedy::get_fval)
-        .def("fit", &Greedy::fit, py::arg("X"));
+        .def("fit", &Greedy::fit, py::arg("X"), py::arg("iterations") = 1);
     
     py::class_<Random>(m, "Random") 
         .def(py::init<unsigned int, SubmodularFunction&, unsigned long>(), py::arg("K"), py::arg("f"), py::arg("seed")= 0)
         .def(py::init<unsigned int, std::function<data_t (std::vector<std::vector<data_t>> const &)>, unsigned long>(), py::arg("K"), py::arg("f"), py::arg("seed") = 0)
         .def("get_solution", &Random::get_solution)
         .def("get_fval", &Random::get_fval)
-        .def("fit", &Random::fit, py::arg("X"))
+        .def("fit", &Random::fit, py::arg("X"), py::arg("iterations") = 1)
         .def("next", &Random::next, py::arg("x"));
 
     py::class_<SieveStreaming>(m, "SieveStreaming") 
@@ -193,7 +193,7 @@ PYBIND11_MODULE(PySSM, m) {
         .def(py::init<unsigned int, std::function<data_t (std::vector<std::vector<data_t>> const &)>, data_t, data_t>(), py::arg("K"), py::arg("f"),  py::arg("m"), py::arg("epsilon"))
         .def("get_solution", &SieveStreaming::get_solution)
         .def("get_fval", &SieveStreaming::get_fval)
-        .def("fit", &SieveStreaming::fit, py::arg("X"))
+        .def("fit", &SieveStreaming::fit, py::arg("X"), py::arg("iterations") = 1)
         .def("next", &SieveStreaming::next, py::arg("x"));
     
     py::class_<SieveStreamingPP>(m, "SieveStreamingPP") 
@@ -201,7 +201,7 @@ PYBIND11_MODULE(PySSM, m) {
         .def(py::init<unsigned int, std::function<data_t (std::vector<std::vector<data_t>> const &)>, data_t, data_t>(), py::arg("K"), py::arg("f"),  py::arg("m"), py::arg("epsilon"))
         .def("get_solution", &SieveStreamingPP::get_solution)
         .def("get_fval", &SieveStreamingPP::get_fval)
-        .def("fit", &SieveStreamingPP::fit, py::arg("X"))
+        .def("fit", &SieveStreamingPP::fit, py::arg("X"), py::arg("iterations") = 1)
         .def("next", &SieveStreamingPP::next, py::arg("x"));
     
     py::class_<ThreeSieves>(m, "ThreeSieves") 
@@ -209,7 +209,7 @@ PYBIND11_MODULE(PySSM, m) {
         .def(py::init<unsigned int, std::function<data_t (std::vector<std::vector<data_t>> const &)>, data_t, data_t, std::string const &, unsigned int>(), py::arg("K"), py::arg("f"),  py::arg("m"), py::arg("epsilon"), py::arg("strategy"), py::arg("T"))
         .def("get_solution", &ThreeSieves::get_solution)
         .def("get_fval", &ThreeSieves::get_fval)
-        .def("fit", &ThreeSieves::fit, py::arg("X"))
+        .def("fit", &ThreeSieves::fit, py::arg("X"), py::arg("iterations") = 1)
         .def("next", &ThreeSieves::next, py::arg("x"));
 
     py::class_<Salsa>(m, "Salsa") 
@@ -217,6 +217,6 @@ PYBIND11_MODULE(PySSM, m) {
         .def(py::init<unsigned int, std::function<data_t (std::vector<std::vector<data_t>> const &)>, data_t, data_t, data_t, data_t, data_t, data_t, data_t, data_t,data_t>(), py::arg("K"), py::arg("f"), py::arg("m"), py::arg("epsilon"), py::arg("hilow_epsilon") = 0.05, py::arg("hilow_beta") = 0.1, py::arg("hilow_delta") = 0.025, py::arg("dense_beta") = 0.8, py::arg("dense_C1") = 10, py::arg("dense_C2") = 0.2, py::arg("fixed_epsilon") = 1.0/6.0)
         .def("get_solution", &Salsa::get_solution)
         .def("get_fval", &Salsa::get_fval)
-        .def("fit", &Salsa::fit, py::arg("X"))
+        .def("fit", &Salsa::fit, py::arg("X"), py::arg("iterations") = 1)
         .def("next", &Salsa::next, py::arg("x"));
 }

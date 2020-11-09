@@ -16,6 +16,7 @@
 #include "ThreeSieves.h"
 #include "Salsa.h"
 #include "DataTypeHandling.h"
+#include "SetImprovement.h"
 
 std::vector<std::vector<data_t>> read_arff(std::string const& path) {
     std::vector<std::vector<data_t>> X; 
@@ -94,10 +95,10 @@ int main() {
     // auto res = evaluate_optimizer(greedy, data);
     // std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
 
-    // std::cout << "Selecting " << K << " representatives via Random with seed = 0" << std::endl;
-    // Random random0(K, fastIVM, 0);
-    // res = evaluate_optimizer(random0, data);
-    // std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
+    std::cout << "Selecting " << K << " representatives via Random with seed = 0" << std::endl;
+    Random random0(K, fastIVM, 0);
+    auto res = evaluate_optimizer(random0, data);
+    std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
 
     auto eps = {0.01};
     for (auto e: eps) {
@@ -106,12 +107,16 @@ int main() {
         auto res = evaluate_optimizer(sieve, data);
         std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
         
-        std::cout << "Selecting " << K << " representatives via SieveStreaming++ with eps = " << e << std::endl;
-        SieveStreamingPP sievepp(K, fastIVM, 1.0, e);
-        res = evaluate_optimizer(sievepp, data);
-        std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
+        // std::cout << "Selecting " << K << " representatives via SieveStreaming++ with eps = " << e << std::endl;
+        // SieveStreamingPP sievepp(K, fastIVM, 1.0, e);
+        // res = evaluate_optimizer(sievepp, data);
+        // std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
     }
 
+    std::cout << "Selecting " << K << " representatives via SetImprovement" << std::endl;
+    SetImprovement setimp(K, fastIVM);
+    res = evaluate_optimizer(setimp, data);
+    std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
     // std::cout << "Selecting " << K << " representatives via Salsa" << std::endl;
     // Salsa salsa(K, fastIVM, 1.0, 0.01);
     // auto res = evaluate_optimizer(salsa, data);
