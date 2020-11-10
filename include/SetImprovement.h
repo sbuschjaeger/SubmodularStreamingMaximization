@@ -46,21 +46,29 @@ public:
     
     void next(std::vector<data_t> const &x) {
         unsigned int Kcur = solution.size();
+        
         if (Kcur < K) {
-            data_t fdelta = f->peek(solution, x, solution.size()); //- fval;
+            data_t w = f->peek(solution, x, solution.size()) - fval;
             f->update(solution, x, solution.size());
             solution.push_back(x);
-            weights.push(Pair(fdelta, Kcur));
+            weights.push(Pair(w, Kcur));
         } else {
             Pair to_replace = weights.top();
-            data_t fdelta = f->peek(solution, x, to_replace.idx); // - fval;
-            if (fdelta > 2*to_replace.weight) {
-                //std::cout << "REPLACED" << std::endl;
+            // // solution.push_back(x);
+            // // data_t w = f->operator()(solution) - fval;
+            data_t w = f->peek(solution, x, solution.size()) - fval;
+            // solution.push_back(x);
+            //std::cout << "w = " << w << std::endl;
+            // solution.pop_back();
+            // //std::cout << "fdelta = " << fdelta << std::endl;
+            if (w > 2*to_replace.weight) {
+                std::cout << "replaced" << std::endl;
                 f->update(solution, x, to_replace.idx);
                 solution[to_replace.idx] = x; 
                 weights.pop();
-                weights.push(Pair(fdelta, Kcur));
+                weights.push(Pair(w, to_replace.idx));
             }
+            //solution.pop_back();
         }
         fval = f->operator()(solution);
         is_fitted = true;

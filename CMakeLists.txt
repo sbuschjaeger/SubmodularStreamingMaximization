@@ -31,13 +31,14 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 include_directories("./include")
 
 add_executable(run_kddcup ${SOURCES} experiments/kddcup99/run.cpp)
+
+# add_executable(main tests/main.cpp)
+
+# add_subdirectory(pybind11)
+# pybind11_add_module(PySSM include/Python.cpp)
+
 # if (CREATE_EXPERIMENTS)
 #     # target_link_libraries(threesieves-tests gtest gtest_main gcov)
 #     # target_compile_options(threesieves-tests PUBLIC -DTESTFILES_ROOT_DIR="${CMAKE_CURRENT_SOURCE_DIR}/tests/test-files/")
 #     # set_target_properties(threesieves-tests PROPERTIES LINKER_FLAGS "-fprofile-arcs -ftest-coverage")
 # endif ()
-
-# add_executable(main tests/main.cpp)
-
-add_subdirectory(pybind11)
-pybind11_add_module(PySSM include/Python.cpp)
