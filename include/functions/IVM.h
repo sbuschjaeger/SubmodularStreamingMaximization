@@ -11,7 +11,6 @@
 #include "kernels/Kernel.h"
 #include "functions/Matrix.h"
 
-template <bool VECTORIZED = false>
 class IVM : public SubmodularFunction {
 protected:
 
@@ -65,11 +64,7 @@ public:
         // I would not use this for any real-world problems. 
         
         Matrix kernel_mat = compute_kernel(X);
-        if constexpr(VECTORIZED) {
-            return log_det_vectorized(kernel_mat);
-        } else {
-            return log_det(kernel_mat);
-        }
+        return log_det(kernel_mat);
     } 
 
     std::shared_ptr<SubmodularFunction> clone() const override {

@@ -1,5 +1,5 @@
-#ifndef SET_IMPROVEMENT_H
-#define SET_IMPROVEMENT_H
+#ifndef INDEPENDENT_SET_IMPROVEMENT_H
+#define INDEPENDENT_SET_IMPROVEMENT_H
 
 #include "DataTypeHandling.h"
 #include "SubmodularOptimizer.h"
@@ -12,7 +12,7 @@
 
 #include <iostream>
 
-class SetImprovement : public SubmodularOptimizer {
+class IndependentSetImprovement : public SubmodularOptimizer {
 
 protected:
     struct Pair {
@@ -36,11 +36,11 @@ protected:
     std::priority_queue<Pair> weights; 
 public:
 
-    SetImprovement(unsigned int K, SubmodularFunction & f) : SubmodularOptimizer(K,f)  {
+    IndependentSetImprovement(unsigned int K, SubmodularFunction & f) : SubmodularOptimizer(K,f)  {
         // assert(("T should at-least be 1 or greater.", T >= 1));
     }
 
-    SetImprovement(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f) : SubmodularOptimizer(K,f) {
+    IndependentSetImprovement(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f) : SubmodularOptimizer(K,f) {
         // assert(("T should at-least be 1 or greater.", T >= 1));
     }
     
@@ -54,21 +54,13 @@ public:
             weights.push(Pair(w, Kcur));
         } else {
             Pair to_replace = weights.top();
-            // // solution.push_back(x);
-            // // data_t w = f->operator()(solution) - fval;
             data_t w = f->peek(solution, x, solution.size()) - fval;
-            // solution.push_back(x);
-            //std::cout << "w = " << w << std::endl;
-            // solution.pop_back();
-            // //std::cout << "fdelta = " << fdelta << std::endl;
             if (w > 2*to_replace.weight) {
-                std::cout << "replaced" << std::endl;
                 f->update(solution, x, to_replace.idx);
                 solution[to_replace.idx] = x; 
                 weights.pop();
                 weights.push(Pair(w, to_replace.idx));
             }
-            //solution.pop_back();
         }
         fval = f->operator()(solution);
         is_fitted = true;

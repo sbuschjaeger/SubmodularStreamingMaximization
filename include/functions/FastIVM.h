@@ -17,7 +17,7 @@
 /**
  *
  */
-class FastIVM : public IVM<false> {
+class FastIVM : public IVM {
 private:
     
 protected:

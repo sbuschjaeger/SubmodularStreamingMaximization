@@ -24,7 +24,7 @@ protected:
         FixedThreshold(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f, data_t epsilon, data_t threshold) 
             : SubmodularOptimizer(K,f),  epsilon(epsilon), threshold(threshold) {}
 
-        void fit(std::vector<std::vector<data_t>> const & X) {
+        void fit(std::vector<std::vector<data_t>> const & X, unsigned int iterations = 1) {
             throw std::runtime_error("FixedThresholds are only meant to be used through Salsa and therefore do not require the implementation of `fit'");
         }
 
@@ -58,7 +58,7 @@ protected:
         Dense(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f, data_t threshold, data_t beta, data_t C1, data_t C2, unsigned int N) 
             : SubmodularOptimizer(K,f), threshold(threshold), beta(beta), C1(C1), C2(C2), N(N), observed(0) {}
 
-        void fit(std::vector<std::vector<data_t>> const & X) {
+        void fit(std::vector<std::vector<data_t>> const & X, unsigned int iterations = 1) {
             throw std::runtime_error("FixedThresholds are only meant to be used through Salsa and therefore do not require the implementation of `fit'");
         }
 
@@ -103,7 +103,7 @@ protected:
         HighLowThreshold(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f, data_t epsilon, data_t threshold, data_t beta, data_t delta, unsigned int N) 
             : SubmodularOptimizer(K,f),  epsilon(epsilon), threshold(threshold), beta(beta), delta(delta), N(N), observed(0) {}
 
-        void fit(std::vector<std::vector<data_t>> const & X) {
+        void fit(std::vector<std::vector<data_t>> const & X, unsigned int iterations = 1) {
             throw std::runtime_error("HighLowThreshold are only meant to be used through Salsa and therefore do not require the implementation of `fit'");
         }
 

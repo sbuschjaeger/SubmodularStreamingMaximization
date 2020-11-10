@@ -75,7 +75,6 @@ protected:
      * @brief A single Sieve with its own threshold
      * 
      */
-    template <bool DYNAMIC>
     class Sieve : public SubmodularOptimizer {
     public:
         // The threshold
@@ -105,7 +104,7 @@ protected:
          * 
          * @param X A constant reference to the entire data set
          */
-        void fit(std::vector<std::vector<data_t>> const & X) {
+        void fit(std::vector<std::vector<data_t>> const & X, unsigned int iterations = 1) {
             throw std::runtime_error("Sieves are only meant to be used through SieveStreaming and therefore do not require the implementation of `fit'");
         }
 
@@ -118,13 +117,7 @@ protected:
             unsigned int Kcur = solution.size();
             if (Kcur < K) {
                 data_t fdelta = f->peek(solution, x, solution.size()) - fval;
-                
-                data_t tau;
-                if constexpr(DYNAMIC) {
-                    tau = (threshold / 2.0 - fval) / static_cast<data_t>(K - Kcur);
-                } else {
-                    tau = threshold;
-                }
+                data_t tau = (threshold / 2.0 - fval) / static_cast<data_t>(K - Kcur);
 
                 if (fdelta >= tau) {
                     f->update(solution, x, solution.size());
@@ -138,7 +131,7 @@ protected:
 protected:
     // A list of all sieves
     // TODO: Move from raw pointer to std::unique_ptr
-    std::vector<std::unique_ptr<Sieve<true>>> sieves;
+    std::vector<std::unique_ptr<Sieve>> sieves;
 
     /**
      * @brief Construct a new Sieve Streaming object. This constructor does not prepare any sieves and might be useable for optimizers which inherit from this class
@@ -171,7 +164,7 @@ public:
         std::vector<data_t> ts = thresholds(m, K*m, epsilon);
 
         for (auto t : ts) {
-            sieves.push_back(std::make_unique<Sieve<true>>(K, f, t));
+            sieves.push_back(std::make_unique<Sieve>(K, f, t));
         }
     }
 
@@ -186,7 +179,7 @@ public:
     SieveStreaming(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f, data_t m, data_t epsilon) : SubmodularOptimizer(K,f) {
         std::vector<data_t> ts = thresholds(m, K*m, epsilon);
         for (auto t : ts) {
-            sieves.push_back(std::make_unique<Sieve<true>>(K, f, t));
+            sieves.push_back(std::make_unique<Sieve>(K, f, t));
         }
     }
 

@@ -15,6 +15,7 @@
 #include "SieveStreamingPP.h"
 #include "ThreeSieves.h"
 #include "Salsa.h"
+#include "IndependentSetImprovement.h"
 
 namespace py = pybind11;
 
@@ -187,6 +188,14 @@ PYBIND11_MODULE(PySSM, m) {
         .def("get_fval", &Random::get_fval)
         .def("fit", &Random::fit, py::arg("X"), py::arg("iterations") = 1)
         .def("next", &Random::next, py::arg("x"));
+
+    py::class_<IndependentSetImprovement>(m, "IndependentSetImprovement") 
+        .def(py::init<unsigned int, SubmodularFunction&>(), py::arg("K"), py::arg("f"))
+        .def(py::init<unsigned int, std::function<data_t (std::vector<std::vector<data_t>> const &)>>(), py::arg("K"), py::arg("f"))
+        .def("get_solution", &IndependentSetImprovement::get_solution)
+        .def("get_fval", &IndependentSetImprovement::get_fval)
+        .def("fit", &IndependentSetImprovement::fit, py::arg("X"), py::arg("iterations") = 1)
+        .def("next", &IndependentSetImprovement::next, py::arg("x"));
 
     py::class_<SieveStreaming>(m, "SieveStreaming") 
         .def(py::init<unsigned int, SubmodularFunction&, data_t, data_t>(), py::arg("K"), py::arg("f"), py::arg("m"), py::arg("epsilon"))

@@ -74,11 +74,6 @@ int main() {
     std::cout << "log det from chol is: " << log_det_from_cholesky(L) << std::endl;
     // std::cout << "log det directly is: " << log_det(m) << std::endl << std::endl;
 
-    Matrix Lavx = cholesky_vectorized(m);
-    std::cout << "AVX L: " << std::endl;
-    std::cout << to_string(Lavx) << std::endl;
-    std::cout << "log det from chol is: " << log_det_from_cholesky(Lavx) << std::endl;
-
     // auto row = 2;
     // std::vector<data_t> kvec;
     // auto x = {2.0, 1.0};
