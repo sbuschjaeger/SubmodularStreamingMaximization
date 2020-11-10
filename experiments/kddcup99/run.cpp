@@ -87,18 +87,24 @@ int main() {
     //     if (cnt > 10) break;
     // }
 
-    auto K = 20;
+    auto K = 10;
 
-    // std::cout << "Selecting " << K << " representatives via slow IVM with Greedy" << std::endl;
-    // IVM slowIVM(RBFKernel( std::sqrt(data[0].size()), 1.0) , 1.0);
-    // Greedy slowGreedy(K, slowIVM);
-    // auto res = evaluate_optimizer(slowGreedy, data);
-    // std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
+    std::cout << "Selecting " << K << " representatives via slow IVM without vectorization Greedy" << std::endl;
+    IVM<false> slowIVM(RBFKernel( std::sqrt(data[0].size()), 1.0) , 1.0);
+    Greedy slowGreedy(K, slowIVM);
+    auto res = evaluate_optimizer(slowGreedy, data);
+    std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
+
+    std::cout << "Selecting " << K << " representatives via slow IVM with vectorization Greedy" << std::endl;
+    IVM<true> slowVecIVM(RBFKernel( std::sqrt(data[0].size()), 1.0) , 1.0);
+    Greedy slowVecGreedy(K, slowVecIVM);
+    res = evaluate_optimizer(slowVecGreedy, data);
+    std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
 
     // std::cout << "Selecting " << K << " representatives via fast IVM with Greedy" << std::endl;
-    FastIVM fastIVM(K, RBFKernel( std::sqrt(data[0].size()), 1.0) , 1.0);
+    // FastIVM fastIVM(K, RBFKernel( std::sqrt(data[0].size()), 1.0) , 1.0);
     // Greedy fastGreedy(K, fastIVM);
-    // res = evaluate_optimizer(fastGreedy, data);
+    // auto res = evaluate_optimizer(fastGreedy, data);
     // std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
 
     // std::cout << "Selecting " << K << " representatives via Random with seed = 0" << std::endl;
@@ -119,10 +125,10 @@ int main() {
     //     // std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
     // }
 
-    std::cout << "Selecting " << K << " representatives via SetImprovement" << std::endl;
-    SetImprovement setimp(K, fastIVM);
-    auto res = evaluate_optimizer(setimp, data);
-    std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
+    // std::cout << "Selecting " << K << " representatives via SetImprovement" << std::endl;
+    // SetImprovement setimp(K, fastIVM);
+    // auto res = evaluate_optimizer(setimp, data);
+    // std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
     
     // std::cout << "Selecting " << K << " representatives via Salsa" << std::endl;
     // Salsa salsa(K, fastIVM, 1.0, 0.01);

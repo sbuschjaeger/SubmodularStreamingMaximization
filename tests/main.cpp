@@ -21,167 +21,63 @@ data_t kernel(const std::vector<data_t>& x1, const std::vector<data_t>& x2) {
     return 1.0 * std::exp(-distance);
 }
 
-// class Matrix {
-// private:
-//     data_t *val = NULL;
-//     unsigned int N = 0;
+inline Matrix compute_kernel(std::vector<std::vector<data_t>> const &X) {
+    unsigned int K = X.size();
+    Matrix mat(K);
 
-// public:
+    for (unsigned int i = 0; i < K; ++i) {
+        for (unsigned int j = i; j < K; ++j) {
+            data_t kval = kernel(X[i], X[j]);
+            if (i == j) {
+                mat(i,j) = 1.0 + kval / std::pow(1.0, 2.0);
+            } else {
+                mat(i,j) = kval / std::pow(1.0, 2.0);
+                mat(j,i) = kval / std::pow(1.0, 2.0);
+            }
+        }
+    }
 
-//     Matrix(Matrix const &other) {
-//         N = other.N;
-//         val = new data_t[N*N];
-//         for (unsigned int i = 0; i < N; ++i) {
-//             val[i] = other.val[i];
-//         }
-//     }
-
-//     Matrix(unsigned int _size) {
-//         N = _size;
-//         val = new data_t[N*N]();
-//     }
-
-//     ~Matrix() {
-//         delete val;
-//         val = NULL;
-//         N = 0;
-//     }
-
-//     inline unsigned int size() const { return N; }
-
-//     void replace_row(unsigned int row, data_t const * const data) {
-//         for (unsigned int i = 0; i < N; ++i) {
-//             this->operator()(i, row) = data[i];
-//         }
-//     }
-
-//     void replace_column(unsigned int col, data_t const * const data) {
-//         for (unsigned int i = 0; i < N; ++i) {
-//             this->operator()(col, i) = data[i];
-//         }
-//     }
-
-//     void rank_one_update(unsigned int row, data_t const * const data) {
-//         for (unsigned int i = 0; i < N; ++i) {
-//             if (row == i) {
-//                 this->operator()(i,i) += data[i];
-//             } else {
-//                 this->operator()(i,row) += data[i];
-//                 this->operator()(row,i) += data[i];
-//             }
-//         }
-//     }
-
-//     data_t & operator()(int i, int j) { return val[i*N+j]; }
-//     data_t operator()(int i, int j) const { return val[i*N+j]; }
-// };
-
-// Matrix compute_kernel(std::vector<std::vector<data_t>> const &X) {
-//     unsigned int K = X.size();
-//     Matrix mat(K);
-
-//     for (unsigned int i = 0; i < K; ++i) {
-//         for (unsigned int j = i; j < K; ++j) {
-//             data_t kval = kernel(X[i], X[j]);
-//             if (i == j) {
-//                 mat(i,j) = 1.0 + kval / std::pow(1.0, 2.0);
-//             } else {
-//                 mat(i,j) = kval / std::pow(1.0, 2.0);
-//                 mat(j,i) = kval / std::pow(1.0, 2.0);
-//             }
-//         }
-//     }
-
-//     // TODO CHECK IF THIS USES MOVE
-//     return mat;
-// }
-
-// Matrix cholesky(Matrix const &in) {
-//     Matrix L(in.size());
-
-//     for (unsigned int j = 0; j < in.size(); ++j) {
-//         data_t sum = 0.0;
-
-//         for (unsigned int k = 0; k < j; ++k) {
-//             sum += L(j,k)*L(j,k);
-//             //sum += pOut[j * N + k] * pOut[j * N + k];
-//         }
-
-//         L(j,j) = std::sqrt(in(j,j) - sum);
-
-//         for (unsigned int i = j + 1; i < in.size(); ++i) {
-//             data_t sum = 0.0;
-
-//             for (unsigned int k = 0; k < j; ++k) {
-//                 sum += L(i,k) * L(j,k);
-//             }
-//             L(i,j) = (in(i,j) - sum) / L(j,j);
-//         }
-//     }
-
-//     return L;
-// }
-
-// inline data_t log_det_from_cholesky(Matrix const &L) {
-//     data_t det = 0;
-//     // TODO: THIS CAN BE IMPROVED / MAYBE THERE IS A MKL/LAPACK FUNCTION FOR THIS
-//     for (size_t i = 0; i < L.size(); ++i) {
-//         //if (L[i * N + i] == 0) det += std::numeric_limits<T>::max();
-//         det += std::log(L(i,i));
-//     }
-//     return 2*det;
-// }
-
-// inline data_t log_det(Matrix const &mat) {
-//     Matrix L = cholesky(mat);
-//     return log_det_from_cholesky(L);
-// }
-
-// inline std::string to_string(Matrix const &mat) {
-//     std::string s = "[";
-
-//     for (unsigned int i = 0; i < mat.size(); ++i) {
-//         s += "[";
-//         for (unsigned int j = 0; j < mat.size(); ++j) {
-//             if (j < mat.size() - 1) {
-//                 s += std::to_string(mat(i,j)) + ",";
-//             } else {
-//                 s += std::to_string(mat(i,j));
-//             }
-//         }
-
-//         if (i < mat.size() - 1) {
-//             s += "],\n";
-//         } else {
-//             s += "]";
-//         }
-//     }
-
-//     return s + "]";
-// }
+    return mat;
+}
 
 int main() {
 
-    std::vector<std::vector<double>> data = {
-        {0, 0},
-        {1, 1},
+    std::vector<std::vector<data_t>> data = {
+        {0.0, 0.0},
+        {1.0, 1.0},
         {0.5, 1.0},
         {1.0, 0.5},
-        {0, 0.5},
-        {0.5, 1},
+
+        {0.0, 0.5},
+        {0.0, 1.5},
         {0.0, 1.0},
-        {1.0, 0.0}
+        {0.5, 0.5},
+        
+        // {2.0, 0.0}
+        // {1.0, 2.0},
+        // {1.0, 1.5},
+        // {2.0, 1.0},
+
+        // {2.0, 0.5},
+        // {0.25, 1.0},
+        // {1.0, 1.25},
+        // {2.25, 1.0}
     };    
 
-    unsigned int K = 3;
-    // Matrix m = compute_kernel(data);
+    unsigned int K = 5;
+    Matrix m = compute_kernel(data);
     // std::cout << "Matrix is: " << std::endl;
     // std::cout << to_string(m) << std::endl;
-    // Matrix L = cholesky(m);
-    // std::cout << "With L: " << std::endl;
-    // std::cout << to_string(L) << std::endl;
-    // std::cout << "log det from chol is: " << log_det_from_cholesky(L) << std::endl;
+    Matrix L = cholesky(m);
+    std::cout << "Regular L: " << std::endl;
+    std::cout << to_string(L) << std::endl;
+    std::cout << "log det from chol is: " << log_det_from_cholesky(L) << std::endl;
     // std::cout << "log det directly is: " << log_det(m) << std::endl << std::endl;
+
+    Matrix Lavx = cholesky_vectorized(m);
+    std::cout << "AVX L: " << std::endl;
+    std::cout << to_string(Lavx) << std::endl;
+    std::cout << "log det from chol is: " << log_det_from_cholesky(Lavx) << std::endl;
 
     // auto row = 2;
     // std::vector<data_t> kvec;

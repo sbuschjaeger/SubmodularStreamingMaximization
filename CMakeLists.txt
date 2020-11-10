@@ -20,7 +20,7 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif()
 
-set(CMAKE_CXX_FLAGS "-Wall -Wextra")
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -mavx2 -ffast-math")
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
@@ -32,7 +32,7 @@ include_directories("./include")
 
 add_executable(run_kddcup ${SOURCES} experiments/kddcup99/run.cpp)
 
-# add_executable(main tests/main.cpp)
+add_executable(main tests/main.cpp)
 
 # add_subdirectory(pybind11)
 # pybind11_add_module(PySSM include/Python.cpp)
