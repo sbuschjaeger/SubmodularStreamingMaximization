@@ -89,16 +89,18 @@ int main() {
 
     auto K = 30;
 
-    // std::cout << "Selecting " << K << " representatives via slow IVM without vectorization Greedy" << std::endl;
     // IVM slowIVM(RBFKernel( std::sqrt(data[0].size()), 1.0) , 1.0);
+    // std::cout << "Selecting " << K << " representatives via slow IVM without vectorization Greedy" << std::endl;
     // Greedy slowGreedy(K, slowIVM);
     // auto res = evaluate_optimizer(slowGreedy, data);
     // std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
 
-    std::cout << "Selecting " << K << " representatives via fast IVM with Greedy" << std::endl;
     FastIVM fastIVM(K, RBFKernel( std::sqrt(data[0].size()), 1.0) , 1.0);
+    std::tuple<data_t, double> res;
+    
+    std::cout << "Selecting " << K << " representatives via fast IVM with Greedy" << std::endl;
     Greedy fastGreedy(K, fastIVM);
-    auto res = evaluate_optimizer(fastGreedy, data);
+    res = evaluate_optimizer(fastGreedy, data);
     std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
 
     std::cout << "Selecting " << K << " representatives via Random with seed = 0" << std::endl;
@@ -115,7 +117,7 @@ int main() {
         
         std::cout << "Selecting " << K << " representatives via SieveStreaming++ with eps = " << e << std::endl;
         SieveStreamingPP sievepp(K, fastIVM, 1.0, e);
-        auto res = evaluate_optimizer(sievepp, data);
+        res = evaluate_optimizer(sievepp, data);
         std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
     }
 

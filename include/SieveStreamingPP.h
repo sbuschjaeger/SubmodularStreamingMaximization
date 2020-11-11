@@ -84,25 +84,24 @@ public:
 
     SieveStreamingPP(unsigned int K, SubmodularFunction & f, data_t m, data_t epsilon) 
         : SubmodularOptimizer(K,f), lower_bound(0), m(m), epsilon(epsilon) {
-            std::vector<data_t> ts = thresholds(m/(1.0 + epsilon), K * m, epsilon);
+            // std::vector<data_t> ts = thresholds(m/(1.0 + epsilon), K * m, epsilon);
 
-            for (auto t : ts) {
-                sieves.push_back(std::make_unique<Sieve>(K, *this->f, t));
-            }
+            // for (auto t : ts) {
+            //     sieves.push_back(std::make_unique<Sieve>(K, *this->f, t));
+            // }
         }
 
     SieveStreamingPP(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f, data_t m, data_t epsilon) 
         : SubmodularOptimizer(K,f), lower_bound(0), m(m), epsilon(epsilon) {
-            std::vector<data_t> ts = thresholds(m/(1.0 + epsilon), K * m, epsilon);
+            // std::vector<data_t> ts = thresholds(m/(1.0 + epsilon), K * m, epsilon);
 
-            for (auto t : ts) {
-                sieves.push_back(std::make_unique<Sieve>(K, *this->f, t));
-            }
+            // for (auto t : ts) {
+            //     sieves.push_back(std::make_unique<Sieve>(K, *this->f, t));
+            // }
         }
 
     void next(std::vector<data_t> const &x) {
-
-        if (lower_bound != fval) {
+        if (lower_bound != fval || sieves.size() == 0) {
             lower_bound = fval;
             data_t tau_min = std::max(lower_bound, m) / static_cast<data_t>(2.0*K);
             auto no_sieves_before = sieves.size();
@@ -126,12 +125,10 @@ public:
             }
         }
         
-        std::cout << "checking " << sieves.size() << " sieves" << std::endl;
         for (auto &s : sieves) {
             s->next(x);
             if (s->get_fval() > fval) {
                 fval = s->get_fval();
-                std::cout << "new fval: " << fval << std::endl;
                 // TODO THIS IS A COPY AT THE MOMENT
                 solution = s->solution;
             }
