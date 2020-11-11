@@ -83,44 +83,60 @@ protected:
 public:
 
     SieveStreamingPP(unsigned int K, SubmodularFunction & f, data_t m, data_t epsilon) 
-        : SubmodularOptimizer(K,f), lower_bound(0), m(m), epsilon(epsilon) {}
-
-    SieveStreamingPP(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f, data_t m, data_t epsilon) 
-        : SubmodularOptimizer(K,f), lower_bound(0), m(m), epsilon(epsilon) {}
-
-    void next(std::vector<data_t> const &x) {
-        data_t tau_min = std::max(lower_bound, m) / static_cast<data_t>(2.0*K);
-        auto no_sieves_before = sieves.size();
-
-        auto res = std::remove_if(sieves.begin(), sieves.end(), 
-            [tau_min](auto const &s) { return s->get_fval() < tau_min; }
-        );
-        sieves.erase(res, sieves.end());
-
-        if (no_sieves_before > sieves.size() || no_sieves_before == 0) {
-            std::vector<data_t> ts = thresholds(tau_min/(1.0 + epsilon), K * m, epsilon);
+        : SubmodularOptimizer(K,f), lower_bound(0), m(m), epsilon(epsilon) {
+            std::vector<data_t> ts = thresholds(m/(1.0 + epsilon), K * m, epsilon);
 
             for (auto t : ts) {
-                bool any = std::any_of(sieves.begin(), sieves.end(), 
-                    [t](auto const &s){ return s->threshold == t; }
-                );
-                if (!any) {
-                    sieves.push_back(std::make_unique<Sieve>(K, *f, t));
+                sieves.push_back(std::make_unique<Sieve>(K, *this->f, t));
+            }
+        }
+
+    SieveStreamingPP(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f, data_t m, data_t epsilon) 
+        : SubmodularOptimizer(K,f), lower_bound(0), m(m), epsilon(epsilon) {
+            std::vector<data_t> ts = thresholds(m/(1.0 + epsilon), K * m, epsilon);
+
+            for (auto t : ts) {
+                sieves.push_back(std::make_unique<Sieve>(K, *this->f, t));
+            }
+        }
+
+    void next(std::vector<data_t> const &x) {
+
+        if (lower_bound != fval) {
+            lower_bound = fval;
+            data_t tau_min = std::max(lower_bound, m) / static_cast<data_t>(2.0*K);
+            auto no_sieves_before = sieves.size();
+
+            auto res = std::remove_if(sieves.begin(), sieves.end(), 
+                [tau_min](auto const &s) { return s->get_fval() < tau_min; }
+            );
+            sieves.erase(res, sieves.end());
+
+            if (no_sieves_before > sieves.size() || no_sieves_before == 0) {
+                std::vector<data_t> ts = thresholds(tau_min/(1.0 + epsilon), K * m, epsilon);
+
+                for (auto t : ts) {
+                    bool any = std::any_of(sieves.begin(), sieves.end(), 
+                        [t](auto const &s){ return s->threshold == t; }
+                    );
+                    if (!any) {
+                        sieves.push_back(std::make_unique<Sieve>(K, *f, t));
+                    }
                 }
             }
         }
         
+        std::cout << "checking " << sieves.size() << " sieves" << std::endl;
         for (auto &s : sieves) {
             s->next(x);
             if (s->get_fval() > fval) {
                 fval = s->get_fval();
+                std::cout << "new fval: " << fval << std::endl;
                 // TODO THIS IS A COPY AT THE MOMENT
                 solution = s->solution;
             }
         }
         is_fitted = true;
-
-        lower_bound = fval;
     };
 };
 

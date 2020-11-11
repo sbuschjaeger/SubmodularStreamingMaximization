@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+import random
 from scipy.io import arff
 import numpy as np
 import pandas as pd
@@ -21,6 +22,7 @@ from PySSM import SieveStreaming
 from PySSM import SieveStreamingPP
 from PySSM import ThreeSieves 
 from PySSM import Salsa 
+from PySSM import IndependentSetImprovement
 
 import os
 import numpy as np
@@ -39,6 +41,8 @@ def pre(cfg):
 
     if name == "Greedy":
         opt = Greedy(K, fastLogDet)
+    if name == "IndependentSetImprovement":
+        opt = IndependentSetImprovement(K, fastLogDet)
     elif name == "Random":
         opt = Random(K, fastLogDet, cfg["run_id"])
     elif name == "SieveStreaming":
@@ -78,9 +82,9 @@ y = np.array([1 if x == 0 else -1 for x in y])  # 1 = inlier, -1 = outlier
 min_max_scaler = preprocessing.MinMaxScaler()
 X = min_max_scaler.fit_transform(X)
 
-Ks = range(5,10,5)
+Ks = range(5,105,5)
 # Ks = [5]
-eps = [1e-3,5e-3,1e-2,5e-2,1e-1]
+eps = [1e-1, 5e-2, 1e-2, 1e-3, 5e-3]
 Ts = [500, 1000, 2500, 5000]
 #Sigmas = np.array([0.1, 0.5, 1.0, 2.0, 5.0])*np.sqrt(X.shape[1])
 Sigmas = [np.sqrt(X.shape[1])]
@@ -88,20 +92,31 @@ Sigmas = [np.sqrt(X.shape[1])]
 basecfg = {
     "out_path":"results",
     "backend":"multiprocessing",
-    "num_cpus":5,
+    "num_cpus":10,
     "pre": pre,
     "post": post,
-    "fit": fit,
+    "fit": fit
 }
 
 results = []
 
 runs = []
+
 for K in Ks:
     for s in Sigmas:
         runs.append(
             ({   
                 "method": "Greedy",
+                "K":K,
+                "sigma":s,
+                "scale":1,
+                "X":X
+            })
+        )
+
+        runs.append(
+            ({   
+                "method": "IndependentSetImprovement",
                 "K":K,
                 "sigma":s,
                 "scale":1,
@@ -167,4 +182,5 @@ for K in Ks:
                     })
                 )
 
+random.shuffle(runs)
 run_experiments(basecfg, runs)

@@ -127,6 +127,12 @@ In the `experiments` folder you can find code which runs experiments on various 
 
 Once the data is downloaded, you can start the experiments by executing `run.py` in the respective folder. This file starts _all_ experiments for a single data-set including all hyperparameter configurations. This may take some time (usually a few hours per data-set) to finish. The experiments are currently configured to launch `15` threads via `joblib`, so make sure your hardware is strong enough or reduce the number of cores by setting `n_cores` at the end of each file. After the experiments finished, you can browse the results by using the `explore_results` Jupyter Notebook. Note that, depending on actual experiments you ran you might want to change the list of `datasets` used for plotting in the second cell of this notebook accordingly.
 
+## To Do 
+
+- [ ] Check if we should introduce a unique id for each example in the summary so that we can query it afterwards
+- [ ] Write more documentation
+- [ ] Write some tests
+
 ## Citing our Paper
 
     @misc{buschjäger2020fast,
