@@ -63,20 +63,30 @@ def pre(cfg):
 def fit(cfg, opt):
     X = cfg["X"]
     
-    opt.fit(cfg["X"],cfg["K"])
+    opt.fit(cfg["X"],1)
     return opt
 
 def post(cfg, opt):
-
     solution_dict = {
-        **cfg,
+        "name" : cfg.get("method", None),
+        "sigma" : cfg.get("sigma", None),
+        "scale" : cfg.get("scale", None),
+        "K" : cfg.get("K", None),
+        "epsilon":cfg.get("epsilon", None),
+        "T":cfg.get("T", None),
+        "run_id":cfg.get("run_id", None),
+        "out_path":cfg.get("out_path", None),
         "solution":opt.get_solution(),
         "fval":opt.get_fval()
     }
 
     np.save(cfg["out_path"],solution_dict,allow_pickle=True)
 
-    return {"fval":opt.get_fval()}
+    return {
+        "fval":opt.get_fval(),
+        "num_candidate_solutions":opt.get_num_candidate_solutions(),
+        "num_elements_stored":opt.get_num_elements_stored(),
+    }
 
 print("Loading data")
 X = np.load("/data/s1/buschjae/SubmodularStreamingMaximization/abc.npy")

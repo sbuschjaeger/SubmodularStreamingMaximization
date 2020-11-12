@@ -110,7 +110,7 @@ public:
      * @note   
      * @retval A const reference to the current solution.
      */
-    std::vector<std::vector<data_t>>const &  get_solution() const {
+    std::vector<std::vector<data_t>>const & get_solution() const {
         if (!this->is_fitted) {
              throw std::runtime_error("Optimizer was not fitted yet! Please call fit() or next() before calling get_solution()");
         } else {
@@ -118,6 +118,14 @@ public:
         }
     }
     
+    virtual unsigned int get_num_candidate_solutions() const {
+        return 1;
+    }
+    
+    virtual unsigned long get_num_elements_stored() const {
+        return this->get_solution().size();
+    }
+
     /**
      * @brief  Returns the current function value
      * @note   

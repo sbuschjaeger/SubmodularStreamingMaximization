@@ -22,6 +22,7 @@
 */
 class SieveStreamingPP : public SubmodularOptimizer {
 private:
+
     class Sieve : public SubmodularOptimizer {
         public:
             // The threshold
@@ -71,16 +72,17 @@ private:
                         fval += fdelta;
                     }
                 }
+                is_fitted = true;
             }
         };    
 
-protected:
+
     data_t lower_bound;
     data_t m;
     data_t epsilon;
-    std::vector<std::unique_ptr<Sieve>> sieves;
 
 public:
+    std::vector<std::unique_ptr<Sieve>> sieves;
 
     SieveStreamingPP(unsigned int K, SubmodularFunction & f, data_t m, data_t epsilon) 
         : SubmodularOptimizer(K,f), lower_bound(0), m(m), epsilon(epsilon) {
@@ -100,6 +102,19 @@ public:
             // }
         }
 
+    unsigned int get_num_candidate_solutions() const {
+        return sieves.size();
+    }
+
+    unsigned long get_num_elements_stored() const {
+        unsigned long num_elements = 0;
+        for (auto const & s : sieves) {
+            num_elements += s->get_solution().size();
+        }
+
+        return num_elements;
+    }
+
     void next(std::vector<data_t> const &x) {
         if (lower_bound != fval || sieves.size() == 0) {
             lower_bound = fval;
@@ -107,13 +122,13 @@ public:
             auto no_sieves_before = sieves.size();
 
             auto res = std::remove_if(sieves.begin(), sieves.end(), 
-                [tau_min](auto const &s) { return s->get_fval() < tau_min; }
+                [tau_min](auto const &s) { return s->threshold < tau_min; }
             );
             sieves.erase(res, sieves.end());
 
             if (no_sieves_before > sieves.size() || no_sieves_before == 0) {
                 std::vector<data_t> ts = thresholds(tau_min/(1.0 + epsilon), K * m, epsilon);
-
+                
                 for (auto t : ts) {
                     bool any = std::any_of(sieves.begin(), sieves.end(), 
                         [t](auto const &s){ return s->threshold == t; }
@@ -124,7 +139,8 @@ public:
                 }
             }
         }
-        
+
+        // std::cout << sieves.size() << std::endl;
         for (auto &s : sieves) {
             s->next(x);
             if (s->get_fval() > fval) {

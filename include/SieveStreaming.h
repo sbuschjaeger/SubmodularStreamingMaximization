@@ -69,7 +69,7 @@ inline std::vector<data_t> thresholds(data_t lower, data_t upper, data_t epsilon
  *   - Badanidiyuru, A., Mirzasoleiman, B., Karbasi, A., & Krause, A. (2014). Streaming submodular maximization: Massive data summarization on the fly. In Proceedings of the ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. https://doi.org/10.1145/2623330.2623637
  */
 class SieveStreaming : public SubmodularOptimizer {
-protected:
+private:
 
     /**
      * @brief A single Sieve with its own threshold
@@ -125,33 +125,16 @@ protected:
                     fval += fdelta;
                 }
             }
+            is_fitted = true;
         }
     };
 
 protected:
     // A list of all sieves
-    // TODO: Move from raw pointer to std::unique_ptr
     std::vector<std::unique_ptr<Sieve>> sieves;
 
-    /**
-     * @brief Construct a new Sieve Streaming object. This constructor does not prepare any sieves and might be useable for optimizers which inherit from this class
-     * 
-     * @param K The cardinality constraint you of the optimization problem, that is the number of items selected.
-     * @param f The function which should be maximized. Note, that the `clone' function is used to construct a new SubmodularFunction which is owned by this object. If you implement a custom SubmodularFunction make sure that everything you need is actually cloned / copied.  
-     */
-    SieveStreaming(unsigned int K, SubmodularFunction & f) : SubmodularOptimizer(K,f) {
-    }
-
-    /**
-     * @brief Construct a new Sieve Streaming object. This constructor does not prepare any sieves and might be useable for optimizers which inherit from this class
-     * 
-     * @param K The cardinality constraint you of the optimization problem, that is the number of items selected.
-     * @param f The function which should be maximized. Note, that this parameter is likely moved and not copied. Thus, if you construct multiple optimizers with the __same__ function they all reference the __same__ function. This can be very efficient for state-less functions, but may lead to weird side effects if f keeps track of a state. 
-     */
-    SieveStreaming(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f) : SubmodularOptimizer(K,f) {
-    }
-
 public:
+
     /**
      * @brief Construct a new Sieve Streaming object
      * 
@@ -181,6 +164,19 @@ public:
         for (auto t : ts) {
             sieves.push_back(std::make_unique<Sieve>(K, f, t));
         }
+    }
+
+    unsigned int get_num_candidate_solutions() const {
+        return sieves.size();
+    }
+
+    unsigned long get_num_elements_stored() const {
+        unsigned long num_elements = 0;
+        for (auto const & s : sieves) {
+            num_elements += s->get_solution().size();
+        }
+
+        return num_elements;
     }
 
     /**

@@ -179,6 +179,8 @@ PYBIND11_MODULE(PySSM, m) {
         .def(py::init<unsigned int, std::function<data_t (std::vector<std::vector<data_t>> const &)> >(), py::arg("K"), py::arg("f"))
         .def("get_solution", &Greedy::get_solution)
         .def("get_fval", &Greedy::get_fval)
+        .def("get_num_candidate_solutions", &Greedy::get_num_candidate_solutions)
+        .def("get_num_elements_stored", &Greedy::get_num_elements_stored)
         .def("fit", &Greedy::fit, py::arg("X"), py::arg("iterations") = 1);
     
     py::class_<Random>(m, "Random") 
@@ -186,6 +188,8 @@ PYBIND11_MODULE(PySSM, m) {
         .def(py::init<unsigned int, std::function<data_t (std::vector<std::vector<data_t>> const &)>, unsigned long>(), py::arg("K"), py::arg("f"), py::arg("seed") = 0)
         .def("get_solution", &Random::get_solution)
         .def("get_fval", &Random::get_fval)
+        .def("get_num_candidate_solutions", &Random::get_num_candidate_solutions)
+        .def("get_num_elements_stored", &Random::get_num_elements_stored)
         .def("fit", &Random::fit, py::arg("X"), py::arg("iterations") = 1)
         .def("next", &Random::next, py::arg("x"));
 
@@ -194,6 +198,8 @@ PYBIND11_MODULE(PySSM, m) {
         .def(py::init<unsigned int, std::function<data_t (std::vector<std::vector<data_t>> const &)>>(), py::arg("K"), py::arg("f"))
         .def("get_solution", &IndependentSetImprovement::get_solution)
         .def("get_fval", &IndependentSetImprovement::get_fval)
+        .def("get_num_candidate_solutions", &IndependentSetImprovement::get_num_candidate_solutions)
+        .def("get_num_elements_stored", &IndependentSetImprovement::get_num_elements_stored)
         .def("fit", &IndependentSetImprovement::fit, py::arg("X"), py::arg("iterations") = 1)
         .def("next", &IndependentSetImprovement::next, py::arg("x"));
 
@@ -202,6 +208,8 @@ PYBIND11_MODULE(PySSM, m) {
         .def(py::init<unsigned int, std::function<data_t (std::vector<std::vector<data_t>> const &)>, data_t, data_t>(), py::arg("K"), py::arg("f"),  py::arg("m"), py::arg("epsilon"))
         .def("get_solution", &SieveStreaming::get_solution)
         .def("get_fval", &SieveStreaming::get_fval)
+        .def("get_num_candidate_solutions", &SieveStreaming::get_num_candidate_solutions)
+        .def("get_num_elements_stored", &SieveStreaming::get_num_elements_stored)
         .def("fit", &SieveStreaming::fit, py::arg("X"), py::arg("iterations") = 1)
         .def("next", &SieveStreaming::next, py::arg("x"));
     
@@ -210,6 +218,8 @@ PYBIND11_MODULE(PySSM, m) {
         .def(py::init<unsigned int, std::function<data_t (std::vector<std::vector<data_t>> const &)>, data_t, data_t>(), py::arg("K"), py::arg("f"),  py::arg("m"), py::arg("epsilon"))
         .def("get_solution", &SieveStreamingPP::get_solution)
         .def("get_fval", &SieveStreamingPP::get_fval)
+        .def("get_num_candidate_solutions", &SieveStreamingPP::get_num_candidate_solutions)
+        .def("get_num_elements_stored", &SieveStreamingPP::get_num_elements_stored)
         .def("fit", &SieveStreamingPP::fit, py::arg("X"), py::arg("iterations") = 1)
         .def("next", &SieveStreamingPP::next, py::arg("x"));
     
@@ -218,6 +228,8 @@ PYBIND11_MODULE(PySSM, m) {
         .def(py::init<unsigned int, std::function<data_t (std::vector<std::vector<data_t>> const &)>, data_t, data_t, std::string const &, unsigned int>(), py::arg("K"), py::arg("f"),  py::arg("m"), py::arg("epsilon"), py::arg("strategy"), py::arg("T"))
         .def("get_solution", &ThreeSieves::get_solution)
         .def("get_fval", &ThreeSieves::get_fval)
+        .def("get_num_candidate_solutions", &ThreeSieves::get_num_candidate_solutions)
+        .def("get_num_elements_stored", &ThreeSieves::get_num_elements_stored)
         .def("fit", &ThreeSieves::fit, py::arg("X"), py::arg("iterations") = 1)
         .def("next", &ThreeSieves::next, py::arg("x"));
 
@@ -226,6 +238,8 @@ PYBIND11_MODULE(PySSM, m) {
         .def(py::init<unsigned int, std::function<data_t (std::vector<std::vector<data_t>> const &)>, data_t, data_t, data_t, data_t, data_t, data_t, data_t, data_t,data_t>(), py::arg("K"), py::arg("f"), py::arg("m"), py::arg("epsilon"), py::arg("hilow_epsilon") = 0.05, py::arg("hilow_beta") = 0.1, py::arg("hilow_delta") = 0.025, py::arg("dense_beta") = 0.8, py::arg("dense_C1") = 10, py::arg("dense_C2") = 0.2, py::arg("fixed_epsilon") = 1.0/6.0)
         .def("get_solution", &Salsa::get_solution)
         .def("get_fval", &Salsa::get_fval)
+        .def("get_num_candidate_solutions", &Salsa::get_num_candidate_solutions)
+        .def("get_num_elements_stored", &Salsa::get_num_elements_stored)
         .def("fit", &Salsa::fit, py::arg("X"), py::arg("iterations") = 1)
         .def("next", &Salsa::next, py::arg("x"));
 }

@@ -67,8 +67,12 @@ def fit(cfg, opt):
     return opt
 
 def post(cfg, opt):
-    return {"fval":opt.get_fval()}
-
+    return {
+        "fval":opt.get_fval(),
+        "num_candidate_solutions":opt.get_num_candidate_solutions(),
+        "num_elements_stored":opt.get_num_elements_stored(),
+    }
+    
 print("Loading data")
 
 matrix = scipy.io.loadmat(os.path.join(os.path.dirname(__file__), "cover.mat"))

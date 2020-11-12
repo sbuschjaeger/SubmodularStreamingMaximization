@@ -39,6 +39,7 @@ protected:
                     fval += fdelta;
                 }
             }
+            is_fitted = true;
         }
     };
 
@@ -84,6 +85,7 @@ protected:
                 }
             }
             observed++;
+            is_fitted = true;
         }
     };
 
@@ -129,6 +131,7 @@ protected:
                 }
             }
             observed++;
+            is_fitted = true;
         }
     };
     
@@ -189,6 +192,19 @@ public:
         dense_C2(dense_C2),
         fixed_epsilon(fixed_epsilon)
     {}
+
+    unsigned int get_num_candidate_solutions() const {
+        return algos.size();
+    }
+
+    unsigned long get_num_elements_stored() const {
+        unsigned long num_elements = 0;
+        for (auto const & s : algos) {
+            num_elements += s->get_solution().size();
+        }
+
+        return num_elements;
+    }
 
     void fit(std::vector<std::vector<data_t>> const & X, unsigned int iterations = 1) {
         unsigned int N = X.size();
