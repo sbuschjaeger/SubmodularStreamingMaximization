@@ -87,7 +87,7 @@ int main() {
     //     if (cnt > 10) break;
     // }
 
-    auto K = 30;
+    auto K = 50;
 
     // IVM slowIVM(RBFKernel( std::sqrt(data[0].size()), 1.0) , 1.0);
     // std::cout << "Selecting " << K << " representatives via slow IVM without vectorization Greedy" << std::endl;
@@ -126,8 +126,8 @@ int main() {
     res = evaluate_optimizer(setimp, data);
     std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\t memory:\t" <<  std::get<2>(res) << "\n\t num_sieves:\t" <<  std::get<3>(res) << "\n\n" << std::endl;
     
-    std::cout << "Selecting " << K << " representatives via Salsa" << std::endl;
-    Salsa salsa(K, fastIVM, 1.0, 0.01);
+    std::cout << "Selecting " << K << " representatives via Salsa with eps = 0.005" << std::endl;
+    Salsa salsa(K, fastIVM, 1.0, 0.005);
     res = evaluate_optimizer(salsa, data);
     std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\t memory:\t" <<  std::get<2>(res) << "\n\t num_sieves:\t" <<  std::get<3>(res) << "\n\n" << std::endl;
     
