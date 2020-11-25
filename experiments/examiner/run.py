@@ -89,7 +89,7 @@ def post(cfg, opt):
     }
 
 print("Loading data")
-X = np.load("/data/s1/buschjae/SubmodularStreamingMaximization/examiner.npy")
+X = np.load("data/examiner.npy")
 
 min_max_scaler = preprocessing.Normalizer()
 X = min_max_scaler.fit_transform(X)
