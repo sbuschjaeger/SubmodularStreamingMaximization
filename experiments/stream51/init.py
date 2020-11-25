@@ -17,7 +17,7 @@ def stream51():
     ])
 
     x = StreamDataset(root="data", train=True, transform=transform)
-    data = torch.utils.data.DataLoader(x, batch_size=1024, num_workers=8)
+    data = torch.utils.data.DataLoader(x, batch_size=1024, num_workers=8) # YOU CAN DECREASE BATCHSIZE HERE!!!
 
     # Load pretrained InceptionV3 Classifier
     model = torchvision.models.inception_v3(pretrained=True, transform_input=False).eval()

@@ -12,4 +12,5 @@ mkdir -p "data"
 unzip Stream-51.zip -d "data"
 
 # extract feature vectors with pytorch and InceptionV3
+echo "Extracting Features. If CUDA GPUs are available, this will be done on GPU. By default we use a batch_size of 1024. On smaller devices this may lead to Out-of-Memory Errors. Head into $( pwd )/init.py and decrase the batch size to solve this issue."
 python init.py
