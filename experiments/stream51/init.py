@@ -29,12 +29,15 @@ def stream51():
 
     dataset = []
     labels = []
-    model = model.cuda()
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model = model.to(device)
+
     with torch.no_grad():
         for x, y in tqdm.tqdm(data):
             for yy in y:
                 labels.append(yy.cpu().numpy())
-            z = model(x.cuda()).cpu()
+            z = model(x.to(device)).cpu()
             for yy in z:
                 dataset.append(yy.numpy())
     dataset = np.array(dataset)
