@@ -9,7 +9,7 @@ def examiner():
     nlp = spacy.load("en_core_web_lg")
     dataset = []
     dates, texts = zip(*[(x["publish_date"], x["headline_text"]) for x in data])
-    for date, text in tqdm.tqdm(zip(dates, nlp.pipe(texts, batch_size=50, disable=["tagger", "parser", "ner"]))):
+    for date, text in tqdm.tqdm(zip(dates, nlp.pipe(texts, batch_size=50, disable=["tagger", "parser", "ner"])), total=3089781):
         dataset.append(text.vector)
         # print(date, text.vector)
         # break

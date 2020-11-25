@@ -18,6 +18,8 @@ dependencies:
     - plotly-express
     - nbformat
     - kaggle # for downloading creditfraud dataset
+    - gdown # for downloading the Stream51 dataset from google drive
+    - spacy # for processing the examiner and abc datasets
     - pyfact # for downloading / processing fact data
     - progressbar
   #  - -e file:. 
