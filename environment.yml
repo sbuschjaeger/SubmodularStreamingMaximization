@@ -1,23 +1,30 @@
 name: pyssm
 channels:
+  - plotly
   - conda-forge
-  - defaults
 dependencies:
   - cmake
-  - python=3.8
+  - python=3.7
   - numpy
   - pip
+  - gcc_linux-64
+  - cmake
   - pandas
-  - scipy
+  - scikit-learn
+  - tqdm
+  - pylint
   - plotly # Technically not a dependency, but still nice to have for browsing results
   - plotly-orca # Technically not a dependency, but still nice to have for browsing results
   - psutil # Technically not a dependency, but required for exporting PDFs from plotting
   - jupyter # Technically not a dependency, but still nice to have for browsing results
-  - pip:
-    - pylint
-    - plotly-express
-    - nbformat
-    - kaggle # for downloading creditfraud dataset
-    - pyfact # for downloading / processing fact data
-    - progressbar
-  #  - -e file:. 
+  - requests
+  # - scipy
+  # - pip:
+  #   - ray
+  #   - pylint
+  #   - plotly-express
+  #   - nbformat
+  #   - kaggle # for downloading creditfraud dataset
+  #   - pyfact # for downloading / processing fact data
+  #   - progressbar
+  #   - -e file:. 

@@ -34,8 +34,8 @@ add_executable(run_kddcup ${SOURCES} experiments/kddcup99/run.cpp)
 
 # add_executable(main tests/main.cpp)
 
-# add_subdirectory(pybind11)
-# pybind11_add_module(PySSM include/Python.cpp)
+add_subdirectory(pybind11)
+pybind11_add_module(PySSM include/Python.cpp)
 
 # if (CREATE_EXPERIMENTS)
 #     # target_link_libraries(threesieves-tests gtest gtest_main gcov)

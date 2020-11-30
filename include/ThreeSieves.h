@@ -18,6 +18,7 @@ public:
     data_t epsilon;
     THRESHOLD_STRATEGY strategy;
     
+    // make list of Ts in parallel :)
     unsigned int T;
     unsigned int t;
 

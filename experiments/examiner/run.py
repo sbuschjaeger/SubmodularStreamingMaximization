@@ -29,6 +29,7 @@ import numpy as np
 import scipy.io
 import scipy.io
 from sklearn import preprocessing
+from sklearn.preprocessing import MinMaxScaler
 
 def pre(cfg):
     name = cfg["method"]
@@ -61,9 +62,17 @@ def pre(cfg):
     return opt
 
 def fit(cfg, opt):
-    X = cfg["X"]
+    X = np.load("/home/share/fuerBuschjaeger/threesieves/examiner/examiner.npy")
+
+    min_max_scaler = MinMaxScaler()
+    X = min_max_scaler.fit_transform(X)
+
+    if cfg["method"] == "Greedy":
+        opt.fit(X,1)
+    else:
+        for x in X:
+            opt.next(x)
     
-    opt.fit(cfg["X"],1)
     return opt
 
 def post(cfg, opt):
@@ -88,23 +97,21 @@ def post(cfg, opt):
         "num_elements_stored":opt.get_num_elements_stored(),
     }
 
-print("Loading data")
-X = np.load("/data/s1/buschjae/SubmodularStreamingMaximization/examiner.npy")
 
-min_max_scaler = preprocessing.Normalizer()
-X = min_max_scaler.fit_transform(X)
+X = np.load("/home/share/fuerBuschjaeger/threesieves/examiner/examiner.npy") #, mmap_mode="r"
 
 Ks = range(5,105,5)
-# Ks = [5]
-eps = [1e-1, 5e-2, 1e-2, 1e-3, 5e-3]
-Ts = [500, 1000, 2500, 5000]
-#Sigmas = np.array([0.1, 0.5, 1.0, 2.0, 5.0])*np.sqrt(X.shape[1])
-Sigmas = [np.sqrt(X.shape[1])]
+eps = [1e-1, 1e-2] #, 1e-3
+Ts = [250, 500, 1000, 1500, 2000, 2500, 5000]
+Sigmas = [0.25*np.sqrt(X.shape[1]), 0.5*np.sqrt(X.shape[1]), np.sqrt(X.shape[1]), 2*np.sqrt(X.shape[1])]
 
 basecfg = {
     "out_path":"results",
-    "backend":"multiprocessing",
-    "num_cpus":5,
+    "backend":"ray",
+    "address":"129.217.30.245:6379",
+    "redis_password":"5241590000000000",
+    "num_cpus":1,
+    "max_memory":6*1024*1024*1024, # 6 GB
     "pre": pre,
     "post": post,
     "fit": fit
@@ -121,8 +128,7 @@ for K in Ks:
                 "method": "Greedy",
                 "K":K,
                 "sigma":s,
-                "scale":1,
-                "X":X
+                "scale":1
             })
         )
 
@@ -131,8 +137,7 @@ for K in Ks:
                 "method": "IndependentSetImprovement",
                 "K":K,
                 "sigma":s,
-                "scale":1,
-                "X":X
+                "scale":1
             })
         )
 
@@ -142,8 +147,7 @@ for K in Ks:
                 "K":K,
                 "sigma":s,
                 "scale":1,
-                "repetitions":5,
-                "X":X
+                "repetitions":5
             })
         )
 
@@ -154,8 +158,7 @@ for K in Ks:
                     "K":K,
                     "sigma":s,
                     "scale":1,
-                    "epsilon":e,
-                    "X":X
+                    "epsilon":e
                 })
             )
 
@@ -165,19 +168,7 @@ for K in Ks:
                     "K":K,
                     "sigma":s,
                     "scale":1,
-                    "epsilon":e,
-                    "X":X
-                })
-            )
-
-            runs.append(
-                ( {   
-                    "method": "Salsa",
-                    "K":K,
-                    "sigma":s,
-                    "scale":1,
-                    "epsilon":e,
-                    "X":X
+                    "epsilon":e
                 })
             )
 
@@ -189,8 +180,7 @@ for K in Ks:
                         "sigma":s,
                         "scale":1,
                         "epsilon":e,
-                        "T":T,
-                        "X":X
+                        "T":T
                     })
                 )
 

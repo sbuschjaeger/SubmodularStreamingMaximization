@@ -2,7 +2,6 @@
 
 import os
 import random
-from scipy.io import arff
 import numpy as np
 import pandas as pd
 
@@ -24,11 +23,8 @@ from PySSM import ThreeSieves
 from PySSM import Salsa 
 from PySSM import IndependentSetImprovement
 
-import os
-import numpy as np
-import scipy.io
-import scipy.io
-from sklearn import preprocessing
+from sklearn.preprocessing import Normalizer
+from sklearn.preprocessing import MinMaxScaler
 
 def pre(cfg):
     name = cfg["method"]
@@ -61,9 +57,18 @@ def pre(cfg):
     return opt
 
 def fit(cfg, opt):
-    X = cfg["X"]
+    X = np.load("/home/share/fuerBuschjaeger/threesieves/stream51/stream51.npy")
+
+    min_max_scaler = MinMaxScaler()
+    X = min_max_scaler.fit_transform(X)
+
+    # X = cfg["X"]
+    if cfg["method"] == "Greedy":
+        opt.fit(X,1)
+    else:
+        for x in X:
+            opt.next(x)
     
-    opt.fit(cfg["X"],1)
     return opt
 
 def post(cfg, opt):
@@ -89,22 +94,22 @@ def post(cfg, opt):
     }
 
 print("Loading data")
-X = np.load("/data/s1/buschjae/SubmodularStreamingMaximization/stream51.npy")
-
-min_max_scaler = preprocessing.Normalizer()
-X = min_max_scaler.fit_transform(X)
+X = np.load("/home/share/fuerBuschjaeger/threesieves/stream51/stream51.npy")
 
 Ks = range(5,105,5)
 # Ks = [5]
-eps = [1e-1, 5e-2, 1e-2, 1e-3, 5e-3]
-Ts = [500, 1000, 2500, 5000]
+eps = [1e-1, 1e-2] #, 1e-3
+Ts = [250, 500, 1000, 1500, 2000, 2500, 5000]
 #Sigmas = np.array([0.1, 0.5, 1.0, 2.0, 5.0])*np.sqrt(X.shape[1])
-Sigmas = [2*np.sqrt(X.shape[1])]
+Sigmas = [0.1*np.sqrt(X.shape[1]), 0.25*np.sqrt(X.shape[1])]
 
 basecfg = {
     "out_path":"results",
-    "backend":"multiprocessing",
-    "num_cpus":5,
+    "backend":"ray",
+    "address":"129.217.30.245:6379",
+    "redis_password":"5241590000000000",
+    "num_cpus":1,
+    "max_memory":4*1024*1024*1024, # 4 GB
     "pre": pre,
     "post": post,
     "fit": fit
@@ -121,8 +126,7 @@ for K in Ks:
                 "method": "Greedy",
                 "K":K,
                 "sigma":s,
-                "scale":1,
-                "X":X
+                "scale":1
             })
         )
 
@@ -131,8 +135,7 @@ for K in Ks:
                 "method": "IndependentSetImprovement",
                 "K":K,
                 "sigma":s,
-                "scale":1,
-                "X":X
+                "scale":1
             })
         )
 
@@ -142,8 +145,7 @@ for K in Ks:
                 "K":K,
                 "sigma":s,
                 "scale":1,
-                "repetitions":5,
-                "X":X
+                "repetitions":5
             })
         )
 
@@ -154,8 +156,7 @@ for K in Ks:
                     "K":K,
                     "sigma":s,
                     "scale":1,
-                    "epsilon":e,
-                    "X":X
+                    "epsilon":e
                 })
             )
 
@@ -165,19 +166,7 @@ for K in Ks:
                     "K":K,
                     "sigma":s,
                     "scale":1,
-                    "epsilon":e,
-                    "X":X
-                })
-            )
-
-            runs.append(
-                ( {   
-                    "method": "Salsa",
-                    "K":K,
-                    "sigma":s,
-                    "scale":1,
-                    "epsilon":e,
-                    "X":X
+                    "epsilon":e
                 })
             )
 
@@ -189,10 +178,9 @@ for K in Ks:
                         "sigma":s,
                         "scale":1,
                         "epsilon":e,
-                        "T":T,
-                        "X":X
+                        "T":T
                     })
                 )
 
-random.shuffle(runs)
+# random.shuffle(runs)
 run_experiments(basecfg, runs)
