@@ -8,6 +8,7 @@
 //#include <memory>
 
 typedef double data_t;
+typedef long idx_t;
 
 // struct Data {
 //     std::vector<data_t> x;

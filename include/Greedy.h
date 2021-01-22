@@ -45,7 +45,8 @@ public:
      * @param X A constant reference to the entire data set
      * @param iterations: Has no effect. Greedy iterates K times over the entire dataset in any case.
      */
-    void fit(std::vector<std::vector<data_t>> const & X, unsigned int iterations = 1) {
+    void fit(std::vector<std::vector<data_t>> const & X, std::vector<idx_t> const & ids, unsigned int iterations = 1) {
+    //void fit(std::vector<std::vector<data_t>> const & X, unsigned int iterations = 1) {
         std::vector<unsigned int> remaining(X.size());
         std::iota(remaining.begin(), remaining.end(), 0);
         data_t fcur = 0;
@@ -69,6 +70,9 @@ public:
             f->update(solution, X[max_idx], solution.size());
             //solution.push_back(std::vector<data_t>(X[max_idx]));
             solution.push_back(X[max_idx]);
+            if (ids.size() >= max_idx) {
+                this->ids.push_back(max_idx);
+            }
             remaining.erase(remaining.begin()+max_element);
         }
 
@@ -76,12 +80,18 @@ public:
         is_fitted = true;
     }
 
+    void fit(std::vector<std::vector<data_t>> const & X, unsigned int iterations = 1) {
+        std::vector<idx_t> ids;
+        fit(X,ids,iterations);
+    }
+
+
     /**
      * @brief Throws an exception when called. Greedy does not support streaming!
      * 
      * @param x A constant reference to the next object on the stream.
      */
-    void next(std::vector<data_t> const &x) {
+    void next(std::vector<data_t> const &x, std::optional<idx_t> id = std::nullopt) {
         throw std::runtime_error("Greedy does not support streaming data, please use fit().");
     }
 

@@ -2,9 +2,9 @@
 #include <vector>
 #include <math.h>
 
-//#include "FastIVM.h"
-// #include "RBFKernel.h"
-// #include "Greedy.h"
+#include "functions/FastIVM.h"
+#include "functions/kernels/RBFKernel.h"
+#include "Greedy.h"
 // #include "Random.h"
 // #include "SieveStreaming.h"
 #include "DataTypeHandling.h"
@@ -63,6 +63,10 @@ int main() {
         // {1.0, 1.25},
         // {2.25, 1.0}
     };    
+
+    std::vector<idx_t> ids = {
+        1, 2, 3, 4, 5, 6, 7, 8
+    };
 
     unsigned int K = 5;
     Matrix m = compute_kernel(data);
@@ -136,31 +140,13 @@ int main() {
     //     end
     // end
     // IVM slowIVM(RBFKernel(), 1.0);
-    // FastIVM fastIVM(K, RBFKernel(), 1.0);
+    FastIVM fastIVM(K, RBFKernel(), 1.0);
     
-    // Greedy greedy(K, [](std::vector<std::vector<data_t>> const &X){
-    //     unsigned int K = X.size();
-    //     data_t * kmat = new data_t[K*K];
-
-    //     for (unsigned int i = 0; i < K; ++i) {
-    //         for (unsigned int j = i; j < K; ++j) {
-    //             data_t kval = kernel(X[i], X[j]);
-    //             if (i == j) {
-    //                 kmat[i+i*K] = 1.0 + kval / std::pow(1.0, 2.0);
-    //             } else {
-    //                 kmat[i+j*K] = kval / std::pow(1.0, 2.0);
-    //                 kmat[j+i*K] = kval / std::pow(1.0, 2.0);
-    //             }
-    //         }
-    //     }
-
-    //     data_t fval = logDet(kmat, X.size(), X.size());
-    //     delete [] kmat;
-    //     return fval;
-    // });
-    // greedy.fit(data);
-    // std::vector<std::vector<double>> solution = greedy.get_solution();
-    // double fval = greedy.get_fval();
+    Greedy greedy(K, fastIVM);
+    greedy.fit(data, ids);
+    std::vector<std::vector<double>> solution = greedy.get_solution();
+    std::vector<idx_t> solution_ids = greedy.get_ids();
+    double fval = greedy.get_fval();
 
     // Random random(K, [](std::vector<std::vector<data_t>> const &X){
     //     unsigned int K = X.size();
@@ -210,12 +196,18 @@ int main() {
     // std::vector<std::vector<double>> solution = sieve.get_solution();
     // double fval = sieve.get_fval();
 
-    // std::cout << "Found a solution with fval = " << fval << std::endl;
-    // for (auto x : solution) {
-    //     for (auto xi : x) {
-    //         std::cout << xi << " ";
-    //     }
-    //     std::cout << std::endl;
-    // }
+    std::cout << "Found a solution with fval = " << fval << std::endl;
+    for (auto x : solution) {
+        for (auto xi : x) {
+            std::cout << xi << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    std::cout << "ids = {";
+    for (auto i : solution_ids) {
+        std::cout << i << " ";
+    }
+    std::cout << "}" << std::endl;
     return 0;
 }

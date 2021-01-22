@@ -44,13 +44,14 @@ public:
         // assert(("T should at-least be 1 or greater.", T >= 1));
     }
     
-    void next(std::vector<data_t> const &x) {
+    void next(std::vector<data_t> const &x, std::optional<idx_t> const id = std::nullopt) {
         unsigned int Kcur = solution.size();
         
         if (Kcur < K) {
             data_t w = f->peek(solution, x, solution.size()) - fval;
             f->update(solution, x, solution.size());
             solution.push_back(x);
+            ids.push_back(id.value());
             weights.push(Pair(w, Kcur));
         } else {
             Pair to_replace = weights.top();
@@ -58,6 +59,7 @@ public:
             if (w > 2*to_replace.weight) {
                 f->update(solution, x, to_replace.idx);
                 solution[to_replace.idx] = x; 
+                if (id.has_value()) ids[to_replace.idx] = id.value();
                 weights.pop();
                 weights.push(Pair(w, to_replace.idx));
             }

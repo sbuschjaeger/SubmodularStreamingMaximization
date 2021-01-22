@@ -28,7 +28,7 @@ protected:
             throw std::runtime_error("FixedThresholds are only meant to be used through Salsa and therefore do not require the implementation of `fit'");
         }
 
-        void next(std::vector<data_t> const &x) {
+        void next(std::vector<data_t> const &x, std::optional<idx_t> const id = std::nullopt) {
             unsigned int Kcur = solution.size();
             if (Kcur < K) {
                 data_t fdelta = f->peek(solution, x, solution.size()) - fval;
@@ -36,6 +36,7 @@ protected:
                 if (fdelta >= ((threshold / static_cast<data_t>(K)) * (0.5 + epsilon))) {
                     f->update(solution, x, solution.size());
                     solution.push_back(x);
+                    if (id.has_value()) ids.push_back(id.value());
                     fval += fdelta;
                 }
             }
@@ -63,7 +64,7 @@ protected:
             throw std::runtime_error("FixedThresholds are only meant to be used through Salsa and therefore do not require the implementation of `fit'");
         }
 
-        void next(std::vector<data_t> const &x) {
+        void next(std::vector<data_t> const &x, std::optional<idx_t> const id = std::nullopt) {
             unsigned int Kcur = solution.size();
             if (Kcur < K) {
                 data_t fdelta = f->peek(solution, x, solution.size()) - fval;
@@ -73,6 +74,7 @@ protected:
                     if (fdelta >= (C1 * threshold) / static_cast<data_t>(K)) {
                         f->update(solution, x, solution.size());
                         solution.push_back(x);
+                        if (id.has_value()) ids.push_back(id.value());
                         fval += fdelta;
                     }
                 } else {
@@ -80,6 +82,7 @@ protected:
                     if (fdelta >= threshold / (C2 * static_cast<data_t>(K))) {
                         f->update(solution, x, solution.size());
                         solution.push_back(x);
+                        if (id.has_value()) ids.push_back(id.value());
                         fval += fdelta;
                     }
                 }
@@ -109,7 +112,7 @@ protected:
             throw std::runtime_error("HighLowThreshold are only meant to be used through Salsa and therefore do not require the implementation of `fit'");
         }
 
-        void next(std::vector<data_t> const &x) {
+        void next(std::vector<data_t> const &x, std::optional<idx_t> const id = std::nullopt) {
             unsigned int Kcur = solution.size();
             if (Kcur < K) {
                 data_t fdelta = f->peek(solution, x, solution.size()) - fval;
@@ -119,6 +122,7 @@ protected:
                     if (fdelta >= ((threshold / static_cast<data_t>(K)) * (0.5 + epsilon))) {
                         f->update(solution, x, solution.size());
                         solution.push_back(x);
+                        if (id.has_value()) ids.push_back(id.value());
                         fval += fdelta;
                     }
                 } else {
@@ -126,6 +130,7 @@ protected:
                     if (fdelta >= ((threshold / static_cast<data_t>(K)) * (0.5 - delta))) {
                         f->update(solution, x, solution.size());
                         solution.push_back(x);
+                        if (id.has_value()) ids.push_back(id.value());
                         fval += fdelta;
                     }
                 }
@@ -206,7 +211,7 @@ public:
         return num_elements;
     }
 
-    void fit(std::vector<std::vector<data_t>> const & X, unsigned int iterations = 1) {
+    void fit(std::vector<std::vector<data_t>> const & X, std::vector<idx_t> const & ids, unsigned int iterations = 1) {
         unsigned int N = X.size();
         std::vector<data_t> ts = thresholds(m, K*m, epsilon);
         for (auto t : ts) {
@@ -216,9 +221,14 @@ public:
         }
 
         for (unsigned int i = 0; i < iterations; ++i) {
-            for (auto &x : X) {
+            for (unsigned int j = 0; j < X.size(); ++j) {
+            //for (auto &x : X) {
                 for (auto &s : algos) {
-                    s->next(x);
+                    if (ids.size() == X.size()) {
+                        s->next(X[j], ids[j]);
+                    } else {
+                        s->next(X[j]);
+                    }
                     if (s->get_fval() > fval) {
                         fval = s->get_fval();
                         // TODO THIS IS A COPY AT THE MOMENT
@@ -234,7 +244,12 @@ public:
         }
     }
 
-    void next(std::vector<data_t> const &x) {
+    void fit(std::vector<std::vector<data_t>> const & X, unsigned int iterations = 1) {
+        std::vector<idx_t> ids;
+        fit(X,ids,iterations);
+    }
+
+    void next(std::vector<data_t> const &x, std::optional<idx_t> const id = std::nullopt) {
         throw std::runtime_error("Salsa does not support streaming data, please use fit().");
     }
 };

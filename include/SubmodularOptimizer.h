@@ -8,6 +8,7 @@
 #include <functional>
 #include <cassert>
 #include <memory>
+#include <optional>
 
 #include "SubmodularFunction.h"
 
@@ -42,6 +43,7 @@ protected:
 public:
     // The current solution of this optimizer
     std::vector<std::vector<data_t>> solution;
+    std::vector<idx_t> ids;
 
     // The current function value of this optimizer
     data_t fval;
@@ -82,6 +84,31 @@ public:
      *                    times over the entire dataset, but at most iterations times and at-least once. Early exits once K elements are found and at-least one iteration is completed. 
      * @retval None
      */
+    virtual void fit(std::vector<std::vector<data_t>> const & X, std::vector<idx_t> const & ids, unsigned int iterations = 1) {
+        assert(X.size() == ids.size());
+
+        for (unsigned int i = 0; i < iterations; ++i) {
+            for (unsigned int j = 0; j < X.size(); ++j) {
+                next(X[j], ids[j]);
+                // It is verly likely that the lower threshold sieves will fill up early and thus we will probably find a full sieve early on
+                // This likely results in a very bad function value. However, only iterating once over the entire data-set may lead to a very
+                // weird situation where no sieve is full yet (e.g. for very small datasets). Thus, we re-iterate as often as needed and early
+                // exit if we have seen every item at-least once
+                if (solution.size() == K && i > 0) {
+                    return;
+                }
+            }
+        }
+    }
+
+    /**
+     * @brief  Find a solution given the entire data set. 
+     * @note   
+     * @param  X: A constant reference to the entire data set
+     * @param iterations: Maximum number of iterations over the entire data-set (default = 1). Tries to select exactly K elements by iterating multiple 
+     *                    times over the entire dataset, but at most iterations times and at-least once. Early exits once K elements are found and at-least one iteration is completed. 
+     * @retval None
+     */
     virtual void fit(std::vector<std::vector<data_t>> const & X, unsigned int iterations = 1) {
         for (unsigned int i = 0; i < iterations; ++i) {
             for (auto &x : X) {
@@ -103,7 +130,8 @@ public:
      * @param  x: A constant reference to the next object on the stream.
      * @retval None
      */
-    virtual void next(std::vector<data_t> const &x) = 0;
+    virtual void next(std::vector<data_t> const &x, std::optional<idx_t> const id = std::nullopt) = 0;
+
 
     /**
      * @brief  Return the current solution.
@@ -118,6 +146,14 @@ public:
         }
     }
     
+    std::vector<idx_t> const &get_ids() const {
+        if (!this->is_fitted) {
+             throw std::runtime_error("Optimizer was not fitted yet! Please call fit() or next() before calling get_ids()");
+        } else {
+            return ids;
+        }
+    }
+
     virtual unsigned int get_num_candidate_solutions() const {
         return 1;
     }

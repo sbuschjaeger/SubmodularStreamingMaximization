@@ -61,7 +61,7 @@ private:
              * 
              * @param x A constant reference to the next object on the stream.
              */
-            void next(std::vector<data_t> const &x) {
+            void next(std::vector<data_t> const &x, std::optional<idx_t> const id = std::nullopt) {
                 unsigned int Kcur = solution.size();
                 if (Kcur < K) {
                     data_t fdelta = f->peek(solution, x, solution.size()) - fval;
@@ -69,6 +69,7 @@ private:
                     if (fdelta >= threshold) {
                         f->update(solution, x, solution.size());
                         solution.push_back(x);
+                        if (id.has_value()) ids.push_back(id.value());
                         fval += fdelta;
                     }
                 }
@@ -115,7 +116,7 @@ public:
         return num_elements;
     }
 
-    void next(std::vector<data_t> const &x) {
+    void next(std::vector<data_t> const &x, std::optional<idx_t> const id = std::nullopt) {
         if (lower_bound != fval || sieves.size() == 0) {
             lower_bound = fval;
             data_t tau_min = std::max(lower_bound, m) / static_cast<data_t>(2.0*K);
@@ -142,7 +143,7 @@ public:
 
         // std::cout << sieves.size() << std::endl;
         for (auto &s : sieves) {
-            s->next(x);
+            s->next(x, id);
             if (s->get_fval() > fval) {
                 fval = s->get_fval();
                 // TODO THIS IS A COPY AT THE MOMENT

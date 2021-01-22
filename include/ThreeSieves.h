@@ -56,7 +56,7 @@ public:
         // assert(("T should at-least be 1 or greater.", T >= 1));
     }
     
-    void next(std::vector<data_t> const &x) {
+    void next(std::vector<data_t> const &x, std::optional<idx_t> const id = std::nullopt) {
         unsigned int Kcur = solution.size();
         if (Kcur < K) {
             if (t >= T) {
@@ -88,6 +88,7 @@ public:
             if (fdelta >= tau) {
                 f->update(solution, x, solution.size());
                 solution.push_back(x);
+                if (id.has_value()) ids.push_back(id.value());
                 fval += fdelta;
                 t = 0;
             } else {

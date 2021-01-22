@@ -77,7 +77,7 @@ public:
      * @param  X A constant reference to the entire data set
      * @param iterations: Has no effect. Random samples K elements, no iterations required.
      */
-    void fit(std::vector<std::vector<data_t>> const & X, unsigned int iterations = 1) {
+    void fit(std::vector<std::vector<data_t>> const & X, std::vector<idx_t> const & ids, unsigned int iterations = 1) {
         if (X.size() < K) {
             K = X.size();
         }
@@ -86,6 +86,9 @@ public:
         for (auto i : indices) {
             f->update(solution, X[i], solution.size());
             solution.push_back(X[i]);
+            if (ids.size() >= i) {
+                this->ids.push_back(ids[i]);
+            }
             //solution.push_back(std::vector<data_t>(X[i]));
         }
 
@@ -94,22 +97,28 @@ public:
         is_fitted = true;
     }
 
+    void fit(std::vector<std::vector<data_t>> const & X, unsigned int iterations = 1) {
+        std::vector<idx_t> ids;
+        fit(X,ids,iterations);
+    }
+
     /**
      * @brief Consume the next object in the data stream. This call uses Reservoir Sampling to sample the current solution which can access via `get_solution`.
      * 
      * @param x A constant reference to the next object on the stream.
      */
-    void next(std::vector<data_t> const &x) {
-        
+    void next(std::vector<data_t> const &x, std::optional<idx_t> const id = std::nullopt) {
         if (solution.size() < K) {
             // Just add the first K elements
             f->update(solution, x, solution.size());
             solution.push_back(x);
+            if (id.has_value()) ids.push_back(id.value());
         } else {
             // Sample the replacement-index with decreasing probability
             unsigned int j = std::uniform_int_distribution<>(1, cnt)(generator);
             if (j <= K) {
                 f->update(solution, x, j - 1);
+                if (id.has_value()) ids[j-1] = id.value();
                 solution[j - 1] = x; 
             }
         }
