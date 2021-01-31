@@ -74,28 +74,48 @@
     
 // }
 
+/**
+ * @brief  The RBF Kernel:
+ *      \f$k(x_1, x_2) = scale * \exp(- \frac{\|x_1 - x_2 \|_2^2}{sigma)\f$
+ *      where scale > 0 and sigma > 0.
+ * @note   
+ * @retval None
+ */
 class RBFKernel : public Kernel {
 private:
+    /**
+     * Sigma hyperparameter. Should be > 0
+     */
     data_t sigma = 1.0;
+    
+    /**
+     * Scale hyperparameter. Should be > 0
+     */
     data_t scale = 1.0;
 
 public:
     /**
-     * The default constructor for this kernel. The sigma value is 1.0 and the distance function equals to Distances::SquaredEuclidean.
+     * @brief   The default constructor for this kernel. The sigma value is 1.0 and the scale is 1.0
+     * @note   
+     * @retval 
      */
     RBFKernel() = default;
 
     /**
-     * Instantiates a RBF Kernel object with given sigma.
-     * @param sigma Kernel sigma value.
+     * @brief  Creates a new RBFKernel with the given sigma parameter and scale 1.0. 
+     * @note   
+     * @param  sigma: The sigma parameter > 0.
+     * @retval Returns the created object
      */
-    explicit RBFKernel(data_t sigma) : RBFKernel(sigma, 1.0) {
+    RBFKernel(data_t sigma) : RBFKernel(sigma, 1.0) {
     }
 
     /**
-     * Instantiates a RBF Kernel object with given sigma and a arbitrarily chosen distance function.
-     * @param sigma Kernel sigma value.
-     * @param l A scaling value.
+     * @brief  Creates a new RBFKernel with the given sigma and scale parameter. 
+     * @note   This constructor uses assert to make sure that scale/sigma has the correct range. This may lead to warnings during compilation.
+     * @param  sigma: The sigma value > 0.
+     * @param  scale: The scale value > 0.
+     * @retval 
      */
     RBFKernel(data_t sigma, data_t scale) : sigma(sigma), scale(scale){
         assert(("The scale of an RBF Kernel should be greater than 0!", scale > 0));
@@ -103,18 +123,14 @@ public:
     };
 
     /**
-     * Returns the RBF kernel value for two vectors x1 and x2 by using the following formula.
-     *
-     * \f$k(x_1, x_2) = _l^2 \exp(- \frac{\|x_1 - x_2 \|_2^2}{2\sigma^2})\f$
-     *
-     * The norm in the equation may be substituted by a different function by constructing this object with another distance function.
-     * However, the implementation defaults to the squared L2-norm, which effectively resembles the squared euclidean distance between
-     * the input vectors.
-     *
-     * @param x1 A vector.
-     * @param x2 A vector.
-     * @return RBF kernel value for x1 and x2.
-     */ 
+     * @brief  Computes the RBF Kernel at the given points x1, x2:
+     *      \f$k(x_1, x_2) = scale * \exp(- \frac{\|x_1 - x_2 \|_2^2}{sigma)\f$
+     *          where scale > 0 and sigma > 0
+     * @note   
+     * @param  x1: First argument for the kernel. 
+     * @param  x2: Second argument for the kernel
+     * @retval The evaluated kernel value. 
+     */
     inline data_t operator()(const std::vector<data_t>& x1, const std::vector<data_t>& x2) const override {
         data_t distance = 0;
         if (x1 != x2) {
@@ -132,6 +148,11 @@ public:
         return scale * std::exp(-distance);
     }
 
+    /**
+     * @brief  Returns a clone of this kernel. 
+     * @note   The clone is a deep copy of this kernel. 
+     * @retval The cloned object.
+     */
     std::shared_ptr<Kernel> clone() const override {
         return std::shared_ptr<Kernel>(new RBFKernel(sigma, scale));
     }
