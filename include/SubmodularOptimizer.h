@@ -15,7 +15,6 @@
 /**
  * @brief  Interface class which every optimizer should implement. Each optimizer must offer a next() and fit() function. However, if a certain optimizer does not support streaming (`next') or batch (`fit') processing it is okay to throw an exeception with an appropriate message. This class already offers a member to store the best solution (`solution') and its function value (`fval`) including getter functions. You can access the function to be maximized via `f` which is a shared pointer (and thus there is no need for explicit delete in the destructor). Please make sure to set `is_fitted` after the fit / next has been called. Please make sure that you use the `peek` and `update` function of the SubmodularFunction correctly. Always call `peek` if you want to know the function value if you would add a new element to the current solution and call `update` if you know which element to add to the current solution. See SubmodularFunction.h for more details.
  * @note   
- * @retval None
  */
 class SubmodularOptimizer {
 private:
@@ -80,6 +79,7 @@ public:
      * @brief  Find a solution given the entire data set. 
      * @note   
      * @param  X: A constant reference to the entire data set
+     * @param ids: A list of identifier for each object. This can be used to uniquely identify the objects in the summary. The exact behavior depends on the optimizer, but generally no safety checks or anything are performed. If you dont want to use ids, leaf it empty. Otherwise, ids.size() == X.size() unless you know what you are doing.
      * @param iterations: Maximum number of iterations over the entire data-set (default = 1). Tries to select exactly K elements by iterating multiple 
      *                    times over the entire dataset, but at most iterations times and at-least once. Early exits once K elements are found and at-least one iteration is completed. 
      * @retval None
@@ -128,6 +128,7 @@ public:
      * @brief  Consume the next object in the data stream. This may throw an exception if the optimizer does not support streaming.
      * @note   
      * @param  x: A constant reference to the next object on the stream.
+     * @param  id: The id of the given object. If this is a `std::nullopt` this parameter is ignored. Otherwise the id is inserted into the solution. Make sure, that either _all_ or _no_ object receives an id to keep track which id belongs to which object. This algorithm simply stores the objects and the ids in two separate lists and performs no safety checks. 
      * @retval None
      */
     virtual void next(std::vector<data_t> const &x, std::optional<idx_t> const id = std::nullopt) = 0;
@@ -146,6 +147,11 @@ public:
         }
     }
     
+    /**
+     * @brief  Return the corresponding ids for the current solution. This might be empty if no ids have been passed to fit / next.
+     * @note   
+     * @retval A const reference to the corresponding ids.
+     */
     std::vector<idx_t> const &get_ids() const {
         if (!this->is_fitted) {
              throw std::runtime_error("Optimizer was not fitted yet! Please call fit() or next() before calling get_ids()");
@@ -154,10 +160,20 @@ public:
         }
     }
 
+    /**
+     * @brief  The number of candidate solutions stored.
+     * @note   
+     * @retval The number of candidate solutions stored.
+     */
     virtual unsigned int get_num_candidate_solutions() const {
         return 1;
     }
     
+    /**
+     * @brief  The number of items stored in the current solution.
+     * @note   
+     * @retval The number of items stored in the current solution.
+     */
     virtual unsigned long get_num_elements_stored() const {
         return this->get_solution().size();
     }

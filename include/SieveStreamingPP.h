@@ -19,10 +19,16 @@
  * 
  * See also:
  *   - Kazemi, E., Mitrovic, M., Zadimoghaddam, M., Lattanzi, S., & Karbasi, A. (2019). Submodular streaming in all its glory: Tight approximation, minimum memory and low adaptive complexity. 36th International Conference on Machine Learning, ICML 2019, 2019-June, 5767–5784. Retrieved from http://proceedings.mlr.press/v97/kazemi19a/kazemi19a.pdf
+ * @note Since this is an extension of SieveStreaming it seems likely that this class should be an extension of SieveStreaming. However, I decided against this, since the actual benefit by this is minimal. The `fit` is substantially different from SieveStreaming and the internal Sieve class uses a slightly different thresholding rule. Thus I decided to separate both implementations.  
 */
 class SieveStreamingPP : public SubmodularOptimizer {
 private:
 
+    /**
+     * @brief  A single sieve with its own threshold and accompanying summary.  
+     * @note   This class is basically also implemented in SieveStreaming and - to some extend - in Salsa. I decided against a unified class for these Sieves, since the thresholding rules are often slightly different from paper to paper. I tried to stick as close as possible to the pseudocode in the papers.
+     * @retval None
+     */
     class Sieve : public SubmodularOptimizer {
         public:
             // The threshold
@@ -57,9 +63,12 @@ private:
             }
 
             /**
-             * @brief Consume the next object in the data stream. This call compares the marginal gain against the given threshold and add the current item to the current solution if it exceeds the given threshold. 
+             * @brief  Consume the next object in the data stream. This call compares the marginal gain against the given threshold and add the current item to the current solution if it exceeds the given threshold. 
              * 
-             * @param x A constant reference to the next object on the stream.
+             * @note   
+             * @param  &x: A constant reference to the next object on the stream.
+             * @param  id: The id of the given object. If this is a `std::nullopt` this parameter is ignored. Otherwise the id is inserted into the solution. Make sure, that either _all_ or _no_ object receives an id to keep track which id belongs to which object. This algorithm simply stores the objects and the ids in two separate lists and performs no safety checks.  
+             * @retval None
              */
             void next(std::vector<data_t> const &x, std::optional<idx_t> const id = std::nullopt) {
                 unsigned int Kcur = solution.size();
@@ -77,14 +86,27 @@ private:
             }
         };    
 
-
+    // The lower bound from which threshold should be sampled. This is per default 0 and will be changed when a new, better lower_bound occurs
     data_t lower_bound;
+
+    // Maximum singleton item value
     data_t m;
+
+    // Epsilon parameter used to sample thresholds according to the "SieveStreaming" rule
     data_t epsilon;
 
 public:
+    // The list of sieves managed by SieveStreamingPP
     std::vector<std::unique_ptr<Sieve>> sieves;
 
+    /**
+     * @brief Construct a new SieveStreamingPP object
+     * 
+     * @param K The cardinality constraint you of the optimization problem, that is the number of items selected.
+     * @param f The function which should be maximized. Note, that the `clone' function is used to construct a new SubmodularFunction which is owned by this object. If you implement a custom SubmodularFunction make sure that everything you need is actually cloned / copied.  
+     * @param m The maximum value of the singleton set, m = max_e f({e}) 
+     * @param epsilon The sampling accuracy for threshold generation
+     */
     SieveStreamingPP(unsigned int K, SubmodularFunction & f, data_t m, data_t epsilon) 
         : SubmodularOptimizer(K,f), lower_bound(0), m(m), epsilon(epsilon) {
             // std::vector<data_t> ts = thresholds(m/(1.0 + epsilon), K * m, epsilon);
@@ -94,6 +116,14 @@ public:
             // }
         }
 
+    /**
+     * @brief Construct a new SieveStreamingPP object
+     * 
+     * @param K The cardinality constraint you of the optimization problem, that is the number of items selected.
+     * @param f The function which should be maximized. Note, that this parameter is likely moved and not copied. Thus, if you construct multiple optimizers with the __same__ function they all reference the __same__ function. This can be very efficient for state-less functions, but may lead to weird side effects if f keeps track of a state. 
+     * @param m The maximum value of the singleton set, m = max_e f({e}) 
+     * @param epsilon The sampling accuracy for threshold generation
+     */
     SieveStreamingPP(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f, data_t m, data_t epsilon) 
         : SubmodularOptimizer(K,f), lower_bound(0), m(m), epsilon(epsilon) {
             // std::vector<data_t> ts = thresholds(m/(1.0 + epsilon), K * m, epsilon);
@@ -103,10 +133,20 @@ public:
             // }
         }
 
+    /**
+     * @brief  Returns the number of sieves.
+     * @note   
+     * @retval The number of sieves.
+     */
     unsigned int get_num_candidate_solutions() const {
         return sieves.size();
     }
 
+    /**
+     * @brief  Returns the total number of items stored across all sieves.
+     * @note   
+     * @retval The total number of items stored across all sieves.
+     */
     unsigned long get_num_elements_stored() const {
         unsigned long num_elements = 0;
         for (auto const & s : sieves) {
@@ -116,6 +156,14 @@ public:
         return num_elements;
     }
 
+    /**
+     * @brief  Consume the next object in the data stream. This checks for each sieve if the given object exceeds the marginal gain thresholdhold and adds it to the corresponding solution.
+     * 
+     * @note   
+     * @param  &x: A constant reference to the next object on the stream.
+     * @param  id: The id of the given object. If this is a `std::nullopt` this parameter is ignored. Otherwise the id is inserted into the solution. Make sure, that either _all_ or _no_ object receives an id to keep track which id belongs to which object. This algorithm simply stores the objects and the ids in two separate lists and performs no safety checks.  
+     * @retval None
+     */
     void next(std::vector<data_t> const &x, std::optional<idx_t> const id = std::nullopt) {
         if (lower_bound != fval || sieves.size() == 0) {
             lower_bound = fval;

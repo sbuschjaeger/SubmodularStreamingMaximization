@@ -10,6 +10,7 @@ Supported algorithms are:
 - ThreeSieves 
 - Random
 - Salsa
+- IndependentSetImprovement
 
 For more information on these algorithms please check out our paper or have a look at the (more or less extensive) comments in the source code.
 

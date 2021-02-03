@@ -10,4 +10,9 @@ data/
 *.npy
 *.json
 *.jsonl
-.nfs000000000019a89400000229
+docs/_*
+docs/xml
+docs/html
+docs/make.bat
+docs/Makefile
+docs/latex

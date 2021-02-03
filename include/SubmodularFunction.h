@@ -12,7 +12,12 @@
 
 
 /**
- * @brief  Interface class which every submodular function should implement. Is is expected by all optimizers. This interface offers a convenient way to implement stateful submodular functions. Each submodular function must offer four functions: operator(), peek, update, clone as detailed below. The SubmodularOptimizer class are expected to use `peek` whenever they ask for a function value and to use `update` whenever a new element is added to the solution. The clone function should implement a deep copy of the object. For state-less functions there is also a SubmodlarFunctonWrapper available which expects a lambda / std::function.
+ * @brief  Interface class which every submodular function should implement. Is is expected by all optimizers. This interface offers a convenient way to implement stateful submodular functions. Each submodular function must offer four functions: 
+ * - operator()
+ * - peek 
+ * - update 
+ * - clone 
+ * as detailed below. The SubmodularOptimizer class are expected to use `peek` whenever they ask for a function value and to use `update` whenever a new element is added to the solution. The clone function should implement a deep copy of the object. For state-less functions there is also a SubmodlarFunctonWrapper available which expects a lambda / std::function.
  * @note   
  * @retval None
  */
@@ -126,6 +131,10 @@ public:
         return std::shared_ptr<SubmodularFunction>(new SubmodularFunctionWrapper(f));
     }
 
+    /**
+     * @brief  Destroy the wrapper object.
+     * @note   
+     */
     ~SubmodularFunctionWrapper() {}
 };
 

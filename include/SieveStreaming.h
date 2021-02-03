@@ -72,8 +72,9 @@ class SieveStreaming : public SubmodularOptimizer {
 private:
 
     /**
-     * @brief A single Sieve with its own threshold
-     * 
+     * @brief  A single sieve with its own threshold and accompanying summary.  
+     * @note   This class is basically also implemented in SieveStreamingPP and - to some extend - in Salsa. I decided against a unified class for these Sieves, since the thresholding rules are often slightly different from paper to paper. I tried to stick as close as possible to the pseudocode in the papers.
+     * @retval None
      */
     class Sieve : public SubmodularOptimizer {
     public:
@@ -111,7 +112,10 @@ private:
         /**
          * @brief Consume the next object in the data stream. This call compares the marginal gain against the given threshold and add the current item to the current solution if it exceeds the given threshold. 
          * 
-         * @param x A constant reference to the next object on the stream.
+         * @note   
+         * @param  &x: A constant reference to the next object on the stream.
+         * @param  id: The id of the given object. If this is a `std::nullopt` this parameter is ignored. Otherwise the id is inserted into the solution. Make sure, that either _all_ or _no_ object receives an id to keep track which id belongs to which object. This algorithm simply stores the objects and the ids in two separate lists and performs no safety checks.  
+         * @retval None
          */
         void next(std::vector<data_t> const &x, std::optional<idx_t> const id = std::nullopt) {
             unsigned int Kcur = solution.size();
@@ -137,7 +141,7 @@ protected:
 public:
 
     /**
-     * @brief Construct a new Sieve Streaming object
+     * @brief Construct a new SieveStreaming object
      * 
      * @param K The cardinality constraint you of the optimization problem, that is the number of items selected.
      * @param f The function which should be maximized. Note, that the `clone' function is used to construct a new SubmodularFunction which is owned by this object. If you implement a custom SubmodularFunction make sure that everything you need is actually cloned / copied.  
@@ -153,7 +157,7 @@ public:
     }
 
     /**
-     * @brief Construct a new Sieve Streaming object
+     * @brief Construct a new SieveStreaming object
      * 
      * @param K The cardinality constraint you of the optimization problem, that is the number of items selected.
      * @param f The function which should be maximized. Note, that this parameter is likely moved and not copied. Thus, if you construct multiple optimizers with the __same__ function they all reference the __same__ function. This can be very efficient for state-less functions, but may lead to weird side effects if f keeps track of a state. 
@@ -167,10 +171,20 @@ public:
         }
     }
 
+    /**
+     * @brief  Returns the number of sieves.
+     * @note   
+     * @retval The number of sieves.
+     */
     unsigned int get_num_candidate_solutions() const {
         return sieves.size();
     }
 
+    /**
+     * @brief  Returns the total number of items stored across all sieves.
+     * @note   
+     * @retval The total number of items stored across all sieves.
+     */
     unsigned long get_num_elements_stored() const {
         unsigned long num_elements = 0;
         for (auto const & s : sieves) {
@@ -191,9 +205,12 @@ public:
     }
 
     /**
-     * @brief Consume the next object in the data stream. This checks for each sieve if the given object exceeds the marginal gain thresholdhold and adds it to the corresponding solution. You can access the best solution via `get_solution`.
+     * @brief  Consume the next object in the data stream. This checks for each sieve if the given object exceeds the marginal gain thresholdhold and adds it to the corresponding solution.
      * 
-     * @param x A constant reference to the next object on the stream.
+     * @note   
+     * @param  &x: A constant reference to the next object on the stream.
+     * @param  id: The id of the given object. If this is a `std::nullopt` this parameter is ignored. Otherwise the id is inserted into the solution. Make sure, that either _all_ or _no_ object receives an id to keep track which id belongs to which object. This algorithm simply stores the objects and the ids in two separate lists and performs no safety checks.  
+     * @retval None
      */
     void next(std::vector<data_t> const &x, std::optional<idx_t> const id = std::nullopt) {
         for (auto &s : sieves) {

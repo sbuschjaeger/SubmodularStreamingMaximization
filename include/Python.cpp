@@ -19,6 +19,10 @@
 
 namespace py = pybind11;
 
+/**
+ * @brief  This is a wrapper / trampoline class to pass the SubmodularFunction interface to the Python-side of things.  
+ * @note   
+ */
 class PySubmodularFunction : public SubmodularFunction {
 public:
     data_t operator()(std::vector<std::vector<data_t>> const &solution) const override {
@@ -71,6 +75,10 @@ public:
     }
 };
 
+/**
+ * @brief  This is a wrapper / trampoline class to pass the Kernel interface to the Python-side of things.  
+ * @note   
+ */
 class PyKernel : public Kernel {
 public:
     data_t operator()(std::vector<data_t> const &x1, std::vector<data_t> const &x2) const override {
@@ -101,43 +109,10 @@ public:
     }
 };
 
-// data_t fit_greedy_on_ivm(unsigned int K, data_t sigma, data_t scale, data_t epsilon, std::vector<std::vector<data_t>> const &X) {
-//     FastIVM fastIVM(K, RBFKernel(sigma, scale), epsilon);
-//     Greedy greedy(K, fastIVM);
-//     greedy.fit(X);
-//     return greedy.get_fval();
-// }
-
-// data_t fit_greedy_on_ivm_2(unsigned int K, data_t sigma, data_t scale, data_t epsilon) {
-//     return 1.0;
-//     // FastIVM fastIVM(K, RBFKernel(sigma, scale), epsilon);
-//     // Greedy greedy(K, fastIVM);
-//     // greedy.fit(X);
-//     // return greedy.get_fval();
-// }
-
-// PYBIND11_MAKE_OPAQUE(std::vector<data_t>);
-// PYBIND11_MAKE_OPAQUE(std::vector<std::vector<data_t>>);
-
+/**
+ * The actual Python binding of all the C++ objects. 
+ */
 PYBIND11_MODULE(PySSM, m) {
-    // m.def("fit_greedy_on_ivm", &fit_greedy_on_ivm, 
-    //     py::arg("K"), 
-    //     py::arg("sigma"),
-    //     py::arg("scale"),
-    //     py::arg("epsilon"),
-    //     py::arg("X")
-    // );
-
-    // m.def("fit_greedy_on_ivm_2", &fit_greedy_on_ivm_2, 
-    //     py::arg("K"), 
-    //     py::arg("sigma"),
-    //     py::arg("scale"),
-    //     py::arg("epsilon")
-    // );
-
-    // py::bind_vector<std::vector<data_t>>(m, "Vector");
-    // py::bind_vector<std::vector<std::vector<data_t>>>(m, "Matrix");
-
     py::class_<Kernel, PyKernel, std::shared_ptr<Kernel>>(m, "Kernel")
         .def(py::init<>())
         .def("__call__", &Kernel::operator())

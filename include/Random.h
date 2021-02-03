@@ -28,22 +28,26 @@ protected:
     unsigned int cnt = 0;
     std::default_random_engine generator;
 
-    // Taken from https://www.gormanalysis.com/blog/random-numbers-in-cpp/#sampling-without-replacement
-    static inline std::vector<unsigned int> sample_without_replacement(int k, int N, std::default_random_engine& gen) {
-        // Sample k elements from the range [1, N] without replacement
-        // k should be <= N
-        
+    /**
+     * @brief  Sample k elements from the range [1, N] without replacement. Caller needs to make sure that k <= N. The runtime is O(k) and memory is O(k)
+     * @note   Basically copied from https://www.gormanalysis.com/blog/random-numbers-in-cpp/#sampling-without-replacement
+     * @param  k: The number of samples to be selected
+     * @param  N: The upper bound of the interval to sample from
+     * @param  gen: A random generator used for sampling
+     * @retval The sampled vector of indices
+     */
+    static inline std::vector<idx_t> sample_without_replacement(int k, int N, std::default_random_engine& gen) {
         // Create an unordered set to store the samples
-        std::unordered_set<unsigned int> samples;
+        std::unordered_set<idx_t> samples;
         
         // Sample and insert values into samples
         for (int r = N - k; r < N; ++r) {
-            unsigned int v = std::uniform_int_distribution<>(1, r)(gen);
+            idx_t v = std::uniform_int_distribution<>(1, r)(gen);
             if (!samples.insert(v).second) samples.insert(r - 1);
         }
         
         // Copy samples into vector
-        std::vector<unsigned int> result(samples.begin(), samples.end());
+        std::vector<idx_t> result(samples.begin(), samples.end());
         
         // Shuffle vector
         std::shuffle(result.begin(), result.end(), gen);
@@ -72,16 +76,17 @@ public:
     Random(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f, unsigned long seed = 0) : SubmodularOptimizer(K,f), generator(seed) {}
 
      /**
-     * @brief  Randomly pick K elements as a solution. You can access the solution via `get_solution`
+     * @brief  Randomly pick K elements as a solution. You can access the solution via `get_solution` and the ids can be accessed via `get_ids`.
      * @note   
      * @param  X A constant reference to the entire data set
+     * @param ids: A list of identifier for each object. This can be used to uniquely identify the objects in the summary. If ids.size() < X.size(), then only partial ids are stored. No ids are stored if ids is empty. Make sure, that either _all_ or _no_ object receives an id to keep track which id belongs to which object. This algorithm simply stores the objects and the ids in two separate lists and performs no safety checks. 
      * @param iterations: Has no effect. Random samples K elements, no iterations required.
      */
     void fit(std::vector<std::vector<data_t>> const & X, std::vector<idx_t> const & ids, unsigned int iterations = 1) {
         if (X.size() < K) {
             K = X.size();
         }
-        std::vector<unsigned int> indices = sample_without_replacement(K, X.size(), generator);
+        std::vector<idx_t> indices = sample_without_replacement(K, X.size(), generator);
 
         for (auto i : indices) {
             f->update(solution, X[i], solution.size());
@@ -97,6 +102,12 @@ public:
         is_fitted = true;
     }
 
+    /**
+     * @brief  Randomly pick K elements as a solution. You can access the solution via `get_solution`.
+     * @note   
+     * @param  X A constant reference to the entire data set
+     * @param iterations: Has no effect. Random samples K elements, no iterations required.
+     */
     void fit(std::vector<std::vector<data_t>> const & X, unsigned int iterations = 1) {
         std::vector<idx_t> ids;
         fit(X,ids,iterations);
@@ -106,6 +117,7 @@ public:
      * @brief Consume the next object in the data stream. This call uses Reservoir Sampling to sample the current solution which can access via `get_solution`.
      * 
      * @param x A constant reference to the next object on the stream.
+     * @param  id: The id of the given object. If this is a `std::nullopt` this parameter is ignored. Otherwise the id is inserted into the solution. Make sure, that either _all_ or _no_ object receives an id to keep track which id belongs to which object. This algorithm simply stores the objects and the ids in two separate lists and performs no safety checks. 
      */
     void next(std::vector<data_t> const &x, std::optional<idx_t> const id = std::nullopt) {
         if (solution.size() < K) {

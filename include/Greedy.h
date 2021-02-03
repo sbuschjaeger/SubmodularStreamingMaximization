@@ -40,9 +40,10 @@ public:
     Greedy(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f) : SubmodularOptimizer(K,f) {}
 
     /**
-     * @brief Pick that element with the largest marginal gain in the entire dataset. Repeat this until K element have been selected. You can access the solution via `get_solution`
+     * @brief Pick that element with the largest marginal gain in the entire dataset. Repeat this until K element have been selected. You can access the solution via `get_solution` and the corresponding ids (if passed) with `get_ids()`
      * 
      * @param X A constant reference to the entire data set
+     * @param ids: A list of identifier for each object. This can be used to uniquely identify the objects in the summary. If ids.size() < X.size(), then only partial ids are stored. No ids are stored if ids is empty. Make sure, that either _all_ or _no_ object receives an id to keep track which id belongs to which object. This algorithm simply stores the objects and the ids in two separate lists and performs no safety checks. 
      * @param iterations: Has no effect. Greedy iterates K times over the entire dataset in any case.
      */
     void fit(std::vector<std::vector<data_t>> const & X, std::vector<idx_t> const & ids, unsigned int iterations = 1) {
@@ -80,6 +81,12 @@ public:
         is_fitted = true;
     }
 
+    /**
+     * @brief Pick that element with the largest marginal gain in the entire dataset. Repeat this until K element have been selected. You can access the solution via `get_solution`
+     * @note: This internally calls fit with an empty id set.
+     * @param X A constant reference to the entire data set
+     * @param iterations: Has no effect. Greedy iterates K times over the entire dataset in any case.
+     */
     void fit(std::vector<std::vector<data_t>> const & X, unsigned int iterations = 1) {
         std::vector<idx_t> ids;
         fit(X,ids,iterations);

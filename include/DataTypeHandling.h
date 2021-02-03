@@ -3,11 +3,10 @@
 
 #include <vector>
 
-//#include "Eigen/Eigen"
-//#include "float.h"
-//#include <memory>
-
+// Float data-typed used in the entire project. If you find a hardcoded "float" / "double" its probably a good idea to replace it with data_t
 typedef double data_t;
+
+// Index data-typed used in the entire project. If you find a hardcoded "size_t" / "unsigned int" etc. its probably a good idea to replace it with idx_t
 typedef long idx_t;
 
 // struct Data {
