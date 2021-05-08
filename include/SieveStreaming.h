@@ -9,9 +9,10 @@
 #include <unordered_set>
 
 /**
- * @brief Samples a set of thresholds from {(1+epsilon)^i  | i \in Z, lower \le (1+epsilon)^i \le upper} as described in 
- *  - Badanidiyuru, A., Mirzasoleiman, B., Karbasi, A., & Krause, A. (2014). Streaming submodular maximization: Massive data summarization on the fly. In Proceedings of the ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. https://doi.org/10.1145/2623330.2623637
+ * @brief Samples a set of thresholds from \f$ {(1+epsilon)^i  | i \in Z, lower \le (1+epsilon)^i \le upper} \f$ as described in [1]
  * 
+ * __References :__
+ * [1] Badanidiyuru, A., Mirzasoleiman, B., Karbasi, A., & Krause, A. (2014). Streaming submodular maximization: Massive data summarization on the fly. In Proceedings of the ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. https://doi.org/10.1145/2623330.2623637
  * @param lower The lower bound (inclusive) which is used form sampling
  * @param upper The upper bound (inclusive) which is used form sampling
  * @param epsilon The sampling accuracy
@@ -54,19 +55,20 @@ inline std::vector<data_t> thresholds(data_t lower, data_t upper, data_t epsilon
 }
 
 /** 
- * @brief The SieveStreaming optimizer for nonnegative, monotone submodular functions. It tries to estimate the potential gain of an element ahead of time by sampling different thresholds from {(1+epsilon)^i  | i \in Z, lower \le (1+epsilon)^i \le upper} and maintaining a set of sieves in parallel. Each sieve uses a different threshold to sieve-out elements with too few of a gain. 
- *  - lower = max_e f({e})  - the largest function value of a singleton-set
- *  - upper = K * max_e f({e})  - K times the function value of a singleton-set
+ * @brief The SieveStreaming optimizer for nonnegative, monotone submodular functions. It tries to estimate the potential gain of an element ahead of time by sampling different thresholds from \f$ {(1+epsilon)^i  | i \in Z, lower \le (1+epsilon)^i \le upper} \f$ and maintaining a set of sieves in parallel. Each sieve uses a different threshold to sieve-out elements with too few of a gain. 
+ *  - lower = \f$ max_e f({e}) \f$  which is the largest function value of a singleton-set
+ *  - upper = \f$ K \cdot max_e f({e}) \f$  which is \f$ K \f$ times the function value of a singleton-set
  
  *  - Stream:  Yes
- *  - Solution: 1/2 - \varepsilon 
- *  - Runtime: O(1)
- *  - Memory: O(K * log(K) / \varepsilon)
- *  - Function Queries per Element: O(log(K) / \varepsilon)
+ *  - Solution: \f$ 1/2 - \varepsilon \f$
+ *  - Runtime: \f$ O(1) \f$
+ *  - Memory: \f$ O(K \cdot log(K) / \varepsilon) \f$
+ *  - Function Queries per Element: \f$ O(log(K) / \varepsilon) \f$
  *  - Function Types: nonnegative, monotone submodular functions
  * 
- * See also:
- *   - Badanidiyuru, A., Mirzasoleiman, B., Karbasi, A., & Krause, A. (2014). Streaming submodular maximization: Massive data summarization on the fly. In Proceedings of the ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. https://doi.org/10.1145/2623330.2623637
+ * __References__
+ * 
+ * [1] Badanidiyuru, A., Mirzasoleiman, B., Karbasi, A., & Krause, A. (2014). Streaming submodular maximization: Massive data summarization on the fly. In Proceedings of the ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. https://doi.org/10.1145/2623330.2623637
  */
 class SieveStreaming : public SubmodularOptimizer {
 private:
@@ -161,7 +163,7 @@ public:
      * 
      * @param K The cardinality constraint you of the optimization problem, that is the number of items selected.
      * @param f The function which should be maximized. Note, that this parameter is likely moved and not copied. Thus, if you construct multiple optimizers with the __same__ function they all reference the __same__ function. This can be very efficient for state-less functions, but may lead to weird side effects if f keeps track of a state. 
-     * @param m The maximum value of the singleton set, m = max_e f({e}) 
+     * @param m The maximum value of the singleton set, \f$ m = max_e f({e}) \f$
      * @param epsilon The sampling accuracy for threshold generation
      */
     SieveStreaming(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f, data_t m, data_t epsilon) : SubmodularOptimizer(K,f) {

@@ -13,9 +13,10 @@
 
 /**
  * @brief  This class implements the InformativeVectorMachine [1]:
- *  \f$f(S) = \frac{1}{2}\log\det\left(\Sigma + \sigma \cdot \mathcal I \right)\f$
- *  where \Sigma is the kernel matrix of all elements in the summary, \mathcal I is the K \times K identity matrix and \sigma > 0 is a scaling parameter. 
- *  This implementation is lazy and slow. It recomputes $\Sigma$ in every evaluation. For a faster and more practical alternative please have a look at the FastIVM class. This class internally uses the Matrix class for somewhat readable linear algebra.
+ *  \f[
+ *      f(S) = \frac{1}{2}\log\det\left(\Sigma + \sigma \cdot \mathcal I \right)
+ * \f]
+ *  where \f$\Sigma\f$ is the kernel matrix of all elements in the summary, \f$ \mathcal I \f$ is the \f$ K \times K \f$ identity matrix and \f$ \sigma > 0 \f$ is a scaling parameter. This implementation is lazy and slow. It recomputes \f$ \Sigma \f$ in every evaluation. For a faster and more practical alternative please have a look at the FastIVM class. This class internally uses the Matrix class for somewhat readable linear algebra.
  * 
  * 
  * 
@@ -32,7 +33,7 @@ protected:
      * @note   
      * @param  &X: The current summary 
      * @param  sigma: Scaling for main-diagonal
-     * @retval The $K \times K$ kernel matrix
+     * @retval The \f$K \times K\f$ kernel matrix
      */
     inline Matrix compute_kernel(std::vector<std::vector<data_t>> const &X, data_t sigma) const {
         unsigned int K = X.size();

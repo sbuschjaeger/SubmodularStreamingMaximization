@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
 project(StreamingSubmodularOptimization LANGUAGES CXX)
 # find_package(OpenMP)
 
-option(CREATE_EXPERIMENTS "Should experiments be created?" OFF)
-
 # Include pybind11
 # add_subdirectory(lib/pybind11)
 
@@ -36,9 +34,3 @@ add_executable(main tests/main.cpp)
 
 add_subdirectory(pybind11)
 pybind11_add_module(PySSM include/Python.cpp)
-
-if (CREATE_EXPERIMENTS)
-    # target_link_libraries(threesieves-tests gtest gtest_main gcov)
-    # target_compile_options(threesieves-tests PUBLIC -DTESTFILES_ROOT_DIR="${CMAKE_CURRENT_SOURCE_DIR}/tests/test-files/")
-    # set_target_properties(threesieves-tests PROPERTIES LINKER_FLAGS "-fprofile-arcs -ftest-coverage")
-endif ()

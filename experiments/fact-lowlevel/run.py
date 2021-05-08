@@ -91,14 +91,29 @@ Ts = [500, 1000, 2500, 5000]
 #Sigmas = np.array([0.1, 0.5, 1.0, 2.0, 5.0])*np.sqrt(X.shape[1])
 Sigmas = [np.sqrt(X.shape[1])]
 
-basecfg = {
-    "out_path":"results",
-    "backend":"multiprocessing",
-    "num_cpus":10,
-    "pre": pre,
-    "post": post,
-    "fit": fit,
-}
+parser = argparse.ArgumentParser()
+parser.add_argument("-s", "--single", help="Run experiments in a single thread",action="store_true", default=True)
+parser.add_argument("-n", "--n_jobs", help="Number of jobs if --single is False",action="store_true", default=10)
+
+args = parser.parse_args()
+if args.single:
+    basecfg = {
+        "out_path":"results",
+        "backend":"local",
+        "num_cpus":1,
+        "pre": pre,
+        "post": post,
+        "fit": fit,
+    }
+else:
+    basecfg = {
+        "out_path":"results",
+        "backend":"multiprocessing",
+        "num_cpus":10,
+        "pre": pre,
+        "post": post,
+        "fit": fit,
+    }
 
 results = []
 

@@ -7,7 +7,7 @@
 #include "DataTypeHandling.h"
 
 /**
- * @brief  This is a simple Matrix class for quadratic N x N matrices. The Matrix is implemented with a 1d (column major) std::vector. There are also some linear algebra functions available
+ * @brief  This is a simple Matrix class for quadratic \f$ N \times N \f$ matrices. The Matrix is implemented with a 1d (column major) `std::vector`. There are also some linear algebra functions available
  * @note   
  * @retval None
  */

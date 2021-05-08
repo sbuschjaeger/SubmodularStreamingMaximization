@@ -79,7 +79,7 @@ public:
      * @brief  Find a solution given the entire data set. 
      * @note   
      * @param  X: A constant reference to the entire data set
-     * @param ids: A list of identifier for each object. This can be used to uniquely identify the objects in the summary. The exact behavior depends on the optimizer, but generally no safety checks or anything are performed. If you dont want to use ids, leaf it empty. Otherwise, ids.size() == X.size() unless you know what you are doing.
+     * @param ids: A list of identifier for each object. This can be used to uniquely identify the objects in the summary. The exact behavior depends on the optimizer, but generally no safety checks or anything are performed. If you don't want to use ids, leaf it empty. Otherwise, ids.size() == X.size() unless you know what you are doing.
      * @param iterations: Maximum number of iterations over the entire data-set (default = 1). Tries to select exactly K elements by iterating multiple 
      *                    times over the entire dataset, but at most iterations times and at-least once. Early exits once K elements are found and at-least one iteration is completed. 
      * @retval None
@@ -90,7 +90,7 @@ public:
         for (unsigned int i = 0; i < iterations; ++i) {
             for (unsigned int j = 0; j < X.size(); ++j) {
                 next(X[j], ids[j]);
-                // It is verly likely that the lower threshold sieves will fill up early and thus we will probably find a full sieve early on
+                // It is very likely that the lower threshold sieves will fill up early and thus we will probably find a full sieve early on
                 // This likely results in a very bad function value. However, only iterating once over the entire data-set may lead to a very
                 // weird situation where no sieve is full yet (e.g. for very small datasets). Thus, we re-iterate as often as needed and early
                 // exit if we have seen every item at-least once
@@ -113,7 +113,7 @@ public:
         for (unsigned int i = 0; i < iterations; ++i) {
             for (auto &x : X) {
                 next(x);
-                // It is verly likely that the lower threshold sieves will fill up early and thus we will probably find a full sieve early on
+                // It is very likely that the lower threshold sieves will fill up early and thus we will probably find a full sieve early on
                 // This likely results in a very bad function value. However, only iterating once over the entire data-set may lead to a very
                 // weird situation where no sieve is full yet (e.g. for very small datasets). Thus, we re-iterate as often as needed and early
                 // exit if we have seen every item at-least once

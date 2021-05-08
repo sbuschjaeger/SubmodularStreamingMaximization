@@ -9,14 +9,15 @@
 /**
  * @brief  The Greedy optimizer for submodular functions. It rates the marginal gain of each element and picks that element with the largest gain. This process is repeated until it K elements have been selected:
  *  - Stream:  No
- *  - Solution: 1 - exp(1)
- *  - Runtime: O(N * K)
- *  - Memory: O(K)
- *  - Function Queries per Element: O(1)
+ *  - Solution: \f$ 1 - \exp(1) \f$
+ *  - Runtime: \f$ O(N \cdot K) \f$
+ *  - Memory: \f$ O(K) \f$
+ *  - Function Queries per Element: \f$ O(1) \f$
  *  - Function Types: nonnegative submodular functions
  * 
- * See also :
- *   - Nemhauser, G. L., Wolsey, L. A., & Fisher, M. L. (1978). An analysis of approximations for maximizing submodular set functions-I. Mathematical Programming, 14(1), 265–294. https://doi.org/10.1007/BF01588971
+ * __References__
+ * 
+ * [1] Nemhauser, G. L., Wolsey, L. A., & Fisher, M. L. (1978). An analysis of approximations for maximizing submodular set functions-I. Mathematical Programming, 14(1), 265–294. https://doi.org/10.1007/BF01588971
  * @note   
  */
 class Greedy : public SubmodularOptimizer {

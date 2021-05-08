@@ -14,7 +14,9 @@
 
 /**
  * @brief  This is a faster implementation of the IVM [1]
- *  \f$f(S) = \frac{1}{2}\log\det\left(\Sigma + \sigma \cdot \mathcal I \right)\f$
+ * \f[
+ *      f(S) = \frac{1}{2}\log\det\left(\Sigma + \sigma \cdot \mathcal I \right)
+ * \f]
  *  where \Sigma is the kernel matrix of all elements in the summary, \mathcal I is the K \times K identity matrix and \sigma > 0 is a scaling parameter. 
  * 
  * This implementation caches the current kernel matrix \Sigma and maintains a cholesky decomposition of it to quickly recompute the log-determinant. This implementation requires the maximum number items in the summary and the maximum size (rows and columns) of \Sigma beforehand. It allocates the appropriate memory during construction. This implementation is optimized towards adding new elements to the summary, but not replacing existing ones. Added a new row / column to a cholesky decomposition is a rank-1 update which can be performed in O(K^2) for K x K matrices. Whenever an element in the matrix must be replaced, the entire cholesky decomposition must be recomputed leading to O(K^3). This class internally uses the Matrix class for somewhat readable linear algebra. 

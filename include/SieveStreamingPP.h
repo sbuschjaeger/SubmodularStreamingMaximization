@@ -11,14 +11,15 @@
 /**
  * @brief The SieveStreaming optimizer for nonnegative, monotone submodular functions. This is an improved version of SieveStreaming which re-samples thresholds once a new (better) lower bound is detected. 
  *  - Stream:  Yes
- *  - Solution: 1/2 - \varepsilon 
- *  - Runtime: O(1)
- *  - Memory: O(K / \varepsilon)
- *  - Function Queries per Element: O(log(K) / \varepsilon)
+ *  - Solution: \f$ 1/2 - \varepsilon \f$
+ *  - Runtime: \f$ O(1) \f$
+ *  - Memory: \f$ O(K / \varepsilon) \f$
+ *  - Function Queries per Element: \f$ O(log(K) / \varepsilon) \f$
  *  - Function Types: nonnegative, monotone submodular functions
  * 
- * See also:
- *   - Kazemi, E., Mitrovic, M., Zadimoghaddam, M., Lattanzi, S., & Karbasi, A. (2019). Submodular streaming in all its glory: Tight approximation, minimum memory and low adaptive complexity. 36th International Conference on Machine Learning, ICML 2019, 2019-June, 5767–5784. Retrieved from http://proceedings.mlr.press/v97/kazemi19a/kazemi19a.pdf
+ * __References__
+ * 
+ * [1] Kazemi, E., Mitrovic, M., Zadimoghaddam, M., Lattanzi, S., & Karbasi, A. (2019). Submodular streaming in all its glory: Tight approximation, minimum memory and low adaptive complexity. 36th International Conference on Machine Learning, ICML 2019, 2019-June, 5767–5784. Retrieved from http://proceedings.mlr.press/v97/kazemi19a/kazemi19a.pdf
  * @note Since this is an extension of SieveStreaming it seems likely that this class should be an extension of SieveStreaming. However, I decided against this, since the actual benefit by this is minimal. The `fit` is substantially different from SieveStreaming and the internal Sieve class uses a slightly different thresholding rule. Thus I decided to separate both implementations.  
 */
 class SieveStreamingPP : public SubmodularOptimizer {
@@ -104,7 +105,7 @@ public:
      * 
      * @param K The cardinality constraint you of the optimization problem, that is the number of items selected.
      * @param f The function which should be maximized. Note, that the `clone' function is used to construct a new SubmodularFunction which is owned by this object. If you implement a custom SubmodularFunction make sure that everything you need is actually cloned / copied.  
-     * @param m The maximum value of the singleton set, m = max_e f({e}) 
+     * @param m The maximum value of the singleton set, \f$ m = max_e f({e}) \f$
      * @param epsilon The sampling accuracy for threshold generation
      */
     SieveStreamingPP(unsigned int K, SubmodularFunction & f, data_t m, data_t epsilon) 
@@ -121,7 +122,7 @@ public:
      * 
      * @param K The cardinality constraint you of the optimization problem, that is the number of items selected.
      * @param f The function which should be maximized. Note, that this parameter is likely moved and not copied. Thus, if you construct multiple optimizers with the __same__ function they all reference the __same__ function. This can be very efficient for state-less functions, but may lead to weird side effects if f keeps track of a state. 
-     * @param m The maximum value of the singleton set, m = max_e f({e}) 
+     * @param m The maximum value of the singleton set, \f$ m = max_e f({e}) \f$
      * @param epsilon The sampling accuracy for threshold generation
      */
     SieveStreamingPP(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f, data_t m, data_t epsilon) 
@@ -157,7 +158,7 @@ public:
     }
 
     /**
-     * @brief  Consume the next object in the data stream. This checks for each sieve if the given object exceeds the marginal gain thresholdhold and adds it to the corresponding solution.
+     * @brief  Consume the next object in the data stream. This checks for each sieve if the given object exceeds the marginal gain threshold and adds it to the corresponding solution.
      * 
      * @note   
      * @param  &x: A constant reference to the next object on the stream.

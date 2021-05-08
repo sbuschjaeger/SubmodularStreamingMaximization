@@ -13,7 +13,8 @@ from PySSM import SieveStreaming
 from PySSM import SieveStreamingPP
 from PySSM import ThreeSieves 
 
-def logdet(X):
+# Compute the kernel matrix + its logdet
+def ivm(X):
     X = np.array(X)
     K = X.shape[0]
     kmat = np.zeros((K,K))
@@ -28,6 +29,7 @@ def logdet(X):
                 kmat[j][i] = kval / 1.0**2
     return slogdet(kmat)[1]
 
+# This is a dummy implementation of the IVM function which caches the kernel matrix
 class FastLogdet(SubmodularFunction):
     def __init__(self, K):
         super().__init__()
@@ -80,23 +82,10 @@ class FastLogdet(SubmodularFunction):
     def clone(self):
         return FastLogdet(self.K)
 
-        # print("CLONE")
-        # cloned = FastLogdet.__new__(FastLogdet)
-        # print(cloned)
-        # # clone C++ state
-        # #SubmodularFunction.__init__(self, cloned)
-        # FastLogdet.__init__(self, self.K)
-        # # clone Python state
-        # cloned.__dict__.update(self.__dict__)
-        # print("CLONE DONE")
-        # print(cloned.__call__)
-        # print(self.__call__)
-        # return cloned
-
     def __call__(self, X):
-        return logdet(X)
+        return ivm(X)
     
-
+# Generate some dummy data
 X = [
     [0, 0],
     [1, 1],
@@ -109,26 +98,16 @@ X = [
 ]
 
 K = 3
-# optimizers = [SieveStreaming] #Greedy, Random
-# for clazz in optimizers:
-# kernel = RBFKernel(sigma=1,scale=1)
-# slowIVM = IVM(kernel = kernel, sigma = 1.0)
+# Test a few optimizers with their default parameters on the FastLogdet class from above
+optimizers = [SieveStreaming, Greedy, Random, ThreeSieves] 
+for clazz in optimizers:
+    kernel = RBFKernel(sigma=1,scale=1)
+    ivm = FastLogdet(kernel = kernel, sigma = 1.0)
 
-# opt = clazz(K, slowIVM)
-#opt = clazz(K, logdet)
-# fastLogDet = FastLogdet(K)
-# opt = SieveStreaming(K, fastLogDet, 2.0, 0.1)
-# opt = SieveStreamingPP(K, fastLogDet, 2.0, 0.1)
+    opt = clazz(K, ivm)
+    opt.fit(X)
+    fval = opt.get_fval()
+    solution = np.array(opt.get_solution())
 
-fastLogDet = FastLogdet(K)
-opt = ThreeSieves(K, fastLogDet, 2.0, 0.1, "sieve", T = 100)
-
-opt.fit(X)
-#for x in X:
-#    opt.next(x)
-
-fval = opt.get_fval()
-solution = np.array(opt.get_solution())
-
-print("Found a solution with fval = {}".format(fval))
-print(solution)
+    print("Found a solution with fval = {}".format(fval))
+    print(solution)

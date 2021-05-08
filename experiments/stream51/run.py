@@ -103,17 +103,31 @@ Ts = [250, 500, 1000, 1500, 2000, 2500, 5000]
 #Sigmas = np.array([0.1, 0.5, 1.0, 2.0, 5.0])*np.sqrt(X.shape[1])
 Sigmas = [0.1*np.sqrt(X.shape[1]), 0.25*np.sqrt(X.shape[1])]
 
-basecfg = {
-    "out_path":"results",
-    "backend":"ray",
-    "address":"129.217.30.245:6379",
-    "redis_password":"5241590000000000",
-    "num_cpus":1,
-    "max_memory":4*1024*1024*1024, # 4 GB
-    "pre": pre,
-    "post": post,
-    "fit": fit
-}
+parser = argparse.ArgumentParser()
+parser.add_argument("-s", "--single", help="Run experiments in a single thread",action="store_true", default=True)
+
+args = parser.parse_args()
+if args.single:
+    basecfg = {
+        "out_path":"results",
+        "backend":"local",
+        "num_cpus":1,
+        "pre": pre,
+        "post": post,
+        "fit": fit,
+    }
+else:
+    basecfg = {
+        "out_path":"results",
+        "backend":"ray",
+        "address":"129.217.30.245:6379",
+        "redis_password":"5241590000000000",
+        "num_cpus":1,
+        "max_memory":4*1024*1024*1024, # 4 GB
+        "pre": pre,
+        "post": post,
+        "fit": fit
+    }
 
 results = []
 

@@ -15,18 +15,19 @@
 /**
  * @brief  Independent Set Improvement for submodular functions. This optimizer stores the marginal gain ("weight") of each element upon arrival and replaces an element if its gain is at-least twice as large as the smallest gain currently stored in the summary. The gains are __not__ recomputed if the summary changes and thus are somewhat independent from the current solution and hence the name: 
  *  - Stream:  No
- *  - Solution: 1/4
- *  - Runtime: O(N)
- *  - Memory: O(K)
- *  - Function Queries per Element: O(1)
+ *  - Solution: \f$ 1/4 \f$
+ *  - Runtime: \f$ O(N) \f$
+ *  - Memory: \f$ O(K) \f$
+ *  - Function Queries per Element: \f$ O(1) \f$
  *  - Function Types: nonnegative submodular functions
  * 
  * Parts of this algorithms are proposed in the appendix of [1], but this might not be enough to fully replicate the algorithm. Many thanks to Sagar Kale who helped with the implementation by answering my many questions via email.
  * 
- * See also :
- * - [1] Chakrabarti, Amit, and Sagar Kale. "Submodular maximization meets streaming: Matchings, matroids, and more." Mathematical Programming 154.1 (2015): 225-247.
+ * __References__
  * 
- * @note   This implementation uses a priority queue for managing the weights of each item. Thus, there is a O(log K) overhead when inserting new elements. 
+ * [1] Chakrabarti, Amit, and Sagar Kale. "Submodular maximization meets streaming: Matchings, matroids, and more." Mathematical Programming 154.1 (2015): 225-247.
+ * 
+ * @note   This implementation uses a priority queue for managing the weights of each item. Thus, there is a \f$ O(log K) \f$ overhead when inserting new elements. 
  * @retval None
  */
 class IndependentSetImprovement : public SubmodularOptimizer {
@@ -94,8 +95,8 @@ public:
 
     /**
      * @brief  Consume the next object in the data stream:
-     * If there are fewer than K elements in the summary: Unconditionally accept the current, compute the function value and weight and update the priority queue of weights. Runtime is O(log K) + 1 function query 
-     * If there are more than K elements in the summary: Compute the current function value and check if the weight is at-least twice as large as the smallest weight in the summary. If so, replace it. Runtime is O(1) (no update) or O(log K) (insert new element) + 1 function query
+     * If there are fewer than K elements in the summary: Unconditionally accept the current, compute the function value and weight and update the priority queue of weights. Runtime is \f$ O(log K) + 1 \f$ function query 
+     * If there are more than K elements in the summary: Compute the current function value and check if the weight is at-least twice as large as the smallest weight in the summary. If so, replace it. Runtime is \f$ O(1) \f$ (no update) or \f$ O(log K) \f$ (insert new element) + 1 function query
      * 
      * @note   
      * @param  &x: A constant reference to the next object on the stream.
@@ -109,7 +110,7 @@ public:
             data_t w = f->peek(solution, x, solution.size()) - fval;
             f->update(solution, x, solution.size());
             solution.push_back(x);
-            ids.push_back(id.value());
+            if (id.has_value()) ids.push_back(id.value());
             weights.push(Pair(w, Kcur));
         } else {
             Pair to_replace = weights.top();

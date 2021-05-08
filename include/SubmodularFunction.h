@@ -13,10 +13,10 @@
 
 /**
  * @brief  Interface class which every submodular function should implement. Is is expected by all optimizers. This interface offers a convenient way to implement stateful submodular functions. Each submodular function must offer four functions: 
- * - operator()
- * - peek 
- * - update 
- * - clone 
+ * - `operator()`
+ * - `peek` 
+ * - `update` 
+ * - `clone` 
  * as detailed below. The SubmodularOptimizer class are expected to use `peek` whenever they ask for a function value and to use `update` whenever a new element is added to the solution. The clone function should implement a deep copy of the object. For state-less functions there is also a SubmodlarFunctonWrapper available which expects a lambda / std::function.
  * @note   
  * @retval None
@@ -31,7 +31,7 @@ public:
      * @note   
      * @param  cur_solution: The current solution.
      * @param  x: The item which we would hypothetically add to the solution.
-     * @param  pos: The position at which we would add x. Note that it holds: 0 <= pos < K
+     * @param  pos: The position at which we would add x. Note that it holds: \f$ 0 \le pos < K \f$
      * @retval The function value if we would add x to cur_solution at position pos 
      */
     virtual data_t peek(std::vector<std::vector<data_t>> const &cur_solution, std::vector<data_t> const &x, unsigned int pos) = 0; 
@@ -41,7 +41,7 @@ public:
      * @note   
      * @param  cur_solution: The current solution.
      * @param  x: The item which we add to the solution.
-     * @param  pos: The position at which we would add x. Note that it holds: 0 <= pos < K
+     * @param  pos: The position at which we would add x. Note that it holds: \f$ 0 \le pos < K \f$
      * @retval None
      */
     virtual void update(std::vector<std::vector<data_t>> const &cur_solution, std::vector<data_t> const &x, unsigned int pos) = 0;
@@ -123,7 +123,7 @@ public:
     void update(std::vector<std::vector<data_t>> const &cur_solution, std::vector<data_t> const &x, unsigned int pos) {}
     
     /**
-     * @brief  Implements the clone method. Note, that it is very likely that the std::function `f' has been moved into this object and similarly, we will move it into the clone as-well. This is okay, as long as `f' is a stateless function. However, if `f' has some internal state, then the other optimizers will use the __same__ function with the shared statte which will probably lead to weird side-effects. In this case consider implementing a proper SubmodularFunction.  
+     * @brief  Implements the clone method. Note, that it is very likely that the std::function `f' has been moved into this object and similarly, we will move it into the clone as-well. This is okay, as long as `f' is a stateless function. However, if `f' has some internal state, then the other optimizers will use the __same__ function with the shared state which will probably lead to weird side-effects. In this case consider implementing a proper SubmodularFunction.  
      * @note   
      * @retval The cloned object.
      */

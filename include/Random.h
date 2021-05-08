@@ -10,17 +10,18 @@
 
 
 /**
- * @brief The Random Optimizers for submodular functions. It randomly picks K elements as a solution. For streaming, Reservoir Sampling is used.
+ * @brief The Random Optimizers for submodular functions. It randomly picks K elements as a solution. For streaming, Reservoir Sampling is used. Feige et al. showed in [1] that a uniform random sample for unconstrained is a 1/4 approximation in expectation, but for constraint maximization problems no such result is known.
  *  - Stream:  Yes
- *  - Solution: 1/4
- *  - Runtime: O(N)
- *  - Memory: O(K)
- *  - Function Queries per Element: O(1) (In case of Reservoir Sampling to maintain a consistent function value)
+ *  - Solution: no guarantee
+ *  - Runtime: \f$ O(N) \f$
+ *  - Memory: \f$ O(K) \f$
+ *  - Function Queries per Element: \f$ O(1) \f$ (In case of Reservoir Sampling to maintain a consistent function value)
  *  - Function Types: nonnegative submodular functions
  * 
- * See also :
- *   - Feige, U., Mirrokni, V. S., & Vondrák, J. (2011). Maximizing non-monotone submodular functions. SIAM Journal on Computing. https://doi.org/10.1137/090779346
- *   - Vitter, J. S. (1985). Random Sampling with a Reservoir. ACM Transactions on Mathematical Software (TOMS). https://doi.org/10.1145/3147.3165
+ * __References__:
+ * 
+ * [1] Feige, U., Mirrokni, V. S., & Vondrák, J. (2011). Maximizing non-monotone submodular functions. SIAM Journal on Computing. https://doi.org/10.1137/090779346
+ * [2] Vitter, J. S. (1985). Random Sampling with a Reservoir. ACM Transactions on Mathematical Software (TOMS). https://doi.org/10.1145/3147.3165
  * @note   
  */
 class Random : public SubmodularOptimizer {
@@ -29,7 +30,7 @@ protected:
     std::default_random_engine generator;
 
     /**
-     * @brief  Sample k elements from the range [1, N] without replacement. Caller needs to make sure that k <= N. The runtime is O(k) and memory is O(k)
+     * @brief  Sample k elements from the range \f$ [1, N] \f$ without replacement. Caller needs to make sure that \f$ k \le N \f$. The runtime is \f$ O(k) \f$ and memory is \f$ O(k) \f$
      * @note   Basically copied from https://www.gormanalysis.com/blog/random-numbers-in-cpp/#sampling-without-replacement
      * @param  k: The number of samples to be selected
      * @param  N: The upper bound of the interval to sample from

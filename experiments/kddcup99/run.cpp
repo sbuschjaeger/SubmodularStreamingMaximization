@@ -18,6 +18,7 @@
 #include "DataTypeHandling.h"
 #include "IndependentSetImprovement.h"
 
+// Read the ARFF given by the path 
 std::vector<std::vector<data_t>> read_arff(std::string const& path) {
     std::vector<std::vector<data_t>> X; 
 
@@ -50,6 +51,7 @@ std::vector<std::vector<data_t>> read_arff(std::string const& path) {
     return X;
 }
 
+// Evaluate the optimizer on the given dataset X
 auto evaluate_optimizer(SubmodularOptimizer &opt, std::vector<std::vector<data_t>> &X) {
     auto start = std::chrono::steady_clock::now();
     opt.fit(X);
@@ -60,6 +62,7 @@ auto evaluate_optimizer(SubmodularOptimizer &opt, std::vector<std::vector<data_t
     return std::make_tuple(fval, runtime_seconds.count(), opt.get_num_elements_stored(), opt.get_num_candidate_solutions());
 }
 
+// A helper function to print the current solution to the terminal
 std::string to_string(std::vector<std::vector<data_t>> const &solution) {
     std::string s;
 
@@ -89,15 +92,11 @@ int main() {
 
     auto K = 50;
 
-    // IVM slowIVM(RBFKernel( std::sqrt(data[0].size()), 1.0) , 1.0);
-    // std::cout << "Selecting " << K << " representatives via slow IVM without vectorization Greedy" << std::endl;
-    // Greedy slowGreedy(K, slowIVM);
-    // auto res = evaluate_optimizer(slowGreedy, data);
-    // std::cout << "\t fval:\t\t" << std::get<0>(res) << "\n\t runtime:\t" << std::get<1>(res) << "s\n\n" << std::endl;
-
+    // Define the function to be maximized
     FastIVM fastIVM(K, RBFKernel( std::sqrt(data[0].size()), 1.0) , 1.0);
     std::tuple<data_t, double, unsigned long, unsigned int> res;
     
+    // Execute all optimizers with their parameters
     std::cout << "Selecting " << K << " representatives via fast IVM with Greedy" << std::endl;
     Greedy fastGreedy(K, fastIVM);
     res = evaluate_optimizer(fastGreedy, data);

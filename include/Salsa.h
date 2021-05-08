@@ -12,15 +12,17 @@
 /**
  * @brief  The Salsa optimizer for submodular functions. This algorithms runs multiple copies of different thresholding strategies in parallel. Some of these strategies require additional information about the datastream such as its length and thus this algorithm might not be applicable in a "real" streaming scenario
  *  - Stream:  (Yes)
- *  - Solution: 1/2 - \varepsilon 
- *  - Runtime: O(1)
- *  - Memory: O(K * log(K) / \varepsilon)
- *  - Function Queries per Element: O(log(K) / \varepsilon)
+ *  - Solution: \f$1/2 - \varepsilon\f$
+ *  - Runtime: \f$O(1)\f$
+ *  - Memory: \f$O(K \cdot log(K) / \varepsilon)\f$
+ *  - Function Queries per Element: \f$O(log(K) / \varepsilon)\f$
  *  - Function Types: nonnegative, monotone submodular functions
  * 
- * See also :
- *   -  [1] Norouzi-Fard, A., Tarnawski, J., Mitrovic, S., Zandieh, A., Mousavifar, A. & Svensson, O.. (2018). Beyond 1/2-Approximation for Submodular Maximization on Massive Data Streams. Proceedings of the 35th International Conference on Machine Learning, in PMLR 80:3829-3838 
- *   - [2] Norouzi-Fard, A., Tarnawski, J., Mitrovic, S., Zandieh, A., Mousavifar, A. & Svensson, O.. (2018). Beyond 1/2-Approximation for Submodular Maximization on Massive Data Streams. https://arxiv.org/abs/1808.01842
+ * __References__
+ * 
+ * [1] Norouzi-Fard, A., Tarnawski, J., Mitrovic, S., Zandieh, A., Mousavifar, A. & Svensson, O.. (2018). Beyond 1/2-Approximation for Submodular Maximization on Massive Data Streams. Proceedings of the 35th International Conference on Machine Learning, in PMLR 80:3829-3838 
+ * 
+ * [2] Norouzi-Fard, A., Tarnawski, J., Mitrovic, S., Zandieh, A., Mousavifar, A. & Svensson, O.. (2018). Beyond 1/2-Approximation for Submodular Maximization on Massive Data Streams. https://arxiv.org/abs/1808.01842
  * @note   
  * @retval None
  */
@@ -28,7 +30,7 @@ class Salsa : public SubmodularOptimizer {
 protected:
 
     /**
-     * @brief  Fixed thresholding strategy (Algorithm 2 in [1]). This basically simulates the thresholding strategy of SieveStreaming with a slightly different sampling strategy for the thresholds. In the original version OPT is known and different epsilon are used to "sample" different thresholds. As detailed in the longer version [2] of the paper, we can estimate OPT via $O = \{(1+\varepsilon)^i \mid i \in \mathbb{Z}, m \le (1+\varepsilon)^i \le K \cdot m\}$ where m = \max f({m}) is the maximum singleton function value. 
+     * @brief  Fixed thresholding strategy (Algorithm 2 in [1]). This basically simulates the thresholding strategy of SieveStreaming with a slightly different sampling strategy for the thresholds. In the original version OPT is known and different epsilon are used to "sample" different thresholds. As detailed in the longer version [2] of the paper, we can estimate OPT via \f$O = \{(1+\varepsilon)^i \mid i \in \mathbb{Z}, m \le (1+\varepsilon)^i \le K \cdot m\}\f$ where m = \max f({m}) is the maximum singleton function value. 
      * @note   This class is basically also implemented in SieveStreaming and SieveStreamingPP. I decided against a unified class for these Sieves, since the thresholding rules are often slightly different from paper to paper. I tried to stick as close as possible to the pseudocode in the papers.
      * @retval None
      */
@@ -101,7 +103,7 @@ protected:
     };
 
     /**
-     * @brief  Dense thresholding strategy (Algorithm 1 in [1]). This basically simulates the SimpleGreedy / PreemptionStreaming algalgorithm with a slightly different sampling strategy for the thresholds. In the original version OPT is known and different epsilon are used to "sample" different thresholds. As detailed in the longer version [2] of the paper, we can estimate OPT via $O = \{(1+\varepsilon)^i \mid i \in \mathbb{Z}, m \le (1+\varepsilon)^i \le K \cdot m\}$ where m = \max f({m}) is the maximum singleton function value. 
+     * @brief  Dense thresholding strategy (Algorithm 1 in [1]). This basically simulates the SimpleGreedy / PreemptionStreaming algalgorithm with a slightly different sampling strategy for the thresholds. In the original version OPT is known and different epsilon are used to "sample" different thresholds. As detailed in the longer version [2] of the paper, we can estimate OPT via \f$O = \{(1+\varepsilon)^i \mid i \in \mathbb{Z}, m \le (1+\varepsilon)^i \le K \cdot m\}\f$ where m = \max f({m}) is the maximum singleton function value. 
      * @note   
      * @retval None
      */
@@ -129,9 +131,9 @@ protected:
          * @param K The cardinality constraint you of the optimization problem, that is the number of items selected.
          * @param f The function which should be maximized. Note, that the `clone' function is used to construct a new SubmodularFunction which is owned by this object. If you implement a custom SubmodularFunction make sure that everything you need is actually cloned / copied.
          * @param  threshold: The (sampled) OPT threshold
-         * @param  beta: The $$\beta$$ parameter
-         * @param  C1: The $$\C_1$$ parameter
-         * @param  C2: The $$C_2$$ parameter
+         * @param  beta: The \f$\beta\f$ parameter
+         * @param  C1: The \f$\C_1\f$ parameter
+         * @param  C2: The \f$C_2\f$ parameter
          * @param  N: The number of items in the datastream
          * @retval A newly constructed Dense object
          */
@@ -144,9 +146,9 @@ protected:
          * @param K The cardinality constraint you of the optimization problem, that is the number of items selected.
          * @param f The function which should be maximized. Note, that this parameter is likely moved and not copied. Thus, if you construct multiple optimizers with the __same__ function they all reference the __same__ function. This can be very efficient for state-less functions, but may lead to weird side effects if f keeps track of a state.
          * @param  threshold: The (sampled) OPT threshold
-         * @param  beta: The $$\beta$$ parameter
-         * @param  C1: The $$\C_1$$ parameter
-         * @param  C2: The $$C_2$$ parameter
+         * @param  beta: The \f$\beta\f$ parameter
+         * @param  C1: The \f$\C_1\f$ parameter
+         * @param  C2: The \f$C_2\f$ parameter
          * @param  N: The number of items in the datastream
          * @retval A newly constructed Dense object
          */
@@ -200,7 +202,7 @@ protected:
     };
 
     /**
-     * @brief  High-Low thresholding strategy (Algorithm 3 in [1]). This basically combines Dense and FixedThresholding. In the original version OPT is known and different epsilon are used to "sample" different thresholds. As detailed in the longer version [2] of the paper, we can estimate OPT via $O = \{(1+\varepsilon)^i \mid i \in \mathbb{Z}, m \le (1+\varepsilon)^i \le K \cdot m\}$ where m = \max f({m}) is the maximum singleton function value. 
+     * @brief  High-Low thresholding strategy (Algorithm 3 in [1]). This basically combines Dense and FixedThresholding. In the original version OPT is known and different epsilon are used to "sample" different thresholds. As detailed in the longer version [2] of the paper, we can estimate OPT via \f$O = \{(1+\varepsilon)^i \mid i \in \mathbb{Z}, m \le (1+\varepsilon)^i \le K \cdot m\}\f$ where m = \max f({m}) is the maximum singleton function value. 
      * @note   
      * @retval None
      */
@@ -227,10 +229,10 @@ protected:
          * 
          * @param K The cardinality constraint you of the optimization problem, that is the number of items selected.
          * @param f The function which should be maximized. Note, that the `clone' function is used to construct a new SubmodularFunction which is owned by this object. If you implement a custom SubmodularFunction make sure that everything you need is actually cloned / copied.
-         * @param  epsilon: The $$\epsilon$$ parameter
+         * @param  epsilon: The \f$\epsilon\f$ parameter
          * @param  threshold: The (sampled) OPT threshold
-         * @param  beta: The $$\beta$$ parameter
-         * @param  delta: The $$\delta$$ parameter
+         * @param  beta: The \f$\beta\f$ parameter
+         * @param  delta: The \f$\delta\f$ parameter
          * @param  N: The number of items in the datastream
          * @retval A newly constructed HighLowThreshold object
          */
@@ -242,10 +244,10 @@ protected:
          * 
          * @param K The cardinality constraint you of the optimization problem, that is the number of items selected.
          * @param f The function which should be maximized. Note, that this parameter is likely moved and not copied. Thus, if you construct multiple optimizers with the __same__ function they all reference the __same__ function. This can be very efficient for state-less functions, but may lead to weird side effects if f keeps track of a state.
-         * @param  epsilon: The $$\epsilon$$ parameter
+         * @param  epsilon: The \f$\epsilon\f$ parameter
          * @param  threshold: The (sampled) OPT threshold
-         * @param  beta: The $$\beta$$ parameter
-         * @param  delta: The $$\delta$$ parameter
+         * @param  beta: The \f$\beta\f$ parameter
+         * @param  delta: The \f$\delta\f$ parameter
          * @param  N: The number of items in the datastream
          * @retval A newly constructed HighLowThreshold object
          */
@@ -329,14 +331,14 @@ public:
      * @param K The cardinality constraint you of the optimization problem, that is the number of items selected.
      * @param f The function which should be maximized. Note, that the `clone' function is used to construct a new SubmodularFunction which is owned by this object. If you implement a custom SubmodularFunction make sure that everything you need is actually cloned / copied.
      * @param  m: The maximum singleton function value m = \max f({m}).
-     * @param  epsilon: The $$\varepsilon$$ parameter used to sample different thresholds via the "SieveStreaming" rule $O = \{(1+\varepsilon)^i \mid i \in \mathbb{Z}, m \le (1+\varepsilon)^i \le K \cdot m\}$ where m = \max f({m}) is the maximum singleton function value.
-     * @param  hilow_epsilon: The $$\epsilon$$ parameter of the High-Low thresholding algorithm
-     * @param  hilow_beta: The $$\beta$$ parameter of the High-Low thresholding algorithm
-     * @param  hilow_delta: The $$\delta$$ parameter of the High-Low thresholding algorithm
-     * @param  dense_beta: The $$\beta$$ parameter of the Dense thresholding algorithm
-     * @param  dense_C1: The $$C_1$$ parameter of the Dense thresholding algorithm
-     * @param  dense_C2: The $$C_2$$ parameter of the Dense thresholding algorithm
-     * @param  fixed_epsilon: The $$\epsilon$$ parameter of the Fixed thresholding algorithm
+     * @param  epsilon: The \f$\varepsilon\f$ parameter used to sample different thresholds via the "SieveStreaming" rule \f$O = \{(1+\varepsilon)^i \mid i \in \mathbb{Z}, m \le (1+\varepsilon)^i \le K \cdot m\}\f$ where \f$m = \max f({m})\f$ is the maximum singleton function value.
+     * @param  hilow_epsilon: The \f$\epsilon\f$ parameter of the High-Low thresholding algorithm
+     * @param  hilow_beta: The \f$\beta\f$ parameter of the High-Low thresholding algorithm
+     * @param  hilow_delta: The \f$\delta\f$ parameter of the High-Low thresholding algorithm
+     * @param  dense_beta: The \f$\beta\f$ parameter of the Dense thresholding algorithm
+     * @param  dense_C1: The \f$C_1\f$ parameter of the Dense thresholding algorithm
+     * @param  dense_C2: The \f$C_2\f$ parameter of the Dense thresholding algorithm
+     * @param  fixed_epsilon: The \f$\epsilon\f$ parameter of the Fixed thresholding algorithm
      * @retval The newly created Salsa object.
      */
     Salsa(unsigned int K, SubmodularFunction & f, data_t m, data_t epsilon,
@@ -364,14 +366,14 @@ public:
      * @param K The cardinality constraint you of the optimization problem, that is the number of items selected.
      * @param f The function which should be maximized. Note, that this parameter is likely moved and not copied. Thus, if you construct multiple optimizers with the __same__ function they all reference the __same__ function. This can be very efficient for state-less functions, but may lead to weird side effects if f keeps track of a state.
      * @param  m: The maximum singleton function value m = \max f({m}).
-     * @param  epsilon: The $$\varepsilon$$ parameter used to sample different thresholds via the "SieveStreaming" rule $O = \{(1+\varepsilon)^i \mid i \in \mathbb{Z}, m \le (1+\varepsilon)^i \le K \cdot m\}$ where m = \max f({m}) is the maximum singleton function value.
-     * @param  hilow_epsilon: The $$\epsilon$$ parameter of the High-Low thresholding algorithm
-     * @param  hilow_beta: The $$\beta$$ parameter of the High-Low thresholding algorithm
-     * @param  hilow_delta: The $$\delta$$ parameter of the High-Low thresholding algorithm
-     * @param  dense_beta: The $$\beta$$ parameter of the Dense thresholding algorithm
-     * @param  dense_C1: The $$C_1$$ parameter of the Dense thresholding algorithm
-     * @param  dense_C2: The $$C_2$$ parameter of the Dense thresholding algorithm
-     * @param  fixed_epsilon: The $$\epsilon$$ parameter of the Fixed thresholding algorithm
+     * @param  epsilon: The \f$\varepsilon\f$ parameter used to sample different thresholds via the "SieveStreaming" rule \f$O = \{(1+\varepsilon)^i \mid i \in \mathbb{Z}, m \le (1+\varepsilon)^i \le K \cdot m\}\f$ where \f$m = \max f({m})\f$ is the maximum singleton function value.
+     * @param  hilow_epsilon: The \f$\epsilon\f$ parameter of the High-Low thresholding algorithm
+     * @param  hilow_beta: The \f$\beta\f$ parameter of the High-Low thresholding algorithm
+     * @param  hilow_delta: The \f$\delta\f$ parameter of the High-Low thresholding algorithm
+     * @param  dense_beta: The \f$\beta\f$ parameter of the Dense thresholding algorithm
+     * @param  dense_C1: The \f$C_1\f$ parameter of the Dense thresholding algorithm
+     * @param  dense_C2: The \f$C_2\f$ parameter of the Dense thresholding algorithm
+     * @param  fixed_epsilon: The \f$\epsilon\f$ parameter of the Fixed thresholding algorithm
      * @retval The newly created Salsa object.
      */
     Salsa(unsigned int K, 

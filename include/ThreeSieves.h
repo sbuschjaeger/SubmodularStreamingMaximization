@@ -10,18 +10,20 @@
 #include <string>
 
 /**
- * @brief  The ThreeSieves algorithm for submodular function maximization. This optimizer tries to estimate the probability that a given item is not `out-valued' in the future. To do so, it compares the marginal gain of each item against a pre-computed threshold. If this threshold is too large and the algorithm therefore rejects most items, it reduces the threshold after T tries. The confidence interval of not finding an element in the stream which would out-value the current threshold is given by the Rule Of Three, hence the name:
+ * @brief  The ThreeSieves algorithm for submodular function maximization. This optimizer tries to estimate the probability that a given item is not `out-valued' in the future. To do so, it compares the marginal gain of each item against a pre-computed threshold. If this threshold is too large and the algorithm therefore rejects most items, it reduces the threshold after \f$ T \f$ tries. The confidence interval of not finding an element in the stream which would out-value the current threshold is given by the Rule Of Three, hence the name:
  *  - Stream:  Yes
- *  - Solution: (1-\varepsilon)(1-1/\exp(1)) with probability (1-\alpha)^K
- *  - Runtime: O(N)
- *  - Memory: O(K)
- *  - Function Queries per Element: O(1)
+ *  - Solution: \f$ (1-\varepsilon)(1-1/\exp(1)) with probability (1-\alpha)^K \f$
+ *  - Runtime: \f$ O(N) \f$
+ *  - Memory: \f$ O(K) \f$
+ *  - Function Queries per Element: \f$ O(1) \f$
  *  - Function Types: nonnegative submodular functions
  * 
- * Internally, this algorithm also uses a novelty threshold similar to SieveStreaming, but only maintains a single sieve. After T unsuccessful tries of adding an element to the summary, it reduces the threshold. This can either be a constant value (CONSTANT strategy) or by using the next smallest threshold from {(1+epsilon)^i  | i \in Z, lower \le (1+epsilon)^i \le upper} similar to SieveStreaming (SIEVE strategy). 
+ * Internally, this algorithm also uses a novelty threshold similar to SieveStreaming, but only maintains a single sieve. After T unsuccessful tries of adding an element to the summary, it reduces the threshold. This can either be a constant value (CONSTANT strategy) or by using the next smallest threshold from \f$ {(1+epsilon)^i  | i \in Z, lower \le (1+epsilon)^i \le upper} \f$ similar to SieveStreaming (SIEVE strategy). 
  * 
- * See also :
- * - TODO: publish paper
+ * __References__:
+ * 
+ * [1] The paper is currently under review.
+ * 
  * @note   
  * @retval None
  */
@@ -30,7 +32,7 @@ class ThreeSieves : public SubmodularOptimizer {
 public:
     /**
      * @brief  The different strategies to reduce the threshold after T unsuccessful tries.
-     *          SIEVE: Start with the largest threshold in {(1+epsilon)^i  | i \in Z, lower \le (1+epsilon)^i \le upper} and use the next largest as the new threshold
+     *          SIEVE: Start with the largest threshold in \f$ {(1+epsilon)^i  | i \in Z, lower \le (1+epsilon)^i \le upper} \f$ and use the next largest as the new threshold
      *          CONSTANT: Reduce the threshold by a constant epsilon 
      * @note   
      * @retval None
