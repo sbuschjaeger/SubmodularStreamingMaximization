@@ -12,6 +12,7 @@ dependencies:
   - pandas
   - scikit-learn
   - tqdm
+  - sphinx
   - pylint
   - plotly # Technically not a dependency, but still nice to have for browsing results
   - plotly-orca # Technically not a dependency, but still nice to have for browsing results
