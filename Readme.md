@@ -1,54 +1,8 @@
-# Very Fast Streaming Submodular Function Maximization
-
-This repository contains the experiments for our paper "Very Fast Streaming Submodular Function Maximization"
-
-## Repository structure
-
-This repository combines code for multiple datasets and two different repositories. It is structured as the following:
-
-- `experiment_runner`: Contains code for the `experiment_runner` package. This is a small tool which we use to run multiple experiments in our computing environment. Basically, the `experiment_runner` accepts a list of experiments and runs these either on multiple machines or in a multi-threaded environment. All results are written to a `*.jsonl`. This code is sparsely documented. For a commented example please have a look at `experiments/kdd99/run.{cpp,py}`.
-- `include/`: Contains the `C++` implementation of all optimizers. You can find more documentation under `docs/html/index.html` including some examples how to use specific optimizers.
-- `tests/run.{py,cpp}`: Contains sample code for `C++` and `Python`
-- `DATASET/run.py`: Contains code to run the experiments on the specific DATASET. 
-- `DATASET/init.sh`: Some datasets must be downloaded manually. In this case you can use the provided `init.sh` to do so.
-- `explore_results.ipynb`: A juypter notebook to plot the results of each experiment
-
-## How to use this code
-For building the code you need:
-
-- CMake >= 3.13
-- C++ 17 compiler (e.g. gcc-7, clang-5)
-- Some newer python version, e.g. python 3.5. However, I never checked which python version breaks this code.
-
-### Using the Python Interface
-
-If you use anaconda to manage your python packages you can use the following commands to install all dependencies:
-    
-    conda env create -f environment.yml  --force
-    conda activate pyssm 
-
-Now you have to install the `experiment_runner` package as well as the `PySSM` package:
-     
-     pip install -e experiment_runner
-     pip install -e .
-
-### Using the C++ interface
-
-The C++ code is header-only so simply include the desired functions in your project and your are good to go. If you have trouble compiling you can look at the `CMakeLists.txt` file which compiles the Python bindings as well as the test files. 
-
-## How to re-run the experiments
-
-All experiments have been performed via the Python interface. Assuming that you followed the instructions above, simply navigate to the specific folder and execute the run file
-    
-    cd experiments/kddcup99
-    ./run.py
-
-
-
-
-
-
 # Submodular Streaming Maximization
+
+NEWS
+
+    - **18.06.2021**: Our paper has been accepted at the ECML/PKDD 2021. Stay tuned for an updated version
 
 This repository includes the code for our paper "Very Fast Streaming Submodular Function Maximization" (https://arxiv.org/abs/2010.10059) which introduces a new  nonnegative submodular function maximization algorithm for streaming data. For our experiments, we also implemented already existing state-of-the-art streaming algorithms for which we could not find an implementation. The code focuses on easy extensibility and accessibility. It is mainly written in header-only C++ with a Python interface via pybind11. 
 
@@ -170,6 +124,20 @@ for (auto x : solution) {
 
 ## How to reproduce the experiments in our paper
 
+This repository combines code for multiple datasets and two different repositories. It is structured as the following:
+
+- `experiment_runner`: Contains code for the `experiment_runner` package. This is a small tool which we use to run multiple experiments in our computing environment. Basically, the `experiment_runner` accepts a list of experiments and runs these either on multiple machines or in a multi-threaded environment. All results are written to a `*.jsonl`. This code is sparsely documented. For a commented example please have a look at `experiments/kdd99/run.{cpp,py}`.
+- `include/`: Contains the `C++` implementation of all optimizers. You can find more documentation under `docs/html/index.html` including some examples how to use specific optimizers.
+- `tests/run.{py,cpp}`: Contains sample code for `C++` and `Python`
+- `DATASET/run.py`: Contains code to run the experiments on the specific DATASET. 
+- `DATASET/init.sh`: Some datasets must be downloaded manually. In this case you can use the provided `init.sh` to do so.
+- `explore_results.ipynb`: A juypter notebook to plot the results of each experiment
+
+All experiments have been performed via the Python interface. Assuming that you followed the instructions above, simply navigate to the specific folder and execute the run file
+    
+    cd experiments/kddcup99
+    ./run.py
+
 In the `experiments` folder you can find code which runs experiments on various dataset via the Python interface. You will probably need to download the data first which can be done using the `init.{sh,py}` scripts provided in each folder. Some notes on this:
 
 - `creditfraud` is hosted on kaggle, which requires the kaggle-api to be installed and configured with an API key. It might be easier to manually download this data-set from kaggle
@@ -177,12 +145,6 @@ In the `experiments` folder you can find code which runs experiments on various 
 - `fact-lowlevel` requires even more additional tools and packages. Please contact sebastian.buschjaeger@tu-dortmund.de if you are interested in these files.
 
 Once the data is downloaded, you can start the experiments by executing `run.py` in the respective folder. This file starts _all_ experiments for a single data-set including all hyperparameter configurations. This may take some time (usually a few hours per data-set) to finish. The experiments are currently configured to launch `15` threads via `joblib`, so make sure your hardware is strong enough or reduce the number of cores by setting `n_cores` at the end of each file. After the experiments finished, you can browse the results by using the `explore_results` Jupyter Notebook. Note that, depending on actual experiments you ran you might want to change the list of `datasets` used for plotting in the second cell of this notebook accordingly.
-
-## To Do 
-
-- [ ] Check if we should introduce a unique id for each example in the summary so that we can query it afterwards
-- [ ] Write more documentation
-- [ ] Write some tests
 
 ## Citing our Paper
 

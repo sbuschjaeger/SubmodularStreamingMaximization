@@ -18,10 +18,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'SubmodularStreamMaximization'
-#copyright = '2021, Sebastian Buschjäger and Philipp-Jan Honysz'
-#author = 'Sebastian Buschjäger and Philipp-Jan Honysz'
-copyright = '2021, Anonymous Author'
-author = 'Anonymous Author'
+copyright = '2021, Sebastian Buschjäger and Philipp-Jan Honysz'
+author = 'Sebastian Buschjäger and Philipp-Jan Honysz'
 
 # -- General configuration ---------------------------------------------------
 
