@@ -7,7 +7,7 @@ on:
 jobs:
   test-cpp:
     runs-on: "ubuntu-latest"
-    name: Prepare conda environment, test python / cpp code and generate docs
+    name: Test cpp code
     #shell: bash -l {0}
     defaults:
       run:
@@ -27,4 +27,3 @@ jobs:
           cmake ..
           make
           ./main
-          github_token: ${{ secrets.GITHUB_TOKEN }}

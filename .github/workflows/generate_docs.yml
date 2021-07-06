@@ -6,7 +6,7 @@ on:
 jobs:
   test-cpp:
     runs-on: "ubuntu-latest"
-    name: Prepare conda environment, test python / cpp code and generate docs
+    name: Generate docs
     #shell: bash -l {0}
     defaults:
       run:
