@@ -1,7 +1,7 @@
 Using the C++ interface
 =======================
 
-The C++ code is header-only so simply include the desired functions in your project and your are good to go. If you have trouble compiling you can look at the ``CMakeLists.txt`` file which compiles the Python bindings as well as the test files For a detailed explanation on specific parameters / functions provided please have a look at the documentation of the individual optimizers. Generally, each optimizer provides
+The C++ code is header-only so simply include the desired functions in your project and your are good to go. However, you require a C++17 compiler (e.g. gcc-7 or clang-5). If you have trouble compiling you can look at the ``CMakeLists.txt`` file which compiles the Python bindings as well as the test files For a detailed explanation on specific parameters / functions provided please have a look at the documentation of the individual optimizers. Generally, each optimizer provides
 
 - ``fit(X)``: Selects a summary of the given data set (batch processing)
 - ``next(x)``: Consumes the next data item from a stream  (stream processing)
@@ -11,7 +11,7 @@ The C++ code is header-only so simply include the desired functions in your proj
 - ``get_num_elements_stored``: Returns the number of elements stored by the optimizer
 - ``get_fval``: Returns the function value
 
-. The following example uses the Greedy optimizer to select a data summary by maximizing the Informative Vector Machine (the full examples can be found in ``tests/main.cpp``\ )
+The following example uses the Greedy optimizer to select a data summary by maximizing the Informative Vector Machine (the full examples can be found in ``tests/main.cpp``\ )
 
 .. code-block:: cpp
 
