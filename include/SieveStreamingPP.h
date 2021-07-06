@@ -9,7 +9,8 @@
 #include <unordered_set>
 
 /**
- * @brief The SieveStreaming optimizer for nonnegative, monotone submodular functions. This is an improved version of SieveStreaming which re-samples thresholds once a new (better) lower bound is detected. 
+ * @brief The SieveStreaming++ optimizer for nonnegative, monotone submodular functions. This is an improved version of SieveStreaming which re-samples thresholds once a new (better) lower bound is detected. Note that this implementation also requires that \f$ m = max_e f({e}) \f$ is known beforehand.
+ * 
  *  - Stream:  Yes
  *  - Solution: \f$ 1/2 - \varepsilon \f$
  *  - Runtime: \f$ O(1) \f$
@@ -17,10 +18,40 @@
  *  - Function Queries per Element: \f$ O(log(K) / \varepsilon) \f$
  *  - Function Types: nonnegative, monotone submodular functions
  * 
+ * Example usage in C++:
+ * @code{.cpp}
+ *  //read some data 
+ *  std::vector<std::vector<data_t>> = read_some_data(); 
+ *  auto K = 50;
+ *  // Define the function to be maximized and select the summary
+ *  FastIVM fastIVM(K, RBFKernel( std::sqrt(data[0].size()), 1.0) , 1.0);
+ *  SieveStreamingPP opt(K, fastIVM, 1.0, 0.1);
+ *  opt.fit(data);
+ *  std::cout << "fval:" << opt.get_fval() << "num_elements: " << opt.get_num_elements_stored() << "num_candidates: " << opt.get_num_candidate_solutions() << std::endl;
+ *  // Process summary
+ *  auto summary = opt.get_solution();
+ * @endcode
+ * 
+ * Example usage in Python:
+ * @code{.py}
+ *  X = read_some_data(); 
+ *  K = 50
+ *  # Create function to be maximized
+ *  kernel = RBFKernel(sigma=sigma,scale=scale)
+ *  fastLogDet = FastIVM(K, kernel, 1.0)
+ *  opt = SieveStreamingPP(K, fastLogDet, 1.0, 0.1)
+ *  opt.fit(X, K)
+ *  print("fval: {} num_elements: {} num_candidates: {}".format(opt.get_fval(), opt.get_num_elements_stored(), opt.get_num_candidate_solutions()))
+ *  # process summary
+ *  summary = opt.get_solution()
+ * @endcode
+ * 
+ * @note Since this is an extension of SieveStreaming it seems likely that this class should be an extension of SieveStreaming. However, I decided against this, since the actual benefit by this is minimal. The `fit` is substantially different from SieveStreaming and the internal Sieve class uses a slightly different thresholding rule. Thus I decided to separate both implementations.  
+ * 
  * __References__
  * 
- * [1] Kazemi, E., Mitrovic, M., Zadimoghaddam, M., Lattanzi, S., & Karbasi, A. (2019). Submodular streaming in all its glory: Tight approximation, minimum memory and low adaptive complexity. 36th International Conference on Machine Learning, ICML 2019, 2019-June, 5767–5784. Retrieved from http://proceedings.mlr.press/v97/kazemi19a/kazemi19a.pdf
- * @note Since this is an extension of SieveStreaming it seems likely that this class should be an extension of SieveStreaming. However, I decided against this, since the actual benefit by this is minimal. The `fit` is substantially different from SieveStreaming and the internal Sieve class uses a slightly different thresholding rule. Thus I decided to separate both implementations.  
+ * - Kazemi, E., Mitrovic, M., Zadimoghaddam, M., Lattanzi, S., & Karbasi, A. (2019). Submodular streaming in all its glory: Tight approximation, minimum memory and low adaptive complexity. 36th International Conference on Machine Learning, ICML 2019, 2019-June, 5767–5784. Retrieved from http://proceedings.mlr.press/v97/kazemi19a/kazemi19a.pdf
+
 */
 class SieveStreamingPP : public SubmodularOptimizer {
 private:
@@ -28,7 +59,6 @@ private:
     /**
      * @brief  A single sieve with its own threshold and accompanying summary.  
      * @note   This class is basically also implemented in SieveStreaming and - to some extend - in Salsa. I decided against a unified class for these Sieves, since the thresholding rules are often slightly different from paper to paper. I tried to stick as close as possible to the pseudocode in the papers.
-     * @retval None
      */
     class Sieve : public SubmodularOptimizer {
         public:
@@ -66,10 +96,8 @@ private:
             /**
              * @brief  Consume the next object in the data stream. This call compares the marginal gain against the given threshold and add the current item to the current solution if it exceeds the given threshold. 
              * 
-             * @note   
              * @param  &x: A constant reference to the next object on the stream.
              * @param  id: The id of the given object. If this is a `std::nullopt` this parameter is ignored. Otherwise the id is inserted into the solution. Make sure, that either _all_ or _no_ object receives an id to keep track which id belongs to which object. This algorithm simply stores the objects and the ids in two separate lists and performs no safety checks.  
-             * @retval None
              */
             void next(std::vector<data_t> const &x, std::optional<idx_t> const id = std::nullopt) {
                 unsigned int Kcur = solution.size();
@@ -136,8 +164,6 @@ public:
 
     /**
      * @brief  Returns the number of sieves.
-     * @note   
-     * @retval The number of sieves.
      */
     unsigned int get_num_candidate_solutions() const {
         return sieves.size();
@@ -145,8 +171,6 @@ public:
 
     /**
      * @brief  Returns the total number of items stored across all sieves.
-     * @note   
-     * @retval The total number of items stored across all sieves.
      */
     unsigned long get_num_elements_stored() const {
         unsigned long num_elements = 0;
@@ -160,10 +184,8 @@ public:
     /**
      * @brief  Consume the next object in the data stream. This checks for each sieve if the given object exceeds the marginal gain threshold and adds it to the corresponding solution.
      * 
-     * @note   
      * @param  &x: A constant reference to the next object on the stream.
      * @param  id: The id of the given object. If this is a `std::nullopt` this parameter is ignored. Otherwise the id is inserted into the solution. Make sure, that either _all_ or _no_ object receives an id to keep track which id belongs to which object. This algorithm simply stores the objects and the ids in two separate lists and performs no safety checks.  
-     * @retval None
      */
     void next(std::vector<data_t> const &x, std::optional<idx_t> const id = std::nullopt) {
         if (lower_bound != fval || sieves.size() == 0) {

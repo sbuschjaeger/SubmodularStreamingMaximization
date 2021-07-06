@@ -12,25 +12,22 @@
 #include "functions/Matrix.h"
 
 /**
- * @brief  This class implements the InformativeVectorMachine [1]:
+ * @brief  This class implements the InformativeVectorMachine:
  *  \f[
  *      f(S) = \frac{1}{2}\log\det\left(\Sigma + \sigma \cdot \mathcal I \right)
  * \f]
  *  where \f$\Sigma\f$ is the kernel matrix of all elements in the summary, \f$ \mathcal I \f$ is the \f$ K \times K \f$ identity matrix and \f$ \sigma > 0 \f$ is a scaling parameter. This implementation is lazy and slow. It recomputes \f$ \Sigma \f$ in every evaluation. For a faster and more practical alternative please have a look at the FastIVM class. This class internally uses the Matrix class for somewhat readable linear algebra.
  * 
  * 
+ * __References__
  * 
- * [1] Herbrich, R., Lawrence, N., & Seeger, M. (2003). Fast Sparse Gaussian Process Methods: The Informative Vector Machine. In S. Becker, S. Thrun, & K. Obermayer (Eds.), Advances in Neural Information Processing Systems (Vol. 15, pp. 625–632). MIT Press. Retrieved from https://proceedings.neurips.cc/paper/2002/file/d4dd111a4fd973394238aca5c05bebe3-Paper.pdf
-
- * @note   
- * @retval None
+ * - Herbrich, R., Lawrence, N., & Seeger, M. (2003). Fast Sparse Gaussian Process Methods: The Informative Vector Machine. In S. Becker, S. Thrun, & K. Obermayer (Eds.), Advances in Neural Information Processing Systems (Vol. 15, pp. 625–632). MIT Press. Retrieved from https://proceedings.neurips.cc/paper/2002/file/d4dd111a4fd973394238aca5c05bebe3-Paper.pdf
  */
 class IVM : public SubmodularFunction {
 protected:
 
     /**
      * @brief  Computes the kernel similarity \Sigma + \sigma \cdot \mathcal I between all pairs in X
-     * @note   
      * @param  &X: The current summary 
      * @param  sigma: Scaling for main-diagonal
      * @retval The \f$K \times K\f$ kernel matrix
@@ -109,7 +106,6 @@ public:
 
     /**
      * @brief  Does nothing and only exists for compatibility reasons.
-     * @note   
      * @param  &cur_solution: 
      * @param  &x: 
      * @param  pos: 
@@ -127,7 +123,7 @@ public:
         // This is the most basic implementations which recomputes everything with each call
         // I would not use this for any real-world problems. 
         
-        Matrix kernel_mat = compute_kernel(X);
+        Matrix kernel_mat = compute_kernel(X, sigma);
         return log_det(kernel_mat);
     } 
 

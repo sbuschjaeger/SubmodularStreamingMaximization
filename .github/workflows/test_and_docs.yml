@@ -1,0 +1,71 @@
+name: test-and-generate-docs
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  test-cpp:
+    runs-on: "ubuntu-latest"
+    name: Prepare conda environment, test python / cpp code and generate docs
+    #shell: bash -l {0}
+    defaults:
+      run:
+        shell: bash -l {0}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          miniconda-version: "latest"
+          activate-environment: pyssm
+          environment-file: environment.yml
+      - name: Test CPP Code
+        run: |
+          cd build
+          cmake ..
+          make
+          ./main
+      - name: Test Python code
+        run: |
+          cd ../tests
+          ./main.py
+      - name: Generate the docs
+        run: |
+          cd ../docs/
+          make html
+      - name: Commit documentation # transfer the new html files back into the repository
+        run: |
+          git config --local user.name "sbuschjaeger"
+          git add docs/*
+          git commit -m "Added documentation"
+      - name: Push changes # push the output folder to your repo
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+  
+  # test-python:
+  #   runs-on: "ubuntu-latest"
+  #   name: Prepare conda environment and test python interface
+  #   #shell: bash -l {0}
+  #   defaults:
+  #     run:
+  #       shell: bash -l {0}
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: conda-incubator/setup-miniconda@v2
+  #       with:
+  #         miniconda-version: "latest"
+  #         activate-environment: pyssm
+  #         environment-file: environment.yml
+  #     - run: |
+  #         cd tests
+  #         ./main.py 
+      # - name: Commit files # transfer the new html files back into the repository
+      #   run: |
+      #     git config --local user.name "sbuschjaeger"
+      #     git add PyPruning/tests/accuracy_digits.csv
+      #     git commit -m "Added latest accuracy on digits to repository"
+      # - name: Push changes # push the output folder to your repo
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}

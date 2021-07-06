@@ -76,10 +76,10 @@
 
 /**
  * @brief  The RBF Kernel:
- *      \f$k(x_1, x_2) = scale * \exp(- \frac{\|x_1 - x_2 \|_2^2}{sigma)\f$
- *      where scale > 0 and sigma > 0.
- * @note   
- * @retval None
+ *      \f[
+ *          k(x_1, x_2) = scale \cdot \exp\left(- \frac{\|x_1 - x_2 \|_2^2}{sigma}\right)
+ *      \f]
+ *      where \f$ scale > 0\f$  and \f$sigma > 0\f$.
  */
 class RBFKernel : public Kernel {
 private:
@@ -96,16 +96,12 @@ private:
 public:
     /**
      * @brief   The default constructor for this kernel. The sigma value is 1.0 and the scale is 1.0
-     * @note   
-     * @retval 
      */
     RBFKernel() = default;
 
     /**
      * @brief  Creates a new RBFKernel with the given sigma parameter and scale 1.0. 
-     * @note   
      * @param  sigma: The sigma parameter > 0.
-     * @retval Returns the created object
      */
     RBFKernel(data_t sigma) : RBFKernel(sigma, 1.0) {
     }
@@ -115,7 +111,6 @@ public:
      * @note   This constructor uses assert to make sure that scale/sigma has the correct range. This may lead to warnings during compilation.
      * @param  sigma: The sigma value > 0.
      * @param  scale: The scale value > 0.
-     * @retval 
      */
     RBFKernel(data_t sigma, data_t scale) : sigma(sigma), scale(scale){
         assert(("The scale of an RBF Kernel should be greater than 0!", scale > 0));
@@ -125,11 +120,9 @@ public:
     /**
      * @brief  Computes the RBF Kernel at the given points x1, x2:
      *      \f$k(x_1, x_2) = scale * \exp(- \frac{\|x_1 - x_2 \|_2^2}{sigma)\f$
-     *          where scale > 0 and sigma > 0
-     * @note   
+     *          where \f$scale > 0\f$ and \f$sigma > 0\f$
      * @param  x1: First argument for the kernel. 
      * @param  x2: Second argument for the kernel
-     * @retval The evaluated kernel value. 
      */
     inline data_t operator()(const std::vector<data_t>& x1, const std::vector<data_t>& x2) const override {
         data_t distance = 0;
@@ -151,7 +144,6 @@ public:
     /**
      * @brief  Returns a clone of this kernel. 
      * @note   The clone is a deep copy of this kernel. 
-     * @retval The cloned object.
      */
     std::shared_ptr<Kernel> clone() const override {
         return std::shared_ptr<Kernel>(new RBFKernel(sigma, scale));

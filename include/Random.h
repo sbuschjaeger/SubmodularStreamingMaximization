@@ -10,7 +10,7 @@
 
 
 /**
- * @brief The Random Optimizers for submodular functions. It randomly picks K elements as a solution. For streaming, Reservoir Sampling is used. Feige et al. showed in [1] that a uniform random sample for unconstrained is a 1/4 approximation in expectation, but for constraint maximization problems no such result is known.
+ * @brief The Random Optimizers for submodular functions. It randomly picks \f$ K \f$ elements as a solution. For streaming, Reservoir Sampling is used. Feige et al. showed that a uniform random sample for unconstrained is a 1/4 approximation in expectation, but for constraint maximization problems no such result is known.
  *  - Stream:  Yes
  *  - Solution: no guarantee
  *  - Runtime: \f$ O(N) \f$
@@ -18,11 +18,38 @@
  *  - Function Queries per Element: \f$ O(1) \f$ (In case of Reservoir Sampling to maintain a consistent function value)
  *  - Function Types: nonnegative submodular functions
  * 
+ * Example usage in C++:
+ * @code{.cpp}
+ *  //read some data 
+ *  std::vector<std::vector<data_t>> = read_some_data(); 
+ *  auto K = 50;
+ *  // Define the function to be maximized and select the summary
+ *  FastIVM fastIVM(K, RBFKernel( std::sqrt(data[0].size()), 1.0) , 1.0);
+ *  Random opt(K, fastIVM);
+ *  opt.fit(data);
+ *  std::cout << "fval:" << opt.get_fval() << "num_elements: " << opt.get_num_elements_stored() << "num_candidates: " << opt.get_num_candidate_solutions() << std::endl;
+ *  // Process summary
+ *  auto summary = opt.get_solution();
+ * @endcode
+ * 
+ * Example usage in Python:
+ * @code{.py}
+ *  X = read_some_data(); 
+ *  K = 50
+ *  # Create function to be maximized
+ *  kernel = RBFKernel(sigma=sigma,scale=scale)
+ *  fastLogDet = FastIVM(K, kernel, 1.0)
+ *  opt = Random(K, fastLogDet)
+ *  opt.fit(X, K)
+ *  print("fval: {} num_elements: {} num_candidates: {}".format(opt.get_fval(), opt.get_num_elements_stored(), opt.get_num_candidate_solutions()))
+ *  # process summary
+ *  summary = opt.get_solution()
+ * @endcode
+ * 
  * __References__:
  * 
- * [1] Feige, U., Mirrokni, V. S., & Vondrák, J. (2011). Maximizing non-monotone submodular functions. SIAM Journal on Computing. https://doi.org/10.1137/090779346
- * [2] Vitter, J. S. (1985). Random Sampling with a Reservoir. ACM Transactions on Mathematical Software (TOMS). https://doi.org/10.1145/3147.3165
- * @note   
+ * - Feige, U., Mirrokni, V. S., & Vondrák, J. (2011). Maximizing non-monotone submodular functions. SIAM Journal on Computing. https://doi.org/10.1137/090779346
+ * - Vitter, J. S. (1985). Random Sampling with a Reservoir. ACM Transactions on Mathematical Software (TOMS). https://doi.org/10.1145/3147.3165
  */
 class Random : public SubmodularOptimizer {
 protected:
@@ -105,7 +132,6 @@ public:
 
     /**
      * @brief  Randomly pick K elements as a solution. You can access the solution via `get_solution`.
-     * @note   
      * @param  X A constant reference to the entire data set
      * @param iterations: Has no effect. Random samples K elements, no iterations required.
      */

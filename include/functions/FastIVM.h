@@ -13,18 +13,17 @@
 #include "functions/IVM.h"
 
 /**
- * @brief  This is a faster implementation of the IVM [1]
+ * @brief  This is a faster implementation of the IVM
  * \f[
  *      f(S) = \frac{1}{2}\log\det\left(\Sigma + \sigma \cdot \mathcal I \right)
  * \f]
- *  where \Sigma is the kernel matrix of all elements in the summary, \mathcal I is the K \times K identity matrix and \sigma > 0 is a scaling parameter. 
+ *  where \f$\Sigma\f$ is the kernel matrix of all elements in the summary, \f$ \mathcal I \f$ is the \f$ K \times K \f$ identity matrix and \f$ \sigma > 0 \f$ is a scaling parameter. 
  * 
- * This implementation caches the current kernel matrix \Sigma and maintains a cholesky decomposition of it to quickly recompute the log-determinant. This implementation requires the maximum number items in the summary and the maximum size (rows and columns) of \Sigma beforehand. It allocates the appropriate memory during construction. This implementation is optimized towards adding new elements to the summary, but not replacing existing ones. Added a new row / column to a cholesky decomposition is a rank-1 update which can be performed in O(K^2) for K x K matrices. Whenever an element in the matrix must be replaced, the entire cholesky decomposition must be recomputed leading to O(K^3). This class internally uses the Matrix class for somewhat readable linear algebra. 
+ * This implementation caches the current kernel matrix \f$ \Sigma \f$ and maintains a cholesky decomposition of it to quickly recompute the log-determinant. This implementation requires the maximum number items in the summary and the maximum size (rows and columns) of \Sigma beforehand. It allocates the appropriate memory during construction. This implementation is optimized towards adding new elements to the summary, but not replacing existing ones. Added a new row / column to a cholesky decomposition is a rank-1 update which can be performed in \f$ O(K^2) \f$ for \f$ K \times K \f$ matrices. Whenever an element in the matrix must be replaced, the entire cholesky decomposition must be recomputed leading to \f$ O(K^3) \f$. This class internally uses the Matrix class for somewhat readable linear algebra. 
  * 
+ * __References__
  * 
- * [1] Herbrich, R., Lawrence, N., & Seeger, M. (2003). Fast Sparse Gaussian Process Methods: The Informative Vector Machine. In S. Becker, S. Thrun, & K. Obermayer (Eds.), Advances in Neural Information Processing Systems (Vol. 15, pp. 625–632). MIT Press. Retrieved from https://proceedings.neurips.cc/paper/2002/file/d4dd111a4fd973394238aca5c05bebe3-Paper.pdf 
- * @note   
- * @retval None
+ * - Herbrich, R., Lawrence, N., & Seeger, M. (2003). Fast Sparse Gaussian Process Methods: The Informative Vector Machine. In S. Becker, S. Thrun, & K. Obermayer (Eds.), Advances in Neural Information Processing Systems (Vol. 15, pp. 625–632). MIT Press. Retrieved from https://proceedings.neurips.cc/paper/2002/file/d4dd111a4fd973394238aca5c05bebe3-Paper.pdf 
  */
 class FastIVM : public IVM {
 private:
@@ -46,11 +45,9 @@ public:
 
     /**
      * @brief  Creates a new FastIVM object.
-     * @note   
      * @param  K: The number of elements to be stored in the summary
      * @param  &kernel: The kernel function
      * @param  sigma: The scaling constant for the kernel
-     * @retval 
      */
     FastIVM(unsigned int K, Kernel const &kernel, data_t sigma) : IVM(kernel, sigma), kmat(K+1), L(K+1) {
         added = 0;
@@ -59,11 +56,9 @@ public:
 
     /**
      * @brief  Creates a new FastIVM object.
-     * @note   
      * @param  K: The number of elements to be stored in the summary
      * @param  &kernel: The kernel function
      * @param  sigma: The scaling constant for the kernel
-     * @retval 
      */
     FastIVM(unsigned int K, std::function<data_t (std::vector<data_t> const &, std::vector<data_t> const &)> kernel, data_t sigma) 
         : IVM(kernel, sigma), kmat(K+1), L(K+1) {
@@ -74,7 +69,6 @@ public:
     /**
      * @brief  Peek operator for the FastIVM. For more details see SubmodularFunction. This function adds the vector of kernel evaluations to the current kernel matrix and performs a rank-1 update to the cholesky decomposition, if possible. When a new element is added (pos >= added) then the runtime is O(K^2) where K = cur_solution.size() and added is the number of previous `update` calls. If an existing element is replaced (pos < added), then the cholesky decomposition cannot be updated with a rank-1 update. In this case the runtime is O(K^3) since the cholesky decomposition is recomputed. 
      * 
-     * @note  
      * @param  cur_solution: The current summary
      * @param  &x: The element which should be added to the summary
      * @param  pos: The position at which the given element should be inserted. If pos >= cur_solution.size(), then x is appended. Otherwise it replaces the element at position pos
@@ -123,7 +117,6 @@ public:
 
     /**
      * @brief  Update the current solution. Does the same as `peek` and additionally preserves any changes to the kernel matrix.  
-     * @note  
      * @param  cur_solution: The current summary
      * @param  &x: The element which should be added to the summary
      * @param  pos: The position at which the given element should be inserted. If pos >= cur_solution.size(), then x is appended. Otherwise it replaces the element at position pos

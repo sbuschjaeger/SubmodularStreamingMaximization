@@ -14,7 +14,6 @@
 
 /**
  * @brief  Interface class which every optimizer should implement. Each optimizer must offer a next() and fit() function. However, if a certain optimizer does not support streaming (`next') or batch (`fit') processing it is okay to throw an exeception with an appropriate message. This class already offers a member to store the best solution (`solution') and its function value (`fval`) including getter functions. You can access the function to be maximized via `f` which is a shared pointer (and thus there is no need for explicit delete in the destructor). Please make sure to set `is_fitted` after the fit / next has been called. Please make sure that you use the `peek` and `update` function of the SubmodularFunction correctly. Always call `peek` if you want to know the function value if you would add a new element to the current solution and call `update` if you know which element to add to the current solution. See SubmodularFunction.h for more details.
- * @note   
  */
 class SubmodularOptimizer {
 private:
@@ -49,7 +48,6 @@ public:
 
     /**
      * @brief  Creates a submodular optimizer object. 
-     * @note   
      * @param  K: The cardinality constraint K of the optimization problem or differently put the number of items to be selected.
      * @param  f: The function which should be maximized. Note, that the `clone' function is used to construct a new SubmodularFunction which is owned by this object. If you implement a custom SubmodularFunction make sure that everything you need is actually cloned / copied.  
      * @retval A new SubmodularOptimizer object.  
@@ -63,7 +61,6 @@ public:
 
     /**
      * @brief  Creates a submodular optimizer object. 
-     * @note   
      * @param  K: The cardinality constraint K of the optimization problem or differently put the number of items to be selected.
      * @param  f: The function which should be maximized. Note, that this parameter is likely moved and not copied. Thus, if you construct multiple optimizers with the __same__ function they all reference the __same__ function. This can be very efficient for state-less functions, but may lead to weird side effects if f keeps track of a state. 
      * @retval A new SubmodularOptimizer object.  
@@ -77,7 +74,6 @@ public:
 
     /**
      * @brief  Find a solution given the entire data set. 
-     * @note   
      * @param  X: A constant reference to the entire data set
      * @param ids: A list of identifier for each object. This can be used to uniquely identify the objects in the summary. The exact behavior depends on the optimizer, but generally no safety checks or anything are performed. If you don't want to use ids, leaf it empty. Otherwise, ids.size() == X.size() unless you know what you are doing.
      * @param iterations: Maximum number of iterations over the entire data-set (default = 1). Tries to select exactly K elements by iterating multiple 
@@ -103,7 +99,6 @@ public:
 
     /**
      * @brief  Find a solution given the entire data set. 
-     * @note   
      * @param  X: A constant reference to the entire data set
      * @param iterations: Maximum number of iterations over the entire data-set (default = 1). Tries to select exactly K elements by iterating multiple 
      *                    times over the entire dataset, but at most iterations times and at-least once. Early exits once K elements are found and at-least one iteration is completed. 
@@ -126,7 +121,6 @@ public:
 
     /**
      * @brief  Consume the next object in the data stream. This may throw an exception if the optimizer does not support streaming.
-     * @note   
      * @param  x: A constant reference to the next object on the stream.
      * @param  id: The id of the given object. If this is a `std::nullopt` this parameter is ignored. Otherwise the id is inserted into the solution. Make sure, that either _all_ or _no_ object receives an id to keep track which id belongs to which object. This algorithm simply stores the objects and the ids in two separate lists and performs no safety checks. 
      * @retval None
@@ -136,7 +130,6 @@ public:
 
     /**
      * @brief  Return the current solution.
-     * @note   
      * @retval A const reference to the current solution.
      */
     std::vector<std::vector<data_t>>const & get_solution() const {
@@ -149,7 +142,6 @@ public:
     
     /**
      * @brief  Return the corresponding ids for the current solution. This might be empty if no ids have been passed to fit / next.
-     * @note   
      * @retval A const reference to the corresponding ids.
      */
     std::vector<idx_t> const &get_ids() const {
@@ -162,8 +154,6 @@ public:
 
     /**
      * @brief  The number of candidate solutions stored.
-     * @note   
-     * @retval The number of candidate solutions stored.
      */
     virtual unsigned int get_num_candidate_solutions() const {
         return 1;
@@ -171,8 +161,6 @@ public:
     
     /**
      * @brief  The number of items stored in the current solution.
-     * @note   
-     * @retval The number of items stored in the current solution.
      */
     virtual unsigned long get_num_elements_stored() const {
         return this->get_solution().size();
@@ -180,8 +168,6 @@ public:
 
     /**
      * @brief  Returns the current function value
-     * @note   
-     * @retval The current function value
      */
     data_t get_fval() const {
         return fval;
@@ -189,8 +175,6 @@ public:
 
     /**
      * @brief  Destroys this object
-     * @note   
-     * @retval None
      */
     virtual ~SubmodularOptimizer() {}
 };

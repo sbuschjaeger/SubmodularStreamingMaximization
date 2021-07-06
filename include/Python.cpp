@@ -21,7 +21,6 @@ namespace py = pybind11;
 
 /**
  * @brief  This is a wrapper / trampoline class to pass the SubmodularFunction interface to the Python-side of things.  
- * @note   
  */
 class PySubmodularFunction : public SubmodularFunction {
 public:
@@ -77,7 +76,6 @@ public:
 
 /**
  * @brief  This is a wrapper / trampoline class to pass the Kernel interface to the Python-side of things.  
- * @note   
  */
 class PyKernel : public Kernel {
 public:
@@ -133,7 +131,7 @@ PYBIND11_MODULE(PySSM, m) {
         .def("clone", &SubmodularFunction::clone, py::return_value_policy::reference);
 
     py::class_<IVM, SubmodularFunction, std::shared_ptr<IVM> >(m, "IVM")
-        //.def(py::init<std::function<data_t (std::vector<data_t> const &, std::vector<data_t> const &)>, data_t>(), py::arg("kernel"), py::arg("sigma"))
+        .def(py::init<std::function<data_t (std::vector<data_t> const &, std::vector<data_t> const &)>, data_t>(), py::arg("kernel"), py::arg("sigma"))
         .def(py::init<Kernel const &, data_t>(), py::arg("kernel"), py::arg("sigma") = 1.0)
         .def("peek", &IVM::peek, py::arg("cur_solution"), py::arg("x"), py::arg("pos"))
         .def("update", &IVM::update, py::arg("cur_solution"), py::arg("x"), py::arg("pos"))
@@ -141,7 +139,7 @@ PYBIND11_MODULE(PySSM, m) {
         .def("clone", &IVM::clone, py::return_value_policy::reference);
 
     py::class_<FastIVM, IVM, SubmodularFunction, std::shared_ptr<FastIVM> >(m, "FastIVM")
-        //.def(py::init<unsigned int, std::function<data_t (std::vector<data_t> const &, std::vector<data_t> const &)>, data_t>(),  py::arg("K"),  py::arg("kernel"), py::arg("sigma"))
+        .def(py::init<unsigned int, std::function<data_t (std::vector<data_t> const &, std::vector<data_t> const &)>, data_t>(),  py::arg("K"),  py::arg("kernel"), py::arg("sigma"))
         .def(py::init<unsigned int, Kernel const &, data_t>(),  py::arg("K"),  py::arg("kernel"), py::arg("sigma") = 1.0)
         .def("peek", &FastIVM::peek, py::arg("cur_solution"), py::arg("x"), py::arg("pos"))
         .def("update", &FastIVM::update, py::arg("cur_solution"), py::arg("x"), py::arg("pos"))

@@ -9,16 +9,43 @@
 /**
  * @brief  The Greedy optimizer for submodular functions. It rates the marginal gain of each element and picks that element with the largest gain. This process is repeated until it K elements have been selected:
  *  - Stream:  No
- *  - Solution: \f$ 1 - \exp(1) \f$
+ *  - Solution: \f$ 1 - 1/\exp(1) \f$
  *  - Runtime: \f$ O(N \cdot K) \f$
  *  - Memory: \f$ O(K) \f$
  *  - Function Queries per Element: \f$ O(1) \f$
  *  - Function Types: nonnegative submodular functions
  * 
+ * Example usage in C++:
+ * @code{.cpp}
+ *  //read some data 
+ *  std::vector<std::vector<data_t>> = read_some_data(); 
+ *  auto K = 50;
+ *  // Define the function to be maximized and select the summary
+ *  FastIVM fastIVM(K, RBFKernel( std::sqrt(data[0].size()), 1.0) , 1.0);
+ *  Greedy opt(K, fastIVM);
+ *  opt.fit(data);
+ *  std::cout << "fval:" << opt.get_fval() << "num_elements: " << opt.get_num_elements_stored() << "num_candidates: " << opt.get_num_candidate_solutions() << std::endl;
+ *  // Process summary
+ *  auto summary = opt.get_solution();
+ * @endcode
+ * 
+ * Example usage in Python:
+ * @code{.py}
+ *  X = read_some_data(); 
+ *  K = 50
+ *  # Create function to be maximized
+ *  kernel = RBFKernel(sigma=sigma,scale=scale)
+ *  fastLogDet = FastIVM(K, kernel, 1.0)
+ *  opt = Greedy(K, fastLogDet)
+ *  opt.fit(X, K)
+ *  print("fval: {} num_elements: {} num_candidates: {}".format(opt.get_fval(), opt.get_num_elements_stored(), opt.get_num_candidate_solutions()))
+ *  # process summary
+ *  summary = opt.get_solution()
+ * @endcode
+ * 
  * __References__
  * 
- * [1] Nemhauser, G. L., Wolsey, L. A., & Fisher, M. L. (1978). An analysis of approximations for maximizing submodular set functions-I. Mathematical Programming, 14(1), 265–294. https://doi.org/10.1007/BF01588971
- * @note   
+ * - Nemhauser, G. L., Wolsey, L. A., & Fisher, M. L. (1978). An analysis of approximations for maximizing submodular set functions-I. Mathematical Programming, 14(1), 265–294. https://doi.org/10.1007/BF01588971
  */
 class Greedy : public SubmodularOptimizer {
 public:
@@ -36,7 +63,7 @@ public:
      * @brief Construct a new Greedy object
      * 
      * @param K The cardinality constraint you of the optimization problem, that is the number of items selected.
-     * @param f The function which should be maximized. Note, that this parameter is likely moved and not copied. Thus, if you construct multiple optimizers with the __same__ function they all reference the __same__ function. This can be very efficient for state-less functions, but may lead to weird side effects if f keeps track of a state.
+     * @param f The function which should be maximized. Note, that this parameter is likely moved and not copied. Thus, if you construct multiple optimizers with the __same__ function they all reference the __same__ function. This can be very efficient for state-less functions, but may lead to weird side effects if `f` keeps track of a state.
      */
     Greedy(unsigned int K, std::function<data_t (std::vector<std::vector<data_t>> const &)> f) : SubmodularOptimizer(K,f) {}
 
@@ -84,7 +111,7 @@ public:
 
     /**
      * @brief Pick that element with the largest marginal gain in the entire dataset. Repeat this until K element have been selected. You can access the solution via `get_solution`
-     * @note: This internally calls fit with an empty id set.
+     * @note This internally calls fit with an empty id set.
      * @param X A constant reference to the entire data set
      * @param iterations: Has no effect. Greedy iterates K times over the entire dataset in any case.
      */

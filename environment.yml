@@ -8,6 +8,7 @@ dependencies:
   - numpy
   - pip
   - gcc_linux-64
+  - gxx_linux-64
   - cmake
   - pandas
   - scikit-learn
@@ -20,7 +21,12 @@ dependencies:
   - jupyter # Technically not a dependency, but still nice to have for browsing results
   - requests
   # - scipy
-  # - pip:
+  - pip:
+    - karma-sphinx-theme
+    - sphinx_rtd_theme
+    - breathe
+    - exhale
+    - -e file:. 
   #   - ray
   #   - pylint
   #   - plotly-express
@@ -28,4 +34,3 @@ dependencies:
   #   - kaggle # for downloading creditfraud dataset
   #   - pyfact # for downloading / processing fact data
   #   - progressbar
-  #   - -e file:. 

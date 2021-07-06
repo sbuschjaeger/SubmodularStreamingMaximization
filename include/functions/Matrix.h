@@ -8,8 +8,6 @@
 
 /**
  * @brief  This is a simple Matrix class for quadratic \f$ N \times N \f$ matrices. The Matrix is implemented with a 1d (column major) `std::vector`. There are also some linear algebra functions available
- * @note   
- * @retval None
  */
 class Matrix {
 private:
@@ -26,7 +24,6 @@ public:
 
     /**
      * @brief  Copies the upper left N_sub x N_sub matrix from other into the new object. Caller has to make sure that N_sub <= other.size()
-     * @note   
      * @param  &other: The matrix from which we want to copy entries
      * @param  N_sub: The size of the sub matrix. Caller has to make sure that N_sub <= other.size()
      * @retval A newly constructed N_sub x N_sub Matrix object.
@@ -41,23 +38,17 @@ public:
 
     /**
      * @brief  Creates a new _size x _size matrix. The matrix elements are initialized with zeros.
-     * @note   
      * @param  _size: The number of rows / columns of the matrix.
-     * @retval The newly created object.
      */
     Matrix(unsigned int _size) : N(_size), data(_size * _size, 0){}
 
     /**
      * @brief  Destroys the current matrix object.
-     * @note   
-     * @retval 
      */
     ~Matrix() { }
 
     /**
      * @brief  Returns the number of row / columns of the matrix
-     * @note   
-     * @retval 
      */
     inline unsigned int size() const { return N; }
 
@@ -140,7 +131,6 @@ public:
 
 /**
  * @brief  Converts the given (sub-)matrix into a python / numpy compatible string, e.g. you can copy this string directly into the interactive python console for debugging if necessary. If you want to print the entire matrix supply N_sub = N.
- * @note   
  * @param  &mat: The matrix which should ne converted to a string.
  * @param  N_sub: The N_sub x N_sub matrix which should be printed. The caller has to make sure that N_sub <= N. If you want to print the entire matrix supply N_sub = N.
  * @retval A string representation of the sub-matrix
@@ -170,7 +160,6 @@ inline std::string to_string(Matrix const &mat, unsigned int N_sub) {
 
 /**
  * @brief  Converts the given matrix into a python / numpy compatible string, e.g. you can copy this string directly into the interactive python console for debugging if necessary. 
- * @note   
  * @param  &mat: The matrix which should ne converted to a string. 
  * @retval A string representation of the matrix
  */
@@ -180,7 +169,6 @@ inline std::string to_string(Matrix const &mat) {
 
 /**
  * @brief  Computes the choleksy decomposition of the N_sub x N_sub sub matrix and returns the lower triangular matrix L with LL^T = in.
- * @note   
  * @param  &in: The matrix which should be decomposed.
  * @param  N_sub: The N_sub x N_sub sub-matrix. The caller has to make sure that N_sub <= N. If you want to print the entire matrix supply N_sub = N.
  * @retval Returns the cholesky decomposition
@@ -211,7 +199,6 @@ inline Matrix cholesky(Matrix const &in, unsigned int N_sub) {
 
 /**
  * @brief  Computes the choleksy decomposition given matrix and returns the lower triangular matrix L with LL^T = in.
- * @note   
  * @param  &in: The matrix which should be decomposed.
  * @retval Returns the cholesky decomposition
  */
@@ -219,7 +206,6 @@ inline Matrix cholesky(Matrix const &in) {return cholesky(in, in.size()); }
 
 /**
  * @brief  Computes the log-determinant from the lower triangular matrix L which previously has been computed via a cholesky decomposition
- * @note   
  * @param  &L: The lower triangular matrix with LL^T = in, where in is the original matrix
  * @retval The log-determinant of the matrix in
  */
@@ -235,7 +221,6 @@ inline data_t log_det_from_cholesky(Matrix const &L) {
 
 /**
  * @brief  Computes the log-determinant of the N_sub x N_sub sub-matrix of the given matrix mat  
- * @note   
  * @param  &mat: The base matrix from which the N_sub x N_sub sub-matrix is used.
  * @param  N_sub: The N_sub x N_sub sub-matrix. The caller has to make sure that N_sub <= N. If you want to use the entire matrix supply N_sub = N.
  * @retval The log-determinant of the  N_sub x N_sub sub-matrix of mat
@@ -247,7 +232,6 @@ inline data_t log_det(Matrix const &mat, unsigned int N_sub) {
 
 /**
  * @brief  Computes the log-determinant of the given matrix mat  
- * @note   
  * @param  &mat: The matrix of which the log-determinant should be computed
  * @retval The log-determinant of the mat
  */
