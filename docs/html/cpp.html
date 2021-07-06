@@ -142,7 +142,7 @@
                             
   <div class="section" id="using-the-c-interface">
 <h1>Using the C++ interface<a class="headerlink" href="#using-the-c-interface" title="Permalink to this headline">¶</a></h1>
-<p>The C++ code is header-only so simply include the desired functions in your project and your are good to go. If you have trouble compiling you can look at the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file which compiles the Python bindings as well as the test files For a detailed explanation on specific parameters / functions provided please have a look at the documentation of the individual optimizers. Generally, each optimizer provides</p>
+<p>The C++ code is header-only so simply include the desired functions in your project and your are good to go. However, you require a C++17 compiler (e.g. gcc-7 or clang-5). If you have trouble compiling you can look at the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file which compiles the Python bindings as well as the test files For a detailed explanation on specific parameters / functions provided please have a look at the documentation of the individual optimizers. Generally, each optimizer provides</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">fit(X)</span></code>: Selects a summary of the given data set (batch processing)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">next(x)</span></code>: Consumes the next data item from a stream  (stream processing)</p></li>
@@ -152,7 +152,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">get_num_elements_stored</span></code>: Returns the number of elements stored by the optimizer</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">get_fval</span></code>: Returns the function value</p></li>
 </ul>
-<p>. The following example uses the Greedy optimizer to select a data summary by maximizing the Informative Vector Machine (the full examples can be found in <code class="docutils literal notranslate"><span class="pre">tests/main.cpp</span></code>)</p>
+<p>The following example uses the Greedy optimizer to select a data summary by maximizing the Informative Vector Machine (the full examples can be found in <code class="docutils literal notranslate"><span class="pre">tests/main.cpp</span></code>)</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;math.h&gt;</span><span class="cp"></span>
@@ -450,7 +450,7 @@ Alternatively, you can extend the <cite>Kernel</cite> class by implementing the 
     <div class="footer" role="contentinfo">
         <div class="container">
             &#169; Copyright 2021, Sebastian Buschjäger.
-        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2.
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.3.
         </div>
     </div>  
 
