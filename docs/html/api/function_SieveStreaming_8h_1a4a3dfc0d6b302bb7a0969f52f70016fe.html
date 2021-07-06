@@ -1,0 +1,213 @@
+
+
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Function thresholds &mdash; SubmodularStreamMaximization  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Function to_string(Matrix const&amp;, unsigned int)" href="function_Matrix_8h_1aaf9bc56a53b9a334621531b0e32ed04b.html" />
+    <link rel="prev" title="Function PYBIND11_MODULE" href="function_Python_8cpp_1ab3974db34051dddb4d81e89a8f347071.html" /> 
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a class="site-nav-toggle hidden-lg-up"><i class="icon-menu"></i></a>
+            <a class="site-title" href="../index.html">
+                SubmodularStreamMaximization
+            </a>
+        </div>
+    </header>
+
+
+<div class="breadcrumbs-outer hidden-xs-down">
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a></li>
+        
+          <li><a href="library_root.html">Library API</a></li>
+        
+      <li>Function thresholds</li>
+    
+    
+      <li class="breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/function_SieveStreaming_8h_1a4a3dfc0d6b302bb7a0969f52f70016fe.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+</div>
+    </div>
+</div>
+    <div class="main-outer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-3 site-nav">
+                    
+<div role="search">
+    <form class="search" action="../search.html" method="get">
+        <div class="icon-input">
+            <input type="text" name="q" placeholder="Search" />
+            <span class="icon-search"></span>
+        </div>
+        <input type="submit" value="Go" class="d-hidden" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+                    <div class="site-nav-tree">
+                        
+                            
+                            
+                                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../root.html">SubmodularStreamMaximization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#how-to-install">How to install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#how-to-reproduce-the-experiments-in-our-paper">How to reproduce the experiments in our paper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#cite-our-paper">Cite our paper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Using the Python Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-a-custom-kernel-for-the-ivm">Implementing a custom kernel for the IVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-custom-submodular-functions">Implementing custom submodular functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-your-own-optimizer">Implementing your own optimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp.html">Using the C++ interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-a-custom-kernel-for-the-ivm">Implementing a custom kernel for the IVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-custom-submodular-functions">Implementing custom submodular functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-your-own-optimizer">Implementing your own optimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="library_root.html">Library API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_root.html#full-api">Full API</a></li>
+</ul>
+</li>
+</ul>
+
+                            
+                        
+                    </div>
+                </div>
+                <div class="col-12 col-lg-9">
+                    <div class="document">
+                        
+                            
+  <div class="section" id="function-thresholds">
+<span id="exhale-function-sievestreaming-8h-1a4a3dfc0d6b302bb7a0969f52f70016fe"></span><h1>Function thresholds<a class="headerlink" href="#function-thresholds" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_include_SieveStreaming.h.html#file-include-sievestreaming-h"><span class="std std-ref">File SieveStreaming.h</span></a></p></li>
+</ul>
+<div class="section" id="function-documentation">
+<h2>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv410thresholds6data_t6data_t6data_t">
+<span id="_CPPv310thresholds6data_t6data_t6data_t"></span><span id="_CPPv210thresholds6data_t6data_t6data_t"></span><span id="thresholds__data_t.data_t.data_t"></span><span class="target" id="SieveStreaming_8h_1a4a3dfc0d6b302bb7a0969f52f70016fe"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">thresholds</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">lower</span></span>, <a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">upper</span></span>, <a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">epsilon</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv410thresholds6data_t6data_t6data_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Samples a set of thresholds from <span class="math notranslate nohighlight">\( {(1+epsilon)^i | i \in Z, lower \le (1+epsilon)^i \le upper} \)</span> as described in [1]. </p>
+<p><strong>References :</strong> [1] Badanidiyuru, A., Mirzasoleiman, B., Karbasi, A., &amp; Krause, A. (2014). Streaming submodular maximization: Massive data summarization on the fly. In Proceedings of the ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. <a class="reference external" href="https://doi.org/10.1145/2623330.2623637">https://doi.org/10.1145/2623330.2623637</a> </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lower</strong> – The lower bound (inclusive) which is used form sampling </p></li>
+<li><p><strong>upper</strong> – The upper bound (inclusive) which is used form sampling </p></li>
+<li><p><strong>epsilon</strong> – The sampling accuracy </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>std::vector&lt;data_t&gt; The set of sampled thresholds </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script type="text/javascript" src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+    <div class="footer" role="contentinfo">
+        <div class="container">
+            &#169; Copyright 2021, Sebastian Buschjäger.
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2.
+        </div>
+    </div>  
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+
+File Hierarchy
+--------------
+
+
+.. raw:: html
+
+   <ul class="treeView" id="file-treeView">
+     <li>
+       <ul class="collapsibleList">
+         <li class="lastChild">Directory <a href="dir_include.html#dir-include">include</a><ul><li>Directory <a href="dir_include_functions.html#dir-include-functions">functions</a><ul><li>Directory <a href="dir_include_functions_kernels.html#dir-include-functions-kernels">kernels</a><ul><li>File <a href="file_include_functions_kernels_Kernel.h.html#file-include-functions-kernels-Kernel.h">Kernel.h</a></li><li class="lastChild">File <a href="file_include_functions_kernels_RBFKernel.h.html#file-include-functions-kernels-RBFKernel.h">RBFKernel.h</a></li></ul></li><li>File <a href="file_include_functions_FastIVM.h.html#file-include-functions-FastIVM.h">FastIVM.h</a></li><li>File <a href="file_include_functions_IVM.h.html#file-include-functions-IVM.h">IVM.h</a></li><li class="lastChild">File <a href="file_include_functions_Matrix.h.html#file-include-functions-Matrix.h">Matrix.h</a></li></ul></li><li>File <a href="file_include_DataTypeHandling.h.html#file-include-DataTypeHandling.h">DataTypeHandling.h</a></li><li>File <a href="file_include_Greedy.h.html#file-include-Greedy.h">Greedy.h</a></li><li>File <a href="file_include_IndependentSetImprovement.h.html#file-include-IndependentSetImprovement.h">IndependentSetImprovement.h</a></li><li>File <a href="file_include_Python.cpp.html#file-include-Python.cpp">Python.cpp</a></li><li>File <a href="file_include_Random.h.html#file-include-Random.h">Random.h</a></li><li>File <a href="file_include_Salsa.h.html#file-include-Salsa.h">Salsa.h</a></li><li>File <a href="file_include_SieveStreaming.h.html#file-include-SieveStreaming.h">SieveStreaming.h</a></li><li>File <a href="file_include_SieveStreamingPP.h.html#file-include-SieveStreamingPP.h">SieveStreamingPP.h</a></li><li>File <a href="file_include_SubmodularFunction.h.html#file-include-SubmodularFunction.h">SubmodularFunction.h</a></li><li>File <a href="file_include_SubmodularOptimizer.h.html#file-include-SubmodularOptimizer.h">SubmodularOptimizer.h</a></li><li class="lastChild">File <a href="file_include_ThreeSieves.h.html#file-include-ThreeSieves.h">ThreeSieves.h</a></li></ul></li>
+       </ul>
+     </li><!-- only tree view element -->
+   </ul><!-- /treeView file-treeView -->
+
+.. end raw html for treeView
+
+

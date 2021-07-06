@@ -1,0 +1,343 @@
+
+
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Using the Python Interface &mdash; SubmodularStreamMaximization  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Using the C++ interface" href="cpp.html" />
+    <link rel="prev" title="SubmodularStreamMaximization" href="root.html" /> 
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a class="site-nav-toggle hidden-lg-up"><i class="icon-menu"></i></a>
+            <a class="site-title" href="index.html">
+                SubmodularStreamMaximization
+            </a>
+        </div>
+    </header>
+
+
+<div class="breadcrumbs-outer hidden-xs-down">
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="breadcrumbs">
+    
+      <li><a href="index.html">Docs</a></li>
+        
+      <li>Using the Python Interface</li>
+    
+    
+      <li class="breadcrumbs-aside">
+        
+            
+            <a href="_sources/python.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+</div>
+    </div>
+</div>
+    <div class="main-outer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-3 site-nav">
+                    
+<div role="search">
+    <form class="search" action="search.html" method="get">
+        <div class="icon-input">
+            <input type="text" name="q" placeholder="Search" />
+            <span class="icon-search"></span>
+        </div>
+        <input type="submit" value="Go" class="d-hidden" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+                    <div class="site-nav-tree">
+                        
+                            
+                            
+                                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="root.html">SubmodularStreamMaximization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="root.html#how-to-install">How to install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="root.html#how-to-reproduce-the-experiments-in-our-paper">How to reproduce the experiments in our paper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="root.html#cite-our-paper">Cite our paper</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using the Python Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#implementing-a-custom-kernel-for-the-ivm">Implementing a custom kernel for the IVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#implementing-custom-submodular-functions">Implementing custom submodular functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#implementing-your-own-optimizer">Implementing your own optimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cpp.html">Using the C++ interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cpp.html#implementing-a-custom-kernel-for-the-ivm">Implementing a custom kernel for the IVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cpp.html#implementing-custom-submodular-functions">Implementing custom submodular functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cpp.html#implementing-your-own-optimizer">Implementing your own optimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/library_root.html">Library API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/library_root.html#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/library_root.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/library_root.html#full-api">Full API</a></li>
+</ul>
+</li>
+</ul>
+
+                            
+                        
+                    </div>
+                </div>
+                <div class="col-12 col-lg-9">
+                    <div class="document">
+                        
+                            
+  <div class="section" id="using-the-python-interface">
+<h1>Using the Python Interface<a class="headerlink" href="#using-the-python-interface" title="Permalink to this headline">¶</a></h1>
+<p>Once installed, you can simply import the desired submodular function and optimizer via <code class="docutils literal notranslate"><span class="pre">PySSM</span></code>. For a detailed explanation on specific parameters / functions provided please have a look at the documentation of the individual optimizers. Generally, each optimizer provides</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fit(X)</span></code>: Selects a summary of the given data set (batch processing)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">next(x)</span></code>: Consumes the next data item from a stream  (stream processing)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_solution()</span></code>: Returns the current solution</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_ids()</span></code>: Returns the id (if any) of each object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_num_candidate_solutions</span></code>: Returns the number of intermediate solutions stored by the optimizer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_num_elements_stored</span></code>: Returns the number of elements stored by the optimizer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_fval</span></code>: Returns the function value</p></li>
+</ul>
+<p>The following example uses the Greedy optimizer to select a data summary by maximizing the Informative Vector Machine (the full examples can be found in <code class="docutils literal notranslate"><span class="pre">tests/main.py</span></code>)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PySSM</span> <span class="kn">import</span> <span class="n">RBFKernel</span>
+<span class="kn">from</span> <span class="nn">PySSM</span> <span class="kn">import</span> <span class="n">IVM</span>
+<span class="kn">from</span> <span class="nn">PySSM</span> <span class="kn">import</span> <span class="n">Greedy</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+      <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+      <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+      <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+      <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+      <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+      <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+      <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="n">K</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">kernel</span> <span class="o">=</span> <span class="n">RBFKernel</span><span class="p">(</span><span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ivm</span> <span class="o">=</span> <span class="n">IVM</span><span class="p">(</span><span class="n">kernel</span> <span class="o">=</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">Greedy</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">ivm</span><span class="p">)</span>
+
+<span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># Alternativley, you can use the streaming interface.</span>
+<span class="c1">#for x in X:</span>
+<span class="c1">#    opt.next(x)</span>
+
+<span class="n">fval</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">get_fval</span><span class="p">()</span>
+<span class="n">solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">get_solution</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Found a solution with fval = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fval</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="implementing-a-custom-kernel-for-the-ivm">
+<h2>Implementing a custom kernel for the IVM<a class="headerlink" href="#implementing-a-custom-kernel-for-the-ivm" title="Permalink to this headline">¶</a></h2>
+<p>Implementing your own custom kernel is easy. To do so, there are two options. Either you simply implement a python function accepting two arguments <cite>x1</cite> and <cite>x2</cite> and simply pass them to the IVM / FastIVM object. We recommend this approach for stateless kernel functions.
+Alternatively, you can extend the <cite>Kernel</cite> class by implementing the <cite>clone</cite> and <cite>__call__</cite> method. The <cite>clone</cite> method must return a clone (_not_ a copy) of the object, whereas the <cite>__call__</cite> method accepts two the two instances <cite>x1</cite> and <cite>x2</cite>. Use this approach if you want to implement a stateful kernel.</p>
+<p><em>Note</em>: The parameters <cite>x1</cite> and <cite>x2</cite> are regular python lists. Make sure to transform them to the appropriate data types before using them.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PySSM</span> <span class="kn">import</span> <span class="n">Kernel</span>
+
+<span class="c1"># Define a new kernel by implementing the clone and __call__ function</span>
+<span class="k">class</span> <span class="nc">PolyKernel</span><span class="p">(</span><span class="n">Kernel</span><span class="p">):</span>
+ <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+     <span class="k">return</span> <span class="n">PolyKernel</span><span class="p">()</span>
+
+ <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">):</span>
+     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
+
+<span class="c1"># Define a new kernel by implementing the function directly</span>
+<span class="k">def</span> <span class="nf">poly_kernel</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">):</span>
+   <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
+
+<span class="c1"># Use the class interface</span>
+<span class="n">kernel</span> <span class="o">=</span> <span class="n">PolyKernel</span><span class="p">()</span>
+<span class="n">ivm</span> <span class="o">=</span> <span class="n">FastIVM</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">kernel</span> <span class="o">=</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span>
+
+<span class="c1">#Alternatively use the function directly</span>
+<span class="c1">#ivm = FastIVM(K, kernel = poly_kernel, sigma = 1.0)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="implementing-custom-submodular-functions">
+<h2>Implementing custom submodular functions<a class="headerlink" href="#implementing-custom-submodular-functions" title="Permalink to this headline">¶</a></h2>
+<p>Implementing your own submodular function is easy. Again there are two options: First, you simply provide a python function which evaluates the function value of the provided summary <cite>X</cite>. Any optimizer accepts these regular python functions and an example is given below which computes the kernel matrix of the provided summary and computes its logdet via numpys <cite>slogdet</cite> method. We recommend this approach if you want to implement stateless submodular functions.</p>
+<p>Re-computing the kernel matrix can become slow for larger summaries. Thus, you can also implement the SubmodularFunction interface directly to cache computations. To do so, you have to implement the <cite>peek</cite>, the <cite>update</cite>, the <cite>clone</cite> and the <cite>__call__</cite>  method. For more details please see the dedicated documentation for the C++ back-end of SubmodularFunction. An example is given below.</p>
+<p><em>Note</em>: The parameters <cite>X</cite> and <cite>x</cite> are regular python lists. Make sure to transform them to the appropriate data types before using them.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">slogdet</span>
+<span class="kn">from</span> <span class="nn">PySSM</span> <span class="kn">import</span> <span class="n">SubmodularFunction</span>
+
+<span class="c1"># Compute the kernel matrix + its logdet</span>
+<span class="k">def</span> <span class="nf">ivm</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+   <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+   <span class="n">K</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+   <span class="n">kmat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">K</span><span class="p">,</span><span class="n">K</span><span class="p">))</span>
+
+   <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">xi</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+      <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">xj</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+            <span class="n">kval</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">xi</span><span class="o">-</span><span class="n">xj</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+               <span class="n">kmat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">kval</span> <span class="o">/</span> <span class="mf">1.0</span><span class="o">**</span><span class="mi">2</span>
+            <span class="k">else</span><span class="p">:</span>
+               <span class="n">kmat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">kval</span> <span class="o">/</span> <span class="mf">1.0</span><span class="o">**</span><span class="mi">2</span>
+               <span class="n">kmat</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">kval</span> <span class="o">/</span> <span class="mf">1.0</span><span class="o">**</span><span class="mi">2</span>
+   <span class="k">return</span> <span class="n">slogdet</span><span class="p">(</span><span class="n">kmat</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># This is a dummy implementation of the IVM function which caches the kernel matrix</span>
+<span class="k">class</span> <span class="nc">FastLogdet</span><span class="p">(</span><span class="n">SubmodularFunction</span><span class="p">):</span>
+   <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+      <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">added</span> <span class="o">=</span> <span class="mi">0</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">=</span> <span class="n">K</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">kmat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">K</span><span class="p">,</span><span class="n">K</span><span class="p">))</span>
+
+   <span class="k">def</span> <span class="nf">peek</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+      <span class="c1"># if self.added == 0:</span>
+      <span class="c1">#     return 0</span>
+
+      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">added</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span><span class="p">:</span>
+            <span class="c1">#X = np.array(X)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+            <span class="n">row</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">X</span><span class="p">:</span>
+               <span class="n">kval</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">xi</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.0</span><span class="p">)</span>
+               <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kval</span><span class="p">)</span>
+            <span class="n">kval</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.0</span><span class="p">)</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">kval</span> <span class="o">/</span> <span class="mf">1.0</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">kmat</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">added</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">added</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kmat</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">added</span><span class="p">,</span> <span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">added</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span>
+            <span class="k">return</span> <span class="n">slogdet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kmat</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">added</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,:</span><span class="bp">self</span><span class="o">.</span><span class="n">added</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
+      <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+   <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+      <span class="c1">#X = np.array(X)</span>
+      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">added</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+            <span class="n">row</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">X</span><span class="p">:</span>
+               <span class="n">kval</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">xi</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.0</span><span class="p">)</span>
+               <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kval</span><span class="p">)</span>
+
+            <span class="n">kval</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.0</span><span class="p">)</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">kval</span> <span class="o">/</span> <span class="mf">1.0</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">kmat</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">added</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">added</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kmat</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">added</span><span class="p">,</span> <span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">added</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">added</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="k">return</span> <span class="n">slogdet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kmat</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">added</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,:</span><span class="bp">self</span><span class="o">.</span><span class="n">added</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
+      <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+   <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="k">return</span> <span class="n">FastLogdet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">K</span><span class="p">)</span>
+
+   <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+      <span class="k">return</span> <span class="n">ivm</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="implementing-your-own-optimizer">
+<h2>Implementing your own optimizer<a class="headerlink" href="#implementing-your-own-optimizer" title="Permalink to this headline">¶</a></h2>
+<p>We currently do not support the implementation of new optimizers in Python, but only in C++. Sorry. Please have a look at the C++ documentation.</p>
+</div>
+</div>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script type="text/javascript" src="_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+    <div class="footer" role="contentinfo">
+        <div class="container">
+            &#169; Copyright 2021, Sebastian Buschjäger.
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2.
+        </div>
+    </div>  
+
+</body>
+</html>

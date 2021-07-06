@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Class SubmodularFunctionWrapper &mdash; SubmodularStreamMaximization  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class SubmodularOptimizer" href="classSubmodularOptimizer.html" />
+    <link rel="prev" title="Class SubmodularFunction" href="classSubmodularFunction.html" /> 
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a class="site-nav-toggle hidden-lg-up"><i class="icon-menu"></i></a>
+            <a class="site-title" href="../index.html">
+                SubmodularStreamMaximization
+            </a>
+        </div>
+    </header>
+
+
+<div class="breadcrumbs-outer hidden-xs-down">
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a></li>
+        
+          <li><a href="library_root.html">Library API</a></li>
+        
+      <li>Class SubmodularFunctionWrapper</li>
+    
+    
+      <li class="breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/classSubmodularFunctionWrapper.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+</div>
+    </div>
+</div>
+    <div class="main-outer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-3 site-nav">
+                    
+<div role="search">
+    <form class="search" action="../search.html" method="get">
+        <div class="icon-input">
+            <input type="text" name="q" placeholder="Search" />
+            <span class="icon-search"></span>
+        </div>
+        <input type="submit" value="Go" class="d-hidden" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+                    <div class="site-nav-tree">
+                        
+                            
+                            
+                                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../root.html">SubmodularStreamMaximization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#how-to-install">How to install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#how-to-reproduce-the-experiments-in-our-paper">How to reproduce the experiments in our paper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#cite-our-paper">Cite our paper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Using the Python Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-a-custom-kernel-for-the-ivm">Implementing a custom kernel for the IVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-custom-submodular-functions">Implementing custom submodular functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-your-own-optimizer">Implementing your own optimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp.html">Using the C++ interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-a-custom-kernel-for-the-ivm">Implementing a custom kernel for the IVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-custom-submodular-functions">Implementing custom submodular functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-your-own-optimizer">Implementing your own optimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="library_root.html">Library API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_root.html#full-api">Full API</a></li>
+</ul>
+</li>
+</ul>
+
+                            
+                        
+                    </div>
+                </div>
+                <div class="col-12 col-lg-9">
+                    <div class="document">
+                        
+                            
+  <div class="section" id="class-submodularfunctionwrapper">
+<span id="exhale-class-classsubmodularfunctionwrapper"></span><h1>Class SubmodularFunctionWrapper<a class="headerlink" href="#class-submodularfunctionwrapper" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_include_SubmodularFunction.h.html#file-include-submodularfunction-h"><span class="std std-ref">File SubmodularFunction.h</span></a></p></li>
+</ul>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">SubmodularFunction</span></code> (<a class="reference internal" href="classSubmodularFunction.html#exhale-class-classsubmodularfunction"><span class="std std-ref">Class SubmodularFunction</span></a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv425SubmodularFunctionWrapper">
+<span id="_CPPv325SubmodularFunctionWrapper"></span><span id="_CPPv225SubmodularFunctionWrapper"></span><span id="SubmodularFunctionWrapper"></span><span class="target" id="classSubmodularFunctionWrapper"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SubmodularFunctionWrapper</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="classSubmodularFunction.html#_CPPv418SubmodularFunction" title="SubmodularFunction"><span class="n"><span class="pre">SubmodularFunction</span></span></a><a class="headerlink" href="#_CPPv425SubmodularFunctionWrapper" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A simple Wrapper class which takse a std::function and uses it to implement the <a class="reference internal" href="classSubmodularFunction.html#classSubmodularFunction"><span class="std std-ref">SubmodularFunction</span></a> interface. This is used as a convience class for the <a class="reference internal" href="classSubmodularOptimizer.html#classSubmodularOptimizer"><span class="std std-ref">SubmodularOptimizer</span></a> interface. This wrapper is meant for stateless functions so that the std::function <strong>should not</strong> have / change / maintain an internal state which depends on the order of function calls. The main reason for this is, that the given std::function is likely to be moved into the member object (and not copied) which makes for very efficient code. However, some optimizers require multiple copies of the same function such as <a class="reference internal" href="classSieveStreaming.html#classSieveStreaming"><span class="std std-ref">SieveStreaming</span></a>(++) for multiple sub-optimizers. In this case, <em>all</em> (sub-) optimizers reference the same object, which works fine if the function is stateless but probably breaks for stateful functions. If your submodular function requires some internal states which e.g. depend on the order of items added please consider to implement a proper <a class="reference internal" href="classSubmodularFunction.html#classSubmodularFunction"><span class="std std-ref">SubmodularFunction</span></a>. </p>
+<p><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">returns None</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N25SubmodularFunctionWrapper25SubmodularFunctionWrapperENSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE">
+<span id="_CPPv3N25SubmodularFunctionWrapper25SubmodularFunctionWrapperENSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE"></span><span id="_CPPv2N25SubmodularFunctionWrapper25SubmodularFunctionWrapperENSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE"></span><span class="target" id="classSubmodularFunctionWrapper_1af0d95e27b2dfcb0bc201fa63d399fab7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SubmodularFunctionWrapper</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">f</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N25SubmodularFunctionWrapper25SubmodularFunctionWrapperENSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates a new <a class="reference internal" href="classSubmodularFunction.html#classSubmodularFunction"><span class="std std-ref">SubmodularFunction</span></a> from a given std::function object. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>f</strong> – The (stateless) function which implements the actual submodular function </p>
+</dd>
+<dt class="field-even">Returns </dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK25SubmodularFunctionWrapperclERKNSt6vectorINSt6vectorI6data_tEEEE">
+<span id="_CPPv3NK25SubmodularFunctionWrapperclERKNSt6vectorINSt6vectorI6data_tEEEE"></span><span id="_CPPv2NK25SubmodularFunctionWrapperclERKNSt6vectorINSt6vectorI6data_tEEEE"></span><span id="SubmodularFunctionWrapper::call-operator__std::vector:std::vector:data_t::CRC"></span><span class="target" id="classSubmodularFunctionWrapper_1a2fcfb8ff62cecf0e829cf2ff6d3586a2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">()</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cur_solution</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK25SubmodularFunctionWrapperclERKNSt6vectorINSt6vectorI6data_tEEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Implements the () operator by simply delegating the call to the underlying std::function. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>&amp;cur_solution</strong> – </p>
+</dd>
+<dt class="field-even">Returns </dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N25SubmodularFunctionWrapper4peekERKNSt6vectorINSt6vectorI6data_tEEEERKNSt6vectorI6data_tEEj">
+<span id="_CPPv3N25SubmodularFunctionWrapper4peekERKNSt6vectorINSt6vectorI6data_tEEEERKNSt6vectorI6data_tEEj"></span><span id="_CPPv2N25SubmodularFunctionWrapper4peekERKNSt6vectorINSt6vectorI6data_tEEEERKNSt6vectorI6data_tEEj"></span><span id="SubmodularFunctionWrapper::peek__std::vector:std::vector:data_t::CR.std::vector:data_t:CR.unsigned-i"></span><span class="target" id="classSubmodularFunctionWrapper_1ad40e6619fa684c95207cb9b148686b85"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">peek</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cur_solution</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">x</span></span>, <span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pos</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N25SubmodularFunctionWrapper4peekERKNSt6vectorINSt6vectorI6data_tEEEERKNSt6vectorI6data_tEEj" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Implements the peek method. This copies the current solution vector to a new one, adds x at the appropriate positon and calls the ()-operator. In most cases the copy is probably not necessary (e.g. if we only append x to the current solution) which makes this code slightly inefficient. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>&amp;cur_solution</strong> – </p></li>
+<li><p><strong>&amp;x</strong> – </p></li>
+<li><p><strong>pos</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns </dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N25SubmodularFunctionWrapper6updateERKNSt6vectorINSt6vectorI6data_tEEEERKNSt6vectorI6data_tEEj">
+<span id="_CPPv3N25SubmodularFunctionWrapper6updateERKNSt6vectorINSt6vectorI6data_tEEEERKNSt6vectorI6data_tEEj"></span><span id="_CPPv2N25SubmodularFunctionWrapper6updateERKNSt6vectorINSt6vectorI6data_tEEEERKNSt6vectorI6data_tEEj"></span><span id="SubmodularFunctionWrapper::update__std::vector:std::vector:data_t::CR.std::vector:data_t:CR.unsigned-i"></span><span class="target" id="classSubmodularFunctionWrapper_1a1bcb4606e959b87883d5c85f69bc95d1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">update</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cur_solution</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">x</span></span>, <span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pos</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N25SubmodularFunctionWrapper6updateERKNSt6vectorINSt6vectorI6data_tEEEERKNSt6vectorI6data_tEEj" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Implements the update method. This class only wraps an std::function so it is state-less and the std::function would have to deal with any stateful behaviour. Thus, we don’t do anything here. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>&amp;cur_solution</strong> – </p></li>
+<li><p><strong>&amp;x</strong> – </p></li>
+<li><p><strong>pos</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns None</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK25SubmodularFunctionWrapper5cloneEv">
+<span id="_CPPv3NK25SubmodularFunctionWrapper5cloneEv"></span><span id="_CPPv2NK25SubmodularFunctionWrapper5cloneEv"></span><span id="SubmodularFunctionWrapper::cloneC"></span><span class="target" id="classSubmodularFunctionWrapper_1a9d63cb8949c54925ae3bf0937ecdeb27"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classSubmodularFunction.html#_CPPv418SubmodularFunction" title="SubmodularFunction"><span class="n"><span class="pre">SubmodularFunction</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clone</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK25SubmodularFunctionWrapper5cloneEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Implements the clone method. Note, that it is very likely that the std::function f has been moved into this object and similarly, we will move it into the clone as-well. This is okay, as long as f is a stateless function. However, if f has some internal state, then the other optimizers will use the <strong>same</strong> function with the shared state which will probably lead to weird side-effects. In this case consider implementing a proper <a class="reference internal" href="classSubmodularFunction.html#classSubmodularFunction"><span class="std std-ref">SubmodularFunction</span></a>. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns The</dt>
+<dd class="field-odd"><p>cloned object. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N25SubmodularFunctionWrapperD0Ev">
+<span id="_CPPv3N25SubmodularFunctionWrapperD0Ev"></span><span id="_CPPv2N25SubmodularFunctionWrapperD0Ev"></span><span id="SubmodularFunctionWrapper::~SubmodularFunctionWrapper"></span><span class="target" id="classSubmodularFunctionWrapper_1a56b3864353cc14a2b1a246d3ce36e5ac"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~SubmodularFunctionWrapper</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N25SubmodularFunctionWrapperD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Destroy the wrapper object. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-attributes">Protected Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25SubmodularFunctionWrapper1fE">
+<span id="_CPPv3N25SubmodularFunctionWrapper1fE"></span><span id="_CPPv2N25SubmodularFunctionWrapper1fE"></span><span class="target" id="classSubmodularFunctionWrapper_1a70feced90f82398516cf30fa94c581bd"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">f</span></span></span><a class="headerlink" href="#_CPPv4N25SubmodularFunctionWrapper1fE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script type="text/javascript" src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+    <div class="footer" role="contentinfo">
+        <div class="container">
+            &#169; Copyright 2021, Sebastian Buschjäger.
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2.
+        </div>
+    </div>  
+
+</body>
+</html>

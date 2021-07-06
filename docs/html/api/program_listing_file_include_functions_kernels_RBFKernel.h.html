@@ -1,0 +1,302 @@
+
+
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File RBFKernel.h &mdash; SubmodularStreamMaximization  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a class="site-nav-toggle hidden-lg-up"><i class="icon-menu"></i></a>
+            <a class="site-title" href="../index.html">
+                SubmodularStreamMaximization
+            </a>
+        </div>
+    </header>
+
+
+<div class="breadcrumbs-outer hidden-xs-down">
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a></li>
+        
+      <li>Program Listing for File RBFKernel.h</li>
+    
+    
+      <li class="breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/program_listing_file_include_functions_kernels_RBFKernel.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+</div>
+    </div>
+</div>
+    <div class="main-outer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-3 site-nav">
+                    
+<div role="search">
+    <form class="search" action="../search.html" method="get">
+        <div class="icon-input">
+            <input type="text" name="q" placeholder="Search" />
+            <span class="icon-search"></span>
+        </div>
+        <input type="submit" value="Go" class="d-hidden" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+                    <div class="site-nav-tree">
+                        
+                            
+                            
+                                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../root.html">SubmodularStreamMaximization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#how-to-install">How to install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#how-to-reproduce-the-experiments-in-our-paper">How to reproduce the experiments in our paper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#cite-our-paper">Cite our paper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Using the Python Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-a-custom-kernel-for-the-ivm">Implementing a custom kernel for the IVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-custom-submodular-functions">Implementing custom submodular functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-your-own-optimizer">Implementing your own optimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp.html">Using the C++ interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-a-custom-kernel-for-the-ivm">Implementing a custom kernel for the IVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-custom-submodular-functions">Implementing custom submodular functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-your-own-optimizer">Implementing your own optimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#full-api">Full API</a></li>
+</ul>
+</li>
+</ul>
+
+                            
+                        
+                    </div>
+                </div>
+                <div class="col-12 col-lg-9">
+                    <div class="document">
+                        
+                            
+  <div class="section" id="program-listing-for-file-rbfkernel-h">
+<span id="program-listing-file-include-functions-kernels-rbfkernel-h"></span><h1>Program Listing for File RBFKernel.h<a class="headerlink" href="#program-listing-for-file-rbfkernel-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_include_functions_kernels_RBFKernel.h.html#file-include-functions-kernels-rbfkernel-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">include/functions/kernels/RBFKernel.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef RBF_KERNEL_H</span>
+<span class="cp">#define RBF_KERNEL_H</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;cassert&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;numeric&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;x86intrin.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;DataTypeHandling.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;functions/kernels/Kernel.h&quot;</span><span class="cp"></span>
+
+<span class="cm">/* These are remains of an AVX implementation for the euclidean distance. However, it was not much faster (sometimes slower)</span>
+<span class="cm"> * then the code snippet used from the STL. Also, it only supports float at the moment.</span>
+<span class="cm"> *</span>
+<span class="cm">*/</span>
+<span class="c1">// // From https://gist.github.com/matsui528/583925f88fcb08240319030202588c74</span>
+<span class="c1">// // reads 0 &lt;= d &lt; 4 floats as __m128</span>
+<span class="c1">// static inline __m128 masked_read (int d, const float *x) {</span>
+<span class="c1">//     assert (0 &lt;= d &amp;&amp; d &lt; 4);</span>
+<span class="c1">//     __attribute__((__aligned__(16))) float buf[4] = {0, 0, 0, 0};</span>
+<span class="c1">//     switch (d) {</span>
+<span class="c1">//       case 3:</span>
+<span class="c1">//         buf[2] = x[2];</span>
+<span class="c1">//       case 2:</span>
+<span class="c1">//         buf[1] = x[1];</span>
+<span class="c1">//       case 1:</span>
+<span class="c1">//         buf[0] = x[0];</span>
+<span class="c1">//     }</span>
+<span class="c1">//     return _mm_load_ps (buf);</span>
+<span class="c1">//     // cannot use AVX2 _mm_mask_set1_epi32</span>
+<span class="c1">// }</span>
+
+<span class="c1">// template&lt;typename T&gt;</span>
+<span class="c1">// T squared_distance(const float * x, const float * y, unsigned int d);</span>
+
+<span class="c1">// template&lt;&gt;</span>
+<span class="c1">// float squared_distance(const float * x, const float * y, unsigned int d) {</span>
+<span class="c1">//      __m256 msum1 = _mm256_setzero_ps();</span>
+
+<span class="c1">//     while (d &gt;= 8) {</span>
+<span class="c1">//         __m256 mx = _mm256_loadu_ps (x); x += 8;</span>
+<span class="c1">//         __m256 my = _mm256_loadu_ps (y); y += 8;</span>
+<span class="c1">//         const __m256 a_m_b1 = mx - my;</span>
+<span class="c1">//         msum1 += a_m_b1 * a_m_b1;</span>
+<span class="c1">//         d -= 8;</span>
+<span class="c1">//     }</span>
+
+<span class="c1">//     __m128 msum2 = _mm256_extractf128_ps(msum1, 1);</span>
+<span class="c1">//     msum2 +=       _mm256_extractf128_ps(msum1, 0);</span>
+
+<span class="c1">//     if (d &gt;= 4) {</span>
+<span class="c1">//         __m128 mx = _mm_loadu_ps (x); x += 4;</span>
+<span class="c1">//         __m128 my = _mm_loadu_ps (y); y += 4;</span>
+<span class="c1">//         const __m128 a_m_b1 = mx - my;</span>
+<span class="c1">//         msum2 += a_m_b1 * a_m_b1;</span>
+<span class="c1">//         d -= 4;</span>
+<span class="c1">//     }</span>
+
+<span class="c1">//     if (d &gt; 0) {</span>
+<span class="c1">//         __m128 mx = masked_read (d, x);</span>
+<span class="c1">//         __m128 my = masked_read (d, y);</span>
+<span class="c1">//         __m128 a_m_b1 = mx - my;</span>
+<span class="c1">//         msum2 += a_m_b1 * a_m_b1;</span>
+<span class="c1">//     }</span>
+
+<span class="c1">//     msum2 = _mm_hadd_ps (msum2, msum2);</span>
+<span class="c1">//     msum2 = _mm_hadd_ps (msum2, msum2);</span>
+<span class="c1">//     return  _mm_cvtss_f32 (msum2);</span>
+<span class="c1">// }</span>
+
+<span class="c1">// template&lt;&gt;</span>
+<span class="c1">// double squared_distance(const float * x, const float * y, unsigned int d) {</span>
+
+<span class="c1">// }</span>
+
+<span class="k">class</span> <span class="nc">RBFKernel</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Kernel</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="n">data_t</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+
+    <span class="n">data_t</span> <span class="n">scale</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">RBFKernel</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+
+    <span class="n">RBFKernel</span><span class="p">(</span><span class="n">data_t</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">:</span> <span class="n">RBFKernel</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="n">RBFKernel</span><span class="p">(</span><span class="n">data_t</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">data_t</span> <span class="n">scale</span><span class="p">)</span> <span class="o">:</span> <span class="n">sigma</span><span class="p">(</span><span class="n">sigma</span><span class="p">),</span> <span class="n">scale</span><span class="p">(</span><span class="n">scale</span><span class="p">){</span>
+        <span class="n">assert</span><span class="p">((</span><span class="s">&quot;The scale of an RBF Kernel should be greater than 0!&quot;</span><span class="p">,</span> <span class="n">scale</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">));</span>
+        <span class="n">assert</span><span class="p">((</span><span class="s">&quot;The sigma value of an RBF Kernel should be greater than  0!&quot;</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">));</span>
+    <span class="p">};</span>
+
+    <span class="kr">inline</span> <span class="n">data_t</span> <span class="nf">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">data_t</span><span class="o">&gt;&amp;</span> <span class="n">x1</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">data_t</span><span class="o">&gt;&amp;</span> <span class="n">x2</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+        <span class="n">data_t</span> <span class="n">distance</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">x1</span> <span class="o">!=</span> <span class="n">x2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// This is the fastest stl-compatible version I could find / come up with. I am not sure how much</span>
+            <span class="c1">// vectorization this utilizes, but for now this shall be enough</span>
+            <span class="n">distance</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">inner_product</span><span class="p">(</span><span class="n">x1</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">x1</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">x2</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">data_t</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">plus</span><span class="o">&lt;</span><span class="n">data_t</span><span class="o">&gt;</span><span class="p">(),</span> <span class="p">[](</span><span class="n">data_t</span> <span class="n">x</span><span class="p">,</span><span class="n">data_t</span> <span class="n">y</span><span class="p">){</span><span class="k">return</span> <span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">x</span><span class="p">);}</span>
+            <span class="p">);</span>
+            <span class="c1">// for (unsigned int i = 0; i &lt; x1.size(); ++i) {</span>
+            <span class="c1">//     auto const d = x1[i] - x2[i];</span>
+            <span class="c1">//     distance += d * d;</span>
+            <span class="c1">// }</span>
+            <span class="n">distance</span> <span class="o">/=</span> <span class="n">sigma</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">std</span><span class="o">::</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">distance</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Kernel</span><span class="o">&gt;</span> <span class="n">clone</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Kernel</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span> <span class="n">RBFKernel</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">scale</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="cp">#endif </span><span class="c1">// RBF_KERNEL_H</span>
+</pre></div>
+</div>
+</div>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script type="text/javascript" src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+    <div class="footer" role="contentinfo">
+        <div class="container">
+            &#169; Copyright 2021, Sebastian Buschjäger.
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2.
+        </div>
+    </div>  
+
+</body>
+</html>

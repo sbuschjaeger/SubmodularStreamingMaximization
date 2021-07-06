@@ -1,0 +1,367 @@
+
+
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Class IndependentSetImprovement &mdash; SubmodularStreamMaximization  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class IVM" href="classIVM.html" />
+    <link rel="prev" title="Class Greedy" href="classGreedy.html" /> 
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a class="site-nav-toggle hidden-lg-up"><i class="icon-menu"></i></a>
+            <a class="site-title" href="../index.html">
+                SubmodularStreamMaximization
+            </a>
+        </div>
+    </header>
+
+
+<div class="breadcrumbs-outer hidden-xs-down">
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a></li>
+        
+          <li><a href="library_root.html">Library API</a></li>
+        
+      <li>Class IndependentSetImprovement</li>
+    
+    
+      <li class="breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/classIndependentSetImprovement.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+</div>
+    </div>
+</div>
+    <div class="main-outer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-3 site-nav">
+                    
+<div role="search">
+    <form class="search" action="../search.html" method="get">
+        <div class="icon-input">
+            <input type="text" name="q" placeholder="Search" />
+            <span class="icon-search"></span>
+        </div>
+        <input type="submit" value="Go" class="d-hidden" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+                    <div class="site-nav-tree">
+                        
+                            
+                            
+                                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../root.html">SubmodularStreamMaximization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#how-to-install">How to install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#how-to-reproduce-the-experiments-in-our-paper">How to reproduce the experiments in our paper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#cite-our-paper">Cite our paper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Using the Python Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-a-custom-kernel-for-the-ivm">Implementing a custom kernel for the IVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-custom-submodular-functions">Implementing custom submodular functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-your-own-optimizer">Implementing your own optimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp.html">Using the C++ interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-a-custom-kernel-for-the-ivm">Implementing a custom kernel for the IVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-custom-submodular-functions">Implementing custom submodular functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-your-own-optimizer">Implementing your own optimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="library_root.html">Library API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_root.html#full-api">Full API</a></li>
+</ul>
+</li>
+</ul>
+
+                            
+                        
+                    </div>
+                </div>
+                <div class="col-12 col-lg-9">
+                    <div class="document">
+                        
+                            
+  <div class="section" id="class-independentsetimprovement">
+<span id="exhale-class-classindependentsetimprovement"></span><h1>Class IndependentSetImprovement<a class="headerlink" href="#class-independentsetimprovement" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_include_IndependentSetImprovement.h.html#file-include-independentsetimprovement-h"><span class="std std-ref">File IndependentSetImprovement.h</span></a></p></li>
+</ul>
+<div class="section" id="nested-relationships">
+<h2>Nested Relationships<a class="headerlink" href="#nested-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="nested-types">
+<h3>Nested Types<a class="headerlink" href="#nested-types" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="structIndependentSetImprovement_1_1Pair.html#exhale-struct-structindependentsetimprovement-1-1pair"><span class="std std-ref">Struct IndependentSetImprovement::Pair</span></a></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">SubmodularOptimizer</span></code> (<a class="reference internal" href="classSubmodularOptimizer.html#exhale-class-classsubmodularoptimizer"><span class="std std-ref">Class SubmodularOptimizer</span></a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv425IndependentSetImprovement">
+<span id="_CPPv325IndependentSetImprovement"></span><span id="_CPPv225IndependentSetImprovement"></span><span id="IndependentSetImprovement"></span><span class="target" id="classIndependentSetImprovement"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">IndependentSetImprovement</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="classSubmodularOptimizer.html#_CPPv419SubmodularOptimizer" title="SubmodularOptimizer"><span class="n"><span class="pre">SubmodularOptimizer</span></span></a><a class="headerlink" href="#_CPPv425IndependentSetImprovement" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Independent Set Improvement for submodular functions. This optimizer stores the marginal gain (“weight”) of each element upon arrival and replaces an element if its gain is at-least twice as large as the smallest gain currently stored in the summary. The gains are <strong>not</strong> recomputed if the summary changes and thus are somewhat independent from the current solution and hence the name: </p>
+<p><ul class="simple">
+<li><p>Stream: No</p></li>
+<li><p>Solution: <span class="math notranslate nohighlight">\( 1/4 \)</span></p></li>
+<li><p>Runtime: <span class="math notranslate nohighlight">\( O(N) \)</span></p></li>
+<li><p>Memory: <span class="math notranslate nohighlight">\( O(K) \)</span></p></li>
+<li><p>Function Queries per Element: <span class="math notranslate nohighlight">\( O(1) \)</span></p></li>
+<li><p>Function Types: nonnegative submodular functions</p></li>
+</ul>
+</p>
+<p>Example usage in C++: <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//read some data </span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">data_t</span><span class="o">&gt;&gt;</span> <span class="o">=</span> <span class="n">read_some_data</span><span class="p">();</span> 
+<span class="k">auto</span> <span class="n">K</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+<span class="c1">// Define the function to be maximized and select the summary</span>
+<span class="n">FastIVM</span> <span class="nf">fastIVM</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">RBFKernel</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">()),</span> <span class="mf">1.0</span><span class="p">)</span> <span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
+<span class="n">IndependentSetImprovement</span> <span class="nf">opt</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">fastIVM</span><span class="p">);</span>
+<span class="n">opt</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;fval:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">opt</span><span class="p">.</span><span class="n">get_fval</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;num_elements: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">opt</span><span class="p">.</span><span class="n">get_num_elements_stored</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;num_candidates: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">opt</span><span class="p">.</span><span class="n">get_num_candidate_solutions</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="c1">// Process summary</span>
+<span class="k">auto</span> <span class="n">summary</span> <span class="o">=</span> <span class="n">opt</span><span class="p">.</span><span class="n">get_solution</span><span class="p">();</span>
+</pre></div>
+</div>
+</p>
+<p>Example usage in Python: <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">read_some_data</span><span class="p">();</span> 
+<span class="n">K</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="cp"># Create function to be maximized</span>
+<span class="n">kernel</span> <span class="o">=</span> <span class="n">RBFKernel</span><span class="p">(</span><span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">)</span>
+<span class="n">fastLogDet</span> <span class="o">=</span> <span class="n">FastIVM</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">IndependentSetImprovement</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">fastLogDet</span><span class="p">)</span>
+<span class="n">opt</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="s">&quot;fval: {} num_elements: {} num_candidates: {}&quot;</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">get_fval</span><span class="p">(),</span> <span class="n">opt</span><span class="p">.</span><span class="n">get_num_elements_stored</span><span class="p">(),</span> <span class="n">opt</span><span class="p">.</span><span class="n">get_num_candidate_solutions</span><span class="p">()))</span>
+<span class="cp"># process summary</span>
+<span class="n">summary</span> <span class="o">=</span> <span class="n">opt</span><span class="p">.</span><span class="n">get_solution</span><span class="p">()</span>
+</pre></div>
+</div>
+</p>
+<p>Parts of this algorithms are proposed in the appendix of the following paper, but this might not be enough to fully replicate the algorithm. Many thanks to Sagar Kale who helped with the implementation by answering my many questions via email.</p>
+<p><strong>References</strong></p>
+<p><ul class="simple">
+<li><p>Chakrabarti, Amit, and Sagar Kale. “Submodular maximization meets streaming: Matchings, matroids, and more.” Mathematical Programming 154.1 (2015): 225-247.</p></li>
+</ul>
+</p>
+<p><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This implementation uses a priority queue for managing the weights of each item. Thus, there is a <span class="math notranslate nohighlight">\( O(log K) \)</span> overhead when inserting new elements. </p>
+</div>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N25IndependentSetImprovement25IndependentSetImprovementEjR18SubmodularFunction">
+<span id="_CPPv3N25IndependentSetImprovement25IndependentSetImprovementEjR18SubmodularFunction"></span><span id="_CPPv2N25IndependentSetImprovement25IndependentSetImprovementEjR18SubmodularFunction"></span><span id="IndependentSetImprovement::IndependentSetImprovement__unsigned-i.SubmodularFunctionR"></span><span class="target" id="classIndependentSetImprovement_1ae86a9467687404031a7ee2223f35eb6a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">IndependentSetImprovement</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">K</span></span>, <a class="reference internal" href="classSubmodularFunction.html#_CPPv418SubmodularFunction" title="SubmodularFunction"><span class="n"><span class="pre">SubmodularFunction</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">f</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N25IndependentSetImprovement25IndependentSetImprovementEjR18SubmodularFunction" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Construct a new <a class="reference internal" href="#classIndependentSetImprovement"><span class="std std-ref">IndependentSetImprovement</span></a> object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>K</strong> – The cardinality constraint you of the optimization problem, that is the number of items selected. </p></li>
+<li><p><strong>f</strong> – The function which should be maximized. Note, that the clone function is used to construct a new <a class="reference internal" href="classSubmodularFunction.html#classSubmodularFunction"><span class="std std-ref">SubmodularFunction</span></a> which is owned by this object. If you implement a custom <a class="reference internal" href="classSubmodularFunction.html#classSubmodularFunction"><span class="std std-ref">SubmodularFunction</span></a> make sure that everything you need is actually cloned / copied. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N25IndependentSetImprovement25IndependentSetImprovementEjNSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE">
+<span id="_CPPv3N25IndependentSetImprovement25IndependentSetImprovementEjNSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE"></span><span id="_CPPv2N25IndependentSetImprovement25IndependentSetImprovementEjNSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE"></span><span class="target" id="classIndependentSetImprovement_1af8af17d4d60967e87a0965b19842ca12"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">IndependentSetImprovement</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">K</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">f</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N25IndependentSetImprovement25IndependentSetImprovementEjNSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Construct a new <a class="reference internal" href="#classIndependentSetImprovement"><span class="std std-ref">IndependentSetImprovement</span></a> object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>K</strong> – The cardinality constraint you of the optimization problem, that is the number of items selected. </p></li>
+<li><p><strong>f</strong> – The function which should be maximized. Note, that this parameter is likely moved and not copied. Thus, if you construct multiple optimizers with the <strong>same</strong> function they all reference the <strong>same</strong> function. This can be very efficient for state-less functions, but may lead to weird side effects if f keeps track of a state. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N25IndependentSetImprovement4nextERKNSt6vectorI6data_tEEKNSt8optionalI5idx_tEE">
+<span id="_CPPv3N25IndependentSetImprovement4nextERKNSt6vectorI6data_tEEKNSt8optionalI5idx_tEE"></span><span id="_CPPv2N25IndependentSetImprovement4nextERKNSt6vectorI6data_tEEKNSt8optionalI5idx_tEE"></span><span id="IndependentSetImprovement::next__std::vector:data_t:CR.std::optional:idx_t:C"></span><span class="target" id="classIndependentSetImprovement_1af823bc6bc58b39f66ca99b792349ff87"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">next</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">x</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">optional</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1aebd6d4f4d1878f967fc3873d39646e74.html#_CPPv45idx_t" title="idx_t"><span class="n"><span class="pre">idx_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">id</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">nullopt</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N25IndependentSetImprovement4nextERKNSt6vectorI6data_tEEKNSt8optionalI5idx_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Consume the next object in the data stream: If there are fewer than K elements in the summary: Unconditionally accept the current, compute the function value and weight and update the priority queue of weights. Runtime is <span class="math notranslate nohighlight">\( O(log K) + 1 \)</span> function query If there are more than K elements in the summary: Compute the current function value and check if the weight is at-least twice as large as the smallest weight in the summary. If so, replace it. Runtime is <span class="math notranslate nohighlight">\( O(1) \)</span> (no update) or <span class="math notranslate nohighlight">\( O(log K) \)</span> (insert new element) + 1 function query. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>&amp;x</strong> – A constant reference to the next object on the stream. </p></li>
+<li><p><strong>id</strong> – The id of the given object. If this is a <code class="docutils literal notranslate"><span class="pre">std::nullopt</span></code> this parameter is ignored. Otherwise the id is inserted into the solution. Make sure, that either <em>all</em> or <em>no</em> object receives an id to keep track which id belongs to which object. This algorithm simply stores the objects and the ids in two separate lists and performs no safety checks. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns None</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-attributes">Protected Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25IndependentSetImprovement7weightsE">
+<span id="_CPPv3N25IndependentSetImprovement7weightsE"></span><span id="_CPPv2N25IndependentSetImprovement7weightsE"></span><span id="IndependentSetImprovement::weights__std::priority_queue:Pair:"></span><span class="target" id="classIndependentSetImprovement_1a28cf121c6c0b0bcaf8b731e64fac878d"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">priority_queue</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N25IndependentSetImprovement4PairE" title="IndependentSetImprovement::Pair"><span class="n"><span class="pre">Pair</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">weights</span></span></span><a class="headerlink" href="#_CPPv4N25IndependentSetImprovement7weightsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N25IndependentSetImprovement4PairE">
+<span id="_CPPv3N25IndependentSetImprovement4PairE"></span><span id="_CPPv2N25IndependentSetImprovement4PairE"></span><span id="IndependentSetImprovement::Pair"></span><span class="target" id="structIndependentSetImprovement_1_1Pair"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Pair</span></span></span><a class="headerlink" href="#_CPPv4N25IndependentSetImprovement4PairE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>We use a priority queue to efficiently find / manage the smallest weights. Each item is identified by its weight and index in the summary. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N25IndependentSetImprovement4Pair4PairE6data_tj">
+<span id="_CPPv3N25IndependentSetImprovement4Pair4PairE6data_tj"></span><span id="_CPPv2N25IndependentSetImprovement4Pair4PairE6data_tj"></span><span id="IndependentSetImprovement::Pair::Pair__data_t.unsigned-i"></span><span class="target" id="structIndependentSetImprovement_1_1Pair_1a8863b07fec612514eb2c067be6943c26"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Pair</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">_weight</span></span>, <span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">_idx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N25IndependentSetImprovement4Pair4PairE6data_tj" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates a new <a class="reference internal" href="structIndependentSetImprovement_1_1Pair.html#structIndependentSetImprovement_1_1Pair"><span class="std std-ref">Pair</span></a> object with the given weight and index. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_weight</strong> – The weight of the element </p></li>
+<li><p><strong>_idx</strong> – The position / index in the summary </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK25IndependentSetImprovement4PairltERK4Pair">
+<span id="_CPPv3NK25IndependentSetImprovement4PairltERK4Pair"></span><span id="_CPPv2NK25IndependentSetImprovement4PairltERK4Pair"></span><span id="IndependentSetImprovement::Pair::lt-operator__PairCRC"></span><span class="target" id="structIndependentSetImprovement_1_1Pair_1ada23223841a971c96779e21aeed3b5a1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N25IndependentSetImprovement4PairE" title="IndependentSetImprovement::Pair"><span class="n"><span class="pre">Pair</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK25IndependentSetImprovement4PairltERK4Pair" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Implementation of the comparison operator for sorting into the priority queue. Sorting is done on the basis of the objects weight: this-&gt;weight &gt; other.weight. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>&amp;other</strong> – The other object this object is compared against. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25IndependentSetImprovement4Pair6weightE">
+<span id="_CPPv3N25IndependentSetImprovement4Pair6weightE"></span><span id="_CPPv2N25IndependentSetImprovement4Pair6weightE"></span><span id="IndependentSetImprovement::Pair::weight__data_t"></span><span class="target" id="structIndependentSetImprovement_1_1Pair_1aea3d48bd1c5027df34a143281b44b876"></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">weight</span></span></span><a class="headerlink" href="#_CPPv4N25IndependentSetImprovement4Pair6weightE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25IndependentSetImprovement4Pair3idxE">
+<span id="_CPPv3N25IndependentSetImprovement4Pair3idxE"></span><span id="_CPPv2N25IndependentSetImprovement4Pair3idxE"></span><span id="IndependentSetImprovement::Pair::idx__unsigned-i"></span><span class="target" id="structIndependentSetImprovement_1_1Pair_1ae0c50da0b6c5d2b23eab7674d73986ab"></span><span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">idx</span></span></span><a class="headerlink" href="#_CPPv4N25IndependentSetImprovement4Pair3idxE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script type="text/javascript" src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+    <div class="footer" role="contentinfo">
+        <div class="container">
+            &#169; Copyright 2021, Sebastian Buschjäger.
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2.
+        </div>
+    </div>  
+
+</body>
+</html>

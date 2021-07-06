@@ -1,0 +1,390 @@
+
+
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Class ThreeSieves &mdash; SubmodularStreamMaximization  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Function cholesky(Matrix const&amp;, unsigned int)" href="function_Matrix_8h_1a6ad25ab35e59ad08b5a13aabfe166a11.html" />
+    <link rel="prev" title="Class SubmodularOptimizer" href="classSubmodularOptimizer.html" /> 
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a class="site-nav-toggle hidden-lg-up"><i class="icon-menu"></i></a>
+            <a class="site-title" href="../index.html">
+                SubmodularStreamMaximization
+            </a>
+        </div>
+    </header>
+
+
+<div class="breadcrumbs-outer hidden-xs-down">
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a></li>
+        
+          <li><a href="library_root.html">Library API</a></li>
+        
+      <li>Class ThreeSieves</li>
+    
+    
+      <li class="breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/classThreeSieves.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+</div>
+    </div>
+</div>
+    <div class="main-outer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-3 site-nav">
+                    
+<div role="search">
+    <form class="search" action="../search.html" method="get">
+        <div class="icon-input">
+            <input type="text" name="q" placeholder="Search" />
+            <span class="icon-search"></span>
+        </div>
+        <input type="submit" value="Go" class="d-hidden" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+                    <div class="site-nav-tree">
+                        
+                            
+                            
+                                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../root.html">SubmodularStreamMaximization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#how-to-install">How to install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#how-to-reproduce-the-experiments-in-our-paper">How to reproduce the experiments in our paper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#cite-our-paper">Cite our paper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Using the Python Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-a-custom-kernel-for-the-ivm">Implementing a custom kernel for the IVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-custom-submodular-functions">Implementing custom submodular functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-your-own-optimizer">Implementing your own optimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp.html">Using the C++ interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-a-custom-kernel-for-the-ivm">Implementing a custom kernel for the IVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-custom-submodular-functions">Implementing custom submodular functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-your-own-optimizer">Implementing your own optimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="library_root.html">Library API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_root.html#full-api">Full API</a></li>
+</ul>
+</li>
+</ul>
+
+                            
+                        
+                    </div>
+                </div>
+                <div class="col-12 col-lg-9">
+                    <div class="document">
+                        
+                            
+  <div class="section" id="class-threesieves">
+<span id="exhale-class-classthreesieves"></span><h1>Class ThreeSieves<a class="headerlink" href="#class-threesieves" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_include_ThreeSieves.h.html#file-include-threesieves-h"><span class="std std-ref">File ThreeSieves.h</span></a></p></li>
+</ul>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">SubmodularOptimizer</span></code> (<a class="reference internal" href="classSubmodularOptimizer.html#exhale-class-classsubmodularoptimizer"><span class="std std-ref">Class SubmodularOptimizer</span></a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv411ThreeSieves">
+<span id="_CPPv311ThreeSieves"></span><span id="_CPPv211ThreeSieves"></span><span id="ThreeSieves"></span><span class="target" id="classThreeSieves"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ThreeSieves</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="classSubmodularOptimizer.html#_CPPv419SubmodularOptimizer" title="SubmodularOptimizer"><span class="n"><span class="pre">SubmodularOptimizer</span></span></a><a class="headerlink" href="#_CPPv411ThreeSieves" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The <a class="reference internal" href="#classThreeSieves"><span class="std std-ref">ThreeSieves</span></a> algorithm for submodular function maximization. This optimizer tries to estimate the probability that a given item is not out-valued in the future. To do so, it compares the marginal gain of each item against a pre-computed threshold. If this threshold is too large and the algorithm therefore rejects most items, it reduces the threshold after <span class="math notranslate nohighlight">\( T \)</span> tries. The confidence interval of not finding an element in the stream which would out-value the current threshold is given by the Rule Of Three, hence the name: </p>
+<p><ul class="simple">
+<li><p>Stream: Yes</p></li>
+<li><p>Solution: <span class="math notranslate nohighlight">\( (1-\varepsilon)(1-1/\exp(1)) with probability (1-\alpha)^K \)</span></p></li>
+<li><p>Runtime: <span class="math notranslate nohighlight">\( O(N) \)</span></p></li>
+<li><p>Memory: <span class="math notranslate nohighlight">\( O(K) \)</span></p></li>
+<li><p>Function Queries per Element: <span class="math notranslate nohighlight">\( O(1) \)</span></p></li>
+<li><p>Function Types: nonnegative submodular functions</p></li>
+</ul>
+</p>
+<p>Example usage in C++: <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//read some data </span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">data_t</span><span class="o">&gt;&gt;</span> <span class="o">=</span> <span class="n">read_some_data</span><span class="p">();</span> 
+<span class="k">auto</span> <span class="n">K</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+<span class="c1">// Define the function to be maximized and select the summary</span>
+<span class="n">FastIVM</span> <span class="nf">fastIVM</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">RBFKernel</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">()),</span> <span class="mf">1.0</span><span class="p">)</span> <span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
+<span class="n">ThreeSieves</span> <span class="nf">opt</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">fastIVM</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">THRESHOLD_STRATEGY</span><span class="o">::</span><span class="n">SIEVE</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="n">opt</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;fval:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">opt</span><span class="p">.</span><span class="n">get_fval</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;num_elements: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">opt</span><span class="p">.</span><span class="n">get_num_elements_stored</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;num_candidates: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">opt</span><span class="p">.</span><span class="n">get_num_candidate_solutions</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="c1">// Process summary</span>
+<span class="k">auto</span> <span class="n">summary</span> <span class="o">=</span> <span class="n">opt</span><span class="p">.</span><span class="n">get_solution</span><span class="p">();</span>
+</pre></div>
+</div>
+</p>
+<p>Example usage in Python: <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">read_some_data</span><span class="p">();</span> 
+<span class="n">K</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="cp"># Create function to be maximized</span>
+<span class="n">kernel</span> <span class="o">=</span> <span class="n">RBFKernel</span><span class="p">(</span><span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">)</span>
+<span class="n">fastLogDet</span> <span class="o">=</span> <span class="n">FastIVM</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">ThreeSieves</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">fastLogDet</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s">&quot;sieve&quot;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">opt</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="s">&quot;fval: {} num_elements: {} num_candidates: {}&quot;</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">get_fval</span><span class="p">(),</span> <span class="n">opt</span><span class="p">.</span><span class="n">get_num_elements_stored</span><span class="p">(),</span> <span class="n">opt</span><span class="p">.</span><span class="n">get_num_candidate_solutions</span><span class="p">()))</span>
+<span class="cp"># process summary</span>
+<span class="n">summary</span> <span class="o">=</span> <span class="n">opt</span><span class="p">.</span><span class="n">get_solution</span><span class="p">()</span>
+</pre></div>
+</div>
+</p>
+<p>Internally this algorithm also uses a novelty threshold similar to <a class="reference internal" href="classSieveStreaming.html#classSieveStreaming"><span class="std std-ref">SieveStreaming</span></a>, but only maintains a single sieve. After <span class="math notranslate nohighlight">\( T \)</span> unsuccessful tries of adding an element to the summary, it reduces the threshold. This can either be a constant value (<code class="docutils literal notranslate"><span class="pre">CONSTANT</span></code> strategy) or by using the next smallest threshold from <span class="math notranslate nohighlight">\( \{(1+\varepsilon)^i | i \in Z, lower \le (1+\varepsilon)^i \le upper\} \)</span> similar to <a class="reference internal" href="classSieveStreaming.html#classSieveStreaming"><span class="std std-ref">SieveStreaming</span></a> (<code class="docutils literal notranslate"><span class="pre">SIEVE</span></code> strategy).</p>
+<p><strong>References</strong></p>
+<p><ul class="simple">
+<li><p>Buschjäger, Sebastian, Honysz, Philipp-Jan, Pfahler, Lukas &amp; Morik, Katharina Very Fast Submodular Function Maximization. European Conference on Machine Learning and Knowledge Discovery in Databases (ECML/PKDD) 2021 (accepted)</p></li>
+<li><p>Buschjäger, Sebastian, Honysz, Philipp-Jan, Pfahler, Lukas &amp; Morik, Katharina (2021) Very Fast Submodular Function Maximization. <a class="reference external" href="https://arxiv.org/abs/2010.10059">https://arxiv.org/abs/2010.10059</a> </p></li>
+</ul>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv4N11ThreeSieves18THRESHOLD_STRATEGYE">
+<span id="_CPPv3N11ThreeSieves18THRESHOLD_STRATEGYE"></span><span id="_CPPv2N11ThreeSieves18THRESHOLD_STRATEGYE"></span><span class="target" id="classThreeSieves_1a550085e1ef316d86b4ecd187e010d7f9"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">THRESHOLD_STRATEGY</span></span></span><a class="headerlink" href="#_CPPv4N11ThreeSieves18THRESHOLD_STRATEGYE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The different strategies to reduce the threshold after <span class="math notranslate nohighlight">\( T \)</span> unsuccessful tries. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N11ThreeSieves18THRESHOLD_STRATEGY5SIEVEE">
+<span id="_CPPv3N11ThreeSieves18THRESHOLD_STRATEGY5SIEVEE"></span><span id="_CPPv2N11ThreeSieves18THRESHOLD_STRATEGY5SIEVEE"></span><span class="target" id="classThreeSieves_1a550085e1ef316d86b4ecd187e010d7f9a4bf2e00e90d15f4c1fdfb55ba62a79f3"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SIEVE</span></span></span><a class="headerlink" href="#_CPPv4N11ThreeSieves18THRESHOLD_STRATEGY5SIEVEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Start with the largest threshold in <span class="math notranslate nohighlight">\( \{(1+\varepsilon)^i | i \in Z, lower \le (1+\varepsilon)^i \le upper\} \)</span> and always use the next largest as the new threshold </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N11ThreeSieves18THRESHOLD_STRATEGY8CONSTANTE">
+<span id="_CPPv3N11ThreeSieves18THRESHOLD_STRATEGY8CONSTANTE"></span><span id="_CPPv2N11ThreeSieves18THRESHOLD_STRATEGY8CONSTANTE"></span><span class="target" id="classThreeSieves_1a550085e1ef316d86b4ecd187e010d7f9a9229c54f6c31092831f601c59f9ae38f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CONSTANT</span></span></span><a class="headerlink" href="#_CPPv4N11ThreeSieves18THRESHOLD_STRATEGY8CONSTANTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reduce the threshold by a constant <span class="math notranslate nohighlight">\( \varepsilon \)</span> </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11ThreeSieves11ThreeSievesEjR18SubmodularFunction6data_t6data_tRKNSt6stringEj">
+<span id="_CPPv3N11ThreeSieves11ThreeSievesEjR18SubmodularFunction6data_t6data_tRKNSt6stringEj"></span><span id="_CPPv2N11ThreeSieves11ThreeSievesEjR18SubmodularFunction6data_t6data_tRKNSt6stringEj"></span><span id="ThreeSieves::ThreeSieves__unsigned-i.SubmodularFunctionR.data_t.data_t.ssCR.unsigned-i"></span><span class="target" id="classThreeSieves_1a156a519b80b71ce8d44ac92e1e0c45ec"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ThreeSieves</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">K</span></span>, <a class="reference internal" href="classSubmodularFunction.html#_CPPv418SubmodularFunction" title="SubmodularFunction"><span class="n"><span class="pre">SubmodularFunction</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">f</span></span>, <a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">m</span></span>, <a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">epsilon</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">strategy</span></span>, <span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">T</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ThreeSieves11ThreeSievesEjR18SubmodularFunction6data_t6data_tRKNSt6stringEj" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Construct a new <a class="reference internal" href="#classThreeSieves"><span class="std std-ref">ThreeSieves</span></a> object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>K</strong> – The cardinality constraint you of the optimization problem, that is the number of items selected. </p></li>
+<li><p><strong>f</strong> – The function which should be maximized. Note, that the clone function is used to construct a new <a class="reference internal" href="classSubmodularFunction.html#classSubmodularFunction"><span class="std std-ref">SubmodularFunction</span></a> which is owned by this object. If you implement a custom <a class="reference internal" href="classSubmodularFunction.html#classSubmodularFunction"><span class="std std-ref">SubmodularFunction</span></a> make sure that everything you need is actually cloned / copied. </p></li>
+<li><p><strong>m</strong> – The maximum singleton value </p></li>
+<li><p><strong>epsilon</strong> – The epsilon parameter used in the thresholding strategy </p></li>
+<li><p><strong>strategy</strong> – The thresholding strategy. Uses SIEVE if “sieve” (or any lower/upper-case variation) is supplied. Otherwise uses CONSTANT </p></li>
+<li><p><strong>T</strong> – The maximum number of tries until the threshold is reduced </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11ThreeSieves11ThreeSievesEjNSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE6data_t6data_tRKNSt6stringEj">
+<span id="_CPPv3N11ThreeSieves11ThreeSievesEjNSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE6data_t6data_tRKNSt6stringEj"></span><span id="_CPPv2N11ThreeSieves11ThreeSievesEjNSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE6data_t6data_tRKNSt6stringEj"></span><span class="target" id="classThreeSieves_1a4be1181ffa06697843aaab9f13cc6797"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ThreeSieves</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">K</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">f</span></span>, <a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">m</span></span>, <a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">epsilon</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">strategy</span></span>, <span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">T</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ThreeSieves11ThreeSievesEjNSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE6data_t6data_tRKNSt6stringEj" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Construct a new <a class="reference internal" href="#classThreeSieves"><span class="std std-ref">ThreeSieves</span></a> object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>K</strong> – The cardinality constraint you of the optimization problem, that is the number of items selected. </p></li>
+<li><p><strong>f</strong> – The function which should be maximized. Note, that this parameter is likely moved and not copied. Thus, if you construct multiple optimizers with the <strong>same</strong> function they all reference the <strong>same</strong> function. This can be very efficient for state-less functions, but may lead to weird side effects if f keeps track of a state. </p></li>
+<li><p><strong>m</strong> – The maximum singleton value </p></li>
+<li><p><strong>epsilon</strong> – The epsilon parameter used in the thresholding strategy </p></li>
+<li><p><strong>strategy</strong> – The thresholding strategy. Uses SIEVE if “sieve” (or any lower/upper-case variation) is supplied. Otherwise uses CONSTANT </p></li>
+<li><p><strong>T</strong> – The maximum number of tries until the threshold is reduced </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11ThreeSieves11ThreeSievesEjR18SubmodularFunction6data_t6data_t18THRESHOLD_STRATEGYj">
+<span id="_CPPv3N11ThreeSieves11ThreeSievesEjR18SubmodularFunction6data_t6data_t18THRESHOLD_STRATEGYj"></span><span id="_CPPv2N11ThreeSieves11ThreeSievesEjR18SubmodularFunction6data_t6data_t18THRESHOLD_STRATEGYj"></span><span id="ThreeSieves::ThreeSieves__unsigned-i.SubmodularFunctionR.data_t.data_t.THRESHOLD_STRATEGY.unsigned-i"></span><span class="target" id="classThreeSieves_1a5f47db7fcfdf0776c7b507a9eea71b21"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ThreeSieves</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">K</span></span>, <a class="reference internal" href="classSubmodularFunction.html#_CPPv418SubmodularFunction" title="SubmodularFunction"><span class="n"><span class="pre">SubmodularFunction</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">f</span></span>, <a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">m</span></span>, <a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">epsilon</span></span>, <a class="reference internal" href="#_CPPv4N11ThreeSieves18THRESHOLD_STRATEGYE" title="ThreeSieves::THRESHOLD_STRATEGY"><span class="n"><span class="pre">THRESHOLD_STRATEGY</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">strategy</span></span>, <span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">T</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ThreeSieves11ThreeSievesEjR18SubmodularFunction6data_t6data_t18THRESHOLD_STRATEGYj" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Construct a new <a class="reference internal" href="#classThreeSieves"><span class="std std-ref">ThreeSieves</span></a> object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>K</strong> – The cardinality constraint you of the optimization problem, that is the number of items selected. </p></li>
+<li><p><strong>f</strong> – The function which should be maximized. Note, that the clone function is used to construct a new <a class="reference internal" href="classSubmodularFunction.html#classSubmodularFunction"><span class="std std-ref">SubmodularFunction</span></a> which is owned by this object. If you implement a custom <a class="reference internal" href="classSubmodularFunction.html#classSubmodularFunction"><span class="std std-ref">SubmodularFunction</span></a> make sure that everything you need is actually cloned / copied. </p></li>
+<li><p><strong>m</strong> – The maximum singleton value </p></li>
+<li><p><strong>epsilon</strong> – The epsilon parameter used in the thresholding strategy </p></li>
+<li><p><strong>strategy</strong> – The thresholding strategy. </p></li>
+<li><p><strong>T</strong> – The maximum number of tries until the threshold is reduced </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11ThreeSieves11ThreeSievesEjNSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE6data_t6data_t18THRESHOLD_STRATEGYj">
+<span id="_CPPv3N11ThreeSieves11ThreeSievesEjNSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE6data_t6data_t18THRESHOLD_STRATEGYj"></span><span id="_CPPv2N11ThreeSieves11ThreeSievesEjNSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE6data_t6data_t18THRESHOLD_STRATEGYj"></span><span class="target" id="classThreeSieves_1a28447665c4b0b5d961e7dc899c5efff3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ThreeSieves</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">K</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">f</span></span>, <a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">m</span></span>, <a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">epsilon</span></span>, <a class="reference internal" href="#_CPPv4N11ThreeSieves18THRESHOLD_STRATEGYE" title="ThreeSieves::THRESHOLD_STRATEGY"><span class="n"><span class="pre">THRESHOLD_STRATEGY</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">strategy</span></span>, <span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">T</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ThreeSieves11ThreeSievesEjNSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE6data_t6data_t18THRESHOLD_STRATEGYj" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Construct a new <a class="reference internal" href="#classThreeSieves"><span class="std std-ref">ThreeSieves</span></a> object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>K</strong> – The cardinality constraint you of the optimization problem, that is the number of items selected. </p></li>
+<li><p><strong>f</strong> – The function which should be maximized. Note, that this parameter is likely moved and not copied. Thus, if you construct multiple optimizers with the <strong>same</strong> function they all reference the <strong>same</strong> function. This can be very efficient for state-less functions, but may lead to weird side effects if f keeps track of a state. </p></li>
+<li><p><strong>m</strong> – The maximum singleton value </p></li>
+<li><p><strong>epsilon</strong> – The epsilon parameter used in the thresholding strategy </p></li>
+<li><p><strong>strategy</strong> – The thresholding strategy. </p></li>
+<li><p><strong>T</strong> – The maximum number of tries until the threshold is reduced </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N11ThreeSieves4nextERKNSt6vectorI6data_tEEKNSt8optionalI5idx_tEE">
+<span id="_CPPv3N11ThreeSieves4nextERKNSt6vectorI6data_tEEKNSt8optionalI5idx_tEE"></span><span id="_CPPv2N11ThreeSieves4nextERKNSt6vectorI6data_tEEKNSt8optionalI5idx_tEE"></span><span id="ThreeSieves::next__std::vector:data_t:CR.std::optional:idx_t:C"></span><span class="target" id="classThreeSieves_1a5a17d3e6a1a2e3c4b57a5cbf038bbba7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">next</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">x</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">optional</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1aebd6d4f4d1878f967fc3873d39646e74.html#_CPPv45idx_t" title="idx_t"><span class="n"><span class="pre">idx_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">id</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">nullopt</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11ThreeSieves4nextERKNSt6vectorI6data_tEEKNSt8optionalI5idx_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Consume the next object in the data stream. If more than T tries have already been performed, then the threshold is lower according to the threshold strategy. In any case, the current item’s marginal gain is compared to the current / changed threshold and the item is added if the gain exceeds it. If so, the summary is updated accordingly. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>&amp;x</strong> – A constant reference to the next object on the stream. </p></li>
+<li><p><strong>id</strong> – The id of the given object. If this is a <code class="docutils literal notranslate"><span class="pre">std::nullopt</span></code> this parameter is ignored. Otherwise the id is inserted into the solution. Make sure, that either <em>all</em> or <em>no</em> object receives an id to keep track which id belongs to which object. This algorithm simply stores the objects and the ids in two separate lists and performs no safety checks. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N11ThreeSieves9thresholdE">
+<span id="_CPPv3N11ThreeSieves9thresholdE"></span><span id="_CPPv2N11ThreeSieves9thresholdE"></span><span id="ThreeSieves::threshold__data_t"></span><span class="target" id="classThreeSieves_1a412b0dc805751f6ae995ceedf6af71fc"></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">threshold</span></span></span><a class="headerlink" href="#_CPPv4N11ThreeSieves9thresholdE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N11ThreeSieves7epsilonE">
+<span id="_CPPv3N11ThreeSieves7epsilonE"></span><span id="_CPPv2N11ThreeSieves7epsilonE"></span><span id="ThreeSieves::epsilon__data_t"></span><span class="target" id="classThreeSieves_1ae5ae534e84b9aab199a6a2384c84e6a9"></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">epsilon</span></span></span><a class="headerlink" href="#_CPPv4N11ThreeSieves7epsilonE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N11ThreeSieves8strategyE">
+<span id="_CPPv3N11ThreeSieves8strategyE"></span><span id="_CPPv2N11ThreeSieves8strategyE"></span><span id="ThreeSieves::strategy__THRESHOLD_STRATEGY"></span><span class="target" id="classThreeSieves_1a9a27b845866d783e7468fd114257382f"></span><a class="reference internal" href="#_CPPv4N11ThreeSieves18THRESHOLD_STRATEGYE" title="ThreeSieves::THRESHOLD_STRATEGY"><span class="n"><span class="pre">THRESHOLD_STRATEGY</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">strategy</span></span></span><a class="headerlink" href="#_CPPv4N11ThreeSieves8strategyE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N11ThreeSieves1TE">
+<span id="_CPPv3N11ThreeSieves1TE"></span><span id="_CPPv2N11ThreeSieves1TE"></span><span id="ThreeSieves::T__unsigned-i"></span><span class="target" id="classThreeSieves_1ae9a6fbc051bcdd00712cc184eb3231eb"></span><span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><a class="headerlink" href="#_CPPv4N11ThreeSieves1TE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N11ThreeSieves1tE">
+<span id="_CPPv3N11ThreeSieves1tE"></span><span id="_CPPv2N11ThreeSieves1tE"></span><span id="ThreeSieves::t__unsigned-i"></span><span class="target" id="classThreeSieves_1aace1a330cc7e5ad3d22eb73d06e37d95"></span><span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">t</span></span></span><a class="headerlink" href="#_CPPv4N11ThreeSieves1tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script type="text/javascript" src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+    <div class="footer" role="contentinfo">
+        <div class="container">
+            &#169; Copyright 2021, Sebastian Buschjäger.
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2.
+        </div>
+    </div>  
+
+</body>
+</html>

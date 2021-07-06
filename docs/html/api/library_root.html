@@ -1,0 +1,606 @@
+
+
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Library API &mdash; SubmodularStreamMaximization  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Struct IndependentSetImprovement::Pair" href="structIndependentSetImprovement_1_1Pair.html" />
+    <link rel="prev" title="Using the C++ interface" href="../cpp.html" /> 
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a class="site-nav-toggle hidden-lg-up"><i class="icon-menu"></i></a>
+            <a class="site-title" href="../index.html">
+                SubmodularStreamMaximization
+            </a>
+        </div>
+    </header>
+
+
+<div class="breadcrumbs-outer hidden-xs-down">
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a></li>
+        
+      <li>Library API</li>
+    
+    
+      <li class="breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/library_root.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+</div>
+    </div>
+</div>
+    <div class="main-outer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-3 site-nav">
+                    
+<div role="search">
+    <form class="search" action="../search.html" method="get">
+        <div class="icon-input">
+            <input type="text" name="q" placeholder="Search" />
+            <span class="icon-search"></span>
+        </div>
+        <input type="submit" value="Go" class="d-hidden" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+                    <div class="site-nav-tree">
+                        
+                            
+                            
+                                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../root.html">SubmodularStreamMaximization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#how-to-install">How to install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#how-to-reproduce-the-experiments-in-our-paper">How to reproduce the experiments in our paper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#cite-our-paper">Cite our paper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Using the Python Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-a-custom-kernel-for-the-ivm">Implementing a custom kernel for the IVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-custom-submodular-functions">Implementing custom submodular functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-your-own-optimizer">Implementing your own optimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp.html">Using the C++ interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-a-custom-kernel-for-the-ivm">Implementing a custom kernel for the IVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-custom-submodular-functions">Implementing custom submodular functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-your-own-optimizer">Implementing your own optimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Library API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#full-api">Full API</a></li>
+</ul>
+</li>
+</ul>
+
+                            
+                        
+                    </div>
+                </div>
+                <div class="col-12 col-lg-9">
+                    <div class="document">
+                        
+                            
+  <div class="section" id="library-api">
+<h1>Library API<a class="headerlink" href="#library-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-hierarchy">
+<h2>Class Hierarchy<a class="headerlink" href="#class-hierarchy" title="Permalink to this headline">¶</a></h2>
+<ul class="treeView" id="class-treeView">
+  <li>
+    <ul class="collapsibleList">
+      <li>Class <a href="classFastIVM.html#exhale-class-classFastIVM">FastIVM</a></li><li>Class <a href="classGreedy.html#exhale-class-classGreedy">Greedy</a></li><li>Class <a href="classIndependentSetImprovement.html#exhale-class-classIndependentSetImprovement">IndependentSetImprovement</a><ul><li class="lastChild">Struct <a href="structIndependentSetImprovement_1_1Pair.html#exhale-struct-structIndependentSetImprovement-1-1Pair">IndependentSetImprovement::Pair</a></li></ul></li><li>Class <a href="classIVM.html#exhale-class-classIVM">IVM</a></li><li>Class <a href="classKernel.html#exhale-class-classKernel">Kernel</a></li><li>Class <a href="classKernelWrapper.html#exhale-class-classKernelWrapper">KernelWrapper</a></li><li>Class <a href="classMatrix.html#exhale-class-classMatrix">Matrix</a></li><li>Class <a href="classPyKernel.html#exhale-class-classPyKernel">PyKernel</a></li><li>Class <a href="classPySubmodularFunction.html#exhale-class-classPySubmodularFunction">PySubmodularFunction</a></li><li>Class <a href="classRandom.html#exhale-class-classRandom">Random</a></li><li>Class <a href="classRBFKernel.html#exhale-class-classRBFKernel">RBFKernel</a></li><li>Class <a href="classSalsa.html#exhale-class-classSalsa">Salsa</a><ul><li>Class <a href="classSalsa_1_1Dense.html#exhale-class-classSalsa-1-1Dense">Salsa::Dense</a></li><li>Class <a href="classSalsa_1_1FixedThreshold.html#exhale-class-classSalsa-1-1FixedThreshold">Salsa::FixedThreshold</a></li><li class="lastChild">Class <a href="classSalsa_1_1HighLowThreshold.html#exhale-class-classSalsa-1-1HighLowThreshold">Salsa::HighLowThreshold</a></li></ul></li><li>Class <a href="classSieveStreaming.html#exhale-class-classSieveStreaming">SieveStreaming</a><ul><li class="lastChild">Class <a href="classSieveStreaming_1_1Sieve.html#exhale-class-classSieveStreaming-1-1Sieve">SieveStreaming::Sieve</a></li></ul></li><li>Class <a href="classSieveStreamingPP.html#exhale-class-classSieveStreamingPP">SieveStreamingPP</a><ul><li class="lastChild">Class <a href="classSieveStreamingPP_1_1Sieve.html#exhale-class-classSieveStreamingPP-1-1Sieve">SieveStreamingPP::Sieve</a></li></ul></li><li>Class <a href="classSubmodularFunction.html#exhale-class-classSubmodularFunction">SubmodularFunction</a></li><li>Class <a href="classSubmodularFunctionWrapper.html#exhale-class-classSubmodularFunctionWrapper">SubmodularFunctionWrapper</a></li><li>Class <a href="classSubmodularOptimizer.html#exhale-class-classSubmodularOptimizer">SubmodularOptimizer</a></li><li class="lastChild">Class <a href="classThreeSieves.html#exhale-class-classThreeSieves">ThreeSieves</a></li>
+    </ul>
+  </li><!-- only tree view element -->
+</ul><!-- /treeView class-treeView --></div>
+<div class="section" id="file-hierarchy">
+<h2>File Hierarchy<a class="headerlink" href="#file-hierarchy" title="Permalink to this headline">¶</a></h2>
+<ul class="treeView" id="file-treeView">
+  <li>
+    <ul class="collapsibleList">
+      <li class="lastChild">Directory <a href="dir_include.html#dir-include">include</a><ul><li>Directory <a href="dir_include_functions.html#dir-include-functions">functions</a><ul><li>Directory <a href="dir_include_functions_kernels.html#dir-include-functions-kernels">kernels</a><ul><li>File <a href="file_include_functions_kernels_Kernel.h.html#file-include-functions-kernels-Kernel.h">Kernel.h</a></li><li class="lastChild">File <a href="file_include_functions_kernels_RBFKernel.h.html#file-include-functions-kernels-RBFKernel.h">RBFKernel.h</a></li></ul></li><li>File <a href="file_include_functions_FastIVM.h.html#file-include-functions-FastIVM.h">FastIVM.h</a></li><li>File <a href="file_include_functions_IVM.h.html#file-include-functions-IVM.h">IVM.h</a></li><li class="lastChild">File <a href="file_include_functions_Matrix.h.html#file-include-functions-Matrix.h">Matrix.h</a></li></ul></li><li>File <a href="file_include_DataTypeHandling.h.html#file-include-DataTypeHandling.h">DataTypeHandling.h</a></li><li>File <a href="file_include_Greedy.h.html#file-include-Greedy.h">Greedy.h</a></li><li>File <a href="file_include_IndependentSetImprovement.h.html#file-include-IndependentSetImprovement.h">IndependentSetImprovement.h</a></li><li>File <a href="file_include_Python.cpp.html#file-include-Python.cpp">Python.cpp</a></li><li>File <a href="file_include_Random.h.html#file-include-Random.h">Random.h</a></li><li>File <a href="file_include_Salsa.h.html#file-include-Salsa.h">Salsa.h</a></li><li>File <a href="file_include_SieveStreaming.h.html#file-include-SieveStreaming.h">SieveStreaming.h</a></li><li>File <a href="file_include_SieveStreamingPP.h.html#file-include-SieveStreamingPP.h">SieveStreamingPP.h</a></li><li>File <a href="file_include_SubmodularFunction.h.html#file-include-SubmodularFunction.h">SubmodularFunction.h</a></li><li>File <a href="file_include_SubmodularOptimizer.h.html#file-include-SubmodularOptimizer.h">SubmodularOptimizer.h</a></li><li class="lastChild">File <a href="file_include_ThreeSieves.h.html#file-include-ThreeSieves.h">ThreeSieves.h</a></li></ul></li>
+    </ul>
+  </li><!-- only tree view element -->
+</ul><!-- /treeView file-treeView --></div>
+<div class="section" id="full-api">
+<h2>Full API<a class="headerlink" href="#full-api" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="classes-and-structs">
+<h3>Classes and Structs<a class="headerlink" href="#classes-and-structs" title="Permalink to this headline">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structIndependentSetImprovement_1_1Pair.html">Struct IndependentSetImprovement::Pair</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structIndependentSetImprovement_1_1Pair.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structIndependentSetImprovement_1_1Pair.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classFastIVM.html">Class FastIVM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classFastIVM.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classFastIVM.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classFastIVM.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classGreedy.html">Class Greedy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classGreedy.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classGreedy.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classGreedy.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classIndependentSetImprovement.html">Class IndependentSetImprovement</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classIndependentSetImprovement.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classIndependentSetImprovement.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classIndependentSetImprovement.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classIndependentSetImprovement.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classIndependentSetImprovement.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classIVM.html">Class IVM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classIVM.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classIVM.html#base-type">Base Type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="classIVM.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classIVM.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKernel.html">Class Kernel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKernel.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classKernel.html#derived-types">Derived Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classKernel.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKernelWrapper.html">Class KernelWrapper</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKernelWrapper.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classKernelWrapper.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classKernelWrapper.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classMatrix.html">Class Matrix</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classMatrix.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classPyKernel.html">Class PyKernel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classPyKernel.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classPyKernel.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classPyKernel.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classPySubmodularFunction.html">Class PySubmodularFunction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classPySubmodularFunction.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classPySubmodularFunction.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classPySubmodularFunction.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classRandom.html">Class Random</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classRandom.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classRandom.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classRandom.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classRBFKernel.html">Class RBFKernel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classRBFKernel.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classRBFKernel.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classRBFKernel.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classSalsa.html">Class Salsa</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classSalsa.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classSalsa.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classSalsa.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classSalsa.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classSalsa.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classSalsa_1_1Dense.html">Class Salsa::Dense</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classSalsa_1_1Dense.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classSalsa_1_1Dense.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classSalsa_1_1Dense.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classSalsa_1_1Dense.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classSalsa_1_1FixedThreshold.html">Class Salsa::FixedThreshold</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classSalsa_1_1FixedThreshold.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classSalsa_1_1FixedThreshold.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classSalsa_1_1FixedThreshold.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classSalsa_1_1FixedThreshold.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classSalsa_1_1HighLowThreshold.html">Class Salsa::HighLowThreshold</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classSalsa_1_1HighLowThreshold.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classSalsa_1_1HighLowThreshold.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classSalsa_1_1HighLowThreshold.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classSalsa_1_1HighLowThreshold.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classSieveStreaming.html">Class SieveStreaming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classSieveStreaming.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classSieveStreaming.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classSieveStreaming.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classSieveStreaming.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classSieveStreaming.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classSieveStreaming_1_1Sieve.html">Class SieveStreaming::Sieve</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classSieveStreaming_1_1Sieve.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classSieveStreaming_1_1Sieve.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classSieveStreaming_1_1Sieve.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classSieveStreaming_1_1Sieve.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classSieveStreamingPP.html">Class SieveStreamingPP</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classSieveStreamingPP.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classSieveStreamingPP.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classSieveStreamingPP.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classSieveStreamingPP.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classSieveStreamingPP.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classSieveStreamingPP_1_1Sieve.html">Class SieveStreamingPP::Sieve</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classSieveStreamingPP_1_1Sieve.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classSieveStreamingPP_1_1Sieve.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classSieveStreamingPP_1_1Sieve.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classSieveStreamingPP_1_1Sieve.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classSubmodularFunction.html">Class SubmodularFunction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classSubmodularFunction.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classSubmodularFunction.html#derived-types">Derived Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classSubmodularFunction.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classSubmodularFunctionWrapper.html">Class SubmodularFunctionWrapper</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classSubmodularFunctionWrapper.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classSubmodularFunctionWrapper.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classSubmodularFunctionWrapper.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classSubmodularOptimizer.html">Class SubmodularOptimizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classSubmodularOptimizer.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classSubmodularOptimizer.html#derived-types">Derived Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classSubmodularOptimizer.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classThreeSieves.html">Class ThreeSieves</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classThreeSieves.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classThreeSieves.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classThreeSieves.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_Matrix_8h_1a6ad25ab35e59ad08b5a13aabfe166a11.html">Function cholesky(Matrix const&amp;, unsigned int)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_Matrix_8h_1a6ad25ab35e59ad08b5a13aabfe166a11.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_Matrix_8h_1a49f276b01293b9c7cd6ed4bff13dad70.html">Function cholesky(Matrix const&amp;)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_Matrix_8h_1a49f276b01293b9c7cd6ed4bff13dad70.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_Matrix_8h_1a2e9d8f00fc452e60c75013b7f37e43cb.html">Function log_det(Matrix const&amp;, unsigned int)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_Matrix_8h_1a2e9d8f00fc452e60c75013b7f37e43cb.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_Matrix_8h_1a38ada3e60db87205c68a8cd27bb53754.html">Function log_det(Matrix const&amp;)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_Matrix_8h_1a38ada3e60db87205c68a8cd27bb53754.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_Matrix_8h_1a5be908feb53890de249ca868e91435e0.html">Function log_det_from_cholesky</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_Matrix_8h_1a5be908feb53890de249ca868e91435e0.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_Python_8cpp_1ab3974db34051dddb4d81e89a8f347071.html">Function PYBIND11_MODULE</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_Python_8cpp_1ab3974db34051dddb4d81e89a8f347071.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_SieveStreaming_8h_1a4a3dfc0d6b302bb7a0969f52f70016fe.html">Function thresholds</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_SieveStreaming_8h_1a4a3dfc0d6b302bb7a0969f52f70016fe.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_Matrix_8h_1aaf9bc56a53b9a334621531b0e32ed04b.html">Function to_string(Matrix const&amp;, unsigned int)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_Matrix_8h_1aaf9bc56a53b9a334621531b0e32ed04b.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_Matrix_8h_1a6742cc24af1c654c44907d62a8bf743e.html">Function to_string(Matrix const&amp;)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_Matrix_8h_1a6742cc24af1c654c44907d62a8bf743e.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="typedefs">
+<h3>Typedefs<a class="headerlink" href="#typedefs" title="Permalink to this headline">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html">Typedef data_t</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_DataTypeHandling_8h_1aebd6d4f4d1878f967fc3873d39646e74.html">Typedef idx_t</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_DataTypeHandling_8h_1aebd6d4f4d1878f967fc3873d39646e74.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script type="text/javascript" src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+    <div class="footer" role="contentinfo">
+        <div class="container">
+            &#169; Copyright 2021, Sebastian Buschjäger.
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2.
+        </div>
+    </div>  
+
+</body>
+</html>

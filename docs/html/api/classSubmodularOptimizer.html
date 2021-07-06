@@ -1,0 +1,390 @@
+
+
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Class SubmodularOptimizer &mdash; SubmodularStreamMaximization  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class ThreeSieves" href="classThreeSieves.html" />
+    <link rel="prev" title="Class SubmodularFunctionWrapper" href="classSubmodularFunctionWrapper.html" /> 
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a class="site-nav-toggle hidden-lg-up"><i class="icon-menu"></i></a>
+            <a class="site-title" href="../index.html">
+                SubmodularStreamMaximization
+            </a>
+        </div>
+    </header>
+
+
+<div class="breadcrumbs-outer hidden-xs-down">
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a></li>
+        
+          <li><a href="library_root.html">Library API</a></li>
+        
+      <li>Class SubmodularOptimizer</li>
+    
+    
+      <li class="breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/classSubmodularOptimizer.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+</div>
+    </div>
+</div>
+    <div class="main-outer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-3 site-nav">
+                    
+<div role="search">
+    <form class="search" action="../search.html" method="get">
+        <div class="icon-input">
+            <input type="text" name="q" placeholder="Search" />
+            <span class="icon-search"></span>
+        </div>
+        <input type="submit" value="Go" class="d-hidden" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+                    <div class="site-nav-tree">
+                        
+                            
+                            
+                                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../root.html">SubmodularStreamMaximization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#how-to-install">How to install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#how-to-reproduce-the-experiments-in-our-paper">How to reproduce the experiments in our paper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#cite-our-paper">Cite our paper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Using the Python Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-a-custom-kernel-for-the-ivm">Implementing a custom kernel for the IVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-custom-submodular-functions">Implementing custom submodular functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-your-own-optimizer">Implementing your own optimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp.html">Using the C++ interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-a-custom-kernel-for-the-ivm">Implementing a custom kernel for the IVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-custom-submodular-functions">Implementing custom submodular functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-your-own-optimizer">Implementing your own optimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="library_root.html">Library API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_root.html#full-api">Full API</a></li>
+</ul>
+</li>
+</ul>
+
+                            
+                        
+                    </div>
+                </div>
+                <div class="col-12 col-lg-9">
+                    <div class="document">
+                        
+                            
+  <div class="section" id="class-submodularoptimizer">
+<span id="exhale-class-classsubmodularoptimizer"></span><h1>Class SubmodularOptimizer<a class="headerlink" href="#class-submodularoptimizer" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_include_SubmodularOptimizer.h.html#file-include-submodularoptimizer-h"><span class="std std-ref">File SubmodularOptimizer.h</span></a></p></li>
+</ul>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="derived-types">
+<h3>Derived Types<a class="headerlink" href="#derived-types" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">Greedy</span></code> (<a class="reference internal" href="classGreedy.html#exhale-class-classgreedy"><span class="std std-ref">Class Greedy</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">IndependentSetImprovement</span></code> (<a class="reference internal" href="classIndependentSetImprovement.html#exhale-class-classindependentsetimprovement"><span class="std std-ref">Class IndependentSetImprovement</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">Random</span></code> (<a class="reference internal" href="classRandom.html#exhale-class-classrandom"><span class="std std-ref">Class Random</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">Salsa</span></code> (<a class="reference internal" href="classSalsa.html#exhale-class-classsalsa"><span class="std std-ref">Class Salsa</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">Salsa::Dense</span></code> (<a class="reference internal" href="classSalsa_1_1Dense.html#exhale-class-classsalsa-1-1dense"><span class="std std-ref">Class Salsa::Dense</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">Salsa::FixedThreshold</span></code> (<a class="reference internal" href="classSalsa_1_1FixedThreshold.html#exhale-class-classsalsa-1-1fixedthreshold"><span class="std std-ref">Class Salsa::FixedThreshold</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">Salsa::HighLowThreshold</span></code> (<a class="reference internal" href="classSalsa_1_1HighLowThreshold.html#exhale-class-classsalsa-1-1highlowthreshold"><span class="std std-ref">Class Salsa::HighLowThreshold</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">SieveStreaming</span></code> (<a class="reference internal" href="classSieveStreaming.html#exhale-class-classsievestreaming"><span class="std std-ref">Class SieveStreaming</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">SieveStreamingPP</span></code> (<a class="reference internal" href="classSieveStreamingPP.html#exhale-class-classsievestreamingpp"><span class="std std-ref">Class SieveStreamingPP</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">ThreeSieves</span></code> (<a class="reference internal" href="classThreeSieves.html#exhale-class-classthreesieves"><span class="std std-ref">Class ThreeSieves</span></a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv419SubmodularOptimizer">
+<span id="_CPPv319SubmodularOptimizer"></span><span id="_CPPv219SubmodularOptimizer"></span><span id="SubmodularOptimizer"></span><span class="target" id="classSubmodularOptimizer"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SubmodularOptimizer</span></span></span><a class="headerlink" href="#_CPPv419SubmodularOptimizer" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Interface class which every optimizer should implement. Each optimizer must offer a <a class="reference internal" href="#classSubmodularOptimizer_1ae61667f975b5cb2c8e5c0c33fc156c41"><span class="std std-ref">next()</span></a> and <a class="reference internal" href="#classSubmodularOptimizer_1ad3c52e6ecd14adb23c2f1e322981130e"><span class="std std-ref">fit()</span></a> function. However, if a certain optimizer does not support streaming (next) or batch (fit) processing it is okay to throw an exeception with an appropriate message. This class already offers a member to store the best solution (solution) and its function value (<code class="docutils literal notranslate"><span class="pre">fval</span></code>) including getter functions. You can access the function to be maximized via <code class="docutils literal notranslate"><span class="pre">f</span></code> which is a shared pointer (and thus there is no need for explicit delete in the destructor). Please make sure to set <code class="docutils literal notranslate"><span class="pre">is_fitted</span></code> after the fit / next has been called. Please make sure that you use the <code class="docutils literal notranslate"><span class="pre">peek</span></code> and <code class="docutils literal notranslate"><span class="pre">update</span></code> function of the <a class="reference internal" href="classSubmodularFunction.html#classSubmodularFunction"><span class="std std-ref">SubmodularFunction</span></a> correctly. Always call <code class="docutils literal notranslate"><span class="pre">peek</span></code> if you want to know the function value if you would add a new element to the current solution and call <code class="docutils literal notranslate"><span class="pre">update</span></code> if you know which element to add to the current solution. See SubmodularFunction.h for more details. </p>
+<p>Subclassed by <a class="reference internal" href="classGreedy.html#classGreedy"><span class="std std-ref">Greedy</span></a>, <a class="reference internal" href="classIndependentSetImprovement.html#classIndependentSetImprovement"><span class="std std-ref">IndependentSetImprovement</span></a>, <a class="reference internal" href="classRandom.html#classRandom"><span class="std std-ref">Random</span></a>, <a class="reference internal" href="classSalsa.html#classSalsa"><span class="std std-ref">Salsa</span></a>, <a class="reference internal" href="classSalsa_1_1Dense.html#classSalsa_1_1Dense"><span class="std std-ref">Salsa::Dense</span></a>, <a class="reference internal" href="classSalsa_1_1FixedThreshold.html#classSalsa_1_1FixedThreshold"><span class="std std-ref">Salsa::FixedThreshold</span></a>, <a class="reference internal" href="classSalsa_1_1HighLowThreshold.html#classSalsa_1_1HighLowThreshold"><span class="std std-ref">Salsa::HighLowThreshold</span></a>, <a class="reference internal" href="classSieveStreaming.html#classSieveStreaming"><span class="std std-ref">SieveStreaming</span></a>, <a class="reference internal" href="classSieveStreamingPP.html#classSieveStreamingPP"><span class="std std-ref">SieveStreamingPP</span></a>, <a class="reference internal" href="classThreeSieves.html#classThreeSieves"><span class="std std-ref">ThreeSieves</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N19SubmodularOptimizer19SubmodularOptimizerEjR18SubmodularFunction">
+<span id="_CPPv3N19SubmodularOptimizer19SubmodularOptimizerEjR18SubmodularFunction"></span><span id="_CPPv2N19SubmodularOptimizer19SubmodularOptimizerEjR18SubmodularFunction"></span><span id="SubmodularOptimizer::SubmodularOptimizer__unsigned-i.SubmodularFunctionR"></span><span class="target" id="classSubmodularOptimizer_1a8ad59413d387b2ea6dba16b539da3494"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SubmodularOptimizer</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">K</span></span>, <a class="reference internal" href="classSubmodularFunction.html#_CPPv418SubmodularFunction" title="SubmodularFunction"><span class="n"><span class="pre">SubmodularFunction</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">f</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N19SubmodularOptimizer19SubmodularOptimizerEjR18SubmodularFunction" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates a submodular optimizer object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>K</strong> – The cardinality constraint K of the optimization problem or differently put the number of items to be selected. </p></li>
+<li><p><strong>f</strong> – The function which should be maximized. Note, that the clone function is used to construct a new <a class="reference internal" href="classSubmodularFunction.html#classSubmodularFunction"><span class="std std-ref">SubmodularFunction</span></a> which is owned by this object. If you implement a custom <a class="reference internal" href="classSubmodularFunction.html#classSubmodularFunction"><span class="std std-ref">SubmodularFunction</span></a> make sure that everything you need is actually cloned / copied. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns A</dt>
+<dd class="field-even"><p>new <a class="reference internal" href="#classSubmodularOptimizer"><span class="std std-ref">SubmodularOptimizer</span></a> object. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N19SubmodularOptimizer19SubmodularOptimizerEjNSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE">
+<span id="_CPPv3N19SubmodularOptimizer19SubmodularOptimizerEjNSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE"></span><span id="_CPPv2N19SubmodularOptimizer19SubmodularOptimizerEjNSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE"></span><span class="target" id="classSubmodularOptimizer_1a36e1735a243064c2025e1aa99293c4a4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SubmodularOptimizer</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">K</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">f</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N19SubmodularOptimizer19SubmodularOptimizerEjNSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates a submodular optimizer object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>K</strong> – The cardinality constraint K of the optimization problem or differently put the number of items to be selected. </p></li>
+<li><p><strong>f</strong> – The function which should be maximized. Note, that this parameter is likely moved and not copied. Thus, if you construct multiple optimizers with the <strong>same</strong> function they all reference the <strong>same</strong> function. This can be very efficient for state-less functions, but may lead to weird side effects if f keeps track of a state. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns A</dt>
+<dd class="field-even"><p>new <a class="reference internal" href="#classSubmodularOptimizer"><span class="std std-ref">SubmodularOptimizer</span></a> object. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N19SubmodularOptimizer3fitERKNSt6vectorINSt6vectorI6data_tEEEERKNSt6vectorI5idx_tEEj">
+<span id="_CPPv3N19SubmodularOptimizer3fitERKNSt6vectorINSt6vectorI6data_tEEEERKNSt6vectorI5idx_tEEj"></span><span id="_CPPv2N19SubmodularOptimizer3fitERKNSt6vectorINSt6vectorI6data_tEEEERKNSt6vectorI5idx_tEEj"></span><span id="SubmodularOptimizer::fit__std::vector:std::vector:data_t::CR.std::vector:idx_t:CR.unsigned-i"></span><span class="target" id="classSubmodularOptimizer_1ad3c52e6ecd14adb23c2f1e322981130e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fit</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">X</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1aebd6d4f4d1878f967fc3873d39646e74.html#_CPPv45idx_t" title="idx_t"><span class="n"><span class="pre">idx_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">ids</span></span>, <span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">iterations</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N19SubmodularOptimizer3fitERKNSt6vectorINSt6vectorI6data_tEEEERKNSt6vectorI5idx_tEEj" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Find a solution given the entire data set. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – A constant reference to the entire data set </p></li>
+<li><p><strong>ids</strong> – A list of identifier for each object. This can be used to uniquely identify the objects in the summary. The exact behavior depends on the optimizer, but generally no safety checks or anything are performed. If you don’t want to use ids, leaf it empty. Otherwise, ids.size() == X.size() unless you know what you are doing. </p></li>
+<li><p><strong>iterations</strong> – Maximum number of iterations over the entire data-set (default = 1). Tries to select exactly K elements by iterating multiple times over the entire dataset, but at most iterations times and at-least once. Early exits once K elements are found and at-least one iteration is completed. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns None</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N19SubmodularOptimizer3fitERKNSt6vectorINSt6vectorI6data_tEEEEj">
+<span id="_CPPv3N19SubmodularOptimizer3fitERKNSt6vectorINSt6vectorI6data_tEEEEj"></span><span id="_CPPv2N19SubmodularOptimizer3fitERKNSt6vectorINSt6vectorI6data_tEEEEj"></span><span id="SubmodularOptimizer::fit__std::vector:std::vector:data_t::CR.unsigned-i"></span><span class="target" id="classSubmodularOptimizer_1a14a52ea563051d41c09558cd583ec6fc"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fit</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">X</span></span>, <span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">iterations</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">1</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N19SubmodularOptimizer3fitERKNSt6vectorINSt6vectorI6data_tEEEEj" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Find a solution given the entire data set. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – A constant reference to the entire data set </p></li>
+<li><p><strong>iterations</strong> – Maximum number of iterations over the entire data-set (default = 1). Tries to select exactly K elements by iterating multiple times over the entire dataset, but at most iterations times and at-least once. Early exits once K elements are found and at-least one iteration is completed. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns None</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N19SubmodularOptimizer4nextERKNSt6vectorI6data_tEEKNSt8optionalI5idx_tEE">
+<span id="_CPPv3N19SubmodularOptimizer4nextERKNSt6vectorI6data_tEEKNSt8optionalI5idx_tEE"></span><span id="_CPPv2N19SubmodularOptimizer4nextERKNSt6vectorI6data_tEEKNSt8optionalI5idx_tEE"></span><span id="SubmodularOptimizer::next__std::vector:data_t:CR.std::optional:idx_t:C"></span><span class="target" id="classSubmodularOptimizer_1ae61667f975b5cb2c8e5c0c33fc156c41"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">next</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">x</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">optional</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1aebd6d4f4d1878f967fc3873d39646e74.html#_CPPv45idx_t" title="idx_t"><span class="n"><span class="pre">idx_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">id</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">nullopt</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N19SubmodularOptimizer4nextERKNSt6vectorI6data_tEEKNSt8optionalI5idx_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Consume the next object in the data stream. This may throw an exception if the optimizer does not support streaming. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – A constant reference to the next object on the stream. </p></li>
+<li><p><strong>id</strong> – The id of the given object. If this is a <code class="docutils literal notranslate"><span class="pre">std::nullopt</span></code> this parameter is ignored. Otherwise the id is inserted into the solution. Make sure, that either <em>all</em> or <em>no</em> object receives an id to keep track which id belongs to which object. This algorithm simply stores the objects and the ids in two separate lists and performs no safety checks. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns None</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK19SubmodularOptimizer12get_solutionEv">
+<span id="_CPPv3NK19SubmodularOptimizer12get_solutionEv"></span><span id="_CPPv2NK19SubmodularOptimizer12get_solutionEv"></span><span id="SubmodularOptimizer::get_solutionC"></span><span class="target" id="classSubmodularOptimizer_1a8d949dcc8399058758d65dffdf5f7d08"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_solution</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK19SubmodularOptimizer12get_solutionEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Return the current solution. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns A</dt>
+<dd class="field-odd"><p>const reference to the current solution. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK19SubmodularOptimizer7get_idsEv">
+<span id="_CPPv3NK19SubmodularOptimizer7get_idsEv"></span><span id="_CPPv2NK19SubmodularOptimizer7get_idsEv"></span><span id="SubmodularOptimizer::get_idsC"></span><span class="target" id="classSubmodularOptimizer_1ac4994d102a40f7f4eb0ef1d91c57ae8f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1aebd6d4f4d1878f967fc3873d39646e74.html#_CPPv45idx_t" title="idx_t"><span class="n"><span class="pre">idx_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_ids</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK19SubmodularOptimizer7get_idsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Return the corresponding ids for the current solution. This might be empty if no ids have been passed to fit / next. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns A</dt>
+<dd class="field-odd"><p>const reference to the corresponding ids. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK19SubmodularOptimizer27get_num_candidate_solutionsEv">
+<span id="_CPPv3NK19SubmodularOptimizer27get_num_candidate_solutionsEv"></span><span id="_CPPv2NK19SubmodularOptimizer27get_num_candidate_solutionsEv"></span><span id="SubmodularOptimizer::get_num_candidate_solutionsC"></span><span class="target" id="classSubmodularOptimizer_1acd5c7a63df4f1f03e5fbf8536043fc24"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_num_candidate_solutions</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK19SubmodularOptimizer27get_num_candidate_solutionsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The number of candidate solutions stored. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK19SubmodularOptimizer23get_num_elements_storedEv">
+<span id="_CPPv3NK19SubmodularOptimizer23get_num_elements_storedEv"></span><span id="_CPPv2NK19SubmodularOptimizer23get_num_elements_storedEv"></span><span id="SubmodularOptimizer::get_num_elements_storedC"></span><span class="target" id="classSubmodularOptimizer_1aef704faf0c9ea5cb9c1539162f139765"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span> <span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_num_elements_stored</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK19SubmodularOptimizer23get_num_elements_storedEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The number of items stored in the current solution. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK19SubmodularOptimizer8get_fvalEv">
+<span id="_CPPv3NK19SubmodularOptimizer8get_fvalEv"></span><span id="_CPPv2NK19SubmodularOptimizer8get_fvalEv"></span><span id="SubmodularOptimizer::get_fvalC"></span><span class="target" id="classSubmodularOptimizer_1a67c2567f13f46c7b52af169f00561d53"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_fval</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK19SubmodularOptimizer8get_fvalEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the current function value. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N19SubmodularOptimizerD0Ev">
+<span id="_CPPv3N19SubmodularOptimizerD0Ev"></span><span id="_CPPv2N19SubmodularOptimizerD0Ev"></span><span id="SubmodularOptimizer::~SubmodularOptimizer"></span><span class="target" id="classSubmodularOptimizer_1a0745edf80bcc69620cc8aaccff7e3631"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~SubmodularOptimizer</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N19SubmodularOptimizerD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Destroys this object. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N19SubmodularOptimizer8solutionE">
+<span id="_CPPv3N19SubmodularOptimizer8solutionE"></span><span id="_CPPv2N19SubmodularOptimizer8solutionE"></span><span id="SubmodularOptimizer::solution__std::vector:std::vector:data_t::"></span><span class="target" id="classSubmodularOptimizer_1aa311d996c62fa24e9b3963cbd2aecb6f"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">solution</span></span></span><a class="headerlink" href="#_CPPv4N19SubmodularOptimizer8solutionE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N19SubmodularOptimizer3idsE">
+<span id="_CPPv3N19SubmodularOptimizer3idsE"></span><span id="_CPPv2N19SubmodularOptimizer3idsE"></span><span id="SubmodularOptimizer::ids__std::vector:idx_t:"></span><span class="target" id="classSubmodularOptimizer_1a5dc31f354cd864009c239bd606f29c7e"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1aebd6d4f4d1878f967fc3873d39646e74.html#_CPPv45idx_t" title="idx_t"><span class="n"><span class="pre">idx_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ids</span></span></span><a class="headerlink" href="#_CPPv4N19SubmodularOptimizer3idsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N19SubmodularOptimizer4fvalE">
+<span id="_CPPv3N19SubmodularOptimizer4fvalE"></span><span id="_CPPv2N19SubmodularOptimizer4fvalE"></span><span id="SubmodularOptimizer::fval__data_t"></span><span class="target" id="classSubmodularOptimizer_1a4bda183e7bad68895621dd2a4b6602be"></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fval</span></span></span><a class="headerlink" href="#_CPPv4N19SubmodularOptimizer4fvalE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-attributes">Protected Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N19SubmodularOptimizer1KE">
+<span id="_CPPv3N19SubmodularOptimizer1KE"></span><span id="_CPPv2N19SubmodularOptimizer1KE"></span><span id="SubmodularOptimizer::K__unsigned-i"></span><span class="target" id="classSubmodularOptimizer_1ad7a16e31b4b544b6f31a2cd083fdf320"></span><span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">K</span></span></span><a class="headerlink" href="#_CPPv4N19SubmodularOptimizer1KE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N19SubmodularOptimizer1fE">
+<span id="_CPPv3N19SubmodularOptimizer1fE"></span><span id="_CPPv2N19SubmodularOptimizer1fE"></span><span id="SubmodularOptimizer::f__std::shared_ptr:SubmodularFunction:"></span><span class="target" id="classSubmodularOptimizer_1a99e4aee3b4f2e65c249f6e13103c3a94"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classSubmodularFunction.html#_CPPv418SubmodularFunction" title="SubmodularFunction"><span class="n"><span class="pre">SubmodularFunction</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">f</span></span></span><a class="headerlink" href="#_CPPv4N19SubmodularOptimizer1fE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Okay lets explain the reasoning behind this a bit more. 1): Use <a class="reference internal" href="classSubmodularFunction.html#classSubmodularFunction"><span class="std std-ref">SubmodularFunction</span></a> as an object. This does not work because we are dealing with inheritance / virtual functions 2): Use a reference to <a class="reference internal" href="classSubmodularFunction.html#classSubmodularFunction"><span class="std std-ref">SubmodularFunction</span></a>. This works well with PyBind and has an easy interface, but breaks does not work well together with the <a class="reference internal" href="classSubmodularFunctionWrapper.html#classSubmodularFunctionWrapper"><span class="std std-ref">SubmodularFunctionWrapper</span></a> if we want to allow users to pass a std::function directly. 3): Use SubmodularFunction* which would be a very “pure” and old-school approach. Should be do-able, but is not the modern c++ style 4): Use std::unique_ptr&lt;SubmodularFunction&gt;. This would IMHO be the best approach as it reflects our intend, that the <a class="reference internal" href="#classSubmodularOptimizer"><span class="std std-ref">SubmodularOptimizer</span></a> owns the <a class="reference internal" href="classSubmodularFunction.html#classSubmodularFunction"><span class="std std-ref">SubmodularFunction</span></a> which it clones beforehand. This does not work well with PyBind since PyBind wants to own the memory. 5): Use std::shared_ptr&lt;SubmodularFunction&gt; which is basically a modern version of 3) and works better with PyBind. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N19SubmodularOptimizer9is_fittedE">
+<span id="_CPPv3N19SubmodularOptimizer9is_fittedE"></span><span id="_CPPv2N19SubmodularOptimizer9is_fittedE"></span><span id="SubmodularOptimizer::is_fitted__b"></span><span class="target" id="classSubmodularOptimizer_1ac52155151977d36389c09615696039ad"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_fitted</span></span></span><a class="headerlink" href="#_CPPv4N19SubmodularOptimizer9is_fittedE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script type="text/javascript" src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+    <div class="footer" role="contentinfo">
+        <div class="container">
+            &#169; Copyright 2021, Sebastian Buschjäger.
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2.
+        </div>
+    </div>  
+
+</body>
+</html>

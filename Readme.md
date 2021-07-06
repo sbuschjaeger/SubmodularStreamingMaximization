@@ -1,33 +1,10 @@
 # Submodular Streaming Maximization
 
-NEWS
+**18.06.2021**: Our paper has been accepted at the ECML/PKDD 2021. Stay tuned for an updated version. 🤩
 
-    - **18.06.2021**: Our paper has been accepted at the ECML/PKDD 2021. Stay tuned for an updated version
-
-This repository includes the code for our paper "Very Fast Streaming Submodular Function Maximization" (https://arxiv.org/abs/2010.10059) which introduces a new  nonnegative submodular function maximization algorithm for streaming data. For our experiments, we also implemented already existing state-of-the-art streaming algorithms for which we could not find an implementation. The code focuses on easy extensibility and accessibility. It is mainly written in header-only C++ with a Python interface via pybind11. 
-
-Supported algorithms are:
-
-- Greedy
-- SieveStreaming
-- SieveStreaming++
-- ThreeSieves 
-- Random
-- Salsa
-- IndependentSetImprovement
-
-For more information on these algorithms please check out our paper or have a look at the (more or less extensive) comments in the source code.
-
-Supported submodular functions are:
-
-- Informative Vector Machine (sometimes called LogDet) with RBF kernel. Look at this function if you want to implement your own submodular function.
-- Fast Informative Vector Machine with RBF kernel. This keeps track of the Cholesky Decomposition of the kernel matrix and updates it without re-computing the entire Kernelmatrix or its inverse. Use this function if speed is important. 
+This repository includes the code for our paper [Very Fast Streaming Submodular Function Maximization](https://arxiv.org/abs/2010.10059) which introduces a new  nonnegative submodular function maximization algorithm for streaming data. For our experiments, we also implemented already existing state-of-the-art streaming algorithms for which we could not find an implementation. The code focuses on easy extensibility and accessibility. It is mainly written in header-only C++ with a Python interface via pybind11. A detailed documentation can be found [here](https://sbuschjaeger.github.io/SubmodularStreamingMaximization/html/root.html). 
 
 ## How to use this code
-For building the code you need:
-
-- CMake >= 3.13
-- C++ 17 compiler (e.g. gcc-7, clang-5)
 
 First clone this repo recursively
 
@@ -84,7 +61,7 @@ print(solution)
 
 ### Using the C++ interface
 
-The C++ code is header-only so simply include the desired functions in your project and your are good to go. If you have trouble compiling you can look at the `CMakeLists.txt` file which compiles the Python bindings as well as the following test file. The following example uses the Greedy optimizer to select a data summary by maximizing the Informative Vector Machine (the full examples can be found in `tests/main.cpp`)
+The C++ code is header-only so simply include the desired functions in your project and your are good to go. However, you require a C++17 compiler (e.g. gcc-7 or clang-5). If you have trouble compiling you can look at the `CMakeLists.txt` file which compiles the Python bindings as well as the following test file. The following example uses the Greedy optimizer to select a data summary by maximizing the Informative Vector Machine (the full examples can be found in `tests/main.cpp`)
 
 ```cpp
 #include <iostream>
@@ -156,7 +133,3 @@ Once the data is downloaded, you can start the experiments by executing `run.py`
           archivePrefix={arXiv},
           primaryClass={cs.LG}
     }
-
-## Acknowledgments 
-Special Thanks goes to Philipp Jan-Honysz (philipp.honysz@tu-dortmund.de) who provided the original implementation for our experiments which formed the basis of this code. 
-

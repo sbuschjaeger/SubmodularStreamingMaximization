@@ -1,0 +1,389 @@
+
+
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Class IVM &mdash; SubmodularStreamMaximization  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class Kernel" href="classKernel.html" />
+    <link rel="prev" title="Class IndependentSetImprovement" href="classIndependentSetImprovement.html" /> 
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a class="site-nav-toggle hidden-lg-up"><i class="icon-menu"></i></a>
+            <a class="site-title" href="../index.html">
+                SubmodularStreamMaximization
+            </a>
+        </div>
+    </header>
+
+
+<div class="breadcrumbs-outer hidden-xs-down">
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a></li>
+        
+          <li><a href="library_root.html">Library API</a></li>
+        
+      <li>Class IVM</li>
+    
+    
+      <li class="breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/classIVM.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+</div>
+    </div>
+</div>
+    <div class="main-outer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-3 site-nav">
+                    
+<div role="search">
+    <form class="search" action="../search.html" method="get">
+        <div class="icon-input">
+            <input type="text" name="q" placeholder="Search" />
+            <span class="icon-search"></span>
+        </div>
+        <input type="submit" value="Go" class="d-hidden" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+                    <div class="site-nav-tree">
+                        
+                            
+                            
+                                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../root.html">SubmodularStreamMaximization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#how-to-install">How to install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#how-to-reproduce-the-experiments-in-our-paper">How to reproduce the experiments in our paper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#cite-our-paper">Cite our paper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Using the Python Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-a-custom-kernel-for-the-ivm">Implementing a custom kernel for the IVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-custom-submodular-functions">Implementing custom submodular functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-your-own-optimizer">Implementing your own optimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp.html">Using the C++ interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-a-custom-kernel-for-the-ivm">Implementing a custom kernel for the IVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-custom-submodular-functions">Implementing custom submodular functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-your-own-optimizer">Implementing your own optimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="library_root.html">Library API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_root.html#full-api">Full API</a></li>
+</ul>
+</li>
+</ul>
+
+                            
+                        
+                    </div>
+                </div>
+                <div class="col-12 col-lg-9">
+                    <div class="document">
+                        
+                            
+  <div class="section" id="class-ivm">
+<span id="exhale-class-classivm"></span><h1>Class IVM<a class="headerlink" href="#class-ivm" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_include_functions_IVM.h.html#file-include-functions-ivm-h"><span class="std std-ref">File IVM.h</span></a></p></li>
+</ul>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">SubmodularFunction</span></code> (<a class="reference internal" href="classSubmodularFunction.html#exhale-class-classsubmodularfunction"><span class="std std-ref">Class SubmodularFunction</span></a>)</p></li>
+</ul>
+</div>
+<div class="section" id="derived-type">
+<h3>Derived Type<a class="headerlink" href="#derived-type" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">FastIVM</span></code> (<a class="reference internal" href="classFastIVM.html#exhale-class-classfastivm"><span class="std std-ref">Class FastIVM</span></a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv43IVM">
+<span id="_CPPv33IVM"></span><span id="_CPPv23IVM"></span><span id="IVM"></span><span class="target" id="classIVM"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">IVM</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="classSubmodularFunction.html#_CPPv418SubmodularFunction" title="SubmodularFunction"><span class="n"><span class="pre">SubmodularFunction</span></span></a><a class="headerlink" href="#_CPPv43IVM" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>This class implements the InformativeVectorMachine: </p>
+<p><div class="math notranslate nohighlight">
+\[ f(S) = \frac{1}{2}\log\det\left(\Sigma + \sigma \cdot \mathcal I \right) \]</div>
+ where <span class="math notranslate nohighlight">\(\Sigma\)</span> is the kernel matrix of all elements in the summary, <span class="math notranslate nohighlight">\( \mathcal I \)</span> is the <span class="math notranslate nohighlight">\( K \times K \)</span> identity matrix and <span class="math notranslate nohighlight">\( \sigma &gt; 0 \)</span> is a scaling parameter. This implementation is lazy and slow. It recomputes <span class="math notranslate nohighlight">\( \Sigma \)</span> in every evaluation. For a faster and more practical alternative please have a look at the <a class="reference internal" href="classFastIVM.html#classFastIVM"><span class="std std-ref">FastIVM</span></a> class. This class internally uses the <a class="reference internal" href="classMatrix.html#classMatrix"><span class="std std-ref">Matrix</span></a> class for somewhat readable linear algebra.</p>
+<p><strong>References</strong></p>
+<p><ul class="simple">
+<li><p>Herbrich, R., Lawrence, N., &amp; Seeger, M. (2003). Fast Sparse Gaussian Process Methods: The Informative Vector Machine. In S. Becker, S. Thrun, &amp; K. Obermayer (Eds.), Advances in Neural Information Processing Systems (Vol. 15, pp. 625–632). MIT Press. Retrieved from <a class="reference external" href="https://proceedings.neurips.cc/paper/2002/file/d4dd111a4fd973394238aca5c05bebe3-Paper.pdf">https://proceedings.neurips.cc/paper/2002/file/d4dd111a4fd973394238aca5c05bebe3-Paper.pdf</a> </p></li>
+</ul>
+</p>
+<p>Subclassed by <a class="reference internal" href="classFastIVM.html#classFastIVM"><span class="std std-ref">FastIVM</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3IVM3IVMERK6Kernel6data_t">
+<span id="_CPPv3N3IVM3IVMERK6Kernel6data_t"></span><span id="_CPPv2N3IVM3IVMERK6Kernel6data_t"></span><span id="IVM::IVM__KernelCR.data_t"></span><span class="target" id="classIVM_1af05300d45525978e6b452096fe3e8b32"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">IVM</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="classKernel.html#_CPPv46Kernel" title="Kernel"><span class="n"><span class="pre">Kernel</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">kernel</span></span>, <a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sigma</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3IVM3IVMERK6Kernel6data_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates a new <a class="reference internal" href="#classIVM"><span class="std std-ref">IVM</span></a> object with the given parameters. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This constructor uses assert to make sure that sigma has the correct range. This may lead to warnings during compilation. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>&amp;kernel</strong> – The kernel to be used. </p></li>
+<li><p><strong>sigma</strong> – The scaling constant </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns A</dt>
+<dd class="field-even"><p>new <a class="reference internal" href="#classIVM"><span class="std std-ref">IVM</span></a> object </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3IVM3IVMENSt8functionIF6data_tRKNSt6vectorI6data_tEERKNSt6vectorI6data_tEEEEE6data_t">
+<span id="_CPPv3N3IVM3IVMENSt8functionIF6data_tRKNSt6vectorI6data_tEERKNSt6vectorI6data_tEEEEE6data_t"></span><span id="_CPPv2N3IVM3IVMENSt8functionIF6data_tRKNSt6vectorI6data_tEERKNSt6vectorI6data_tEEEEE6data_t"></span><span class="target" id="classIVM_1abf8b8f7df840e8d7b73306961e3a0720"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">IVM</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">kernel</span></span>, <a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sigma</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3IVM3IVMENSt8functionIF6data_tRKNSt6vectorI6data_tEERKNSt6vectorI6data_tEEEEE6data_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates a new <a class="reference internal" href="#classIVM"><span class="std std-ref">IVM</span></a> object with the given parameters. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This constructor uses assert to make sure that sigma has the correct range. This may lead to warnings during compilation. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kernel</strong> – The kernel to be used. </p></li>
+<li><p><strong>sigma</strong> – The scaling constant </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns A</dt>
+<dd class="field-even"><p>new <a class="reference internal" href="#classIVM"><span class="std std-ref">IVM</span></a> object </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3IVM4peekERKNSt6vectorINSt6vectorI6data_tEEEERKNSt6vectorI6data_tEEj">
+<span id="_CPPv3N3IVM4peekERKNSt6vectorINSt6vectorI6data_tEEEERKNSt6vectorI6data_tEEj"></span><span id="_CPPv2N3IVM4peekERKNSt6vectorINSt6vectorI6data_tEEEERKNSt6vectorI6data_tEEj"></span><span id="IVM::peek__std::vector:std::vector:data_t::CR.std::vector:data_t:CR.unsigned-i"></span><span class="target" id="classIVM_1ad94463afcebf6b800ba98e0eb7a07758"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">peek</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cur_solution</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">x</span></span>, <span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pos</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N3IVM4peekERKNSt6vectorINSt6vectorI6data_tEEEERKNSt6vectorI6data_tEEj" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Peek operator for the <a class="reference internal" href="#classIVM"><span class="std std-ref">IVM</span></a>. For more details see <a class="reference internal" href="classSubmodularFunction.html#classSubmodularFunction"><span class="std std-ref">SubmodularFunction</span></a>. This implementation simply adds / replaces the current item in the summary and recomputes the kernel matrix as well as the log-determinant. The runtime of this implementation is O(K^3) with K = cur_solution.size() </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The log-determinant is computed via a cholesky decomposition. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cur_solution</strong> – The current summary </p></li>
+<li><p><strong>&amp;x</strong> – The element which should be added to the summary </p></li>
+<li><p><strong>pos</strong> – The position at which the given element should be inserted. If pos &gt;= cur_solution.size(), then x is appended. Otherwise it replaces the element at position pos </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns The</dt>
+<dd class="field-even"><p>log-determinant of the kernel matrix, if x would be inserted at position pos in current_solution </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3IVM6updateERKNSt6vectorINSt6vectorI6data_tEEEERKNSt6vectorI6data_tEEj">
+<span id="_CPPv3N3IVM6updateERKNSt6vectorINSt6vectorI6data_tEEEERKNSt6vectorI6data_tEEj"></span><span id="_CPPv2N3IVM6updateERKNSt6vectorINSt6vectorI6data_tEEEERKNSt6vectorI6data_tEEj"></span><span id="IVM::update__std::vector:std::vector:data_t::CR.std::vector:data_t:CR.unsigned-i"></span><span class="target" id="classIVM_1a5f337610b63fafd8f52f21d32abe3cf8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">update</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cur_solution</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">x</span></span>, <span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pos</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N3IVM6updateERKNSt6vectorINSt6vectorI6data_tEEEERKNSt6vectorI6data_tEEj" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Does nothing and only exists for compatibility reasons. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>&amp;cur_solution</strong> – </p></li>
+<li><p><strong>&amp;x</strong> – </p></li>
+<li><p><strong>pos</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns None</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3IVMclERKNSt6vectorINSt6vectorI6data_tEEEE">
+<span id="_CPPv3NK3IVMclERKNSt6vectorINSt6vectorI6data_tEEEE"></span><span id="_CPPv2NK3IVMclERKNSt6vectorINSt6vectorI6data_tEEEE"></span><span id="IVM::call-operator__std::vector:std::vector:data_t::CRC"></span><span class="target" id="classIVM_1a106460de62624783eca759ad8e7ef2d1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">()</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">X</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK3IVMclERKNSt6vectorINSt6vectorI6data_tEEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Computes the kernel matrix \Sigma + \sigma \cdot \mathcal I between all pairs in X and its log-determinant. The runtime is O(K^3) where K = X.size(). </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The log-determinant is computed via a cholesky decomposition. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>&amp;X</strong> – The argument at which <span class="math notranslate nohighlight">\(f(X) = \frac{1}{2}\log\det\left(\Sigma + \sigma \cdot \mathcal I \right)\)</span> should be evaluated </p>
+</dd>
+<dt class="field-even">Returns The</dt>
+<dd class="field-even"><p>log-determinant of the kernel matrix of all pairs in X </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3IVM5cloneEv">
+<span id="_CPPv3NK3IVM5cloneEv"></span><span id="_CPPv2NK3IVM5cloneEv"></span><span id="IVM::cloneC"></span><span class="target" id="classIVM_1a0d4047142f56e2479e0935f41a60caca"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classSubmodularFunction.html#_CPPv418SubmodularFunction" title="SubmodularFunction"><span class="n"><span class="pre">SubmodularFunction</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clone</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK3IVM5cloneEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Clones the current <a class="reference internal" href="#classIVM"><span class="std std-ref">IVM</span></a> object. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Calls the clone method of the given kernel. If the kernel implements a deep-copy, then this clone operation is also a deep -opy. Otherwise it is not. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns The</dt>
+<dd class="field-odd"><p>cloned object. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3IVMD0Ev">
+<span id="_CPPv3N3IVMD0Ev"></span><span id="_CPPv2N3IVMD0Ev"></span><span id="IVM::~IVM"></span><span class="target" id="classIVM_1ad53a88a3b39bf576b99ef41468d8e419"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~IVM</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3IVMD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Destroys the current object. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns </dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3IVM14compute_kernelERKNSt6vectorINSt6vectorI6data_tEEEE6data_t">
+<span id="_CPPv3NK3IVM14compute_kernelERKNSt6vectorINSt6vectorI6data_tEEEE6data_t"></span><span id="_CPPv2NK3IVM14compute_kernelERKNSt6vectorINSt6vectorI6data_tEEEE6data_t"></span><span id="IVM::compute_kernel__std::vector:std::vector:data_t::CR.data_tC"></span><span class="target" id="classIVM_1a06d35d9892ae14045328a0c2cde1d382"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="classMatrix.html#_CPPv46Matrix" title="Matrix"><span class="n"><span class="pre">Matrix</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">compute_kernel</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">X</span></span>, <a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sigma</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK3IVM14compute_kernelERKNSt6vectorINSt6vectorI6data_tEEEE6data_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Computes the kernel similarity \Sigma + \sigma \cdot \mathcal I between all pairs in X. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>&amp;X</strong> – The current summary </p></li>
+<li><p><strong>sigma</strong> – Scaling for main-diagonal </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns The</dt>
+<dd class="field-even"><p><span class="math notranslate nohighlight">\(K \times K\)</span> kernel matrix </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-attributes">Protected Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N3IVM6kernelE">
+<span id="_CPPv3N3IVM6kernelE"></span><span id="_CPPv2N3IVM6kernelE"></span><span id="IVM::kernel__std::shared_ptr:Kernel:"></span><span class="target" id="classIVM_1afc21444d0443b7fe0c5ba614e19e36a6"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classKernel.html#_CPPv46Kernel" title="Kernel"><span class="n"><span class="pre">Kernel</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">kernel</span></span></span><a class="headerlink" href="#_CPPv4N3IVM6kernelE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N3IVM5sigmaE">
+<span id="_CPPv3N3IVM5sigmaE"></span><span id="_CPPv2N3IVM5sigmaE"></span><span id="IVM::sigma__data_t"></span><span class="target" id="classIVM_1ab407f4320c5d2d3f47fa60d8bb23fdfa"></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sigma</span></span></span><a class="headerlink" href="#_CPPv4N3IVM5sigmaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script type="text/javascript" src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+    <div class="footer" role="contentinfo">
+        <div class="container">
+            &#169; Copyright 2021, Sebastian Buschjäger.
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2.
+        </div>
+    </div>  
+
+</body>
+</html>

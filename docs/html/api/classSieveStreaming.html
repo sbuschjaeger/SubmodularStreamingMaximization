@@ -1,0 +1,339 @@
+
+
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Class SieveStreaming &mdash; SubmodularStreamMaximization  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class SieveStreaming::Sieve" href="classSieveStreaming_1_1Sieve.html" />
+    <link rel="prev" title="Class Salsa::HighLowThreshold" href="classSalsa_1_1HighLowThreshold.html" /> 
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a class="site-nav-toggle hidden-lg-up"><i class="icon-menu"></i></a>
+            <a class="site-title" href="../index.html">
+                SubmodularStreamMaximization
+            </a>
+        </div>
+    </header>
+
+
+<div class="breadcrumbs-outer hidden-xs-down">
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a></li>
+        
+          <li><a href="library_root.html">Library API</a></li>
+        
+      <li>Class SieveStreaming</li>
+    
+    
+      <li class="breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/classSieveStreaming.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+</div>
+    </div>
+</div>
+    <div class="main-outer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-3 site-nav">
+                    
+<div role="search">
+    <form class="search" action="../search.html" method="get">
+        <div class="icon-input">
+            <input type="text" name="q" placeholder="Search" />
+            <span class="icon-search"></span>
+        </div>
+        <input type="submit" value="Go" class="d-hidden" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+                    <div class="site-nav-tree">
+                        
+                            
+                            
+                                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../root.html">SubmodularStreamMaximization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#how-to-install">How to install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#how-to-reproduce-the-experiments-in-our-paper">How to reproduce the experiments in our paper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../root.html#cite-our-paper">Cite our paper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Using the Python Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-a-custom-kernel-for-the-ivm">Implementing a custom kernel for the IVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-custom-submodular-functions">Implementing custom submodular functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python.html#implementing-your-own-optimizer">Implementing your own optimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cpp.html">Using the C++ interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-a-custom-kernel-for-the-ivm">Implementing a custom kernel for the IVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-custom-submodular-functions">Implementing custom submodular functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cpp.html#implementing-your-own-optimizer">Implementing your own optimizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="library_root.html">Library API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_root.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_root.html#full-api">Full API</a></li>
+</ul>
+</li>
+</ul>
+
+                            
+                        
+                    </div>
+                </div>
+                <div class="col-12 col-lg-9">
+                    <div class="document">
+                        
+                            
+  <div class="section" id="class-sievestreaming">
+<span id="exhale-class-classsievestreaming"></span><h1>Class SieveStreaming<a class="headerlink" href="#class-sievestreaming" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_include_SieveStreaming.h.html#file-include-sievestreaming-h"><span class="std std-ref">File SieveStreaming.h</span></a></p></li>
+</ul>
+<div class="section" id="nested-relationships">
+<h2>Nested Relationships<a class="headerlink" href="#nested-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="nested-types">
+<h3>Nested Types<a class="headerlink" href="#nested-types" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="classSieveStreaming_1_1Sieve.html#exhale-class-classsievestreaming-1-1sieve"><span class="std std-ref">Class SieveStreaming::Sieve</span></a></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">SubmodularOptimizer</span></code> (<a class="reference internal" href="classSubmodularOptimizer.html#exhale-class-classsubmodularoptimizer"><span class="std std-ref">Class SubmodularOptimizer</span></a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv414SieveStreaming">
+<span id="_CPPv314SieveStreaming"></span><span id="_CPPv214SieveStreaming"></span><span id="SieveStreaming"></span><span class="target" id="classSieveStreaming"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SieveStreaming</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="classSubmodularOptimizer.html#_CPPv419SubmodularOptimizer" title="SubmodularOptimizer"><span class="n"><span class="pre">SubmodularOptimizer</span></span></a><a class="headerlink" href="#_CPPv414SieveStreaming" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The <a class="reference internal" href="#classSieveStreaming"><span class="std std-ref">SieveStreaming</span></a> optimizer for nonnegative, monotone submodular functions. It tries to estimate the potential gain of an element ahead of time by sampling different thresholds from <span class="math notranslate nohighlight">\( \{(1+\varepsilon)^i | i \in Z, lower \le (1+\varepsilon)^i \le upper\} \)</span> and maintaining a set of sieves in parallel. Each sieve uses a different threshold to sieve-out elements with too few of a gain. </p>
+<p><ul class="simple">
+<li><p>lower = <span class="math notranslate nohighlight">\( max_e f({e}) \)</span> which is the largest function value of a singleton-set</p></li>
+<li><p>upper = <span class="math notranslate nohighlight">\( K \cdot max_e f({e}) \)</span> which is <span class="math notranslate nohighlight">\( K \)</span> times the function value of a singleton-set</p></li>
+</ul>
+</p>
+<p>Note that this implementation requires that <span class="math notranslate nohighlight">\( m = max_e f({e}) \)</span> is known beforehand</p>
+<p><ul class="simple">
+<li><p>Stream: Yes</p></li>
+<li><p>Solution: <span class="math notranslate nohighlight">\( 1/2 - \varepsilon \)</span></p></li>
+<li><p>Runtime: <span class="math notranslate nohighlight">\( O(1) \)</span></p></li>
+<li><p>Memory: <span class="math notranslate nohighlight">\( O(K \cdot log(K) / \varepsilon) \)</span></p></li>
+<li><p>Function Queries per Element: <span class="math notranslate nohighlight">\( O(log(K) / \varepsilon) \)</span></p></li>
+<li><p>Function Types: nonnegative, monotone submodular functions</p></li>
+</ul>
+</p>
+<p>Example usage in C++: <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//read some data </span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">data_t</span><span class="o">&gt;&gt;</span> <span class="o">=</span> <span class="n">read_some_data</span><span class="p">();</span> 
+<span class="k">auto</span> <span class="n">K</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+<span class="c1">// Define the function to be maximized and select the summary</span>
+<span class="n">FastIVM</span> <span class="nf">fastIVM</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">RBFKernel</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">()),</span> <span class="mf">1.0</span><span class="p">)</span> <span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
+<span class="n">SieveStreaming</span> <span class="nf">opt</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">fastIVM</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">);</span>
+<span class="n">opt</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;fval:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">opt</span><span class="p">.</span><span class="n">get_fval</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;num_elements: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">opt</span><span class="p">.</span><span class="n">get_num_elements_stored</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;num_candidates: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">opt</span><span class="p">.</span><span class="n">get_num_candidate_solutions</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="c1">// Process summary</span>
+<span class="k">auto</span> <span class="n">summary</span> <span class="o">=</span> <span class="n">opt</span><span class="p">.</span><span class="n">get_solution</span><span class="p">();</span>
+</pre></div>
+</div>
+</p>
+<p>Example usage in Python: <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">read_some_data</span><span class="p">();</span> 
+<span class="n">K</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="cp"># Create function to be maximized</span>
+<span class="n">kernel</span> <span class="o">=</span> <span class="n">RBFKernel</span><span class="p">(</span><span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">)</span>
+<span class="n">fastLogDet</span> <span class="o">=</span> <span class="n">FastIVM</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">SieveStreaming</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">fastLogDet</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">opt</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="s">&quot;fval: {} num_elements: {} num_candidates: {}&quot;</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="n">get_fval</span><span class="p">(),</span> <span class="n">opt</span><span class="p">.</span><span class="n">get_num_elements_stored</span><span class="p">(),</span> <span class="n">opt</span><span class="p">.</span><span class="n">get_num_candidate_solutions</span><span class="p">()))</span>
+<span class="cp"># process summary</span>
+<span class="n">summary</span> <span class="o">=</span> <span class="n">opt</span><span class="p">.</span><span class="n">get_solution</span><span class="p">()</span>
+</pre></div>
+</div>
+</p>
+<p><strong>References</strong></p>
+<p><ul class="simple">
+<li><p>Badanidiyuru, A., Mirzasoleiman, B., Karbasi, A., &amp; Krause, A. (2014). Streaming submodular maximization: Massive data summarization on the fly. In Proceedings of the ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. <a class="reference external" href="https://doi.org/10.1145/2623330.2623637">https://doi.org/10.1145/2623330.2623637</a> </p></li>
+</ul>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14SieveStreaming14SieveStreamingEjR18SubmodularFunction6data_t6data_t">
+<span id="_CPPv3N14SieveStreaming14SieveStreamingEjR18SubmodularFunction6data_t6data_t"></span><span id="_CPPv2N14SieveStreaming14SieveStreamingEjR18SubmodularFunction6data_t6data_t"></span><span id="SieveStreaming::SieveStreaming__unsigned-i.SubmodularFunctionR.data_t.data_t"></span><span class="target" id="classSieveStreaming_1a88a2af548733cac49efadd5c8c8aee2d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SieveStreaming</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">K</span></span>, <a class="reference internal" href="classSubmodularFunction.html#_CPPv418SubmodularFunction" title="SubmodularFunction"><span class="n"><span class="pre">SubmodularFunction</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">f</span></span>, <a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">m</span></span>, <a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">epsilon</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14SieveStreaming14SieveStreamingEjR18SubmodularFunction6data_t6data_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Construct a new <a class="reference internal" href="#classSieveStreaming"><span class="std std-ref">SieveStreaming</span></a> object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>K</strong> – The cardinality constraint you of the optimization problem, that is the number of items selected. </p></li>
+<li><p><strong>f</strong> – The function which should be maximized. Note, that the <code class="docutils literal notranslate"><span class="pre">clone</span></code> function is used to construct a new <a class="reference internal" href="classSubmodularFunction.html#classSubmodularFunction"><span class="std std-ref">SubmodularFunction</span></a> which is owned by this object. If you implement a custom <a class="reference internal" href="classSubmodularFunction.html#classSubmodularFunction"><span class="std std-ref">SubmodularFunction</span></a> make sure that everything you need is actually cloned / copied. </p></li>
+<li><p><strong>m</strong> – The maximum value of the singleton set, <span class="math notranslate nohighlight">\( m = max_e f({e}) \)</span> </p></li>
+<li><p><strong>epsilon</strong> – The sampling accuracy for threshold generation </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14SieveStreaming14SieveStreamingEjNSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE6data_t6data_t">
+<span id="_CPPv3N14SieveStreaming14SieveStreamingEjNSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE6data_t6data_t"></span><span id="_CPPv2N14SieveStreaming14SieveStreamingEjNSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE6data_t6data_t"></span><span class="target" id="classSieveStreaming_1a3e40e75c8678f882049f55fcc881d0b6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SieveStreaming</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">K</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">f</span></span>, <a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">m</span></span>, <a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">epsilon</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14SieveStreaming14SieveStreamingEjNSt8functionIF6data_tRKNSt6vectorINSt6vectorI6data_tEEEEEEE6data_t6data_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Construct a new <a class="reference internal" href="#classSieveStreaming"><span class="std std-ref">SieveStreaming</span></a> object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>K</strong> – The cardinality constraint you of the optimization problem, that is the number of items selected. </p></li>
+<li><p><strong>f</strong> – The function which should be maximized. Note, that this parameter is likely moved and not copied. Thus, if you construct multiple optimizers with the <strong>same</strong> function they all reference the <strong>same</strong> function. This can be very efficient for state-less functions, but may lead to weird side effects if f keeps track of a state. </p></li>
+<li><p><strong>m</strong> – The maximum value of the singleton set, <span class="math notranslate nohighlight">\( m = max_e f({e}) \)</span> </p></li>
+<li><p><strong>epsilon</strong> – The sampling accuracy for threshold generation </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK14SieveStreaming27get_num_candidate_solutionsEv">
+<span id="_CPPv3NK14SieveStreaming27get_num_candidate_solutionsEv"></span><span id="_CPPv2NK14SieveStreaming27get_num_candidate_solutionsEv"></span><span id="SieveStreaming::get_num_candidate_solutionsC"></span><span class="target" id="classSieveStreaming_1a58a0de6770668065b843697e9f59b337"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span> <span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_num_candidate_solutions</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK14SieveStreaming27get_num_candidate_solutionsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the number of sieves. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK14SieveStreaming23get_num_elements_storedEv">
+<span id="_CPPv3NK14SieveStreaming23get_num_elements_storedEv"></span><span id="_CPPv2NK14SieveStreaming23get_num_elements_storedEv"></span><span id="SieveStreaming::get_num_elements_storedC"></span><span class="target" id="classSieveStreaming_1a25c560bd3b2022ec7530d23ebdc401f3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span> <span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_num_elements_stored</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK14SieveStreaming23get_num_elements_storedEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the total number of items stored across all sieves. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14SieveStreamingD0Ev">
+<span id="_CPPv3N14SieveStreamingD0Ev"></span><span id="_CPPv2N14SieveStreamingD0Ev"></span><span id="SieveStreaming::~SieveStreaming"></span><span class="target" id="classSieveStreaming_1a7a2d6df503e28c859074ffd8c80d7e34"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~SieveStreaming</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14SieveStreamingD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Destroy the Sieve Streaming object. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14SieveStreaming4nextERKNSt6vectorI6data_tEEKNSt8optionalI5idx_tEE">
+<span id="_CPPv3N14SieveStreaming4nextERKNSt6vectorI6data_tEEKNSt8optionalI5idx_tEE"></span><span id="_CPPv2N14SieveStreaming4nextERKNSt6vectorI6data_tEEKNSt8optionalI5idx_tEE"></span><span id="SieveStreaming::next__std::vector:data_t:CR.std::optional:idx_t:C"></span><span class="target" id="classSieveStreaming_1a7099ea6d7c15dee748eb3a629f7d3152"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">next</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1ae08b1e8a0b68c4dd03930dcb7eee61c6.html#_CPPv46data_t" title="data_t"><span class="n"><span class="pre">data_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">x</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">optional</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="typedef_DataTypeHandling_8h_1aebd6d4f4d1878f967fc3873d39646e74.html#_CPPv45idx_t" title="idx_t"><span class="n"><span class="pre">idx_t</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">id</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">nullopt</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14SieveStreaming4nextERKNSt6vectorI6data_tEEKNSt8optionalI5idx_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Consume the next object in the data stream. This checks for each sieve if the given object exceeds the marginal gain thresholdhold and adds it to the corresponding solution. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>&amp;x</strong> – A constant reference to the next object on the stream. </p></li>
+<li><p><strong>id</strong> – The id of the given object. If this is a <code class="docutils literal notranslate"><span class="pre">std::nullopt</span></code> this parameter is ignored. Otherwise the id is inserted into the solution. Make sure, that either <strong>all</strong> or <strong>no</strong> object receives an id to keep track which id belongs to which object. This algorithm simply stores the objects and the ids in two separate lists and performs no safety checks. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-attributes">Protected Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N14SieveStreaming6sievesE">
+<span id="_CPPv3N14SieveStreaming6sievesE"></span><span id="_CPPv2N14SieveStreaming6sievesE"></span><span id="SieveStreaming::sieves__std::vector:std::unique_ptr:Sieve::"></span><span class="target" id="classSieveStreaming_1a03f733bad72e8d508946031404f67f5d"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classSieveStreaming_1_1Sieve.html#_CPPv4N14SieveStreaming5SieveE" title="SieveStreaming::Sieve"><span class="n"><span class="pre">Sieve</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sieves</span></span></span><a class="headerlink" href="#_CPPv4N14SieveStreaming6sievesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script type="text/javascript" src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+    <div class="footer" role="contentinfo">
+        <div class="container">
+            &#169; Copyright 2021, Sebastian Buschjäger.
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2.
+        </div>
+    </div>  
+
+</body>
+</html>

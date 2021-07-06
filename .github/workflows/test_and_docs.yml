@@ -27,13 +27,15 @@ jobs:
           ./main
       - name: Test Python code
         run: |
-          cd ../tests
+          cd tests
           ./main.py
       - name: Generate the docs
         run: |
-          cd ../docs/
+          cd docs/
           make html
           rm -rf api html latex _static _templates xml make.bat Doxyfile.bat 
+          mv _build/html html
+          rm -rf _build
       - name: Commit documentation # transfer the new html files back into the repository
         run: |
           git config --local user.name "sbuschjaeger"
