@@ -20,6 +20,7 @@ dependencies:
   - psutil # Technically not a dependency, but required for exporting PDFs from plotting
   - jupyter # Technically not a dependency, but still nice to have for browsing results
   - requests
+  - doxygen
   # - scipy
   - pip:
     - karma-sphinx-theme
