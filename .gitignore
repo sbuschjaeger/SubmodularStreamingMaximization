@@ -10,9 +10,3 @@ data/
 *.npy
 *.json
 *.jsonl
-docs/_*
-docs/xml
-docs/html
-docs/make.bat
-docs/Makefile
-docs/latex

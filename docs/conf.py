@@ -18,8 +18,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'SubmodularStreamMaximization'
-copyright = '2021, Sebastian Buschjäger and Philipp-Jan Honysz'
-author = 'Sebastian Buschjäger and Philipp-Jan Honysz'
+copyright = '2021, Sebastian Buschjäger'
+author = 'Sebastian Buschjäger'
 
 # -- General configuration ---------------------------------------------------
 
@@ -49,7 +49,7 @@ exhale_args = {
     # Suggested optional arguments
     "createTreeView":        True,
     # TIP: if using the sphinx-bootstrap-theme, you need
-    #"treeViewIsBootstrap": True,
+    # "treeViewIsBootstrap": True,
     "exhaleExecutesDoxygen": True,
     "exhaleDoxygenStdin":    "INPUT = ../include"
 }
@@ -74,7 +74,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-#html_theme = 'sphinx_rtd_theme'
+html_theme = 'karma_sphinx_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

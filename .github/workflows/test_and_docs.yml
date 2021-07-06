@@ -33,6 +33,7 @@ jobs:
         run: |
           cd ../docs/
           make html
+          rm -rf api html latex _static _templates xml make.bat Doxyfile.bat 
       - name: Commit documentation # transfer the new html files back into the repository
         run: |
           git config --local user.name "sbuschjaeger"
