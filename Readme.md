@@ -1,5 +1,9 @@
 # Submodular Streaming Maximization
 
+[![Building docs](https://github.com/sbuschjaeger/SubmodularStreamingMaximization/actions/workflows/generate_docs.yml/badge.svg)](https://github.com/sbuschjaeger/SubmodularStreamingMaximization/actions/workflows/generate_docs.yml) 
+[![Python tests](https://github.com/sbuschjaeger/SubmodularStreamingMaximization/actions/workflows/test_python.yml/badge.svg)](https://github.com/sbuschjaeger/SubmodularStreamingMaximization/actions/workflows/test_python.yml)
+[![C++ tests](https://github.com/sbuschjaeger/SubmodularStreamingMaximization/actions/workflows/test_cpp.yml/badge.svg)](https://github.com/sbuschjaeger/SubmodularStreamingMaximization/actions/workflows/test_cpp.yml)
+
 **18.06.2021**: Our paper has been accepted at the ECML/PKDD 2021. Stay tuned for an updated version. 🤩
 
 This repository includes the code for our paper [Very Fast Streaming Submodular Function Maximization](https://arxiv.org/abs/2010.10059) which introduces a new  nonnegative submodular function maximization algorithm for streaming data. For our experiments, we also implemented already existing state-of-the-art streaming algorithms for which we could not find an implementation. The code focuses on easy extensibility and accessibility. It is mainly written in header-only C++ with a Python interface via pybind11. A detailed documentation can be found [here](https://sbuschjaeger.github.io/SubmodularStreamingMaximization/html/root.html). 
