@@ -27,3 +27,4 @@ jobs:
           cmake ..
           make
           ./main
+          
