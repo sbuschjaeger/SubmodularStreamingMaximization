@@ -1,4 +1,5 @@
-# Submodular Streaming Maximization
+
+![Submodular Streaming Maximization](docs/pyssm-logo-bw.png "Submodular Streaming Maximization")
 
 [![Building docs](https://github.com/sbuschjaeger/SubmodularStreamingMaximization/actions/workflows/generate_docs.yml/badge.svg)](https://github.com/sbuschjaeger/SubmodularStreamingMaximization/actions/workflows/generate_docs.yml) 
 [![Python tests](https://github.com/sbuschjaeger/SubmodularStreamingMaximization/actions/workflows/test_python.yml/badge.svg)](https://github.com/sbuschjaeger/SubmodularStreamingMaximization/actions/workflows/test_python.yml)
